@@ -1,0 +1,6 @@
+discord
+wikipedia
+aiohttp
+pillow
+dblpy
+praw
