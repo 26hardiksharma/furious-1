@@ -657,7 +657,7 @@ async def revive(ctx):
 async def i(ctx):
   embed = discord.Embed(title = "Level 100 Xerneas",colour = 0x9FE2B8)
   embed.add_field(name= "Details",value = "**XP:** 2750/2750 \n **Nature:** Hasty",inline = False)
-  embed.add_field(name = "Stats",value = "**HP:** 374 - IV: 7/31 \n **Attack:** 285 – IV: 13/31 \n **Defense:** 198 – IV: 21/31 \n **Sp. Atk:** 302 – IV: 30/31 \n **Sp. Def:** 214 – IV: 8/31 \n **Speed:** 261 – IV: 30/31 \n **Total IV:** 58.60%")
+  embed.add_field(name = "Stats",value = "**HP:** 374 - IV: 7/31 \n **Attack:** 285 – IV: 13/31 \n **Defense:** 198 – IV: 21/31 \n **Sp. Atk:** 302 – IV: 30/31 \n **Sp. Def:** 214 – IV: 8/31 \n **Speed:** 261 – IV: 30/31 \n **Total IV:** 98.76%")
   embed.set_image(url = "https://assets.poketwo.net/images/716.png?v=26")
   embed.set_thumbnail(url = f"{ctx.author.avatar_url}")
   await ctx.send(embed=embed)
