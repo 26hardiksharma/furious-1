@@ -1462,5 +1462,19 @@ async def calculate(ctx,num:float,op,anum:float):
   elif op == "/":
     embed.add_field(name = "Solution",value= f"{num/anum}")
     await ctx.send(embed=embed)
-  
+@client.command()
+async def gr(ctx,user : discord.Member):
+  a = await open_rep(user)
+  repboi = users[str(user.id)]["reputation"] += 1
+  await ctx.send(f"Gave One Reputation To {ctx.author}! Total :- {repboi}")
+async def open_rep(user):
+  with open("rep.json","r") as f:
+    users = json.load(f)
+  if str(user.id)in users:
+    return False
+  else:
+    users[str(user.id)]["reputation"] = 0
+  with open("rep.json","w") as f:
+    json.dump(users,f)
+  return True
 client.run(TOKEN)
