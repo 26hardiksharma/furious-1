@@ -1467,7 +1467,7 @@ async def gr(ctx,user : discord.Member):
   a = await open_rep(user)
   repboi = users[str(user.id)]["reputation"] 
   repboi = users[str(user.id)]["reputation"] + 1
-  await ctx.send(f"Gave One Reputation To {ctx.author}! Total :- {repboi}")
+  await ctx.send(f"Gave One Reputation To {user}! Total :- {repboi}")
 async def open_rep(user):
   with open("rep.json","r") as f:
     users = json.load(f)
