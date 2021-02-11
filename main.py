@@ -13,7 +13,7 @@ import datetime
 import time
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 intents = discord.Intents.default()
-client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None)
+client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = False)
 @client.event
 async def on_ready():
   num= 0
@@ -108,7 +108,7 @@ async def ban_error(ctx, error):
 @client.command(aliases = ['um'])
 async def unmute(ctx,member : discord.Member):
   if ctx.author.guild_permissions.manage_messages:
-    muted_role = discord.utils.get(member.guild.roles, name='Muted™️')
+    muted_role = discord.utils.get(member.guild.roles, name='Muted™')
     if muted_role in member.roles:
 
       await member.remove_roles(muted_role)
@@ -206,7 +206,7 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
     else:
       try:
         
-        muted_role = discord.utils.get(member.guild.roles, name='Muted™️')
+        muted_role = discord.utils.get(member.guild.roles, name='Muted')
         await member.add_roles(muted_role)
         await ctx.message.delete()  
         embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = discord.Colour.red())
@@ -218,7 +218,7 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
         memberembed.set_footer(text = "Made By EternalSlayer#0069")
         await member.send(embed = memberembed)
       except:
-        await ctx.send(f"I Cannot Find The ``Muted™️`` Role Which I Accept As The Mute Role!\n \n Please Type ``^muterole create`` For Instant Setup!")
+        await ctx.send(f"I Cannot Find The ``Muted`` Role Which I Accept As The Mute Role!\n \n Please Type ``^muterole create`` For Instant Setup!")
 @client.command()
 async def botstats(ctx):
   num = 0
@@ -745,7 +745,7 @@ async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specif
     elif time == -2:
       await ctx.send(f"Time Must Be An Integer.. Please Enter An Integer Next Time 😉")
     else:
-      muted_role = discord.utils.get(member.guild.roles, name='Muted™️')
+      muted_role = discord.utils.get(member.guild.roles, name='Muted')
       await member.add_roles(muted_role)
       await ctx.message.delete()
       embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = discord.Colour.red())
@@ -914,17 +914,6 @@ async def decline(ctx,id:int,*,reason):
       embed.add_field(name= "Suggestion Declined",value = reason,inline = False)
       embed.add_field(name = "Declined By",value = ctx.author,inline = False)
       await ctx.send(embed=embed)
-@client.command()
-async def call(ctx,query):
-  if query == "boss":    
-    new = await ctx.send(f"``Dialing Your Boss``")
-    await asyncio.sleep(2)
-    await new.edit(content = f"``Successfully Connected``\n{ctx.author.name} : Hey Boss! Dialed You To Tell Ya That I Am A Bit Sick So Wont Be Able To Make It To The Office Today\n ``...``")
-    await asyncio.sleep(2)
-    await new.edit(content = f"``Successfully Connected``\n{ctx.author.name} : Hey Boss! Dialed You To Tell Ya That I Am A Bit Sick So Wont Be Able To Make It To The Office Today\n Boss : Oh, Sad To Hear That.. Stay Home. Hope You Get Well Soon")
-    await asyncio.sleep(2)
-    await new.edit(content = f"``Successfully Connected``\n{ctx.author.name} : Hey Boss! Dialed You To Tell Ya That I Am A Bit Sick So Wont Be Able To Make It To The Office Today\n Boss : Oh, Sad To Hear That.. Stay Home. Hope You Get Well Soon\n ``Disconnected``")
-
 @client.event
 async def on_guild_join(guild):
   channel = client.get_channel(803246997729443930)
@@ -1508,5 +1497,8 @@ async def meme(ctx,query):
   embed.set_image(url=url)
   await ctx.send(embed=embed)
   client.nextMeme = getMeme()
-
+@client.command()
+async def call(ctx,member = discord.Member = None):
+  await ctx.send(f"Dialing {member.mention}")
+  
 client.run(TOKEN)
