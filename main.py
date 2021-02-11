@@ -11,9 +11,12 @@ from PIL import Image
 from io import BytesIO
 import datetime
 import time
+import dbl
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
+dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = False)
+dbl_client = DBLClient(client,dbl_token)
 @client.event
 async def on_ready():
   num= 0
@@ -1497,4 +1500,12 @@ async def meme(ctx,query):
   embed.set_image(url=url)
   await ctx.send(embed=embed)
   client.nextMeme = getMeme()
+
+@client.event
+async def on_dbl_vote(data):
+  user = data['user']
+  await user.send(f"Thanks For Voting Me || This Really Means A Lot To Us")
+  await asyncio.sleep(43200)
+  embed= discord.Embed(title = f"Vote",description = f"Your Voting Timer Has Refreshed! You Can Vote Now [Here](https://top.gg/bot/790478502909837333/vote)")
+  await user.send(f"embed=embed")
 client.run(TOKEN)
