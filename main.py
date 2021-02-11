@@ -607,7 +607,7 @@ async def giveaway(ctx):
   winners = int(answers[2])
   win = int(winners)
   prize = answers[3]
-  role = str(f"<@&{answers[4]}>")
+  role = str(answers[4])
   if winners > 20:
     await ctx.send(f"Too Many Winners!! The Maximum You Can Have Is 20!")
   elif time > 86400:
