@@ -1492,4 +1492,14 @@ async def image(ctx,*,subred = "scenery"):
     await ctx.send("NSFW Content Is Not Supported CUrrently")
   else:
     await ctx.send(f"{random_sub.url}")
+@client.event
+async def on_command_error(ctx, error):
+  if isinstance(error, commands.CommandOnCooldown):
+    await ctx.message.delete()
+    embed = discord.Embed(title = "<:error:795629492693368833> Error",colour = 0xFF0000)
+    embed.add_field(name = "Status", value = "You Are Still On Cooldown")
+    embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
+    await ctx.send(embed=embed)      
+  else:
+      raise error
 client.run(TOKEN)
