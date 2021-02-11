@@ -1463,7 +1463,7 @@ async def image(ctx,*,subred = "scenery"):
     if submission.is_video == False and submission.url.startswith("https://youtube.com") == False:
       all_subs.append(submission)
   random_sub = random.choice(all_subs)
-  if random_sub.is_nsfw:
+  if random_sub.over_18:
     await ctx.send("NSFW Content Is Not Supported CUrrently")
   else:
     await ctx.send(f"{random_sub.url}")
@@ -1485,7 +1485,7 @@ def getMeme(query):
     if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
   random_sub = random.choice(all_subs)
-  if random_sub.is_nsfw:
+  if random_sub.over_18:
     warn = "NSFW Content Is Not Supported"
     return warn
   else:
@@ -1496,6 +1496,7 @@ def getMeme(query):
     comm = random_sub.num_comments
     return name, url, ups, downs, comm
 @client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def meme(ctx,query):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = getMeme(query)
