@@ -759,31 +759,6 @@ async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specif
 reddit = praw.Reddit(client_id = "HavE-E7-h3pXDQ",client_secret = "TYAmuss0lnMFOXMZA_si6v-SmfkFJQ",user_agent = "prawop",check_for_async= False)
 subreddit = reddit.subreddit("memes")
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def meme(ctx,*,subred = "memes"): 
-  subreddit = reddit.subreddit(subred)
-  all_subs = []
-  top = subreddit.top(limit= 500)
-  for submission in top:
-    if submission.is_video == False:
-      all_subs.append(submission)
-    elif submission.url.startswith("https://youtube.com/") == False:
-      all_subs.append(submission)
-  random_sub = random.choice(all_subs)
-  if random_sub.over_18:
-    await ctx.send(f"NSFW Content Not Supported Currently")
-  else:
-    name = random_sub.title
-    url = random_sub.url
-    likes = random_sub.ups
-    dis = random_sub.downs
-    comm = random_sub.num_comments
-    embed = discord.Embed(description = f"[{name}]({url})",colour = 0xC2C40D)
-    embed.set_image(url=url)
-    embed.set_footer(text = f"👍 {likes} • 💬 {comm} • 👎 {dis}")
-    await ctx.send(embed=embed)
-      
-@client.command()
 async def tour(ctx):
   if ctx.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
     embed = discord.Embed(title = f"{ctx.author.name}",description = f"Welcome To The Tour Of {ctx.guild.name}",colour = 0x00F9FF)
@@ -1502,4 +1477,32 @@ async def on_command_error(ctx, error):
     await ctx.send(embed=embed)      
   else:
       raise error
+def getMeme(query):
+  subreddit = reddit.subreddit(query))   
+  top = subreddit.top(limit=50)
+  for submission in top:
+    if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
+      all_subs.append(submission)
+  random_sub = random.choice(all_subs)
+  if random_sub.is_nsfw:
+    warn = "NSFW Content Is Not Supported"
+    return warn
+  else:
+    name = random_sub.title
+    url = random_sub.url
+    likes = random_sub.ups
+    dis = random_sub.downs
+    comm = random_sub.num_comments
+    return name, url, ups, downs, comm
+@client.command()
+async def meme(ctx,query):
+  if not hasattr(client, 'nextMeme'):
+    client.nextMeme = getMeme(query)
+    name, url = client.nextMeme
+    embed = discord.Embed(title = name,description = f"[{name}]({url})",colour = 0xE5FF00)
+    embed.set_image(url=url)
+    embed.set_footer(text = f"👍 {likes} • 💬 {comm} • 👎 {dis}")
+    await ctx.send(embed=embed)
+    client.nextMeme = getMeme()
+
 client.run(TOKEN)
