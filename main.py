@@ -1494,7 +1494,7 @@ def getMeme(query):
     likes = random_sub.ups
     dis = random_sub.downs
     comm = random_sub.num_comments
-    return name, url, ups, downs, comm
+    return name, url, likes, dis, comm
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def meme(ctx,query):
