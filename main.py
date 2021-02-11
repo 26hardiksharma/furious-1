@@ -1478,6 +1478,7 @@ async def on_command_error(ctx, error):
   else:
       raise error
 def getMeme(query):
+  all_subs = []
   subreddit = reddit.subreddit(query)   
   top = subreddit.top(limit=50)
   for submission in top:
