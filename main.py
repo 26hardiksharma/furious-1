@@ -1472,8 +1472,11 @@ async def image(ctx,*,subred = "scenery"):
   all_subs = []
   top = subreddit.top(limit= 500)
   for submission in top:
-    if submission.is_video == False and submission.url.startswith("https://youtube.com") == False and submission.is_nsfw == False:
+    if submission.is_video == False and submission.url.startswith("https://youtube.com") == False:
       all_subs.append(submission)
   random_sub = random.choice(all_subs)
-  await ctx.send(f"{random_sub.url}")
+  if random_sub.is_nsfw:
+    await ctx.send("NSFW Content Is Not Supported CUrrently")
+  else:
+    await ctx.send(f"{random_sub.url}")
 client.run(TOKEN)
