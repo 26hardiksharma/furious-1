@@ -260,7 +260,7 @@ async def setnick(ctx, member : discord.Member,*,nick):
     f"Requested By {ctx.author.name}, Made by Eternal_SlayerYT")
     await ctx.send(embed=embed)
 @client.command()
-@commands
+@commands.cooldown(1, 10, commands.BucketType.user)
 async def hack(ctx,member : discord.Member):
   if ctx.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
     voter = discord.utils.get(ctx.guild.roles, name = "ᛝ𒅎・SΣЯVΣЯ VΩTΣЯS")
