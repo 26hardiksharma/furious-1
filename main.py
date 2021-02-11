@@ -614,7 +614,7 @@ async def giveaway(ctx):
     await ctx.send(f"I Currently Support Giveaways Of Upto 1 Day Long 😔 || Please Select A Time Duration Less Than  Or Equal To 1 Day ")
   elif role != "none" or "skip":
     if role not in ctx.guild.roles:
-      await ctx.send(f"No Role Named ``{ansers[4]}`` Found!")
+      await ctx.send(f"No Role Named ``{answers[4]}`` Found!")
   else:
     end = datetime.datetime.now()+datetime.timedelta(seconds= time*60)
     embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
