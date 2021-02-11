@@ -260,6 +260,7 @@ async def setnick(ctx, member : discord.Member,*,nick):
     f"Requested By {ctx.author.name}, Made by Eternal_SlayerYT")
     await ctx.send(embed=embed)
 @client.command()
+@commands
 async def hack(ctx,member : discord.Member):
   if ctx.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
     voter = discord.utils.get(ctx.guild.roles, name = "ᛝ𒅎・SΣЯVΣЯ VΩTΣЯS")
@@ -758,6 +759,7 @@ async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specif
 reddit = praw.Reddit(client_id = "HavE-E7-h3pXDQ",client_secret = "TYAmuss0lnMFOXMZA_si6v-SmfkFJQ",user_agent = "prawop")
 subreddit = reddit.subreddit("memes")
 @client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def meme(ctx,*,subred = "memes"): 
   subreddit = reddit.subreddit(subred)
   all_subs = []
@@ -809,6 +811,7 @@ async def tour(ctx):
                     
 
 @client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def wanted(ctx, member: discord.Member = None):
   
   if member == None:
@@ -822,6 +825,7 @@ async def wanted(ctx, member: discord.Member = None):
   wanted.save("profile.jpg")
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def hitler(ctx, member: discord.Member = None):
   if member== None:
     member = ctx.author
@@ -834,6 +838,7 @@ async def hitler(ctx, member: discord.Member = None):
   hitler.save("profile.jpg")
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def help(ctx,query = None):
   if query == None:
     query = 0
@@ -967,6 +972,7 @@ async def on_guild_remove(guild):
   await channel.send(embed=embed)
   await abcd.send(embed=embed)
 @client.command()
+@commands.cooldown(1, 10, commands.BucketType.user)
 async def trash(ctx, member: discord.Member = None):
   if member== None:
     member = ctx.author
@@ -1072,6 +1078,7 @@ async def templock(ctx,unit,channel : discord.TextChannel=None):
   else:
     await ctx.send("<:kya_bey:796610669549322250>")
 @client.command()
+@commands.cooldown(1, 60, commands.BucketType.user)
 async def muterole(ctx,query):
   if ctx.author.guild_permissions.manage_roles:
     if query == "setup" or "create":
@@ -1143,6 +1150,7 @@ async def create_category(ctx, *, name):
     await ctx.send(f"You Are Missing The **MANAGE SERVER** Permissions Required To Execute This Command!")
 @client.command()
 async def serverlock(ctx):
+  @commands.cooldown(1, 60, commands.BucketType.user)
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     for channel in ctx.guild.text_channels:
       overwrite = channel.overwrites_for(ctx.guild.default_role)
@@ -1153,6 +1161,7 @@ async def serverlock(ctx):
   else:
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
+@commands.cooldown(1, 60, commands.BucketType.user)
 async def serverunlock(ctx):
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     for channel in ctx.guild.text_channels:
@@ -1168,6 +1177,7 @@ async def serverunlock(ctx):
   else:
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
+@commands.cooldown(1, 120, commands.BucketType.user)
 async def maintenance(ctx,query):
   if ctx.author.guild_permissions.administrator:
     if query == "on":
@@ -1295,6 +1305,7 @@ async def dm(ctx, member : discord.Member,*,query):
     embed.add_field(name = "Missing Permissions", value = "Administrator",inline = False)
     await ctx.send(embed=embed)
 @client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def addrole(ctx,member : discord.Member,role : discord.Role):
   if ctx.author.guild_permissions.manage_roles:
     owner= await ctx.guild.fetch_member(ctx.guild.owner_id)
@@ -1319,6 +1330,7 @@ async def addrole(ctx,member : discord.Member,role : discord.Role):
       embed.add_field(name = f"Added By",value= ctx.author.mention)
       await ctx.send(embed=embed)
 @client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def takerole(ctx,member : discord.Member,role : discord.Role):
   if ctx.author.guild_permissions.manage_roles:
     owner= await ctx.guild.fetch_member(ctx.guild.owner_id)
@@ -1467,6 +1479,7 @@ async def calculate(ctx,num:float,op,anum:float):
     await ctx.send(embed=embed)
 
 @client.command()
+@commands.cooldown(1, 10, commands.BucketType.user)  
 async def image(ctx,*,subred = "scenery"): 
   subreddit = reddit.subreddit(subred)
   all_subs = []
