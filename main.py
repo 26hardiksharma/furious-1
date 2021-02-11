@@ -1503,7 +1503,6 @@ async def meme(ctx,query):
     name, url = client.nextMeme
     embed = discord.Embed(title = name,description = f"[{name}]({url})",colour = 0xE5FF00)
     embed.set_image(url=url)
-    embed.set_footer(text = f"👍 {likes} • 💬 {comm} • 👎 {dis}")
     await ctx.send(embed=embed)
     client.nextMeme = getMeme()
 
