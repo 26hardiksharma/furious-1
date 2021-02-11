@@ -581,7 +581,7 @@ async def slowmode(ctx, unit):
 @commands.has_permissions(administrator = True)
 async def giveaway(ctx):
   await ctx.send(f"So Nice Of You To Create A Giveaway :D... Lets Start With The Setup")
-  questions = ["Mention The Channel in Which You want The Giveaway To Be Started","Tell Me The Duration Of The Giveaway! Time Parameters :- [s|m|h|d]","Alright! How Many Winners Should Be There ?","Alright! What Should Be The Prize Of The Giveaway ?"]
+  questions = ["Mention The Channel in Which You want The Giveaway To Be Started","Tell Me The Duration Of The Giveaway! Time Parameters :- [s|m|h|d]","Alright! How Many Winners Should Be There ?","Alright! What Should Be The Prize Of The Giveaway ?","Lastly, Is There Any Role Requirement For The Giveaway ?\nIf Yes Then Mention The Role Else Type ``skip`` or ``none``"]
   answers = []
   def check(m):
     return m.author == ctx.author and m.channel == ctx.channel
@@ -607,14 +607,22 @@ async def giveaway(ctx):
   winners = int(answers[2])
   win = int(winners)
   prize = answers[3]
+  role = answers[4]
   if winners > 20:
     await ctx.send(f"Too Many Winners!! The Maximum You Can Have Is 20!")
   elif time > 86400:
     await ctx.send(f"I Currently Support Giveaways Of Upto 1 Day Long 😔 || Please Select A Time Duration Less Than  Or Equal To 1 Day ")
+  elif role != "none" or "skip":
+    if role not in ctx.guild.roles:
+      await ctx.send(f"No Role Named ``{ansers[4]}`` Found!")
   else:
     end = datetime.datetime.now()+datetime.timedelta(seconds= time*60)
     embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
     embed.add_field(name = "Host",value = f"{ctx.author.mention}",inline = False)
+    if answers[4] == "none" or "skip":
+      embed.add_field(name= "Role Requirement",value = f"None",inline=False)
+    else:
+      embed.add_field(name= "Role Requirement",value = f"{role.mention}",inline=False)
     embed.add_field(name = "Participate",value = "React With 🎉 To Enter")
     embed.set_footer(text = f"{winners} Winners • Ends At {end}")
     my_msg = await channel.send(embed=embed)
@@ -631,8 +639,9 @@ async def giveaway(ctx):
     else:
       winlist = []
       for i in range(winners):
-        winner = random.choice(users)
-        winlist.append(winner.mention)
+        if role != "skip"or "none" and role in users.roles:
+          winner = random.choice(users)
+          winlist.append(winner.mention)
       new_embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
       new_embed.add_field(name= "Winner(s)",value = f"{winner.mention}")
       await my_msg.edit(embed=new_embed)
@@ -1482,7 +1491,7 @@ def getMeme(query):
   subreddit = reddit.subreddit(query)   
   top = subreddit.top(limit=50)
   for submission in top:
-    if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False and submission.is_image == True:
+    if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False and submission.is_image == True  :
       all_subs.append(submission)
   random_sub = random.choice(all_subs)
   if random_sub.over_18:
