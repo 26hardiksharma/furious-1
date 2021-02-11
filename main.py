@@ -1500,10 +1500,10 @@ def getMeme(query):
 async def meme(ctx,query):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = getMeme(query)
-    name, url = client.nextMeme
-    embed = discord.Embed(title = name,description = f"[{name}]({url})",colour = 0xE5FF00)
-    embed.set_image(url=url)
-    await ctx.send(embed=embed)
-    client.nextMeme = getMeme()
+  name, url = client.nextMeme
+  embed = discord.Embed(title = name,description = f"[{name}]({url})",colour = 0xE5FF00)
+  embed.set_image(url=url)
+  await ctx.send(embed=embed)
+  client.nextMeme = getMeme()
 
 client.run(TOKEN)
