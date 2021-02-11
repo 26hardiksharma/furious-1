@@ -1446,7 +1446,7 @@ async def totalbans(ctx):
     await ctx.send(f"{ctx.guild.name} Has {ct} Bans In Total")
 @client.command()
 async def calculate(ctx,num:float,op,anum:float):
-  embed= discord.Embed(title= f"Calculate",description = "[Invite Me](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot)",colour = 0xC70039)
+  embed= discord.Embed(title= f"Calculate",colour = 0xC70039)
   embed.add_field(name= f"Problem Given",value= f"{num} {op} {anum}",inline = False)
   embed.set_footer(text =f"Requested By {ctx.author.name}")
   bruh = None
@@ -1465,4 +1465,15 @@ async def calculate(ctx,num:float,op,anum:float):
   elif op == "^":
     embed.add_field(name = "Solution",value= f"{num**anum}")
     await ctx.send(embed=embed)
+
+@client.command()
+async def image(ctx,*,subred = "scenery"): 
+  subreddit = reddit.subreddit(subred)
+  all_subs = []
+  top = subreddit.top(limit= 500)
+  for submission in top:
+    if submission.is_video == False and submission.url.startswith("https://youtube.com") == False and submission.is_nsfw == False:
+      all_subs.append(submission)
+  random_sub = random.choice(all_subs)
+  await ctx.send(f"{random_sub.url}")
 client.run(TOKEN)
