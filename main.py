@@ -756,7 +756,7 @@ async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specif
       await member.send(embed = memberembed)
       await asyncio.sleep(time)
       await member.remove_roles(muted_role)
-reddit = praw.Reddit(client_id = "HavE-E7-h3pXDQ",client_secret = "TYAmuss0lnMFOXMZA_si6v-SmfkFJQ",user_agent = "prawop")
+reddit = praw.Reddit(client_id = "HavE-E7-h3pXDQ",client_secret = "TYAmuss0lnMFOXMZA_si6v-SmfkFJQ",user_agent = "prawop",check_for_async= False)
 subreddit = reddit.subreddit("memes")
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
