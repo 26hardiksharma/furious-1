@@ -1497,8 +1497,4 @@ async def meme(ctx,query):
   embed.set_image(url=url)
   await ctx.send(embed=embed)
   client.nextMeme = getMeme()
-@client.command()
-async def call(ctx,member = discord.Member = None):
-  await ctx.send(f"Dialing {member.mention}")
-  
 client.run(TOKEN)
