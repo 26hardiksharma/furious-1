@@ -1149,8 +1149,8 @@ async def create_category(ctx, *, name):
   else:
     await ctx.send(f"You Are Missing The **MANAGE SERVER** Permissions Required To Execute This Command!")
 @client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def serverlock(ctx):
-  @commands.cooldown(1, 60, commands.BucketType.user)
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     for channel in ctx.guild.text_channels:
       overwrite = channel.overwrites_for(ctx.guild.default_role)
