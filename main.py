@@ -1507,5 +1507,30 @@ async def on_dbl_vote(data):
   await asyncio.sleep(43200)
   embed= discord.Embed(title = f"Vote",description = f"Your Voting Timer Has Refreshed! You Can Vote Now [Here](https://top.gg/bot/790478502909837333/vote)")
   await user.send(f"embed=embed")
+@client.command()
+async def create(ctx,type,*,query):
+  abc = await ctx.guild.fetch_member(client.user.id)
+  if type == "role":
+    if ctx.author.guild_permissions.manage_roles:
+      if abc.guild_permissions.manage_roles:
+        role = await ctx.guild.create_role(name = query,permissions = discord.Permissions(permissions = 0)) 
+        embed = discord.Embed(title = "Role Created",colour = 0x33FFE5)
+        embed.add_field(name = "Role Name",value = f"{role.mention}",inline = False)
+        embed.add_field(name = "Created By",value= ctx.author.mention)
+      else:
+        await ctx.send(f"I Need The **MANAGE ROLES** Permission To Be Able To Execute This Command")
+    else:
+      await ctx.send(f"You Need The **MANAGE ROLES** Permission To Be Able To Execute This Command")
+  elif type == "channel":
+    if ctx.author.guild_permissions.manage_channels:
+      if abc.guild_permissions.manage_channels:
+        channel = await ctx.guild.create_text_channel(name = query)
+        embed = discord.Embed(title = "Channel Created",colour = 0x33FFE5)
+        embed.add_field(name = "Channel Name",value = f"{channel.mention}",inline = False)
+        embed.add_field(name = "Created By",value= ctx.author.mention)
+      else:
+        await ctx.send(f"I Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
+    else:
+      await ctx.send(f"You Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
 
 client.run(TOKEN)
