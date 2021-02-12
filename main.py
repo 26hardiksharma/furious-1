@@ -301,22 +301,6 @@ async def hack(ctx,member : discord.Member):
     embed.add_field(name = "Status", value = "This Command Is Currently Limited To Our Official Server Only")
     embed.add_field(name = "Official Server",value = "[Server Link](https://discord.gg/uKh8Y2fhmJ)",inline = False)
     await ctx.send(embed=embed)
-  
-@client.command()
-async def create(ctx,*,query):
-  if ctx.author.guild_permissions.manage_channels:
-    try:  
-      await ctx.guild.create_text_channel(query)
-      embed = discord.Embed(title = "Create Channel",colour = 0x00FFD7)
-      embed.add_field(name = "Status",value = "Successfully Created The Channel",)
-      await ctx.send(embed=embed)
-    except:
-      await ctx.send(f"Perhaps I Am Missing The **MANAGE CHANNELS** Permissions Required To Execute This Command. Please Check And Try Again!")
-  else:
-    embed = discord.Embed(title = "<:error:795629492693368833> Create Channel",colour = 0xFF0000)
-    embed.add_field(name = "Status", value = "You Dont Have The Permission To Execute This Command",inline = False)
-    embed.add_field(name = "Missing Permissions", value = "Manage Channels")
-    await ctx.send(embed=embed)
 @client.command()
 async def vcreate(ctx,*,query):
   if ctx.author.guild_permissions.manage_channels:
