@@ -1505,7 +1505,7 @@ async def create(ctx,type,*,query):
     else:
       await ctx.send(f"You Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
 @client.command()
-async def test(self, ctx):
+async def test(ctx):
   answers = []
   msg = await ctx.message.channel.send("React to this For Test")
   await msg.add_reaction("<:Pog:808216650859151371")
