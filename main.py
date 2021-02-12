@@ -1504,5 +1504,20 @@ async def create(ctx,type,*,query):
         await ctx.send(f"I Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
     else:
       await ctx.send(f"You Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
-
+@client.command()
+async def test(self, ctx):
+  answers = []
+  msg = await ctx.message.channel.send("React to this For Test")
+  await msg.add_reaction("<:Pog:808216650859151371")
+  def check(react, user):
+    return react.message.author == msg.author and ctx.message.channel == react.message.channel
+  try:
+    react = await client.wait_for('reaction_add', check=check)
+  except asyncio.TimeoutError:
+    await ctx.send("Time's Up! you Didn't Answer In Time")
+    return
+  else:
+    answers.append(msg.content)
+  if msg.content == "<:Pog:808216650859151371>":
+    await ctx.send(f"Test Successfull")
 client.run(TOKEN)
