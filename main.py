@@ -15,7 +15,7 @@ import dbl
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 intents = discord.Intents.default()
-client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = False)
+client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot= client,token = dbl_token)
 @client.event
 async def on_ready():
@@ -641,7 +641,7 @@ async def giveaway(ctx):
       new_embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
       new_embed.add_field(name= "Winner(s)",value = f"{winner.mention}")
       await my_msg.edit(embed=new_embed)
-      await channel.send(f"Congratulations {winlist}! You Won {prize}🥳")
+      await channel.send(f"Congratulations {winlist[:]}! You Won {prize}🥳")
 @client.command()
 async def reroll(ctx,channel : discord.TextChannel, id_ : int):
   try:
@@ -1512,4 +1512,5 @@ async def on_dbl_vote(data):
   await asyncio.sleep(43200)
   embed= discord.Embed(title = f"Vote",description = f"Your Voting Timer Has Refreshed! You Can Vote Now [Here](https://top.gg/bot/790478502909837333/vote)")
   await user.send(f"embed=embed")
+
 client.run(TOKEN)
