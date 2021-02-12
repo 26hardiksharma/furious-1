@@ -498,13 +498,6 @@ async def pokemon(ctx):
       embed = discord.Embed(title = "A wild pokémon has appeared!",description = "Guess the pokémon and type ^catch <pokémon> to catch it!",colour = 0x00D3FF)
       embed.set_image(url = "https://media.discordapp.net/attachments/796260664577359883/796985864554938408/pokemon.jpg?width=625&height=391")
       await ctx.send(embed=embed)
-@client.command(aliases = ['c','C'])
-@commands.cooldown(1, 10, commands.BucketType.user)
-async def catch(ctx,*,name):
-  if ctx.author.guild_permissions.administrator:
-    level = random.randint(0,50)
-    await asyncio.sleep(3)
-    await ctx.send(f"Congratulations {ctx.author.mention}! You caught a level {level} {name}!")
 @client.command()
 async def serverinfo(ctx):
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
