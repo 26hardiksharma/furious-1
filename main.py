@@ -1517,7 +1517,7 @@ async def test(ctx):
     await ctx.send("Time's Up! you Didn't Answer In Time")
     return
   else:
-    answers.append(msg.content)
+    answers.append(react.content)
   if answers[0] == "<:Pog:808216650859151371>":
     await ctx.send(f"Test Successfull")
 client.run(TOKEN)
