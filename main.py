@@ -706,7 +706,7 @@ async def wink(ctx):
   embed=discord.Embed(title = f"{ctx.author.name} Is Winking 😉")
   embed.set_image(url = "https://cdn.discordapp.com/attachments/737780593609408532/737815454046879854/5OHh.gif")
   await ctx.send(embed=embed) 
-@client.command(aliases=["Pog","POG"])
+@client.command()
 async def pog(ctx):
   embed=discord.Embed(title = f"{ctx.author.name} Is Pogging <:Pog:793075474645254185>")
   embed.set_image(url = "https://cdn.discordapp.com/attachments/796260664577359883/801735309913096223/pog.gif")
