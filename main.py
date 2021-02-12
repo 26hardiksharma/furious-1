@@ -1501,6 +1501,7 @@ async def create(ctx,type,*,query):
         embed = discord.Embed(title = "Role Created",colour = 0x33FFE5)
         embed.add_field(name = "Role Name",value = f"{role.mention}",inline = False)
         embed.add_field(name = "Created By",value= ctx.author.mention)
+        await ctx.send(embed=embed)
       else:
         await ctx.send(f"I Need The **MANAGE ROLES** Permission To Be Able To Execute This Command")
     else:
@@ -1512,6 +1513,7 @@ async def create(ctx,type,*,query):
         embed = discord.Embed(title = "Channel Created",colour = 0x33FFE5)
         embed.add_field(name = "Channel Name",value = f"{channel.mention}",inline = False)
         embed.add_field(name = "Created By",value= ctx.author.mention)
+        await ctx.send(embed=embed)
       else:
         await ctx.send(f"I Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
     else:
