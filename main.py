@@ -1507,7 +1507,7 @@ async def create(ctx,type,*,query):
 @client.command()
 async def test(ctx):
   answers = []
-  msg = await ctx.message.channel.send("React to this For Test")
+  msg = await ctx.send("React to this For Test")
   await msg.add_reaction("<:Pog:808216650859151371")
   def check(react, user):
     return react.message.author == msg.author and ctx.message.channel == react.message.channel
