@@ -652,7 +652,7 @@ async def revive(ctx):
     await ctx.message.delete()
     msg = await ctx.send(f"**Alert!** DEAD CHAT || @everyone ||")
     await msg.edit(content =f"**DEAD CHAT, PLEASE BE ACTIVE**")
-@client.command(aliases = ['info','INFO','I'])
+@client.command(aliases = ['info'])
 async def i(ctx):
   embed = discord.Embed(title = "Level 100 Xerneas",colour = 0x9FE2B8)
   embed.add_field(name= "Details",value = "**XP:** 2750/2750 \n **Nature:** Hasty",inline = False)
