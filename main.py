@@ -600,41 +600,43 @@ async def giveaway(ctx):
     await ctx.send(f"You Didn't Answer With A Proper Unit. Use The Table For Acknowledgment :- [s|m|h|d]")
   elif time == -2:
     await ctx.send(f"Time Must Be An Integer.. Please Enter An Integer Next Time 😉")
-  winners = int(answers[2])
-  win = int(winners)
-  prize = answers[3]
-
-  if winners > 20:
-    await ctx.send(f"Too Many Winners!! The Maximum You Can Have Is 20!")
-  elif time > 86400:
-    await ctx.send(f"I Currently Support Giveaways Of Upto 1 Day Long 😔 || Please Select A Time Duration Less Than  Or Equal To 1 Day ")
   else:
-    end = datetime.datetime.now()+datetime.timedelta(seconds= time*60)
-    embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
-    embed.add_field(name = "Host",value = f"{ctx.author.mention}",inline = False)
+    winners = int(answers[2])
 
-    embed.add_field(name = "Participate",value = "React With 🎉 To Enter")
-    embed.set_footer(text = f"{winners} Winners • Ends At {end}")
-    my_msg = await channel.send(embed=embed)
-    await my_msg.add_reaction("🎉")                   
-    await ctx.send(f"Alright! The Giveaway Of {prize} Is Starting In {channel.mention} And Will Last {answers[1]}")
-    await asyncio.sleep(time)
-    new_msg = await channel.fetch_message(my_msg.id)
-    users = await new_msg.reactions[0].users().flatten()
-    users.pop(users.index(client.user))
-    if len(users) ==0:
-      await channel.send(f"**Err,0 Reacts, Can't Choose Any Winner!**")
-    elif winners > len(users):
-      await channel.send(f"Not Enough Reacts! Couldn't Choose Any Winner 😔")
+    win = int(winners)
+    prize = answers[3]
+
+    if winners > 20:
+      await ctx.send(f"Too Many Winners!! The Maximum You Can Have Is 20!")
+    elif time > 86400:
+      await ctx.send(f"I Currently Support Giveaways Of Upto 1 Day Long 😔 || Please Select A Time Duration Less Than  Or Equal To 1 Day ")
     else:
-      winlist = []
-      for i in range(winners):
-        winner = random.choice(users)
-        winlist.append(winner.mention)
-      new_embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
-      new_embed.add_field(name= "Winner(s)",value = f"{winner.mention}")
-      await my_msg.edit(embed=new_embed)
-      await channel.send(f"Congratulations {winlist[:]}! You Won {prize}🥳")
+      end = datetime.datetime.now()+datetime.timedelta(seconds= time*60)
+      embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
+      embed.add_field(name = "Host",value = f"{ctx.author.mention}",inline = False)
+
+      embed.add_field(name = "Participate",value = "React With 🎉 To Enter")
+      embed.set_footer(text = f"{winners} Winners • Ends At {end}")
+      my_msg = await channel.send(embed=embed)
+      await my_msg.add_reaction("🎉")                   
+      await ctx.send(f"Alright! The Giveaway Of {prize} Is Starting In {channel.mention} And Will Last {answers[1]}")
+      await asyncio.sleep(time)
+      new_msg = await channel.fetch_message(my_msg.id)
+      users = await new_msg.reactions[0].users().flatten()
+      users.pop(users.index(client.user))
+      if len(users) ==0:
+        await channel.send(f"**Err,0 Reacts, Can't Choose Any Winner!**")
+      elif winners > len(users):
+        await channel.send(f"Not Enough Reacts! Couldn't Choose Any Winner 😔")
+      else:
+        winlist = []
+        for i in range(winners):
+          winner = random.choice(users)
+          winlist.append(winner.mention)
+        new_embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
+        new_embed.add_field(name= "Winner(s)",value = f"{winner.mention}")
+        await my_msg.edit(embed=new_embed)
+        await channel.send(f"Congratulations {winlist[:]}! You Won {prize}🥳")
 @client.command()
 async def reroll(ctx,channel : discord.TextChannel, id_ : int):
   try:
