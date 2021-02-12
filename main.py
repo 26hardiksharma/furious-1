@@ -1518,6 +1518,6 @@ async def test(ctx):
     return
   else:
     answers.append(msg.content)
-  if msg.content == "<:Pog:808216650859151371>":
+  if answers[0] == "<:Pog:808216650859151371>":
     await ctx.send(f"Test Successfull")
 client.run(TOKEN)
