@@ -802,25 +802,11 @@ async def help(ctx,query = None):
   if query == None:
     query = 0
   if query == 0:    
-    if ctx.guild.name == "FURIOUS SUPPORT" :
-      embed = discord.Embed(title = "Help (Page 1)",description = "Furious' Commands", colour = 0x00FFD7)
-      embed.add_field(name = "Prefix", value = "Bot Prefixes :- ^ Or <@!790478502909837333>")
-      embed.add_field(name = "Moderation", value = "Shows The List Of Moderation Commands | ``^help moderation``",inline = False)
-      embed.add_field(name = "Fun", value = "Shows The Fun Commands Of The Bot | ``^help fun``",inline = False)
-      embed.add_field(name = "Utility", value = "Shows The Utility Commands Of The Bot | ``^help utility``", inline =  False)
-      embed.add_field(name = "Management", value = "Shows The Management Commands Of The Bot | ``^help management``", inline =  False)
-      await ctx.send(embed=embed)
-    else:
-      embed = discord.Embed(title = "Help (Page 1)",description = "Furious' Commands", colour = 0x00FFD7)
-      embed.add_field(name = "Prefix", value = "Bot Prefixes :- ^ Or <@!790478502909837333>")
-      embed.add_field(name = "Moderation", value = "Shows The List Of Moderation Commands | ``^help moderation``",inline = False)
-      embed.add_field(name = "Fun", value = "Shows The Fun Commands Of The Bot | ``^help fun``",inline = False)
-      embed.add_field(name = "Utility", value = "Shows The Utility Commands Of The Bot | ``^help utility``", inline =  False)
-      embed.add_field(name = "Management", value = "Shows The Management Commands Of The Bot | ``^help management``", inline =  False)
-      embed.add_field(name = "Support Server", value = "[Click Here](https://discord.gg/n5DkCQNjEQ)", inline =  False)
-      
-      await ctx.send(embed=embed)
-  
+    embed = discord.Embed(title = "Help ",description = "Furious' Command Modules", colour = 0x00FFD7)
+    embed.add_field(name = "Prefix", value = "Bot Prefixes :- ^ Or <@!790478502909837333>",inline = False)
+    embed.add_field(name = "Modules",value = "<:cyan_ticket:809791540704051270> Moderation\n<:lime_ticket:809791466192896010> Fun\n<:yellow_ticket:809791184028434483> Utility\n<:red_ticket:809791374810546226> Management")
+    embed.set_footer(text= "Type ^help <module> For Commands Of That Module")
+    await ctx.send(embed=embed)
   elif query == 'fun':
     embed = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
     embed.add_field(name = "Wink",value = "**^wink**",inline = False)
