@@ -708,7 +708,7 @@ async def remindme(ctx,time,*,msg):
     await ctx.send(f"Reminder {ctx.author.mention}:- **{msg}**")
     await ctx.author.send(f"Reminder {ctx.author.mention}:- **{msg}**")  
 @client.command(aliases = ['tm'])
-@commands.has_permissions(manage_guild=True)
+@commands.has_permissions(manage_messages=True)
 async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specified"):
   if member.guild_permissions.manage_messages:
     await ctx.message.delete()
@@ -844,6 +844,7 @@ async def help(ctx,query = None):
     await ctx.send(embed=embed)
     
 @client.command()
+@commands.cooldown(1,600,commands.BucketType.user)
 async def suggest(ctx,*,query):
   id = ctx.author.id
   if id in blacklists:
@@ -853,11 +854,11 @@ async def suggest(ctx,*,query):
     channel = client.get_channel(800660800276398121)
     embed = discord.Embed(title = f"{ctx.author.name}",colour = 0x00F9FF)
     embed.add_field(name = "Suggestion",value = suggestion,inline = False)
-    embed.add_field(name = "Status",value = "Suggestion Recorded! Please Wait For It To Be Approved",inline = False)
     op = await channel.send(embed=embed)
     await op.add_reaction("⬆")
     await op.add_reaction("🟡")
     await op.add_reaction("⬇")
+    await ctx.send(f"Thank You For Providing A Suggestion! Your Efforts Are Appreciated")
 @client.command(aliases= ['approve'])
 async def consider(ctx,id:int,*,reason):
   if ctx.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
