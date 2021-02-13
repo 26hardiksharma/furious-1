@@ -1504,6 +1504,18 @@ async def create(ctx,type,*,query):
         await ctx.send(f"I Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
     else:
       await ctx.send(f"You Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
+  elif type == "category":
+     if ctx.author.guild_permissions.manage_channels:
+      if abc.guild_permissions.manage_channels:
+        channel = await ctx.guild.create_category(name = query)
+        embed = discord.Embed(title = "Category Created",colour = 0x33FFE5)
+        embed.add_field(name = "Category Name",value = f"{query}",inline = False)
+        embed.add_field(name = "Created By",value= ctx.author.mention)
+        await ctx.send(embed=embed)
+      else:
+        await ctx.send(f"I Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
+    else:
+      await ctx.send(f"You Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
 @client.command()
 async def test(ctx):
   answers = []
