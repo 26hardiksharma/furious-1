@@ -884,7 +884,6 @@ async def decline(ctx,id:int,*,reason):
 @client.event
 async def on_guild_join(guild):
   channel = client.get_channel(803246997729443930)
-  abcd = client.get_channel(806510556029780028)
   owner = await guild.fetch_member(guild.owner_id)
   msg = f"🥳 I Joined A New Server 🥳\n Server Name = {guild.name}\n Member Count :- {guild.member_count}\n Guild Owner :- {guild.owner}\n Guild Region :- {guild.region}"
   embed = discord.Embed(title = "🥳 I Was Added To A New Server 🥳",colour = 0xDFFF00)
@@ -907,7 +906,6 @@ async def on_guild_remove(guild):
   embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
   embed.set_thumbnail(url = f"{guild.icon_url}")
   await channel.send(embed=embed)
-  await abcd.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 10, commands.BucketType.user)
 async def trash(ctx, member: discord.Member = None):
