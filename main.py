@@ -845,7 +845,7 @@ async def help(ctx,query = None):
     
 @client.command()
 async def suggest(ctx,*,query):
-  if ctx.author.id in blacklist:
+  if ctx.author.id in blacklists:
     await ctx.send(f"You Are Blacklisted And Revoked From Using The Suggest Command")
   else:
     suggestion = query
