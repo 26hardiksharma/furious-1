@@ -890,17 +890,15 @@ async def on_guild_join(guild):
   embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Guild Owner :- {owner.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
   embed.set_thumbnail(url = f"{guild.icon_url}")
   abc = await channel.send(embed=embed)
-  await abcd.send(embed=embed)
   await abc.add_reaction("🥳")
   await abc.add_reaction("🙏")
   em = discord.Embed(title = guild.name,description = "Thanks For Adding Me To This Server! I Surely Will Help You With Your Discord Experience And In Managing This Server :)")
   em.add_field(name = "Some Useful Information",value = "<:lime_ticket:809791466192896010> I Am Furious, A Bot Designed To Moderate Servers While Providing Utility And Other Services To Other Server Members\n<:yellow_ticket:809791184028434483> Command Prefixes :- ^ , <@790478502909837333>\n<:red_ticket:809791374810546226> A Lot Of Useful Commands Which Come In Handy While Using Discord\n<:cyan_ticket:809791540704051270> Fun Commands\n<:cyan_ticket:809791540704051270>Much More Discoverable With ``^help``")
   em.add_field(name = "\n",value = f"[INVITE ME](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [Support Server](https://discord.gg/gMHkNEYW4H)")
-  await ctx.guild.text_channels[0].send(embed = em)
+  await guild.text_channels[0].send(embed = em)
 @client.event
 async def on_guild_remove(guild):
   channel = client.get_channel(803289784919130163)
-  abcd = client.get_channel(806510584866013244)
   msg = f"😔 I Joined A New Server 😔\n Server Name = {guild.name}\n Member Count :- {guild.member_count}\n Guild Owner :- {guild.owner}\n Guild Region :- {guild.region}"
   embed = discord.Embed(title = "😔 I Was Kicked From A Server 😔",colour = 0xFF0000)
   embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
