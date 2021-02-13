@@ -175,29 +175,21 @@ async def say(ctx,*,message):
     await ctx.send(embed=embed)
 
 @client.command(pass_context=True, aliases = ['clear'])
-async def purge(ctx):
+async def purge(ctx,amt: int):
     if ctx.author.guild_permissions.manage_messages:
-      llimit = ctx.message.content[7:].strip()
-      await ctx.channel.purge(limit=int(llimit)+1)
-      embed = discord.Embed(title = "<a:verifiedgg:792365088006471740> Purge" , colour = 0xFF0000)
-      embed.add_field(name = "Status", value = f"Succesfully Purged {llimit} Messages !",inline = False)
-      embed.add_field(name = 'Moderator', value = ctx.author.mention,inline = False)
-      embed.set_footer(icon_url = ctx.author.avatar_url, text = 
-  f"Requested By {ctx.author.name}, Made by Eternal_Slayer#0069")
-
-      await ctx.send(embed = embed)
-      await asyncio.sleep(3)
-      await ctx.channel.purge(limit = 1)
+      try:
+        await ctx.channel.purge(limit = amt)
+        msg = await ctx,send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages")
+        await asyncio.sleep(3)
+        await msg.delete()
+      except commands.BadArgument:
+        await ctx.send(f"Please Enter Only Integer Value For The Number Of Messages To Be Purged")
     else:
       embed = discord.Embed(title = "Purge")
       embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
       embed.add_field(name = "Missing Permission(s)", value = "Manage Messages",inline = False)
-      embed.set_footer(icon_url = ctx.author.avatar_url, text = 
-  f"Requested By {ctx.author.name}, Made by Eternal_Slayer#0069")
+      embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}, Made by Eternal_Slayer#0069")
       await ctx.send(embed=embed)
-      
-  
-
 @client.command(aliases = ['m'])
 async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
   if ctx.author.guild_permissions.manage_messages:
