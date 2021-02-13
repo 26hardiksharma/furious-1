@@ -17,7 +17,7 @@ dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNz
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot= client,token = dbl_token)
-blacklist = []
+blacklists = []
 @client.event
 async def on_ready():
   num= 0
@@ -1533,6 +1533,6 @@ async def test(ctx):
 @client.command()
 async def blacklist(ctx,user : discord.Member):
   id = user.id
-  blacklist.append(str(id))
+  blacklists.append(str(id))
   await ctx.send(f"User Appended To The Command Blacklist")
 client.run(TOKEN)
