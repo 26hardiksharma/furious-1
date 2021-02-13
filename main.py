@@ -1531,7 +1531,7 @@ async def test(ctx):
   if answers[0] == "<:Pog:808216650859151371>":
     await ctx.send(f"Test Successfull")
 @client.command()
-async def blacklist(ctx,user = discord.Member):
+async def blacklist(ctx,user : discord.Member):
   id = user.id
   blacklist.append(str(id))
   await ctx.send(f"User Appended To The Command Blacklist")
