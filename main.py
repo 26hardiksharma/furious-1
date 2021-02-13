@@ -17,6 +17,7 @@ dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNz
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot= client,token = dbl_token)
+blacklist = []
 @client.event
 async def on_ready():
   num= 0
@@ -844,8 +845,9 @@ async def help(ctx,query = None):
     
 @client.command()
 async def suggest(ctx,*,query):
-  if ctx.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    global suggestion
+  if ctx.author.id in blacklist:
+    await ctx.send(f"You Are Blacklisted And Revoked From Using The Suggest Command")
+  else:
     suggestion = query
     channel = client.get_channel(800660800276398121)
     embed = discord.Embed(title = f"{ctx.author.name}",colour = 0x00F9FF)
@@ -1528,4 +1530,8 @@ async def test(ctx):
     answers.append(react)
   if answers[0] == "<:Pog:808216650859151371>":
     await ctx.send(f"Test Successfull")
+@client.command()
+async def blacklist(ctx,user = discord.Member):
+  blacklist.append(user)
+  await ctx.send(f"User Appended To The Command Blacklist")
 client.run(TOKEN)
