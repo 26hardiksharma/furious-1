@@ -1532,6 +1532,7 @@ async def test(ctx):
     await ctx.send(f"Test Successfull")
 @client.command()
 async def blacklist(ctx,user = discord.Member):
-  blacklist.append(user)
+  id = user.id
+  blacklist.append(str(id))
   await ctx.send(f"User Appended To The Command Blacklist")
 client.run(TOKEN)
