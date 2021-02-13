@@ -176,7 +176,7 @@ async def say(ctx,*,message):
 
 @client.command(pass_context=True, aliases = ['clear'])
 async def purge(ctx,amt: int = None):
-    if ctx.author.guild_permissions.manage_messages
+    if ctx.author.guild_permissions.manage_messages:
       if amt == None:
         await ctx.send(f"Please Specify The Number Of Messages To Be Purged")
       else:    
