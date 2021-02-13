@@ -1505,7 +1505,8 @@ async def create(ctx,type,*,query):
     else:
       await ctx.send(f"You Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
   elif type == "category":
-     if ctx.author.guild_permissions.manage_channels:
+
+    if ctx.author.guild_permissions.manage_channels:
       if abc.guild_permissions.manage_channels:
         channel = await ctx.guild.create_category(name = query)
         embed = discord.Embed(title = "Category Created",colour = 0x33FFE5)
