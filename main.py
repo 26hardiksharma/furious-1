@@ -432,7 +432,8 @@ async def unban(ctx, id: int):
 @client.command(aliases = ['wikipedia'])
 async def wiki(ctx,*,query = None):
   if query == None:
-    embed = discord.Embed(title= "Wikipedia"description = "Aliases :- 'wiki'\nUsage :- ^wiki <topic>\n Example:- ^wiki Plants")
+    
+    embed = discord.Embed(title= "Wikipedia",description = "Aliases :- 'wiki'\nUsage :- ^wiki <topic>\n Example:- ^wiki Plants")
     await ctx.send(embed=embed)
   else:
     msg = await ctx.send(f"<a:tg_02:786959609247432784> Searching Wikipedia For **{query}**")
