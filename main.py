@@ -480,6 +480,12 @@ async def pokemon(ctx):
       await ctx.send(embed=embed)
 @client.command()
 async def serverinfo(ctx):
+  ccount = 0
+  for channel in ctx.guild.text_channels:
+    ccount = ccount + 1
+  vcount= 0
+  for vc in ctx.guild.voice_channels:
+    vcount = vcount + 1
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
   embed = discord.Embed(title = f"{ctx.guild.name}",colour = 0x00FF12)
   embed.add_field(name = "Owner",value = owner.mention,inline = False)
@@ -489,6 +495,8 @@ async def serverinfo(ctx):
   embed.add_field(name ="Boost Tier",value = f"{ctx.guild.premium_tier}",inline = False)
   embed.add_field(name = "Verification Level",value= ctx.guild.verification_level,inline= False)
   embed.add_field(name="Explicit Content Filter",value = ctx.guild.explicit_content_filter)
+  embed.add_field(name ="Text Channels",value = f"{ccount}",inline = False)
+  embed.add_field(name ="Voice Channels",value = f"{vcount}",inline = False)
   embed.set_thumbnail(url = ctx.guild.icon_url)
   await ctx.send(embed=embed)
 @client.command()
