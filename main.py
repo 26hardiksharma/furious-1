@@ -24,7 +24,7 @@ async def on_ready():
   for guild in client.guilds:
     num = num + guild.member_count
 
-  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"Couple Activities, Beware Of Bajrang Dal 🔫"))
+  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{num} Singles || ^help"))
   print('Connected to bot: {}'.format(client.user.name))
   print('Bot ID: {}'.format(client.user.id))
 intents.guilds = True
@@ -37,7 +37,6 @@ async def kick(ctx,member : discord.Member,*,reason = "No Reason Provided"):
       
       await ctx.send("You Cant Kick People With Role Above Or Equal To You!")
     else:
-      
       abc = ctx.guild.get_member(client.user.id)
       if member.top_role >= abc.top_role or member == owner:
         await ctx.send(f"I Am Unable To Interact With {member.name}")
@@ -445,39 +444,6 @@ async def wiki(ctx,*,query):
 @client.command()
 async def joke(ctx):
   await ctx.send("Your Life")
-@client.command()
-async def pokemon(ctx):
-  if ctx.author.guild_permissions.administrator:
-    await ctx.message.delete()
-    number = random.randint(1,8)
-    if number == 1:
-      embed = discord.Embed(title = "A wild pokémon has appeared!",description = "Guess the pokémon and type ^catch <pokémon> to catch it!",colour = 0x00D3FF)
-      embed.set_image(url = "https://media.discordapp.net/attachments/796260664577359883/798259720292401193/pokemon.jpg?width=625&height=391")
-      await ctx.send(embed=embed)
-    elif number == 2:
-      embed = discord.Embed(title = "A wild pokémon has appeared!",description = "Guess the pokémon and type ^catch <pokémon> to catch it!",colour = 0x00D3FF)
-      embed.set_image(url = "https://media.discordapp.net/attachments/796260664577359883/798855425776812062/pokemon.jpg?width=625&height=391")
-      await ctx.send(embed=embed)
-    elif number ==3:
-      embed = discord.Embed(title = "A wild pokémon has appeared!",description = "Guess the pokémon and type ^catch <pokémon> to catch it!",colour = 0x00D3FF)
-      embed.set_image(url = "https://media.discordapp.net/attachments/781793777693098025/795174759457357854/pokemon.jpg?width=625&height=391")
-      await ctx.send(embed=embed)
-    elif number ==4:
-      embed = discord.Embed(title = "A wild pokémon has appeared!",description = "Guess the pokémon and type ^catch <pokémon> to catch it!",colour = 0x00D3FF)
-      embed.set_image(url = "https://media.discordapp.net/attachments/796260664577359883/796621344393134111/pokemon.jpg?width=625&height=391")
-      await ctx.send(embed=embed)
-    elif number ==5:    
-      embed = discord.Embed(title = "A wild pokémon has appeared!",description = "Guess the pokémon and type ^catch <pokémon> to catch it!",colour = 0x00D3FF)
-      embed.set_image(url = "https://media.discordapp.net/attachments/781793777693098025/794841693202808832/pokemon.jpg?width=625&height=391")
-      await ctx.send(embed=embed)
-    elif number ==6:
-      embed = discord.Embed(title = "A wild pokémon has appeared!",description = "Guess the pokémon and type ^catch <pokémon> to catch it!",colour = 0x00D3FF)
-      embed.set_image(url = "https://media.discordapp.net/attachments/781793777693098025/794543720011530290/pokemon.jpg?width=625&height=391")
-      await ctx.send(embed=embed)
-    else:
-      embed = discord.Embed(title = "A wild pokémon has appeared!",description = "Guess the pokémon and type ^catch <pokémon> to catch it!",colour = 0x00D3FF)
-      embed.set_image(url = "https://media.discordapp.net/attachments/796260664577359883/796985864554938408/pokemon.jpg?width=625&height=391")
-      await ctx.send(embed=embed)
 @client.command()
 async def serverinfo(ctx):
   ccount = 0
