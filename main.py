@@ -24,7 +24,7 @@ async def on_ready():
   for guild in client.guilds:
     num = num + guild.member_count
 
-  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{num} Users • ^help"))
+  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{num} Users  •  ^help"))
   print('Connected to bot: {}'.format(client.user.name))
   print('Bot ID: {}'.format(client.user.id))
 intents.guilds = True
