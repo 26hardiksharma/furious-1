@@ -489,7 +489,7 @@ async def serverinfo(ctx):
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
   embed = discord.Embed(title = f"{ctx.guild.name}",colour = 0x00FF12)
   embed.add_field(name = "Owner",value = owner.mention,inline = False)
-  embed.add_field(name = "Region",value = f"{ctx.guild.region}",inline = False)
+  embed.add_field(name = "Region",value = f"{ctx.guild.region}",inline = False  )
   embed.add_field(name = "Member Count",value = f"{ctx.guild.member_count}",inline = False)
   embed.add_field(name = "Boosts",value = ctx.guild.premium_subscription_count)
   embed.add_field(name ="Boost Tier",value = f"{ctx.guild.premium_tier}")
@@ -902,7 +902,7 @@ async def on_guild_join(guild):
   await abc.add_reaction("🙏")
   em = discord.Embed(title = guild.name,description = "Thanks For Adding Me To This Server! I Surely Will Help You With Your Discord Experience And In Managing This Server :)",colour = 0xDAF7A6)
   em.add_field(name = "Some Useful Information",value = "<:emoji_0:810202224947888249> I Am Furious, A Bot Designed To Moderate Servers While Providing Utility And Other Services To Other Server Members\n<:emoji_2:810202313142566992> Command Prefixes :- ^ , <@790478502909837333>\n<:emoji_3:810202359362748487> A Lot Of Useful Commands Which Come In Handy While Using Discord\n<:emoji_5:810202499914268703> Fun Commands\n<:emoji_1:810202277624938527> Much More Discoverable With ``^help``")
-  em.add_field(name = "Need Help ?",value = f"[INVITE ME](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [Support Server](https://discord.gg/gMHkNEYW4H)",inline = False)
+  em.add_field(name = "Some Useful Links",value = f"[INVITE ME](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [SUPPORT SERVER](https://discord.gg/gMHkNEYW4H)",inline = False)
   await guild.text_channels[0].send(embed = em)
 @client.event
 async def on_guild_remove(guild):
