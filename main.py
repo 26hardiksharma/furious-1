@@ -43,12 +43,12 @@ async def kick(ctx,member : discord.Member,*,reason = "No Reason Provided"):
       else:
         try:
           await member.send(f"**You Have Been Kicked From {member.guild} Because Of : {reason}**")
-          await member.kick(reason = reason)
+          await member.kick(reason = f"{reason} Action By - {ctx.author.name}")
           await ctx.message.delete()
           embed = discord.Embed(title = "Kick" , description = f"{member.mention} Has Been Successfully Kicked Because Of :-  {reason}" , color = discord.Colour.red())
           await ctx.send(embed=embed)
         except:
-          await member.kick(reason = reason)
+          await member.kick(reason = f"{reason} Action By - {ctx.author.name}")
           await ctx.message.delete()
           embed = discord.Embed(title = "Kick" , description = f"{member.mention} Has Been Successfully Kicked Because Of :-  {reason}" , color = discord.Colour.red())
           await ctx.send(embed=embed)
@@ -83,12 +83,12 @@ async def ban(ctx,member : discord.Member,*,reason = "No Reason Provided"):
       else:
         try:
           await member.send(f"**You Have Been Banned From {member.guild} Because Of : {reason}**")
-          await member.ban(reason = reason)
+          await member.ban(reason = f"{reason} Action By - {ctx.author.name}")
           await ctx.message.delete()
           embed = discord.Embed(title = "Ban" , description = f"{member.mention} Has Been Successfully Banned Because Of :-  {reason}" , color = discord.Colour.red())
           await ctx.send(embed=embed)
         except:
-          await member.ban(reason = reason)
+          await member.ban(reason = f"{reason} Action By - {ctx.author.name}")
           await ctx.message.delete()
           embed = discord.Embed(title = "Ban" , description = f"{member.mention} Has Been Successfully Banned Because Of :-  {reason}" , color = discord.Colour.red())
           await ctx.send(embed=embed)
@@ -432,7 +432,7 @@ async def unban(ctx, id: int):
 @client.command(aliases = ['wikipedia'])
 async def wiki(ctx,*,query = None):
   if query == None:
-    
+
     embed = discord.Embed(title= "Wikipedia",description = "Aliases :- 'wiki'\nUsage :- ^wiki <topic>\n Example:- ^wiki Plants")
     await ctx.send(embed=embed)
   else:
