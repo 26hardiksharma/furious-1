@@ -429,18 +429,22 @@ async def unban(ctx, id: int):
     user = await client.fetch_user(id)
     await ctx.guild.unban(user)
     await ctx.send(f"{user.name} was Unbanned")
-@client.command()
-async def wiki(ctx,*,query):
-  msg = await ctx.send(f"<a:tg_02:786959609247432784> Searching Wikipedia For **{query}**")
-  word = query
-  try:
-    result = wikipedia.summary(word,sentences = 5)
-    await msg.edit(content = f"Wikipedia Search Results For **{query}**")
-    await ctx.send(f"{result}\n **Note :- The Results May Not Be Accurate Everytime!**")
-  except wikipedia.exceptions.PageError:
-    await msg.edit(content = f" <:error:795629492693368833> No Results Found For ``{query}`` :/")
-  except wikipedia.DisambiguationError as e:
-    await msg.edit(content = f"<:error:795629492693368833> Results Could Not Be Loaded Because Your Query :- ``{query}`` Is Matching Several Pages! Please Mention Your Query More Specifically!")
+@client.command(aliases = ['wikipedia'])
+async def wiki(ctx,*,query = None):
+  if query == None:
+    embed = discord.Embed(title= "Wikipedia"description = "Aliases :- 'wiki'\nUsage :- ^wiki <topic>\n Example:- ^wiki Plants")
+    await ctx.send(embed=embed)
+  else:
+    msg = await ctx.send(f"<a:tg_02:786959609247432784> Searching Wikipedia For **{query}**")
+    word = query
+    try:
+      result = wikipedia.summary(word,sentences = 5)
+      await msg.edit(content = f"Wikipedia Search Results For **{query}**")
+      await ctx.send(f"{result}\n **Note :- The Results May Not Be Accurate Everytime!**")
+    except wikipedia.exceptions.PageError:
+      await msg.edit(content = f" <:error:795629492693368833> No Results Found For ``{query}`` :/")
+    except wikipedia.DisambiguationError as e:
+      await msg.edit(content = f"<:error:795629492693368833> Results Could Not Be Loaded Because Your Query :- ``{query}`` Is Matching Several Pages! Please Mention Your Query More Specifically!")
 @client.command()
 async def joke(ctx):
   await ctx.send("Your Life")
@@ -807,7 +811,6 @@ async def help(ctx,query = None):
     embed.add_field(name = "Remindme",value = "Sets A Reminder For You\n• ``^remindme 1h Vote Furious``",inline = False)
     embed.add_field(name = "Giveaway",value = "An Interactive Way To Host Giveaways In Your Server\n • ``^giveaway``",inline = False)
     embed.add_field(name = "Roll",value = "Pick A Random Number Provided\n • ``^roll 10``",inline = False)
-    
     embed.add_field(name = "Wiki",value = "Search The Wikipedia For Some Query\n • ``^wiki Plants``",inline = False)
     await ctx.send(embed=embed)
   elif query == "management":
