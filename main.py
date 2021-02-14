@@ -805,8 +805,8 @@ async def help(ctx,query = None):
   elif query == 'utility':
     embed = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = 0x00FFD7)
     embed.add_field(name = "Remindme",value = "Sets A Reminder For You\n• ``^remindme 1h Vote Furious``",inline = False)
-    embed.add_field(name = "Giveaway",value = "An Interactive Way To Host Giveaways In Your Server\n •``^giveaway``",inline = False)
-    embed.add_field(name = "Roll",value = "Pick A Random Number Provided\n •``^roll 10``",inline = False)
+    embed.add_field(name = "Giveaway",value = "An Interactive Way To Host Giveaways In Your Server\n • ``^giveaway``",inline = False)
+    embed.add_field(name = "Roll",value = "Pick A Random Number Provided\n • ``^roll 10``",inline = False)
     embed.add_field(name = "Wiki",value = "Search The Wikipedia For Some Query\n •``^wikipedia Plants``",inline = False)
     await ctx.send(embed=embed)
   elif query == "management":
