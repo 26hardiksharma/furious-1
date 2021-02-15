@@ -1414,7 +1414,7 @@ async def on_command_error(ctx, error):
     await ctx.send(embed=embed)      
   else:
       raise error
-def getMeme(m):
+def getMeme(query):
   all_subs = []
   subreddit = reddit.subreddit(query)   
   top = subreddit.top(limit=50)
