@@ -1515,7 +1515,7 @@ async def blacklist(ctx,user : discord.Member):
   await ctx.send(f"User Appended To The Command Blacklist")
 @client.command()
 async def coinflip(ctx):
-  num= random.randint(0,1):
+  num= random.randint(0,1)
   if num == 0:
     val = "Heads"
   else:
