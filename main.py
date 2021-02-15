@@ -1413,7 +1413,8 @@ async def on_command_error(ctx, error):
     embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
     await ctx.send(embed=embed)      
   else:
-      raise error
+    print(ctx.guild.name)
+    raise error
 def getMeme(query):
   all_subs = []
   subreddit = reddit.subreddit(query)   
