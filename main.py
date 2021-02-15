@@ -1415,7 +1415,7 @@ async def on_command_error(ctx, error):
   else:
     print(ctx.guild.name)
     raise error
-def getMeme():
+def getMeme(query = None):
   all_subs = []
   subreddit = reddit.subreddit(query)   
   top = subreddit.top(limit=50)
@@ -1439,7 +1439,7 @@ async def meme(ctx,query= "meme"):
   embed = discord.Embed(description = f"[{name}]({url})",colour = 0xE5FF00)
   embed.set_image(url=url)
   await ctx.send(embed=embed)
-  client.nextMeme = getMeme()
+  client.nextMeme = getMeme(query)
 
 @client.event
 async def on_dbl_vote(data):
