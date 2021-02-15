@@ -788,7 +788,7 @@ async def help(ctx,query = None):
     embed.add_field(name = "Pog",value = "**^pog**",inline = False)
     embed.add_field(name = "Wanted!",value = "**^wanted @user**",inline = False)
     embed.add_field(name = "Hitler!",value = "**^hitler @user**",inline = False)
-    embed.add_field(name = "Meme",value = "**^meme <topic>**")
+    embed.add_field(name = "Meme",value = "**^meme**")
     embed.set_footer(text = "[] = Required, <> = Not Neccesary")
     await ctx.send(embed=embed)
   elif query == 'moderation':
