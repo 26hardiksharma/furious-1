@@ -1414,7 +1414,7 @@ async def on_command_error(ctx, error):
     await ctx.send(embed=embed)      
   else:
       raise error
-def getMeme(query):
+def getMeme(m):
   all_subs = []
   subreddit = reddit.subreddit(query)   
   top = subreddit.top(limit=50)
@@ -1431,11 +1431,11 @@ def getMeme(query):
     return name, url
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def meme(ctx,query):
+async def meme(ctx,query= "meme"):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = getMeme(query)
   name, url = client.nextMeme
-  embed = discord.Embed(title = name,description = f"[{name}]({url})",colour = 0xE5FF00)
+  embed = discord.Embed(description = f"[{name}]({url})",colour = 0xE5FF00)
   embed.set_image(url=url)
   await ctx.send(embed=embed)
   client.nextMeme = getMeme()
