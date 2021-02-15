@@ -1415,7 +1415,7 @@ async def on_command_error(ctx, error):
   else:
     print(ctx.guild.name)
     raise error
-def getMeme(query):
+def getMeme():
   all_subs = []
   subreddit = reddit.subreddit(query)   
   top = subreddit.top(limit=50)
