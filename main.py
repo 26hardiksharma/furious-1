@@ -1419,7 +1419,7 @@ def getMeme(query):
   subreddit = reddit.subreddit(query)   
   top = subreddit.top(limit=50)
   for submission in top:
-    if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False and submission.is_image == True  :
+    if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
   random_sub = random.choice(all_subs)
   if random_sub.over_18:
