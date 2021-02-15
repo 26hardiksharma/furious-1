@@ -1513,4 +1513,14 @@ async def blacklist(ctx,user : discord.Member):
   id = user.id
   blacklists.append(str(id))
   await ctx.send(f"User Appended To The Command Blacklist")
+@client.command()
+async def coinflip(ctx):
+  num= random.randint(0,1):
+  if num == 0:
+    val = "Heads"
+  else:
+    val = "Tails"
+  embed = discord.Embed(title = "Coinflip",colour = 0xA3F70B)
+  embed.add_field(name = "Outcome",value = val)
+  await ctx.send(embed=embed)
 client.run(TOKEN)
