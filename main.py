@@ -1415,9 +1415,9 @@ async def on_command_error(ctx, error):
   else:
     print(ctx.guild.name)
     raise error
-def getMeme(query = None):
+def getMeme():
   all_subs = []
-  subreddit = reddit.subreddit(query)   
+  subreddit = reddit.subreddit(meme)   
   top = subreddit.top(limit=50)
   for submission in top:
     if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
@@ -1432,14 +1432,14 @@ def getMeme(query = None):
     return name, url
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def meme(ctx,query= "meme"):
+async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
-    client.nextMeme = getMeme(query)
+    client.nextMeme = getMeme()
   name, url = client.nextMeme
   embed = discord.Embed(description = f"[{name}]({url})",colour = 0xE5FF00)
   embed.set_image(url=url)
   await ctx.send(embed=embed)
-  client.nextMeme = getMeme(query)
+  client.nextMeme = getMeme()
 
 @client.event
 async def on_dbl_vote(data):
