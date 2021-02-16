@@ -20,10 +20,6 @@ dbl_client = dbl.DBLClient(bot= client,token = dbl_token)
 blacklists = []
 @client.event
 async def on_ready():
-  num= 0
-  for guild in client.guilds:
-    num = num + guild.member_count
-
   await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{len(client.guilds)} Servers •  ^help"))
   print('Connected to bot: {}'.format(client.user.name))
   print('Bot ID: {}'.format(client.user.id))
