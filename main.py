@@ -107,7 +107,7 @@ async def ban_error(ctx, error):
 @client.command(aliases = ['um'])
 async def unmute(ctx,member : discord.Member):
   if ctx.author.guild_permissions.manage_messages:
-    muted_role = discord.utils.get(member.guild.roles, name='Muted™')
+    muted_role = discord.utils.get(member.guild.roles, name='Muted')
     if muted_role in member.roles:
 
       await member.remove_roles(muted_role)
@@ -683,7 +683,6 @@ async def remindme(ctx,time,*,msg):
     await ctx.send(f"Reminder {ctx.author.mention}:- **{msg}**")
     await ctx.author.send(f"Reminder {ctx.author.mention}:- **{msg}**")  
 @client.command(aliases = ['tm'])
-@commands.has_permissions(manage_messages=True)
 async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specified"):
   if member.guild_permissions.manage_messages:
     await ctx.message.delete()
@@ -1409,7 +1408,7 @@ async def on_command_error(ctx, error):
     embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
     await ctx.send(embed=embed)      
   if isinstance(error,commands.CommandNotFound):
-    await ctx.send(f"There Is No Command Named ``{ctx.message.content}`` In My Codes! If You Would Like To See That Please Use ^suggest <suggestion> To Log A Suggestion")
+    await ctx.send(f"There Is No Command Named ``{ctx.message.content}`` In My Codes! If You Would Like To See That Please Use ^suggest <suggestion> To Log A Suggestion  ")
   else:
     print(ctx.guild.name)
     raise error
