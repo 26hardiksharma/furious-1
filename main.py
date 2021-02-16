@@ -1266,7 +1266,7 @@ async def takerole(ctx,member : discord.Member,role : discord.Role):
       embed.add_field(name = f"Removed By",value= ctx.author.mention)
       await ctx.send(embed=embed)
 @client.command()
-async def role(ctx,query,role : discox`rd.Role):
+async def role(ctx,query,role : discord.Role):
   if ctx.author.guild_permissions.manage_roles:
     if query == "humans":
       for member in ctx.guild.members:
