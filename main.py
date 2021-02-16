@@ -805,8 +805,8 @@ async def help(ctx,query = None):
     await ctx.send(embed=embed)
   elif query == 'utility':
     embed = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = 0x00FFD7)
-    embed.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious")
-    embed.add_field(name = "Giveaway",value = "<:emoji_2:810202313142566992> Starts A Giveaway Setup In The Server\nUsage :- ^giveaway")
+    embed.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious,inline = True")
+    embed.add_field(name = "Giveaway",value = "<:emoji_2:810202313142566992> Starts A Giveaway Setup In The Server\nUsage :- ^giveaway",inline = True)
     embed.add_field(name = "Roll",value = "<:emoji_0:810202224947888249> Pick A Random Number From The Choice Provided\nUsage :- ^roll [quantity]\nExample :- ^roll 100",inline = True)
     embed.add_field(name = "Wiki",value = "<:emoji_4:810202418750029884> Search Wikipedia For A Topic\nUsage :- ^wiki [topic]\nExample :- ^wiki plants",inline = True)
     await ctx.send(embed=embed)
