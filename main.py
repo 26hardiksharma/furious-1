@@ -171,7 +171,7 @@ async def say(ctx,*,message):
     await ctx.send(embed=embed)
 
 @client.command(pass_context=True, aliases = ['clear'])
-@commands.cooldown(1,10,commands.BucketTypeUser)
+@commands.cooldown(1,10,commands.BucketType.user)
 async def purge(ctx,amt: int = None):
     if ctx.author.guild_permissions.manage_messages:
       if amt == None:
