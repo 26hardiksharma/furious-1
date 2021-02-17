@@ -1525,7 +1525,7 @@ async def roleinfo(ctx,role : discord.Role):
   perm = []
   for i in role.permissions:
     if i == True:
-      perm.append(i.name)
+      perm.append(str(i))
   embed = discord.Embed(title = role.name,colour = 0xFFC300)
   embed.add_field(name= "ID",value = role.id)
   embed.add_field(name = "Created At",value = f"{role.created_at} UTC")
