@@ -1408,7 +1408,7 @@ async def on_command_error(ctx, error):
     embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
     await ctx.send(embed=embed)      
   if isinstance(error,commands.CommandNotFound):
-    await ctx.send(f"There Is No Command Named ``{ctx.message.content}`` In My Codes! If You Would Like To See That Please Use ^suggest <suggestion> To Log A Suggestion  ")
+    await ctx.send(f"There Is No Command Named **{ctx.message.content[1,:]}** In My Codes! If You Would Like To See That Please Use ^suggest <suggestion> To Log A Suggestion  ")
   else:
     print(ctx.guild.name)
     raise error
