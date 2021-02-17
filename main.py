@@ -1522,6 +1522,10 @@ async def coinflip(ctx):
   await ctx.send(embed=embed) 
 @client.command()
 async def roleinfo(ctx,role : discord.Role):
+  perm = []
+  for i in role.permissions:
+    if i == True:
+      perm.append(role.name)
   embed = discord.Embed(title = role.name,colour = 0xFFC300)
   embed.add_field(name= "ID",value = role.id)
   embed.add_field(name = "Created At",value = f"{role.created_at} UTC")
@@ -1529,7 +1533,7 @@ async def roleinfo(ctx,role : discord.Role):
   embed.add_field(name="Position",value = role.position)
   embed.add_field(name= "Mentionable",value = role.mentionable)
   embed.add_field(name="Colour",value = role.color)
-  embed.add_field(name = "Permissions",value = role.permissions,inline = False)
+  embed.add_field(name = "Permissions",value = perm[:],inline = False)
   await ctx.send(embed=embed)
 
 client.run(TOKEN)
