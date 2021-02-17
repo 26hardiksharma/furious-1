@@ -1519,5 +1519,17 @@ async def coinflip(ctx):
     val = "Tails"
   embed = discord.Embed(title = "Coinflip",colour = 0xA3F70B)
   embed.add_field(name = "Outcome",value = val)
+  await ctx.send(embed=embed) 
+@client.command()
+async def roleinfo(ctx,role : discord.Role):
+  embed = discord.Embed(title = role.name,colour = 0xFFC300)
+  embed.add_field(name= "ID",value = role.id)
+  embed.add_field(name = "Created At",value = f"{role.created_at} UTC")
+  embed.add_field(name= "Hoisted",value = upper(str(role.hoist)))
+  embed.add_field(name="Position",value = role.position)
+  embed.add_field(name= "Mentionable",value = upper(str(role.mentionable)))
+  embed.add_field(name="Colour",value = role.color)
+  embed.add_field(name = "Permissions",value = upper(str(role.permissions)),inline = False)
   await ctx.send(embed=embed)
+
 client.run(TOKEN)
