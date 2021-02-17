@@ -1528,7 +1528,7 @@ async def roleinfo(ctx,role : discord.Role):
       perms_string += f"{perm}, "
   embed = discord.Embed(title = role.name,colour = 0xFFC300)
   embed.add_field(name= "ID",value = role.id)
-  embed.add_field(name = "Created At",value = role.created_at.strftime("%d/%m/%Y %H:%M:%S"))
+  embed.add_field(name = "Created At",value = role.created_at.strftime("%d/%m/%Y %H:%M:%S UTC"))
   embed.add_field(name= "Hoisted",value =role.hoist)
   embed.add_field(name="Position",value = role.position)
   embed.add_field(name= "Mentionable",value = role.mentionable)
