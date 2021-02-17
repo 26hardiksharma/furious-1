@@ -171,18 +171,23 @@ async def say(ctx,*,message):
     await ctx.send(embed=embed)
 
 @client.command(pass_context=True, aliases = ['clear'])
+@commands.cooldown(1,10,commands.BucketTypeUser)
 async def purge(ctx,amt: int = None):
     if ctx.author.guild_permissions.manage_messages:
       if amt == None:
         await ctx.send(f"Please Specify The Number Of Messages To Be Purged")
-      else:    
-        try:
-          await ctx.channel.purge(limit = amt + 1)
-          msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages")
-          await asyncio.sleep(3)
-          await msg.delete()
-        except commands.BadArgument:
-          await ctx.send(f"Please Enter Only Integer Value For The Number Of Messages To Be Purged")
+      else: 
+        if amt > 100:
+          await ctx.send(f"The Maximum Amount You Can Purge At A Time Is 100! Please Use The Command Multiple Times To Purge More Messages")   
+        else:
+          try:
+            await ctx.message.delete()
+            await ctx.channel.purge(limit = amt)
+            msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages")
+            await asyncio.sleep(3)
+            await msg.delete()
+          except commands.BadArgument as e:
+            await ctx.send(f"Please Enter Only Integer Value For The Number Of Messages To Be Purged")
     else:
       embed = discord.Embed(title = "Purge")
       embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
