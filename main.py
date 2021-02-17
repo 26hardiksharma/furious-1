@@ -1522,9 +1522,10 @@ async def coinflip(ctx):
   await ctx.send(embed=embed) 
 @client.command()
 async def roleinfo(ctx,role : discord.Role):
+  true_permissions = dict()
   perm = []
   for i in role.permissions:
-    if true_permissions[key] == True:
+    if true_permissions[i] == True:
       perm.append(str(i))
   embed = discord.Embed(title = role.name,colour = 0xFFC300)
   embed.add_field(name= "ID",value = role.id)
