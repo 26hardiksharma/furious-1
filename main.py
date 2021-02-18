@@ -1536,8 +1536,6 @@ async def roleinfo(ctx,role : discord.Role = None):
     for perm, true_false in role.permissions:
       if true_false is True:
         perms_string += f"{perm}, "
-      else:
-        
     embed = discord.Embed(title = role.name,colour = 0xFFC300)
     embed.add_field(name= "ID",value = role.id)
     embed.add_field(name = "Created At",value = role.created_at.strftime("%d/%m/%Y %H:%M:%S UTC"))
@@ -1548,8 +1546,7 @@ async def roleinfo(ctx,role : discord.Role = None):
     try:
       embed.add_field(name = "Permissions",value = perms_string,inline = False )
     except:
-      embed.add_field(name = "Permissions",value = "None",inline = False )
-
+      embed.add_field(name = "Permissions",value = "None",inline = False)
     await ctx.send(embed=embed)
 @client.command(aliases = ['vmute'])
 async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"):
