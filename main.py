@@ -1537,7 +1537,7 @@ async def roleinfo(ctx,role : discord.Role = None):
       if true_false is True:
         perms_string += f"{perm}, "
       else:
-        pemrs_string += f"None"
+        perms_string += f"None"
     embed = discord.Embed(title = role.name,colour = 0xFFC300)
     embed.add_field(name= "ID",value = role.id)
     embed.add_field(name = "Created At",value = role.created_at.strftime("%d/%m/%Y %H:%M:%S UTC"))
