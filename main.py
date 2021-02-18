@@ -178,7 +178,7 @@ async def purge(ctx,amt: int = None):
         await ctx.send(f"Please Specify The Number Of Messages To Be Purged")
       else: 
         if amt > 100:
-          await ctx.send(f"The Maximum Amount You Can Purge At A Time Is 100! Please Use The Command Multiple Times To Purge More Messages")   
+          await ctx.send(f"The Maximum Amount You Can Purge At A Time Is 100!\nPlease Use The Command Multiple Times To Purge More Messages")   
         else:
           try:
             await ctx.message.delete()
@@ -809,10 +809,12 @@ async def help(ctx,query = None):
     await ctx.send(embed=embed)
   elif query == 'utility':
     embed = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = 0x00FFD7)
-    embed.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious,inline = True")
+    embed.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious",inline = True)
     embed.add_field(name = "Giveaway",value = "<:emoji_2:810202313142566992> Starts A Giveaway Setup In The Server\nUsage :- ^giveaway",inline = True)
     embed.add_field(name = "Roll",value = "<:emoji_0:810202224947888249> Pick A Random Number From The Choice Provided\nUsage :- ^roll [quantity]\nExample :- ^roll 100",inline = True)
     embed.add_field(name = "Wiki",value = "<:emoji_4:810202418750029884> Search Wikipedia For A Topic\nUsage :- ^wiki [topic]\nExample :- ^wiki plants",inline = True)
+    embed.add_field(name = "Whois",value = "<:emoji_3:810202359362748487> Get The Info Of A User\nUsage :- ^whois <@user>\nExample :- ^whois <@!790478502909837333>",inline =True)
+    embed.add_field(name= "Roleinfo",value = "<:emoji_7:811830061325090826> Get The Info Of A Role\nUsage :- ^roleinfo [@role/role_id]\nExample :- ^roleinfo @moderators",inline = True)
     await ctx.send(embed=embed)
   elif query == "management":
     embed= discord.Embed(title= "Management",value= "Commands Which Can Help You Manage Your Server",colour= 0x00FFD7)
@@ -1526,19 +1528,22 @@ async def coinflip(ctx):
   embed.add_field(name = "Outcome",value = val)
   await ctx.send(embed=embed) 
 @client.command()
-async def roleinfo(ctx,role : discord.Role):
+async def roleinfo(ctx,role : discord.Role = None):
   perms_string = ""
-  for perm, true_false in role.permissions:
-    if true_false is True:
-      perms_string += f"{perm}, "
-  embed = discord.Embed(title = role.name,colour = 0xFFC300)
-  embed.add_field(name= "ID",value = role.id)
-  embed.add_field(name = "Created At",value = role.created_at.strftime("%d/%m/%Y %H:%M:%S UTC"))
-  embed.add_field(name= "Hoisted",value =role.hoist)
-  embed.add_field(name="Position",value = role.position)
-  embed.add_field(name= "Mentionable",value = role.mentionable)
-  embed.add_field(name="Colour",value = role.color)
-  embed.add_field(name = "Permissions",value = perms_string,inline = False )
-  await ctx.send(embed=embed)
+  if role == None:
+    await ctx.send(f"Please Mention A Role Or Use It's ID To Get Its Info! ;)")
+  else: 
+    for perm, true_false in role.permissions:
+      if true_false is True:
+        perms_string += f"{perm}, "
+    embed = discord.Embed(title = role.name,colour = 0xFFC300)
+    embed.add_field(name= "ID",value = role.id)
+    embed.add_field(name = "Created At",value = role.created_at.strftime("%d/%m/%Y %H:%M:%S UTC"))
+    embed.add_field(name= "Hoisted",value =role.hoist)
+    embed.add_field(name="Position",value = role.position)
+    embed.add_field(name= "Mentionable",value = role.mentionable)
+    embed.add_field(name="Colour",value = role.color)
+    embed.add_field(name = "Permissions",value = perms_string,inline = False )
+    await ctx.send(embed=embed)
 
 client.run(TOKEN)
