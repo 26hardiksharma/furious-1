@@ -1415,7 +1415,7 @@ async def on_command_error(ctx, error):
     embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
     await ctx.send(embed=embed)      
   if isinstance(error,commands.CommandNotFound):
-    await ctx.send(f"There Is No Command Named **{ctx.message.content}** In My Codes! If You Would Like To See That Please Use ^suggest <suggestion> To Log A Suggestion  ")
+    await ctx.send(f"That Command Is Not In My Codes 😔\nIf You Would Like To See The Command In Future Then Please Use ^suggest To Log In A Suggestion")
   else:
     print(ctx.guild.name)
     raise error
@@ -1593,7 +1593,7 @@ async def voiceunmute(ctx,member : discord.Member):
             await ctx.send(f"I Am Unable To Interact With {member}")
           else:
             try:
-              await member.edit(mute=False,reason = f"{reason} || Action By {ctx.author}")
+              await member.edit(mute=False,reason =  f"Action By {ctx.author}")
               await ctx.send(f"Successfully Unmuted {member.mention} From Voice")
             except discord.HTTPException as e:
               await ctx.send(f"{member} Is Not Connected To A Voice Channel")
@@ -1602,7 +1602,7 @@ async def voiceunmute(ctx,member : discord.Member):
           await ctx.send(f"I Am Unable To Interact With {member}")
         else:
           try:
-            await member.edit(mute=False,reason = f"{reason} || Action By {ctx.author}")
+            await member.edit(mute=False,reason = f"Action By {ctx.author}")
             await ctx.send(f"Successfully Unmuted {member.mention} From Voice")
           except discord.HTTPException as f:
             await ctx.send(f"{member} Is Not Connected To A Voice Channel")
