@@ -1549,7 +1549,7 @@ async def roleinfo(ctx,role : discord.Role = None):
 async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"):
   abc = await ctx.guild.fetch_member(client.user.id)
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
-  if ctx.author.guild_permissions.mute_memmbers:
+  if ctx.author.guild_permissions.mute_members:
     if abc.guild_permissions.mute_members:
       if member.top_role>= ctx.author.top_role or member == owner:
         await ctx.send(f"You Dont Have The Permissions To Interact With {member}")
