@@ -1575,5 +1575,5 @@ async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"
     else:
       await ctx.send(f"I Am Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
   else:
-    await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command"))
+    await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
 client.run(TOKEN)
