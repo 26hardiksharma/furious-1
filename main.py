@@ -1579,8 +1579,8 @@ async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"
       await ctx.send(f"I Am Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
   else:
     await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
-@client.command(aliases = ['vmute'])
-async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"):
+@client.command(aliases = ['vunmute'])
+async def voiceunmute(ctx,member : discord.Member,*, reason = "No Reason Provided"):
   abc = await ctx.guild.fetch_member(client.user.id)
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
   if ctx.author.guild_permissions.mute_members:
