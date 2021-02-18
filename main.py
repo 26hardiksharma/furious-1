@@ -1543,10 +1543,10 @@ async def roleinfo(ctx,role : discord.Role = None):
     embed.add_field(name="Position",value = role.position)
     embed.add_field(name= "Mentionable",value = role.mentionable)
     embed.add_field(name="Colour",value = role.color)
-    try:
-      embed.add_field(name = "Permissions",value = perms_string,inline = False )
-    except:
-      embed.add_field(name = "Permissions",value = "None",inline = False)
+    if perms_string == None:
+      embed.add_field(name = "Permissions",value = "None",inline = False )
+    else:
+      embed.add_field(name = "Permissions",value = perms_string,inline = False)
     await ctx.send(embed=embed)
 @client.command(aliases = ['vmute'])
 async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"):
