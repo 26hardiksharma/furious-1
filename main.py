@@ -1557,7 +1557,7 @@ async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"
         if member.top_role >= abc.top_role or member == owner:
           await ctx.send(f"I Am Unable To Interact With {member}")
         else:
-          await member.edit(mute=True)
+          await member.edit(mute=True,reason = f"{reason} || Action By {ctx.author}")
           await ctx.send(f"Successfully Muted {member.mention} From Voice")
     else:
       await ctx.send(f"I Am Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
