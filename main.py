@@ -1545,5 +1545,22 @@ async def roleinfo(ctx,role : discord.Role = None):
     embed.add_field(name="Colour",value = role.color)
     embed.add_field(name = "Permissions",value = perms_string,inline = False )
     await ctx.send(embed=embed)
-
+@client.command(aliases = ['vmute'])
+async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"):
+  abc = await ctx.guild.fetch_member(client.user.id)
+  owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
+  if ctx.author.guild_permissions.mute_memmbers:
+    if abc.guild_permissions.mute_members:
+      if member.top_role>= ctx.author.top_role or member == owner:
+        await ctx.send(f"You Dont Have The Permissions To Interact With {member}")
+      else:
+        if member.top_role >= abc.top_role or member == owner:
+          await ctx.send(f"I Am Unable To Interact With {member}")
+        else:
+          await member.edit(mute=True)
+          await ctx.send(f"Successfully Muted {member.mention} From Voice")
+    else:
+      await ctx.send(f"I Am Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
+  else:
+    await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
 client.run(TOKEN)
