@@ -1552,18 +1552,28 @@ async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"
   if ctx.author.guild_permissions.mute_members:
     if abc.guild_permissions.mute_members:
       if member.top_role>= ctx.author.top_role or member == owner:
-        if ctx.author!= owner:
+        if ctx.author != owner:
           await ctx.send(f"You Dont Have The Permissions To Interact With {member}")
         else:
-          pass
+          if member.top_role >= abc.top_role or member == owner:
+            await ctx.send(f"I Am Unable To Interact With {member}")
+          else:
+            try:
+              await member.edit(mute=True,reason = f"{reason} || Action By {ctx.author}")
+              await ctx.send(f"Successfully Muted {member.mention} From Voice")
+            except discord.HTTPException as e:
+              await ctx.send(f"{member} Is Not Connected To A Voice Channel")
       else:
         if member.top_role >= abc.top_role or member == owner:
           await ctx.send(f"I Am Unable To Interact With {member}")
         else:
-          await member.edit(mute=True,reason = f"{reason} || Action By {ctx.author}")
-          await ctx.send(f"Successfully Muted {member.mention} From Voice")
+          try:
+            await member.edit(mute=True,reason = f"{reason} || Action By {ctx.author}")
+            await ctx.send(f"Successfully Muted {member.mention} From Voice")
+          except discord.HTTPException as f:
+            await ctx.send(f"{member} Is Not Connected To A Voice Channel")
     else:
       await ctx.send(f"I Am Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
   else:
-    await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
+    await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command"))
 client.run(TOKEN)
