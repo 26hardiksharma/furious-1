@@ -1593,7 +1593,7 @@ async def voiceunmute(ctx,member : discord.Member,*, reason = "No Reason Provide
             await ctx.send(f"I Am Unable To Interact With {member}")
           else:
             try:
-              await member.edit(mute=None,reason = f"{reason} || Action By {ctx.author}")
+              await member.edit(mute=False,reason = f"{reason} || Action By {ctx.author}")
               await ctx.send(f"Successfully Unmuted {member.mention} From Voice")
             except discord.HTTPException as e:
               await ctx.send(f"{member} Is Not Connected To A Voice Channel")
@@ -1602,7 +1602,7 @@ async def voiceunmute(ctx,member : discord.Member,*, reason = "No Reason Provide
           await ctx.send(f"I Am Unable To Interact With {member}")
         else:
           try:
-            await member.edit(mute=None,reason = f"{reason} || Action By {ctx.author}")
+            await member.edit(mute=False,reason = f"{reason} || Action By {ctx.author}")
             await ctx.send(f"Successfully Unmuted {member.mention} From Voice")
           except discord.HTTPException as f:
             await ctx.send(f"{member} Is Not Connected To A Voice Channel")
