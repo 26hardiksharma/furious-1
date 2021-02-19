@@ -1234,12 +1234,11 @@ async def addrole(ctx,member : discord.Member,role : discord.Role):
       else:
         await ctx.send(f"You Dont have The Permission To Interact With That Role")
     else:
-      if role.is_integration:
+      if role.is_integration() or role.is_bot_managed():
         await ctx.send(f"That Role Is Managed By An Integration So It Could Not Be Added To Anyone Manually")
-      elif role.is_premium_subscriber:
+      elif role.is_premium_subscriber():
         await ctx.send(f"That Role Is The Boost Role For The Server And It Can Not Be Added To Anyone Manually")
       else:
-
         await member.add_roles(role)
         embed = discord.Embed(title = 'Addrole',colour = 0x00FFE2)
         embed.add_field(name=f"Role Added",value= role.mention,inline= False)
