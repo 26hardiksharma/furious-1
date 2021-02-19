@@ -865,7 +865,6 @@ async def decline(ctx,id:int,*,reason):
 async def on_guild_join(guild):
   channel = client.get_channel(803246997729443930)
   owner = await guild.fetch_member(guild.owner_id)
-  msg = f"🥳 I Joined A New Server 🥳\n Server Name = {guild.name}\n Member Count :- {guild.member_count}\n Guild Owner :- {guild.owner}\n Guild Region :- {guild.region}"
   embed = discord.Embed(title = "🥳 I Was Added To A New Server 🥳",colour = 0xDFFF00)
   embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Guild Owner :- {owner.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
   embed.set_thumbnail(url = f"{guild.icon_url}")
@@ -1601,7 +1600,7 @@ async def voiceunmute(ctx,member : discord.Member):
         if member.top_role >= abc.top_role or member == owner:
           await ctx.send(f"I Am Unable To Interact With {member}")
         else:
-          
+
           try:
             await member.edit(mute=False,reason = f"Action By {ctx.author}")
             await ctx.send(f"Successfully Unmuted {member.mention} From Voice")
