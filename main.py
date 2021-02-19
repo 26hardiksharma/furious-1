@@ -225,7 +225,7 @@ async def botstats(ctx):
     num = num + guild.member_count
   embed = discord.Embed(title = "Bot Stats", description = "<@!790478502909837333>", colour = 0x7FFFD4)
   embed.set_thumbnail(url = 'https://cdn.discordapp.com/avatars/790478502909837333/ffbe1e96004d240eda5385186e145986.webp?size=1024')
-  embed.add_field(name = "Creator", value = "EternalSlayer || Furious™️",inline = False)
+  embed.add_field(name = "Creator", value = f"<@!757589836441059379>",inline = False)
   embed.add_field(name= "Prefix",value = "' ^ ', <@!790478502909837333> " )
   embed.add_field(name = "Total Servers Joined", value = str(len
   (client.guilds)),inline = False)
@@ -1609,5 +1609,5 @@ async def voiceunmute(ctx,member : discord.Member):
     else:
       await ctx.send(f"I Am Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
   else:
-    await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
+    await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command") 
 client.run(TOKEN)
