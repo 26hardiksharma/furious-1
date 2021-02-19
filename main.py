@@ -1241,7 +1241,7 @@ async def addrole(ctx,member : discord.Member,role : discord.Role):
         embed.add_field(name=f"Added To",value = member.mention,inline = False)
         embed.add_field(name = f"Added By",value= ctx.author.mention)
         await ctx.send(embed=embed)
-      except discord.Forbidden:
+      except:
         await ctx.send(f"That Role Is A Bot's Integration Role Or The Server Boosters Role, It Cannot Be Manually Assigned To Anyone ")
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
