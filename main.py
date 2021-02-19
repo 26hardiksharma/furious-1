@@ -1234,17 +1234,15 @@ async def addrole(ctx,member : discord.Member,role : discord.Role):
       else:
         await ctx.send(f"You Dont have The Permission To Interact With That Role")
     else:
-      if role.is_integration() or role.is_bot_managed():
-        await ctx.send(f"That Role Is Managed By An Integration So It Could Not Be Added To Anyone Manually")
-      elif role.is_premium_subscriber():
-        await ctx.send(f"That Role Is The Boost Role For The Server And It Can Not Be Added To Anyone Manually")
-      else:
+      try:
         await member.add_roles(role)
         embed = discord.Embed(title = 'Addrole',colour = 0x00FFE2)
         embed.add_field(name=f"Role Added",value= role.mention,inline= False)
         embed.add_field(name=f"Added To",value = member.mention,inline = False)
         embed.add_field(name = f"Added By",value= ctx.author.mention)
         await ctx.send(embed=embed)
+      except discord.Forbidden as e:
+        await ctx.send(f"That Role Is A Bot's Integration Role Or The Server Boosters Role, It Cannot Be Manually Assigned To Anyone ")
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def takerole(ctx,member : discord.Member,role : discord.Role):
