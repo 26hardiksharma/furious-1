@@ -1656,7 +1656,7 @@ async def on_message_edit(before,after):
     except discord.HTTPException as e:
       pass
 @client.event
-async def on_bulk_message_edit(messages):
+async def on_bulk_message_delete(messages):
   if before.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
     channel = client.get_channel(812652361943875604)
     try:
