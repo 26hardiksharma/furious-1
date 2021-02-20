@@ -1693,6 +1693,6 @@ async def profile(ctx,member: discord.Member = None):
   if member== None:
     member = ctx.author
   embed = discord.Embed(title = f"{member.name}#{member.discriminator}'s Profile",colour = 0xFF0000)
-  embed.add_field(name = "Profile",value = f"**Nitro Subscriber:** {member.premium}\n**Hypesquad:** {member.hypesquad_houses}")
+  embed.add_field(name = "Profile",value = f"**Nitro Subscriber:** {member.nitro}\n**Hypesquad:** {member.hypesquad_houses}")
   await ctx.send(embed=embed)
 client.run(TOKEN)
