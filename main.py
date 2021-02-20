@@ -1138,14 +1138,26 @@ async def maintenance(ctx,query):
           await asyncio.sleep(1)
         await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Deleting Maintenance Channels")
         ch = discord.utils.get(ctx.guild.text_channels,name = "maintenance-chat")
-        await ch.delete()
+        try:
+          await ch.delete()
+        except:
+          pass
         chan = discord.utils.get(ctx.guild.text_channels,name = "maintenance-botzone")
-        await chan.delete()
+        try:
+          await chan.delete()
+        except:
+          pass
         chann = discord.utils.get(ctx.guild.voice_channels,name = "Maintenance VC")
-        await chann.delete()
+        try:
+          await chann.delete()
+        except:
+          pass
         await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Deleting Maintenance Channels \n <a:tg_02:786959609247432784> Deleted Channels \n <a:tg_02:786959609247432784> Deleting Maintenance Role")
         mrole = discord.utils.get(ctx.guild.roles,name = "Maintenance")
-        await mrole.delete()
+        try:
+          await mrole.delete()
+        except:
+          pass
         await ctx.send(f"Successfully Lifted Up Maintenance From {ctx.guild.name}")
 @client.command()
 async def nuke(ctx,channel : discord.TextChannel = None):
