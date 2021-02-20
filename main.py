@@ -1657,8 +1657,8 @@ async def on_message_edit(before,after):
       pass
 @client.event
 async def on_bulk_message_delete(messages):
-  
-  if messages.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
+
+  if messages[1].guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
     channel = client.get_channel(812652361943875604)
     try:
       embed= discord.Embed(title = messages.guild.name,description = f"**Bulk Message Deletion In {messages.channel.mention}, {len(messages)} Messages Deleted**",colour = 0xFF0000)
