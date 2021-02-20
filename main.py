@@ -1088,7 +1088,7 @@ async def serverunlock(ctx):
   else:
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
-@commands.cooldown(1, 120, commands.BucketType.user)
+@commands.cooldown(1, 300, commands.BucketType.user)
 async def maintenance(ctx,query):
   if ctx.author.guild_permissions.administrator:
     if query == "on":
