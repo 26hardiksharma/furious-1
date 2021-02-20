@@ -1612,4 +1612,12 @@ async def voiceunmute(ctx,member : discord.Member):
       await ctx.send(f"I Am Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
   else:
     await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command") 
+@client.event
+async def on_guild_role_create(role):
+  guild = role.guild
+  if guild.name== "VΛИłSĦΣĐ SŁΛҰΣЯS":
+    ch = client.get_channel(812547608593694740)
+    embed = discord.Embed(title= "Role Created")
+    embed.add_field(name= "Role Name",value = role.mention)
+    await ch.send(embed=embed)
 client.run(TOKEN)
