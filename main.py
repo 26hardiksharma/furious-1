@@ -1618,7 +1618,7 @@ async def on_guild_role_create(role):
   if guild.name== "VΛИłSĦΣĐ SŁΛҰΣЯS":
     ch = client.get_channel(812547608593694740)
     embed = discord.Embed(title= "Role Created",colour = 0xFF0000)
-    embed.add_field(name= "Role Info",value = "Mention :- {role.mention}\nColor :- {role.color}\nHoisted :- {role.hoist}\nMentionable :- {role.mentionable}")
-    embed.set_footer(text = f"Role ID :- {role.id} • Today At {datetime.datetime.now}")
+    embed.add_field(name= "Role Info",value = f"Mention :- {role.mention}\nColor :- {role.color}\nHoisted :- {role.hoist}\nMentionable :- {role.mentionable}")
+    embed.set_footer(text = f"Role ID :- {role.id} • Today At {datetime.utcnow}")
     await ch.send(embed=embed)
 client.run(TOKEN)
