@@ -1689,7 +1689,7 @@ async def on_member_unban(guild,user):
     except discord.HTTPException as e:
       pass
 @client.command()
-async def badges(ctx,member = discord.Member= None):
+async def badges(ctx,member: discord.Member = None):
   if member== None:
     member = ctx.author
   badge_string = ""
