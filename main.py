@@ -1655,4 +1655,13 @@ async def on_message_edit(before,after):
       await channel.send(embed=embed)
     except discord.HTTPException as e:
       pass
+@client.event
+async def on_bulk_message_edit(messages):
+  if before.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
+    channel = client.get_channel(812652361943875604)
+    try:
+      embed= discord.Embed(title = messages.guild.name,description = f"**Bulk Message Deletion In {messages.channel.mention}, {len(messages)} Messages Deleted**",colour = 0xFF0000)
+      await channel.send(embed=embed)
+    except discord.HTTPException as e:
+      pass
 client.run(TOKEN)
