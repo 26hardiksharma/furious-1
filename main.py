@@ -1689,13 +1689,10 @@ async def on_member_unban(guild,user):
     except discord.HTTPException as e:
       pass
 @client.command()
-async def badges(ctx,member: discord.Member = None):
+async def profile(ctx,member: discord.Member = None):
   if member== None:
     member = ctx.author
-  badge_string = ""
-  for badge in member.profile:
-    badge_string += f"{badge.name} • "
-  embed = discord.Embed(title = member.name,colour = oxFF0000)
-  embed.add_field(name= "Badges",value= badge_string)
+  embed = discord.Embed(title = f"{member.name}#{member.discriminator}'s Profile",colour = 0xFF0000)
+  embed.add_field(name = Profile,value = f"**Nitro Subscriber:** {member.premium}\n**Hypesquad:** {member.hypesquad_houses}")
   await ctx.send(embed=embed)
 client.run(TOKEN)
