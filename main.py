@@ -1665,4 +1665,16 @@ async def on_bulk_message_delete(messages):
       await channel.send(embed=embed)
     except discord.HTTPException as e:
       pass
+intents.bans = True
+@client.event
+async def on_member_ban(guild,user):
+  if guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
+    channel = client.get_channel(812652361943875604)
+    try:
+      embed= discord.Embed(title = guild.name,description = f"A Member Was Banned From {guild.name}",colour = 0xFF0000)
+      embed.add_field(name = "Member Name",value= f"{user.name}#{user.discriminator}",inline = False)
+      embed.add_field(name = "ID",value = user.id)
+      await channel.send(embed=embed)
+    except discord.HTTPException as e:
+      pass
 client.run(TOKEN)
