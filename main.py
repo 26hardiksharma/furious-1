@@ -1647,8 +1647,8 @@ async def on_message_delete(message):
 @client.event
 async def on_message_edit(before,after):
   if before.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812652361943875604,colour = 0xFF0000)
-    embed= discord.Embed(title = before.author,description = f"Message Edited In {before.channel.mention}")
+    channel = client.get_channel(812652361943875604)
+    embed= discord.Embed(title = before.author,description = f"Message Edited In {before.channel.mention}",colour = 0xFF0000)
     embed.add_field(name = "Before",value= before.content,inline = False)
     embed.add_field(name = "After",value = after.content)
     await channel.send(embed=embed)
