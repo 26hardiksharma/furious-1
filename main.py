@@ -1631,6 +1631,15 @@ async def on_guild_role_create(role):
     ch = client.get_channel(812547608593694740)
     embed = discord.Embed(title= "Role Created",colour = 0xFF0000)
     embed.add_field(name= "Role Info",value = f"Mention :- {role.mention}\nColor :- {role.color}\nHoisted :- {role.hoist}\nMentionable :- {role.mentionable}")
-    embed.set_footer(text = f"Role ID :- {role.id} • Today At {datetime.datetime.utcnow}")
+    embed.set_footer(text = f"Role ID :- {role.id}")
     await ch.send(embed=embed)
+intents.messages = True
+@client.event
+async def on_message_delete(message):
+  if message.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
+    channel = client.get_channel(812547608593694740)
+    embed = discord.Embed(title = "Message Deleted")
+    embed.add_field(name = "Message",value= message.content)
+    embed.add_field(name = "Channel",value = message.channel.mention)
+    await channel.send(embed=embed)
 client.run(TOKEN)
