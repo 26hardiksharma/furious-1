@@ -1628,7 +1628,7 @@ async def voiceunmute(ctx,member : discord.Member):
 async def on_guild_role_create(role):
   guild = role.guild
   if guild.name== "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    ch = client.get_channel(812547608593694740)
+    ch = client.get_channel(812652361943875604)
     embed = discord.Embed(title= "Role Created",colour = 0xFF0000)
     embed.add_field(name= "Role Info",value = f"Mention :- {role.mention}\nColor :- {role.color}\nHoisted :- {role.hoist}\nMentionable :- {role.mentionable}")
     embed.set_footer(text = f"Role ID :- {role.id}")
@@ -1637,7 +1637,7 @@ intents.messages = True
 @client.event
 async def on_message_delete(message):
   if message.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812547608593694740)
+    channel = client.get_channel(812652361943875604)
     embed = discord.Embed(title = "Message Deleted",description = f"Message By {message.author.mention} Deleted In {message.channel.mention}",colour = 0xFF0000)
     embed.add_field(name = "Message",value= message.content,inline= False)
 
@@ -1646,9 +1646,9 @@ async def on_message_delete(message):
 @client.event
 async def on_message_edit(before,after):
   if before.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812547608593694740)
-    embed= discord.Embed(title = "Message Edited",description = "Message By {before.author.mention} Was Edited In {before.channel.mention}")
-    embed.add_field(name = "Before",value= before.content)
+    channel = client.get_channel(812652361943875604)
+    embed= discord.Embed(title = "Message Edited",description = f"Message By {before.author.mention} Was Edited In {before.channel.mention}")
+    embed.add_field(name = "Before",value= before.content,inline = False)
     embed.add_field(name = "After",value = after.content)
     await channel.send(embed=embed)
 client.run(TOKEN)
