@@ -1638,8 +1638,8 @@ intents.messages = True
 async def on_message_delete(message):
   if message.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
     channel = client.get_channel(812547608593694740)
-    embed = discord.Embed(title = "Message Deleted",colour = 0xFF0000)
+    embed = discord.Embed(title = "Message Deleted",description = f"Message By {message.author.mention} Deleted In {message.channel.mention}",colour = 0xFF0000)
     embed.add_field(name = "Message",value= message.content,inline= False)
-    embed.add_field(name = "Channel",value = message.channel.mention)
+
     await channel.send(embed=embed)
 client.run(TOKEN)
