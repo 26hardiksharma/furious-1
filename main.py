@@ -1638,16 +1638,17 @@ intents.messages = True
 async def on_message_delete(message):
   if message.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
     channel = client.get_channel(812652361943875604)
-    embed = discord.Embed(title = "Message Deleted",description = f"Message By {message.author.mention} Deleted In {message.channel.mention}",colour = 0xFF0000)
-    embed.add_field(name = "Message",value= message.content,inline= False)
-
-
-    await channel.send(embed=embed)
+    try:
+      embed = discord.Embed(title = "Message Deleted",description = f"Message By {message.author.mention} Deleted In {message.channel.mention}",colour = 0xFF0000)
+      embed.add_field(name = "Message",value= message.content,inline= False)
+      await channel.send(embed=embed)
+    except discord.HTTPException as e:
+      pass
 @client.event
 async def on_message_edit(before,after):
   if before.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812652361943875604)
-    embed= discord.Embed(title = "Message Edited",description = f"Message By {before.author.mention} Was Edited In {before.channel.mention}")
+    channel = client.get_channel(812652361943875604,colour = 0xFF0000)
+    embed= discord.Embed(title = before.author,description = f"Message Edited In {before.channel.mention}")
     embed.add_field(name = "Before",value= before.content,inline = False)
     embed.add_field(name = "After",value = after.content)
     await channel.send(embed=embed)
