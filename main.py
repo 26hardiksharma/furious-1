@@ -782,7 +782,7 @@ async def help(ctx,query = None):
     embed.add_field(name = "Modules",value = "<:emoji_1:810202277624938527> Moderation\n<:emoji_2:810202313142566992> Fun\n<:emoji_0:810202224947888249> Utility\n<:emoji_4:810202418750029884> Management")
     embed.set_footer(text= "Type ^help <module> For Commands Of That Module")
     await ctx.send(embed=embed)
-  elif query.lower == 'fun':
+  elif query.lower() == 'fun':
     embed = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
     embed.add_field(name = "Wink",value = "**^wink**",inline = False)
     embed.add_field(name = "Pog",value = "**^pog**",inline = False)
@@ -791,7 +791,7 @@ async def help(ctx,query = None):
     embed.add_field(name = "Meme",value = "**^meme**")
     embed.set_footer(text = "[] = Required, <> = Not Neccesary")
     await ctx.send(embed=embed)
-  elif query.lower == 'moderation':
+  elif query.lower() == 'moderation':
     embed = discord.Embed(title = "Moderation",description = "Furious' Moderation Commands", colour = 0x00FFD7)
     embed.add_field(name = "Mute",value = "**^mute [@user] <reason>**",inline = False)
     embed.add_field(name = "Kick",value = "**^kick [@user] <reason>**",inline = False)
@@ -807,7 +807,7 @@ async def help(ctx,query = None):
     
     embed.set_footer(text = "[] = Required, <> = Optional")
     await ctx.send(embed=embed)
-  elif query.lower == 'utility':
+  elif query.lower() == 'utility':
     embed = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = 0x00FFD7)
     embed.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious",inline = True)
     embed.add_field(name = "Giveaway",value = "<:emoji_2:810202313142566992> Starts A Giveaway Setup In The Server\nUsage :- ^giveaway",inline = True)
@@ -816,7 +816,7 @@ async def help(ctx,query = None):
     embed.add_field(name = "Whois",value = "<:emoji_3:810202359362748487> Get The Info Of A User\nUsage :- ^whois <@user>\nExample :- ^whois <@!790478502909837333>",inline =True)
     embed.add_field(name= "Roleinfo",value = "<:emoji_7:811830061325090826> Get The Info Of A Role\nUsage :- ^roleinfo [@role/role_id]\nExample :- ^roleinfo @moderators",inline = True)
     await ctx.send(embed=embed)
-  elif query.lower == "management":
+  elif query.lower() == "management":
     embed= discord.Embed(title= "Management",value= "Commands Which Can Help You Manage Your Server",colour= 0x00FFD7)
     embed.add_field(name= "Serverlock",value= "Locks All Channels Of The Server\n• ``^serverlock``",inline = False)
     embed.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``^serverunlock``",inline = False)
