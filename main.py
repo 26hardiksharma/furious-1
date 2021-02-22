@@ -1436,7 +1436,7 @@ async def on_command_error(ctx, error):
 def getMeme():
   all_subs = []
   subreddit = reddit.subreddit("meme")   
-  top = subreddit.top(limit=50)
+  top = subreddit.top(limit=500)
   for submission in top:
     if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
