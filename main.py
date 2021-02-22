@@ -1697,14 +1697,15 @@ async def on_member_unban(guild,user):
 @client.command()
 async def warn(ctx,member : discord.Member,*,reason = None):
   if ctx.author.guild_permissions.manage_messages:
+    await ctx.message.delete()
     if reason == None:
       await ctx.send(f"Please Specify A Reason To Warn Someone")
     else:
       try:
         await member.send(f"You Have Been Warned In {ctx.guild.name} For: **{reason}**")
-        embed = discord.Embed(desciption = f"**{member.name}#{member.discriminator} Has Been Warned || {reason}**")
+        embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned || {reason}**")
         await ctx.send(embed=embed)
       except:
-        embed = discord.Embed(desciption = f"**{member.name}#{member.discriminator} Has Been Warned || {reason}**")
+        embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned || {reason}**")
         await ctx.send(embed=embed)
 client.run(TOKEN)
