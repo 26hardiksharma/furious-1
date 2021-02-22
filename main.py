@@ -1703,9 +1703,9 @@ async def warn(ctx,member : discord.Member,*,reason = None):
     else:
       try:
         await member.send(f"You Have Been Warned In {ctx.guild.name} For: **{reason}**")
-        embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned || {reason}**")
+        embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**")
         await ctx.send(embed=embed)
       except:
-        embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned || {reason}**")
+        embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**")
         await ctx.send(embed=embed)
 client.run(TOKEN)
