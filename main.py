@@ -589,14 +589,15 @@ async def giveaway(ctx):
       elif winners > len(users):
         await channel.send(f"Not Enough Reacts! Couldn't Choose Any Winner 😔")
       else:
-        winlist = []
+        winlist = "• "
+
         for i in range(winners):
           winner = random.choice(users)
-          winlist.append(winner.mention)
+          winlist += f"{winner.mention} •"
         new_embed = discord.Embed(title = "Giveaway",description = f"{prize}", colour = 0x00FFEE)
         new_embed.add_field(name= "Winner(s)",value = f"{winner.mention}")
         await my_msg.edit(embed=new_embed)
-        await channel.send(f"Congratulations {winlist[:]}! You Won {prize}🥳")
+        await channel.send(f"Congratulations {winlist}! You Won {prize}🥳")
 @client.command()
 async def reroll(ctx,channel : discord.TextChannel, id_ : int):
   try:
