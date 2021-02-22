@@ -1695,10 +1695,16 @@ async def on_member_unban(guild,user):
     except discord.HTTPException as e:
       pass
 @client.command()
-async def profile(ctx,member: discord.Member = None):
-  if member== None:
-    member = ctx.author
-  embed = discord.Embed(title = f"{member.name}#{member.discriminator}'s Profile",colour = 0xFF0000)
-  embed.add_field(name = "Profile",value = f"**Nitro Subscriber:** {member.nitro}\n**Hypesquad:** {member.hypesquad_houses}")
-  await ctx.send(embed=embed)
+async def warn(ctx,member : discord.Member,*,reason = None):
+  if ctx.author.guild_permissions.manage_messages:
+    if reason == None:
+      await ctx.send(f"Please Specify A Reason To Warn Someone")
+    else:
+      try:
+        await member.send(f"You Have Been Warned In {ctx.guild.name} For: **{reason}**")
+        embed = discord.Embed(desciption = f"**{member.name}#{member.discriminator} Has Been Warned || {reason}**")
+        await ctx.send(embed=embed)
+      except:
+        embed = discord.Embed(desciption = f"**{member.name}#{member.discriminator} Has Been Warned || {reason}**")
+        await ctx.send(embed=embed)
 client.run(TOKEN)
