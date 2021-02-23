@@ -1532,7 +1532,7 @@ async def test(ctx):
     await ctx.send(f"Test Successfull")
 blacklists= []
 @client.command()
-async def blacklist(ctx,query,user : discord.Member):
+async def blacklist(ctx,query,user : discord.Member = None):
   if ctx.author.id == 757589836441059379:
     if query.lower() == "view":
       await ctx.send(blacklists)
