@@ -1215,13 +1215,16 @@ async def ticket(ctx,query = "create" , channel : discord.TextChannel = None):
 @client.command(aliases = ['msg'])
 async def dm(ctx, member : discord.Member,*,query):
   if ctx.author.guild_permissions.administrator:
-    await ctx.message.delete() 
-    await member.send(f"**DIRECT MESSAGE**\n**MESSAGE** :- {query}\n**SENT BY** :- {ctx.author.mention}\n**SERVER**:- {ctx.guild.name}")
-    embed = discord.Embed(title = " <a:eo_TICK:807656268360712312> DM",colour = 0x00F2FF)
-    embed.add_field(name = "Status",value = f"DM Sent Successfully",inline = False)
-    my_msg = await ctx.send(embed = embed)
-    await asyncio.sleep(1)
-    await my_msg.delete()
+    if ctx.author.id in blacklists:
+      await ctx.send(f"You Are Blacklisted From using This Command")
+    else:
+      await ctx.message.delete() 
+      await member.send(f"**DIRECT MESSAGE**\n**MESSAGE** :- {query}\n**SENT BY** :- {ctx.author.mention}\n**SERVER**:- {ctx.guild.name}")
+      embed = discord.Embed(title = " <a:eo_TICK:807656268360712312> DM",colour = 0x00F2FF)
+      embed.add_field(name = "Status",value = f"DM Sent Successfully",inline = False)
+      my_msg = await ctx.send(embed = embed)
+      await asyncio.sleep(1)
+      await my_msg.delete()
   else:
     await ctx.message.delete()
     embed = discord.Embed(title = " <:vError:807656410468712498> DM",colour = 0xFF0000)
@@ -1526,11 +1529,13 @@ async def test(ctx):
     answers.append(react)
   if answers[0] == "<:Pog:808216650859151371>":
     await ctx.send(f"Test Successfull")
+blacklists = []
 @client.command()
 async def blacklist(ctx,user : discord.Member):
-  id = user.id
-  blacklists.append(str(id))
-  await ctx.send(f"User Appended To The Command Blacklist")
+  if ctx.author.id == 757589836441059379:
+    id = user.id
+    blacklists.append(str(id))
+    await ctx.send(f"User Appended To The Command Blacklist")
 @client.command()
 async def coinflip(ctx):
   num= random.randint(0,1)
