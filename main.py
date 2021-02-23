@@ -1532,12 +1532,18 @@ async def test(ctx):
     await ctx.send(f"Test Successfull")
 blacklists= []
 @client.command()
-async def blacklist(ctx,user : discord.Member):
+async def blacklist(ctx,query,user : discord.Member):
   if ctx.author.id == 757589836441059379:
-    id = user.id
-    blacklists.append(id)
-    print(blacklists[:])
-    await ctx.send(f"User Appended To The Command Blacklist")
+    if query.lower() == "view":
+      await ctx.send(blacklists)
+    elif query.lower() == "add":
+      id = user.id
+      blacklists.append(id)
+      print(blacklists[:])
+      await ctx.send(f"User Appended To The Command Blacklist")
+    elif query.lower() == "remove":
+      blacklists.remove(user.id)
+      await ctx.send(f"Removed {user.mention} From Command Blacklist")
 @client.command() 
 async def coinflip(ctx):
   num= random.randint(0,1)
