@@ -599,7 +599,7 @@ async def giveaway(ctx):
           await my_msg.edit(embed=new_embed)
           await channel.send(f"Congratulations {winlist} ! You Won {prize}🥳")
   else:
-    await ctx.send(f"You Need The **MANAGE SERVER** Permission To Start A Giveaway In This Server")
+    await ctx.send(f"You Need The **MANAGE SERVER** Permission To Start A Giveaway In This Server!")
 @client.command()
 async def reroll(ctx,channel : discord.TextChannel, id_ : int):
   try:
