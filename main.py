@@ -1529,7 +1529,6 @@ async def test(ctx):
     answers.append(react)
   if answers[0] == "<:Pog:808216650859151371>":
     await ctx.send(f"Test Successfull")
-blacklists = []
 @client.command()
 async def blacklist(ctx,user : discord.Member):
   if ctx.author.id == 757589836441059379:
