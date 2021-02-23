@@ -17,7 +17,6 @@ dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNz
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot= client,token = dbl_token)
-blacklists = []
 @client.event
 async def on_ready():
   await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{len(client.guilds)} Servers •  ^help"))
