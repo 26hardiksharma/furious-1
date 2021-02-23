@@ -1534,7 +1534,7 @@ blacklists = []
 async def blacklist(ctx,user : discord.Member):
   if ctx.author.id == 757589836441059379:
     id = user.id
-    blacklists.append(str(id))
+    blacklists.append(id)
     await ctx.send(f"User Appended To The Command Blacklist")
 @client.command()
 async def coinflip(ctx):
