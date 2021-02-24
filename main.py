@@ -16,7 +16,7 @@ TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = True)
-dbl_client = dbl.DBLClient(bot= client,token = dbl_token)
+dbl_client = dbl.DBLClient(client,dbl_token)
 @client.event
 async def on_ready():
   await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{len(client.guilds)} Servers •  ^help"))
@@ -1468,7 +1468,7 @@ async def meme(ctx):
 async def on_dbl_vote(data):
   user = data['user']
   await user.send(f"Thanks For Voting Me || This Really Means A Lot To Us")
-  channel = await client.get_channel(808557166029832202)
+  channel = await client.get_channel(814151238177259520)
   em = discord.Embed(title = "Upvote",colour= 0x36FF24)
   em.add_field(name = "Recieved An Upvote",value = f"{user.mention} Voted Me On [Top.gg](https://top.gg/bot/790478502909837333/vote)\nWe Really Appreciate Your Efforts")
   await channel.send(embed=em)
