@@ -1723,10 +1723,5 @@ async def warn(ctx,member : discord.Member,*,reason = None):
       except:
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
-@client.command()
-async def restart(ctx):
-  if ctx.author.id == 757589836441059379:
-    await client.logout()
-    await client.login()
-    await ctx.send(f"Successfully Rebooted")
+
 client.run(TOKEN)
