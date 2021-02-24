@@ -1223,8 +1223,9 @@ async def dm(ctx, member : discord.Member,*,query):
       await member.send(f"**DIRECT MESSAGE**\n**MESSAGE** :- {query}\n**SENT BY** :- {ctx.author.mention}\n**SERVER**:- {ctx.guild.name}")
       embed = discord.Embed(title = " <a:eo_TICK:807656268360712312> DM",colour = 0x00F2FF)
       embed.add_field(name = "Status",value = f"DM Sent Successfully",inline = False)
+      embed.set_footer(text = "Misuse Of This Command May Lead To You Getting Blacklisted From The Command")
       my_msg = await ctx.send(embed = embed)
-      await asyncio.sleep(1)
+      await asyncio.sleep(5)
       await my_msg.delete()
   else:
     await ctx.message.delete()
