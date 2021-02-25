@@ -1723,5 +1723,20 @@ async def warn(ctx,member : discord.Member,*,reason = None):
       except:
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
+@client.event
+async def on_message(msg):
+  if msg.guild.id == 758381318404308994:
+    ch = client.get_channel(812652361943875604)
+    if msg.author.guild_permissions.administrator:
+      pass
+    else:
+      if msg.content.startswith("https://discord.gg"):
+        await msg.delete()
+        await msg.author.send(f"Invite Links Not Allowed")
+        embed = discord.Embed(title= "<:vError:807656410468712498> Invite Link Posted")
+        embed.add_field(name= "Link",value = "{msg.content}")
+        embed.add_field(name = "Sent By",value = f"{msg.author.mention}",inline = False)
+        await ch.send(embed=embed)
+        await client.process_commands(msg)
 
 client.run(TOKEN)
