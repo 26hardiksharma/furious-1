@@ -38,7 +38,7 @@ async def kick(ctx,member : discord.Member,*,reason = "No Reason Provided"):
       else:
         try:
           await member.send(f"**You Have Been Kicked From {member.guild} Because Of : {reason}**")
-          await member.kick(reason = f"{reason} Action By - {ctx.author.name}")
+          await member.kick(reason = f"{reason} || Action By - {ctx.author.name}")
           await ctx.message.delete()
           embed = discord.Embed(title = "Kick" , description = f"{member.mention} Has Been Successfully Kicked Because Of :-  {reason}" , color = discord.Colour.red())
           await ctx.send(embed=embed)
@@ -1464,7 +1464,7 @@ async def meme(ctx):
   await ctx.send(embed=embed)
   client.nextMeme = getMeme()
 
-@client.event
+@dbl_client.event
 async def on_dbl_vote(data):
   user = data['user']
   await user.send(f"Thanks For Voting Me || This Really Means A Lot To Us")
