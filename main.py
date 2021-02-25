@@ -1464,17 +1464,9 @@ async def meme(ctx):
   await ctx.send(embed=embed)
   client.nextMeme = getMeme()
 
-@dbl_client.event
+@client.event
 async def on_dbl_vote(data):
-  user = data['user']
-  await user.send(f"Thanks For Voting Me || This Really Means A Lot To Us")
-  channel = await client.get_channel(814151238177259520)
-  em = discord.Embed(title = "Upvote",colour= 0x36FF24)
-  em.add_field(name = "Recieved An Upvote",value = f"{user.mention} Voted Me On [Top.gg](https://top.gg/bot/790478502909837333/vote)\nWe Really Appreciate Your Efforts")
-  await channel.send(embed=em)
-  await asyncio.sleep(43200)
-  embed= discord.Embed(title = f"Vote",description = f"Your Voting Timer Has Refreshed! You Can Vote Now [Here](https://top.gg/bot/790478502909837333/vote)")
-  await user.send(f"embed=embed")
+  print(data)
 @client.command()
 async def create(ctx,type,*,query):
   abc = await ctx.guild.fetch_member(client.user.id)
