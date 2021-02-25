@@ -19,7 +19,7 @@ client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> ",
 dbl_client = dbl.DBLClient(client,dbl_token)
 @client.event
 async def on_ready():
-  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{len(client.guilds)} Servers •  ^help"))
+  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"New Prefixes •  f!help"))
   print('Connected to bot: {}'.format(client.user.name))
   print('Bot ID: {}'.format(client.user.id))
 intents.guilds = True
