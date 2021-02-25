@@ -17,7 +17,7 @@ dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNz
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> ","f!","F!"],help_command=None,case_insensitive = True)
-dbl_client = dbl.DBLClient(bot :client,token :dbl_token,webhook_path:dbl_webhook)
+dbl_client = dbl.DBLClient(bot =client,token =dbl_token,webhook_path=dbl_webhook)
 @client.event
 async def on_ready():
   await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"New Prefixes •  f!help"))
