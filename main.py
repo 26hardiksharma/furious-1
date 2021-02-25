@@ -15,7 +15,7 @@ import dbl
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 intents = discord.Intents.default()
-client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> "],help_command=None,case_insensitive = True)
+client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> ","f!","F!"],help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(client,dbl_token)
 @client.event
 async def on_ready():
@@ -780,8 +780,8 @@ async def help(ctx,query = None):
     query = 0
   if query == 0:    
     embed = discord.Embed(title = "Help ",colour = 0x00FFD7)
-    embed.add_field(name="Guide",value = f"**Welcome To My Help Page,{ctx.author.mention}\nPlease Use One Of The Modules Listed Below\nUsage :- ^help <module>\nExample :- ^help fun**",inline= False)
-    embed.add_field(name = "Prefix", value = "1) ^\n2) <@!790478502909837333>")
+    embed.add_field(name="Guide",value = f"Welcome To My Help Page, User\nTo Get Started, Please Use One Of The Modules Listed Below\nUsage :- ^help <module>\nExample :- ^help fun\nIf You Are New To The Bot Or Need More Help, Please Join Our [Support Server](https://discord.gg/MXa2EReETq)",inline= False)
+    embed.add_field(name = "Prefix", value = "1) ^\n2) <@!790478502909837333>\n3) f!")
     embed.add_field(name = "Modules",value = "<:emoji_1:810202277624938527> Moderation\n<:emoji_2:810202313142566992> Fun\n<:emoji_0:810202224947888249> Utility\n<:emoji_4:810202418750029884> Management")
     await ctx.send(embed=embed)
   elif query.lower() == 'fun':
