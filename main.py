@@ -779,7 +779,7 @@ async def help(ctx,query = None):
   if query == None:
     query = 0
   if query == 0:    
-    embed = discord.Embed(title = "Help ",description = "```py Welcome To Furious' Help Page\nPlease Use One Of The Modules Listed Below\nUsage :- ^help <module>\nExample :- ^help fun```", colour = 0x00FFD7)
+    embed = discord.Embed(title = "Help ",description = "```py\nWelcome To Furious' Help Page\nPlease Use One Of The Modules Listed Below\nUsage :- ^help <module>\nExample :- ^help fun\n```", colour = 0x00FFD7)
     embed.add_field(name = "Prefix", value = "Bot Prefixes :- ^ Or <@!790478502909837333>",inline = False)
     embed.add_field(name = "Modules",value = "<:emoji_1:810202277624938527> Moderation\n<:emoji_2:810202313142566992> Fun\n<:emoji_0:810202224947888249> Utility\n<:emoji_4:810202418750029884> Management")
     await ctx.send(embed=embed)
