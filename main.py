@@ -21,7 +21,7 @@ def get_prefix(client,message):
     return prefixes[str(message.guild.id)]
 
 intents = discord.Intents.default()
-client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> ","f!","F!"],help_command=None,case_insensitive = True)
+client = commands.Bot(command_prefix =get_prefix,help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot =client,token =dbl_token,webhook_path=dbl_webhook)
 @client.event
 async def on_ready():
@@ -1738,10 +1738,12 @@ async def prefix(ctx,value):
 @client.command()
 async def setprefix(ctx,value):
   if ctx.author.id ==757589836441059379:
+    await ctx.send(f"Changing Prefixes On All Guilds, Please Be Patient")
     for guild in client.guilds:
       with open("prefixes.json","r") as f:
         prefixes = json.load(f)
       prefixes[str(guild.id)] = f"{value}"
       with open("prefixes.json","w") as f:
         json.dump(prefixes,f)
+    await ctx.send(f"Process Completed")
 client.run(TOKEN)
