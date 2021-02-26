@@ -15,6 +15,11 @@ import dbl
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
+def get_prefix(client,message):
+  with open("prefixes.json", "r") as f:
+    prefixes = json.load(f)
+    return prefixes[str(message.guild.id)]
+
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix =["^","furious ","<@!790478502909837333> ","f!","F!"],help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot =client,token =dbl_token,webhook_path=dbl_webhook)
@@ -878,6 +883,11 @@ async def on_guild_join(guild):
   em.add_field(name = "Some Useful Information",value = "<:emoji_0:810202224947888249> I Am Furious, A Bot Designed To Moderate Servers While Providing Utility And Other Services To Other Server Members\n<:emoji_2:810202313142566992> Command Prefixes :- ^ , <@790478502909837333>\n<:emoji_3:810202359362748487> A Lot Of Useful Commands Which Come In Handy While Using Discord\n<:emoji_5:810202499914268703> Fun Commands\n<:emoji_1:810202277624938527> Much More Discoverable With ``^help``")
   em.add_field(name = "Some Useful Links",value = f"[INVITE ME](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [SUPPORT SERVER](https://discord.gg/gMHkNEYW4H)",inline = False)
   await guild.text_channels[0].send(embed = em)
+  with open("prefixes.json","r") as f:
+    prefixes = json.load(f)
+  prefixes[str(guild.id)] = "^"
+  with open("prefixes.json","w") as f:
+    json.dump(prefixes,f)
 @client.event
 async def on_guild_remove(guild):
   channel = client.get_channel(803289784919130163)
@@ -1716,4 +1726,22 @@ async def warn(ctx,member : discord.Member,*,reason = None):
       except:
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
+@client.command()
+async def prefix(ctx,value):
+  if ctx.author.guild_permissions.administrator:
+    with open("prefixes.json", "r") as f:
+      prefixes = json.load(f)
+    prefixes[str(ctx.guild.id)] = value
+    with open("prefixes.json", "w") as f:
+      json.dump(prefixes,f)
+    await ctx.send(f"The prefix was changed to: `{prefix}`")
+@client.command()
+async def setprefix(ctx,value):
+  if ctx.author.id ==757589836441059379:
+    for guild in client.guilds:
+      with open("prefixes.json","r") as f:
+        prefixes = json.load(f)
+      prefixes[str(guild.id)] = f"{value}"
+      with open("prefixes.json","w") as f:
+        json.dump(prefixes,f)
 client.run(TOKEN)
