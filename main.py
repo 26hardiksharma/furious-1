@@ -141,12 +141,10 @@ async def whois(ctx, member : discord.Member = None):
   embed.set_footer(icon_url = ctx.author.avatar_url, text = 
   f"Requested By {ctx.author.name}")
   embed.add_field(name= "Avatar Link",value = f"[Click Here]({member.avatar_url})")
-  if role_str == None:
-    return
-  else:
+  if rc >= 1:
     embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
     embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
-  
+
   await ctx.send(embed=embed)
 
 
