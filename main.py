@@ -133,7 +133,7 @@ async def whois(ctx, member : discord.Member = None):
   for role in member.roles[1:]:
     role_str += f"{role.mention} "
     rc += 1
-  embed = discord.Embed(title = "User Info" , description = member.mention , colour = 0xE 91E63)
+  embed = discord.Embed(title = "User Info" , description = member.mention , colour = 0xE91E63)
   embed.add_field(name = "ID", value = member.id , inline = False)  
   embed.set_thumbnail(url = member.avatar_url)
   embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
