@@ -128,15 +128,20 @@ async def unmute(ctx,member : discord.Member):
 async def whois(ctx, member : discord.Member = None):
   if member == None:
     member = ctx.author
+  rc = 0
+  role_str = ""
+  for role in member.roles[1:]:
+    role_str += f"{role.mention} "
+    rc += 1
   embed = discord.Embed(title = "User Info" , description = member.mention , color = discord.Colour.red())
   embed.add_field(name = "ID", value = member.id , inline = False)  
   embed.set_thumbnail(url = member.avatar_url)
   embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
   embed.add_field(name="Joined Server On:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
   embed.set_footer(icon_url = ctx.author.avatar_url, text = 
-  f"Requested By {ctx.author.name}, Made by Eternal_Slayer#0069")
+  f"Requested By {ctx.author.name}")
   embed.add_field(name= "Avatar Link",value = f"[Click Here]({member.avatar_url})")
-  embed.add_field(name="Roles: ", value=([role.mention for role in member.roles[1:]]),inline = False)
+  embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
   embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
   
   await ctx.send(embed=embed)
@@ -1182,7 +1187,7 @@ async def invites(ctx,member : discord.Member= None):
   total = 0
   for i in await ctx.guild.invites():
     if i.inviter == member:
-      total = total + i.uses
+      total = total + i.usesx
   embed = discord.Embed(title = "Invites",description = ctx.guild.name,colour = 0x00EAFF)
   embed.add_field(name= f"{member.name}'s Invites",value = total)
   await ctx.send(embed=embed)
@@ -1716,4 +1721,5 @@ async def warn(ctx,member : discord.Member,*,reason = None):
       except:
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
+
 client.run(TOKEN)
