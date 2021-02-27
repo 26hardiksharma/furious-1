@@ -144,7 +144,8 @@ async def whois(ctx, member : discord.Member = None):
   if rc >= 1:
     embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
     embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
-
+  else:
+    embed.add_field(name = "Roles",value = "None",inline = False)
   await ctx.send(embed=embed)
 
 
