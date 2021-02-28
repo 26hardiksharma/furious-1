@@ -1187,7 +1187,7 @@ async def invites(ctx,member : discord.Member= None):
   total = 0
   for i in await ctx.guild.invites():
     if i.inviter == member:
-      total = total + i.usesx
+      total = total + i.uses
   embed = discord.Embed(title = "Invites",description = ctx.guild.name,colour = 0x00EAFF)
   embed.add_field(name= f"{member.name}'s Invites",value = total)
   await ctx.send(embed=embed)
@@ -1439,7 +1439,7 @@ async def on_command_error(ctx, error):
     embed.add_field(name = "Status", value = "You Are Still On Cooldown")
     embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
     await ctx.send(embed=embed)      
-  if isinstance(error,commands.CommandNotFound):
+  elif isinstance(error,commands.CommandNotFound):
     pass
   else:
     print(ctx.guild.name)
