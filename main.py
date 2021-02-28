@@ -1086,14 +1086,12 @@ async def serverlock(ctx):
 async def serverunlock(ctx):
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     for channel in ctx.guild.text_channels:
-      if channel.is_news:
-        pass
-      else:
+      if channel.is_news() == False:
         overwrite = channel.overwrites_for(ctx.guild.default_role)
         overwrite.send_messages = None    
         await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
         await asyncio.sleep(1)
-    await ctx.send(f"Successfully Unlocked All Channels For {ctx.guild.name}|| Excluding All Annoucement Channels")
+    await ctx.send(f"Successfully Unlocked All Channels Of {ctx.guild.name}|| All Annoucement Channels Are Excluded")
       
   else:
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
@@ -1723,5 +1721,4 @@ async def warn(ctx,member : discord.Member,*,reason = None):
       except:
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
-
 client.run(TOKEN)
