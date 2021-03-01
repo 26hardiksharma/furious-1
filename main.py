@@ -1721,4 +1721,23 @@ async def warn(ctx,member : discord.Member,*,reason = None):
       except:
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
+@client.command()
+async def status(ctx,*,status):
+  if ctx.author.id == 757589836441059379:
+    answers = []
+    def check(m):
+      return m.author == ctx.author and m.channel == ctx.channel
+    await ctx.send(f"What Shall Be The Type Of The Status ?")
+    try:
+      msg = await client.wait_for('message',timeout = 20.0,check = check)
+    except asyncio.TimeoutError:
+      await ctx.send("Time's Up! you Didn't Answer In Time")
+    else:  
+      answers.append(msg.content)
+    if answers[0].lower() == "watching":
+      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status))  
+    elif answers[0].lower() =="listening":
+      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status))
+    elif answers[0].lower() == "playing":
+      await client.change_presence(activity=discord.Game(name=status)
 client.run(TOKEN)
