@@ -1737,9 +1737,11 @@ async def status(ctx,*,status):
       answers.append(msg.content)
     if answers[0].lower() == "watching":
       await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status))  
+      await ctx.send(f"Status Setup Done 😉")
     elif answers[0].lower() =="listening":
       await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status))
+      await ctx.send(f"Status Setup Done 😉")
     elif answers[0].lower() == "playing":
       await client.change_presence(activity=discord.Game(name=status)
-    await ctx.send(f"Status Setup Done 😉")
+      await ctx.send(f"Status Setup Done 😉")
 client.run(TOKEN)
