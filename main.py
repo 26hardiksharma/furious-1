@@ -1741,5 +1741,5 @@ async def status(ctx,*,status):
       await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status))
     elif answers[0].lower() == "playing":
       await client.change_presence(activity=discord.Game(name=status)
-    await ctx.send(f"Status Setup Done ;")
+    await ctx.send(f"Status Setup Done 😉")
 client.run(TOKEN)
