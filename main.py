@@ -1734,10 +1734,10 @@ async def status(ctx,*,status):
       await ctx.send("Time's Up! you Didn't Answer In Time")
     else:  
       answers.append(msg.content)
-    if answers[0].lower() == "watching":
-      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status))  
-    elif answers[0].lower() =="listening":
-      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status))
-    elif answers[0].lower() == "playing":
-      await client.change_presence(activity=discord.Game(name=status)
+      if answers[0].lower() == "watching":
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status))  
+      elif answers[0].lower() =="listening":
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status))
+      elif answers[0].lower() == "playing":
+        await client.change_presence(activity=discord.Game(name=status)
 client.run(TOKEN)
