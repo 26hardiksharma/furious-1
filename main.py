@@ -168,14 +168,11 @@ async def avatar(ctx, member : discord.Member=None):
 
 @client.command()
 async def say(ctx,*,message):
-  if ctx.author.guild_permissions.manage_messages:
+  if ctx.author.id in prem:
     await ctx.message.delete()
     await ctx.send(message)
   else:
-    embed=discord.Embed(title = "<:error:795629492693368833> Say",colour = 0xFF0000)
-    embed.add_field(name = "Status",value = f"{ctx.author.mention}, You Dont Have The Permission To Use This Command")
-    embed.add_field(name = "Missing Permissions",value = "Manage Messages",inline = False)
-    await ctx.send(embed=embed)
+    await ctx.send(f"Only Premium Users Can Use This Command ;)")
 
 @client.command(pass_context=True, aliases = ['clear'])
 @commands.cooldown(1,10,commands.BucketType.user)
