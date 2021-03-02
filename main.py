@@ -386,7 +386,7 @@ async def misc(ctx):
 @client.command()
 async def roll(ctx,amount):
   entry = int(amount)
-  outcome = random.randint(0,entry)
+  outcome = random.randint(1,entry)
   if outcome > entry/2:
     await ctx.send(f"🎲 Your Random Outcome Is :- {outcome}. (1-{amount}) 😎")
   elif outcome == entry/2:
@@ -1741,5 +1741,21 @@ async def status(ctx,*,status):
     elif answers[0].lower() == "playing":
       await client.change_presence(activity=discord.Game(name=status))
     await ctx.send(f"Status Setup Done")
-
+prem = []
+@client.command()
+async def addprem(ctx,user:discord.Member):
+  if ctx.author.id ==757589836441059379:
+    prem.append(user.id)
+    await ctx.send(f"Successfully Gave Premium Perks to {user.mention}")
+@client.command()
+async def abcd(ctx):
+  if ctx.author.id in prem:
+    await ctx.send(f"ABCD")
+  else:
+    await ctx.send(f"Only Premium Users Are Allowed To Use This command")
+@client.command()
+async def takeprem(ctx,user:discord.User):
+  if ctx.author.id == 757589836441059379:
+    prem.remove(user.id)
+    await ctx.send(f"Took Premium Perks Away From {user.mention}")
 client.run(TOKEN)
