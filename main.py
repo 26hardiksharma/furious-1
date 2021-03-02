@@ -1462,7 +1462,7 @@ async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = getMeme()
   name, url = client.nextMeme
-  embed = discord.Embed(description = f"{name}",url=f"{url}",colour = 0xE5FF00)
+  embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
   embed.set_image(url=url)
   embed.set_footer(text=f"©️ By Subreddit",icon_url = client.user.avatar_url)
   await ctx.send(embed=embed)
