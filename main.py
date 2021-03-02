@@ -1464,7 +1464,7 @@ async def meme(ctx):
   name, url = client.nextMeme
   embed = discord.Embed(description = f"{name}",url=f"{url}",colour = 0xE5FF00)
   embed.set_image(url=url)
-  embed.set_footer(f"©️ By Subreddit")
+  embed.set_footer(text=f"©️ By Subreddit",icon_url = client.user.avatar_url)
   await ctx.send(embed=embed)
   client.nextMeme = getMeme()
 
