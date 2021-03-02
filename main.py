@@ -30,7 +30,7 @@ async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
   owner  = await ctx.guild.fetch_member(ctx.guild.owner_id) 
   if ctx.author.guild_permissions.kick_members:
     if abc.guild_permissions.kick_members:
-      if user.top_role >= ctx.author.top_role or ctx.author != owner:
+      if user.top_role >= ctx.author.top_role and ctx.author != owner:
         await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
       else:
         try:
