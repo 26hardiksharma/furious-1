@@ -25,38 +25,29 @@ async def on_ready():
   print('Bot ID: {}'.format(client.user.id))
 intents.guilds = True
 @client.command()
-async def kick(ctx,member : discord.Member,*,reason = "No Reason Provided"):
-  owner  = await ctx.guild.fetch_member(ctx.guild.owner_id)
+async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
+  abc = ctx.guild.get_member(client.user.id)
+  owner  = await ctx.guild.fetch_member(ctx.guild.owner_id) 
   if ctx.author.guild_permissions.kick_members:
-    
-    if member.top_role >= ctx.author.top_role:
-      
-      await ctx.send("You Cant Kick People With Role Above Or Equal To You!")
-    else:
-      abc = ctx.guild.get_member(client.user.id)
-      if member.top_role >= abc.top_role or member == owner:
-        await ctx.send(f"I Am Unable To Interact With {member.name}")
+    if abc.guild_permissions.kick_members:
+      if user.top_role >= ctx.author.top_role or ctx.author != owner:
+        await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
       else:
         try:
-          await member.send(f"**You Have Been Kicked From {member.guild} Because Of : {reason}**")
-          await member.kick(reason = f"{reason} || Action By - {ctx.author.name}")
-          await ctx.message.delete()
-          embed = discord.Embed(title = "Kick" , description = f"{member.mention} Has Been Successfully Kicked Because Of :-  {reason}" , color = discord.Colour.red())
+          await user.kick(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+          embed = discord.Embed(title = "Kick",description = f"{member.mention} Has Been Successfully Kicked Out Because Of :-  {reason}",colour = 0xFF0000)
           await ctx.send(embed=embed)
+          try:
+            await member.send(f"**You Have Been Kicked From {member.guild} Because Of : {reason}**")
+          except:
+            pass
         except:
-          await member.kick(reason = f"{reason} Action By - {ctx.author.name}")
-          await ctx.message.delete()
-          embed = discord.Embed(title = "Kick" , description = f"{member.mention} Has Been Successfully Kicked Because Of :-  {reason}" , color = discord.Colour.red())
-          await ctx.send(embed=embed)
-          await member.send(f"**You Have Been Kicked From {member.guild} Because Of : {reason}**")
-          
+          await ctx.send(f"Unable To Interact With {user.name}#{user.discriminator}")
+    else:
+      await ctx.send(f"I Am Missing The **KICK MEMBERS** Permission Required To Execute This Action")
   else:
-    embed = discord.Embed(title = "Kick")
-    embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
-    embed.add_field(name = "Missing Permission(s)", value = "Kick Members",inline = False)
-    embed.set_footer(icon_url = ctx.author.avatar_url, text = 
-  f"Requested By {ctx.author.name}")
-    await ctx.send(embed=embed)
+    await ctx.send(f"You Are Missing The **KICK MEMBERS** Permission Required To Execute This Action")
+
 @kick.error
 async def kick_error(ctx, error):
   if isinstance(error, commands.MemberNotFound):
