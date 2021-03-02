@@ -399,7 +399,7 @@ async def ping(ctx):
 
 @client.command()
 async def invite(ctx):
-  embed=discord.Embed(title = "Thank You For Choosing Furious",description = "Some Useful Links!",colour = 0x00FFD3)
+  embed=discord.Embed(title = "Thank You For Choosing Furious",description = "Some Useful Links!",url = "https://dsc.gg/furiousop",colour = 0x00FFD3)
   embed.add_field(name = "Invite Link • Normal",value = "[Click Here](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot)")
   embed.add_field(name = "Invite Link • Administrator",value = "[Click Here](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=8&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot)",inline= False)
   embed.add_field(name = "Official Server",value = "[Click Here](https://discord.gg/n5DkCQNjEQ)",inline = False)
@@ -1741,4 +1741,5 @@ async def status(ctx,*,status):
     elif answers[0].lower() == "playing":
       await client.change_presence(activity=discord.Game(name=status))
     await ctx.send(f"Status Setup Done")
+
 client.run(TOKEN)
