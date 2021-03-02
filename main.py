@@ -35,10 +35,10 @@ async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
       else:
         if abc.top_role > user.top_role and user != owner:
           await user.kick(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-          embed = discord.Embed(title = "Kick",description = f"{member.mention} Has Been Successfully Kicked Out Because Of :-  {reason}",colour = 0xFF0000)
+          embed = discord.Embed(title = "Kick",description = f"{user.mention} Has Been Successfully Kicked Out Because Of :-  {reason}",colour = 0xFF0000)
           await ctx.send(embed=embed)
           try:
-            await member.send(f"**You Have Been Kicked From {member.guild} Because Of : {reason}**")
+            await member.send(f"**You Have Been Kicked From {ctx.guild} Because Of : {reason}**")
           except:
             pass
         else:
