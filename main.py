@@ -26,6 +26,7 @@ async def on_ready():
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
+  await ctx.message.delete()
   abc = ctx.guild.get_member(client.user.id)
   owner  = await ctx.guild.fetch_member(ctx.guild.owner_id) 
   if ctx.author.guild_permissions.kick_members:
@@ -35,7 +36,7 @@ async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
       else:
         if abc.top_role > user.top_role and user != owner:
           await user.kick(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-          embed = discord.Embed(title = "Kick",description = f"{user.mention} Has Been Successfully Kicked Out Because Of :-  {reason}",colour = 0xFF0000)
+          embed = discord.Embed(title = "Kick",description = f"{user.mention} **Has Been Successfully Kicked Out Because Of** :-  {reason}",colour = 0xFF0000)
           await ctx.send(embed=embed)
           try:
             await member.send(f"**You Have Been Kicked From {ctx.guild} Because Of : {reason}**")
@@ -56,37 +57,29 @@ async def kick_error(ctx, error):
     raise error
 
 @client.command()
-async def ban(ctx,member : discord.Member,*,reason = "No Reason Provided"):
+async def ban(ctx,user:discord.Member,*,reason = "No Reason Specified"):
+  await ctx.message.delete()
+  abc = ctx.guild.get_member(client.user.id)
+  owner  = await ctx.guild.fetch_member(ctx.guild.owner_id) 
   if ctx.author.guild_permissions.ban_members:
-    
-    if member.top_role >= ctx.author.top_role:
-      
-      await ctx.send("You Cant Ban People With Role Above Or Equal To You!")
-    else:
-      
-      abc = ctx.guild.get_member(client.user.id)
-      if member.top_role >= abc.top_role:
-        await ctx.send(f"I Am Unable To Interact With {member.name}")
+    if abc.guild_permissions.ban_members:
+      if user.top_role >= ctx.author.top_role and ctx.author != owner:
+        await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
       else:
-        try:
-          await member.send(f"**You Have Been Banned From {member.guild} Because Of : {reason}**")
-          await member.ban(reason = f"{reason} Action By - {ctx.author.name}")
-          await ctx.message.delete()
-          embed = discord.Embed(title = "Ban" , description = f"{member.mention} Has Been Successfully Banned Because Of :-  {reason}" , color = discord.Colour.red())
+        if abc.top_role > user.top_role and user != owner:
+          await user.kick(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+          embed = discord.Embed(title = "Ban",description = f"{user.mention} **Has Been Successfully Banned Because Of** :-  {reason}",colour = 0xFF0000)
           await ctx.send(embed=embed)
-        except:
-          await member.ban(reason = f"{reason} Action By - {ctx.author.name}")
-          await ctx.message.delete()
-          embed = discord.Embed(title = "Ban" , description = f"{member.mention} Has Been Successfully Banned Because Of :-  {reason}" , color = discord.Colour.red())
-          await ctx.send(embed=embed)
-          await member.send(f"**You Have Been Banned From {member.guild} Because Of : {reason}**")
+          try:
+            await member.send(f"**You Have Been Banned From {ctx.guild} Because Of : {reason}**")
+          except:
+            pass
+        else:
+          await ctx.send(f"Unable To Interact With {user.name}#{user.discriminator}")
+    else:
+      await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Action")
   else:
-    embed = discord.Embed(title = "Ban")
-    embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
-    embed.add_field(name = "Missing Permission(s)", value = "Ban Members",inline = False)
-    embed.set_footer(icon_url = ctx.author.avatar_url, text = 
-  f"Requested By {ctx.author.name}")
-    await ctx.send(embed=embed)
+    await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
 @ban.error
 async def ban_error(ctx, error):
   if isinstance(error, commands.MemberNotFound):
