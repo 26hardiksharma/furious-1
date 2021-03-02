@@ -1457,7 +1457,7 @@ def getMeme():
     url = random_sub.url
     return name, url
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 10, commands.BucketType.user)
 async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = getMeme()
