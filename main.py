@@ -33,7 +33,7 @@ async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
       if user.top_role >= ctx.author.top_role and ctx.author != owner:
         await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
       else:
-        try:
+        if abc.top_role > user.top_role and user != owner:
           await user.kick(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
           embed = discord.Embed(title = "Kick",description = f"{member.mention} Has Been Successfully Kicked Out Because Of :-  {reason}",colour = 0xFF0000)
           await ctx.send(embed=embed)
@@ -41,7 +41,7 @@ async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
             await member.send(f"**You Have Been Kicked From {member.guild} Because Of : {reason}**")
           except:
             pass
-        except:
+        else:
           await ctx.send(f"Unable To Interact With {user.name}#{user.discriminator}")
     else:
       await ctx.send(f"I Am Missing The **KICK MEMBERS** Permission Required To Execute This Action")
