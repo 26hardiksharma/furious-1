@@ -1153,7 +1153,7 @@ async def nuke(ctx,channel : discord.TextChannel = None):
   if ctx.author.guild_permissions.manage_channels:
     if channel == None:
       channel = ctx.channel
-    await channel.clone(reason=" Channel Has been nuked by {ctx.author.name}")
+    await channel.clone(reason=f" Channel Has been nuked by {ctx.author.name}")
     await channel.delete()
 @client.command()
 async def usercount(ctx):
