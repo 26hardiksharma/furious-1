@@ -1743,20 +1743,4 @@ async def takeprem(ctx,user:discord.User):
   if ctx.author.id == 757589836441059379:
     prem.remove(user.id)
     await ctx.send(f"Took Premium Perks Away From {user.mention}")
-@client.command()
-@commands.is_nsfw()
-async def porn(ctx):
-  if ctx.author.id == 757589836441059379:
-    lists = ['nude','porn','sex','anal','nsfw','porngif'] 
-    subreddit = reddit.subreddit(random.choice(lists))
-    all_subs = []
-
-    top = subreddit.top(limit= 30)
-    for submission in top:
-      if submission.is_video == False and submission.url.startswith("https://youtube.com") == False:
-        all_subs.append(submission)
-    random_sub = random.choice(all_subs)
-    embed = discord.Embed(title = random_sub.title,url = random_sub.url)
-    embed.set_image(url=random_sub.url)
-    await ctx.send(embed=embed)
 client.run(TOKEN)
