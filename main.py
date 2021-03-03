@@ -1756,7 +1756,9 @@ async def porn(ctx):
         if submission.is_video == False and submission.url.startswith("https://youtube.com") == False:
           all_subs.append(submission)
       random_sub = random.choice(all_subs)
-      await ctx.send(f"{random_sub.url}")
+      embed = discord.Embed(title = random_sub.title)
+      embed.set_image(url=random_sub.url)
+      await ctx.send(embed=embed)
     except:
       await ctx.send(f"The Image Could Not Be Found Or Is Unreachable By Me :/")
 client.run(TOKEN)
