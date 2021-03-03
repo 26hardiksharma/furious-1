@@ -1207,7 +1207,7 @@ async def dm(ctx, member : discord.Member,*,query):
       await ctx.send(f"You Are Blacklisted From using This Command")
     else:
       await ctx.message.delete() 
-      await member.send(f"**DIRECT MESSAGE**\n**MESSAGE** :- {query}\n**SENT BY** :- {ctx.author.mention}\n**SERVER**:- {ctx.guild.name}")
+      await member.send(f"**DIRECT MESSAGE**\n**MESSAGE** :- {query}\n**SENT BY** :- {ctx.author.name}#{ctx.author.discriminator}\n**SERVER**:- {ctx.guild.name}")
       embed = discord.Embed(title = " <a:eo_TICK:807656268360712312> DM",colour = 0x00F2FF)
       embed.add_field(name = "Status",value = f"DM Sent Successfully",inline = False)
       embed.set_footer(text = "Misuse Of This Command May Lead To You Getting Blacklisted From The Command")
@@ -1435,7 +1435,7 @@ def getMeme():
   for submission in top:
     if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
-  random_sub = random.choice(all_subs)
+  random_sub = random.choice(all_subs) 
   if random_sub.over_18:
     warn = "NSFW Content Is Not Supported"
     return warn
