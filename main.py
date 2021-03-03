@@ -1413,10 +1413,8 @@ async def image(ctx,*,subred = "scenery"):
   else:
     try:
       await ctx.send(f"{random_sub.url}")
-    except discord.NotFound:
-      await ctx.send(f"No Image Found :/")
-    except discord.Forbidden as e:
-      await ctx.send(f"Forbidden Access To The Image :/")
+    except discord.HTTPException:
+      await ctx.send(f"The Image Could Not Be Found Or Is Forbidden To Be Reached By Me:/")
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandOnCooldown):
