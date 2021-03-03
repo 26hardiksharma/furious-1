@@ -1403,7 +1403,7 @@ async def calculate(ctx,num:float,op,anum:float):
 async def image(ctx,*,subred = "scenery"): 
   subreddit = reddit.subreddit(subred)
   all_subs = []
-  top = subreddit.top(limit= 500)
+  top = subreddit.top(limit= 30)
   for submission in top:
     if submission.is_video == False and submission.url.startswith("https://youtube.com") == False:
       all_subs.append(submission)
@@ -1411,7 +1411,12 @@ async def image(ctx,*,subred = "scenery"):
   if random_sub.over_18:
     await ctx.send("NSFW Content Is Not Supported CUrrently")
   else:
-    await ctx.send(f"{random_sub.url}")
+    try:
+      await ctx.send(f"{random_sub.url}")
+    except discord.NotFound:
+      await ctx.send(f"No Image Found :/")
+    except discord.Forbidden as e:
+      await ctx.send(f"Forbidden Access To The Image :/")
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandOnCooldown):
