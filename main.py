@@ -1747,7 +1747,7 @@ async def takeprem(ctx,user:discord.User):
 @commands.is_nsfw()
 async def porn(ctx):
   if ctx.author.id == 757589836441059379:
-    lists = ['nude','porn','sex','anal','nsfw','nude','porngif'] 
+    lists = ['nude','porn','sex','anal','nsfw','porngif'] 
     subreddit = reddit.subreddit(random.choice(lists))
     all_subs = []
 
