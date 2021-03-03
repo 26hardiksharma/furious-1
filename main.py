@@ -1750,15 +1750,13 @@ async def porn(ctx):
     lists = ['nude','porn','sex','anal',] 
     subreddit = reddit.subreddit(random.choice(lists))
     all_subs = []
-    try:
-      top = subreddit.top(limit= 30)
-      for submission in top:
-        if submission.is_video == False and submission.url.startswith("https://youtube.com") == False:
-          all_subs.append(submission)
-      random_sub = random.choice(all_subs)
-      embed = discord.Embed(title = random_sub.title)
-      embed.set_image(url=random_sub.url)
-      await ctx.send(embed=embed)
-    except:
-      await ctx.send(f"The Image Could Not Be Found Or Is Unreachable By Me :/")
+
+    top = subreddit.top(limit= 30)
+    for submission in top:
+      if submission.is_video == False and submission.url.startswith("https://youtube.com") == False:
+        all_subs.append(submission)
+    random_sub = random.choice(all_subs)
+    embed = discord.Embed(title = random_sub.title,url = random_sub.url)
+    embed.set_image(url=random_sub.url)
+    await ctx.send(embed=embed)
 client.run(TOKEN)
