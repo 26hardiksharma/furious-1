@@ -91,7 +91,7 @@ async def ban_error(ctx, error):
 @client.command(aliases = ['um'])
 async def unmute(ctx,member : discord.Member):
   if ctx.author.guild_permissions.manage_messages:
-    muted_role = discord.utils.get(member.guild.roles, name='Muted')
+    muted_role = discord.utils.get(member.guild.roles, name.lower()='Muted')
     if muted_role in member.roles:
 
       await member.remove_roles(muted_role)
@@ -193,7 +193,7 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
     else:
       try:
         
-        muted_role = discord.utils.get(member.guild.roles, name='Muted')
+        muted_role = discord.utils.get(member.guild.roles, name.lower()='muted')
         await member.add_roles(muted_role)
         await ctx.message.delete()  
         embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = discord.Colour.red())
@@ -1743,4 +1743,5 @@ async def takeprem(ctx,user:discord.User):
   if ctx.author.id == 757589836441059379:
     prem.remove(user.id)
     await ctx.send(f"Took Premium Perks Away From {user.mention}")
+
 client.run(TOKEN)
