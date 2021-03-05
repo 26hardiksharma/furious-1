@@ -1754,9 +1754,10 @@ async def on_message(message):
     afks.remove(message.author.id)
     await message.channel.send(f"Welcome Back {message.author.mention}, I Have Removed Your AFK!")
   else:
-    for member in message.mentions:
+    if member in message.mentions:
       if member.id in afks:
         await message.channel.send(f"{member.mention} Is AFK..")
+        break
       else:
         pass
   await client.process_commands(message)
