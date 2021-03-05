@@ -1776,7 +1776,7 @@ async def automod(ctx,query = None):
   if ctx.author.guild_permissions.manage_guild:
     if query == None:
       await ctx.send(f"Automod Service \n\n **Automod Commands:** \n`F!automod on`\n`F!autumod off`")
-    elif query.lower() = "on":
+    elif query.lower() =="on":
       if ctx.guild.id in mod_on:
         await ctx.send(f"Automod Service Is Already Running On This Server")
       else:
