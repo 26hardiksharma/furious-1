@@ -1753,9 +1753,8 @@ async def on_message(message):
   if message.author.id in afks:
     afks.remove(message.author.id)
     await message.channel.send(f"Welcome Back {message.author.mention}, I Have Removed Your AFK!")
-  await client.process_commands(message)
   test = "discord.gg/"
-  elif test in message.content.lower():
+  elif str(test) in message.content.lower():
     if message.guild.id == 758381318404308994:
       guild= message.guild
       if message.author.guild_permissions.administrator:
@@ -1770,4 +1769,5 @@ async def on_message(message):
         break
       else:
         pass
+  await client.process_commands(message)
 client.run(TOKEN)
