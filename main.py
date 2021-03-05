@@ -1750,11 +1750,11 @@ async def afk(ctx):
   await ctx.send(f"Your Afk Has Been Set!")
 @client.event
 async def on_message(message):
+  test = "discord.gg/"
   if message.author.id in afks:
     afks.remove(message.author.id)
     await message.channel.send(f"Welcome Back {message.author.mention}, I Have Removed Your AFK!")
-  test = "discord.gg/"
-  elif str(test) in message.content.lower():
+  elif test in message.content.lower():
     if message.guild.id == 758381318404308994:
       guild= message.guild
       if message.author.guild_permissions.administrator:
