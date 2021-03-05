@@ -380,7 +380,7 @@ async def invite(ctx):
   embed=discord.Embed(title = "Thank You For Choosing Furious",description = "Some Useful Links!",url = "https://dsc.gg/furiousop",colour = 0x00FFD3)
   embed.add_field(name = "Invite Link • Normal",value = "[Click Here](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot)")
   embed.add_field(name = "Invite Link • Administrator",value = "[Click Here](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=8&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot)",inline= False)
-  embed.add_field(name = "Official Server",value = "[Click Here](https://discord.gg/n5DkCQNjEQ)",inline = False)
+  embed.add_field(name = "Official Server",value = "[Click Here](https://discord.gg/MXa2EReETq)",inline = False)
   embed.set_thumbnail(url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
 @client.command()
@@ -1722,6 +1722,8 @@ async def status(ctx,*,status):
       await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status))
     elif answers[0].lower() == "playing":
       await client.change_presence(activity=discord.Game(name=status))
+    elif answers[0].lower() == "streaming":
+      await client.change_presence(activity=discord.Streaming(name="Support Server", url="https://discord.gg/MXa2EReETq"))
     await ctx.send(f"Status Setup Done")
 prem = []
 @client.command()
