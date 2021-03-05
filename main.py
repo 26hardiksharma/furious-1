@@ -1785,6 +1785,7 @@ async def automod(ctx,query = None):
     elif query.lower() == "off":
       if ctx.guild.id in mod_on:
         mod_on.remove(ctx.guild.id)
+        await ctx.send(f"Disabled Automod Service On This Server")
       else:
         await ctx.send("Automod Service Is Not Running In This Guild")
 
