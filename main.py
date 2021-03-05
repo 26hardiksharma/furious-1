@@ -1748,7 +1748,7 @@ afks=[]
 async def afk(ctx):
   afks.append(ctx.author.id)
   await ctx.send(f"Your Afk Has Been Set!")
-@client.event()
+@client.event
 async def on_message(message):
   if message.author.id in afks:
     afks.remove(message.author.id)
