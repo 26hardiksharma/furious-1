@@ -1755,9 +1755,9 @@ async def on_message(message):
     afks.remove(message.author.id)
     await message.channel.send(f"Welcome Back {message.author.mention}, I Have Removed Your AFK!")
   elif test in message.content.lower():
-    if message.guild.id == 758381318404308994:
+    if message.guild.id == mod_on:
       guild= message.guild
-      if message.author.guild_permissions.administrator:
+      if message.author.guild_permissions.manage_messages:
         pass
       else:
         await message.delete()
@@ -1770,4 +1770,22 @@ async def on_message(message):
       else:
         pass
   await client.process_commands(message)
+mod_on = []
+@client.command()
+async def automod(ctx,query = None):
+  if ctx.author.guild_permissions.manage_guild:
+    if query == None:
+      await ctx.send(f"Automod Service \n\n **Automod Commands:** \n`F!automod on`\n`F!autumod off`")
+    elif query.lower() = "on":
+      if ctx.guild.id in mod_on:
+        await ctx.send(f"Automod Service Is Already Running On This Server")
+      else:
+        mod_on.append(ctx.guild.id)
+        await ctx.send(f"Automod Service Has Been Setup On This Server")
+    elif query.lower() == "off":
+      if ctx.guild.id in mod_on:
+        mod_on.remove(ctx.guild.id)
+      else:
+        await ctx.send("Automod Service Is Not Running In This Guild")
+
 client.run(TOKEN)
