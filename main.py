@@ -1755,7 +1755,7 @@ async def on_message(message):
     afks.remove(message.author.id)
     await message.channel.send(f"Welcome Back {message.author.mention}, I Have Removed Your AFK!")
   elif test in message.content.lower():
-    if message.guild.id == mod_on:
+    if message.guild.id in mod_on:
       guild= message.guild
       if message.author.guild_permissions.manage_messages:
         pass
