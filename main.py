@@ -152,12 +152,9 @@ async def avatar(ctx, member : discord.Member=None):
 
 @client.command()
 async def say(ctx,*,message):
-  if ctx.author.id in prem:
+  if ctx.author.guild_permissions.manage_messages:
     await ctx.message.delete()
     await ctx.send(message)
-  else:
-    await ctx.send(f"Only Premium Users Can Use This Command ;)")
-
 @client.command(pass_context=True, aliases = ['clear'])
 @commands.cooldown(1,10,commands.BucketType.user)
 async def purge(ctx,amt: int = None):
