@@ -1743,4 +1743,17 @@ async def takeprem(ctx,user:discord.User):
   if ctx.author.id == 757589836441059379:
     prem.remove(user.id)
     await ctx.send(f"Took Premium Perks Away From {user.mention}")
+afks=[]
+@client.command()
+async def afk(ctx):
+  afks.append(ctx.author.id)
+  await ctx.send(f"Your Afk Has Been Set!")
+@client.event()
+async def on_message(message):
+  if message.author.id in afks:
+    afks.remove(message.author.id)
+    await message.channel.send(f"Welcome Back {message.author.mention}, I Have Removed Your AFK!")
+  await client.process_commands(message)
+
+
 client.run(TOKEN)
