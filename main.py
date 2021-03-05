@@ -1757,11 +1757,12 @@ async def on_message(message):
   elif test in message.content.lower():
     if message.guild.id in mod_on:
       guild= message.guild
-      if message.author.guild_permissions.manage_messages:
-        pass
-      else:
-        await message.delete()
-        await message.channel.send(f"{message.author.mention}, No Invite Links Allowed")
+      if message.channel.id not in ignored:
+        if message.author.guild_permissions.manage_messages:
+          pass
+        else:
+          await message.delete()
+          await message.channel.send(f"{message.author.mention}, No Invite Links Allowed")
   else:
     for member in message.mentions:
       if member.id in afks:
@@ -1771,11 +1772,12 @@ async def on_message(message):
         pass
   await client.process_commands(message)
 mod_on = []
+ignored = []
 @client.command()
-async def automod(ctx,query = None):
+async def automod(ctx,query = None,ch : discord.TextChannel = None):
   if ctx.author.guild_permissions.manage_guild:
     if query == None:
-      await ctx.send(f"Automod Service \n\n **Automod Commands:** \n`F!automod on`\n`F!autumod off`")
+      await ctx.send(f"Automod Service \n\n **Automod Commands:** \n`F!automod on`\n`F!autumod off`\n`F!automod ignore #channel")
     elif query.lower() =="on":
       if ctx.guild.id in mod_on:
         await ctx.send(f"Automod Service Is Already Running On This Server")
@@ -1788,5 +1790,17 @@ async def automod(ctx,query = None):
         await ctx.send(f"Disabled Automod Service On This Server")
       else:
         await ctx.send("Automod Service Is Not Running In This Guild")
+    elif query.lower() == "ignore":
+      if ch == None:
+        await ctx.send(f"Please Mention A Channel To Ignore")
+      else:
+        if ch.id in ignored:
+          await ctx.send(f"{ch.mention} Is Already Being Ignored")
+        else:
+          try:
+            ignored.append(ch.id)
+            await ctx.send(f"Automod Is Now Ignoring {ch.mention}")
+          except:
+            await ctx.send(f"Couldn't Find That Channel")
 
 client.run(TOKEN)
