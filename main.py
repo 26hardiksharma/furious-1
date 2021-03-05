@@ -1756,7 +1756,7 @@ async def on_message(message):
   else:
     for member in message.mentions:
       if member.id in afks:
-        await message.channel.send(f"{member.name}#{member.discriminator} Is AFK..")
+        await message.channel.send(f"{message.author.mention}, {member.name}#{member.discriminator} Is AFK!")
         break
       else:
         pass
