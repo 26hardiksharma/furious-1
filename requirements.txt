@@ -4,3 +4,4 @@ aiohttp
 pillow
 dblpy
 praw
+requests

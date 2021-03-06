@@ -12,6 +12,7 @@ from io import BytesIO
 import datetime
 import time
 import dbl
+import requests
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
@@ -1795,5 +1796,11 @@ async def automod(ctx,query = None,ch : discord.TextChannel = None):
             await ctx.send(f"Automod Is Now Ignoring {ch.mention}")
           except:
             await ctx.send(f"Couldn't Find That Channel")
+@client.command()
+async def quote(ctx):
+  results = requests.get('https://type.fit/api/quotes').json()
+  num  = random.randint(1,1500)
+  content = results[num]['text']
+  await ctx.send(content)
 
 client.run(TOKEN)
