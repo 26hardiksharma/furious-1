@@ -245,30 +245,36 @@ async def setnick(ctx, member : discord.Member,*,nick):
     await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 10, commands.BucketType.user)
-async def hack(ctx,member : discord.Member):
-  msg = await ctx.send(f"Starting The Hack")
-  await asyncio.sleep(1)
-  await msg.edit(content = f"[▖] Getting {member.mention}'s Info")
-  await asyncio.sleep(1)
-  await msg.edit(content = f"[▘]2FA Passed")
-  await asyncio.sleep(1)
-  await msg.edit(content = f"[▝] Email :- {member.name}xd@gmail.com")
-  await asyncio.sleep(1)
-  await msg.edit(content = f"[▗]Password :- {member.name}0007")
-  await asyncio.sleep(1)
-  await msg.edit(content = f"[▖]Fetching DMs")
-  await asyncio.sleep(1)
-  await msg.edit(content = "[▘]Leaking Data On Sub Reddit")
-  await asyncio.sleep(1)
-  await msg.edit(content = "[▝]Sending Data To Government")
-  await asyncio.sleep(1)
-  await msg.edit(content = "[▗]Reporting Account For Violating Discord TOs")
-  await asyncio.sleep(1)
-  await msg.edit(content = "[▖]Injecting Virus")
-  await asyncio.sleep(1)
-  await msg.edit(content = f"[▘]Sending {member.mention}'s Head To Dynamo Gaming")
-  await asyncio.sleep(3)
-  await msg.edit(content = "Hacking Complete, user Under Control")
+async def hack(ctx,member : discord.Member = None):
+  if member == None:
+    await ctx.send(f"I Got My Setup Ready To Hack Users But Ended Up Realizing You Didn't Mention Anyone! Be Sure To Mention Someone To Be Hacked!")
+  elif member == ctx.author:
+    await ctx.send(f"Bruh, Don't Be So Desperate To Get Yourself Hacked, Ask A Friend To Hack You!")
+  else:
+
+    msg = await ctx.send(f"Starting The Hack")
+    await asyncio.sleep(2)
+    await msg.edit(content = f"[▖] Getting {member.mention}'s Info")
+    await asyncio.sleep(2)
+    await msg.edit(content = f"[▘]2FA Passed")
+    await asyncio.sleep(2)
+    await msg.edit(content = f"[▝] Email :- {member.name}xd@gmail.com")
+    await asyncio.sleep(2)
+    await msg.edit(content = f"[▗]Password :- {member.name}0007")
+    await asyncio.sleep(2)
+    await msg.edit(content = f"[▖]Fetching DMs")
+    await asyncio.sleep(2)
+    await msg.edit(content = "[▘]Leaking Data On Sub Reddit")
+    await asyncio.sleep(2)
+    await msg.edit(content = "[▝]Sending Data To Government")
+    await asyncio.sleep(2)
+    await msg.edit(content = "[▗]Reporting Account For Violating Discord TOs")
+    await asyncio.sleep(2)
+    await msg.edit(content = "[▖]Injecting Virus")
+    await asyncio.sleep(2)
+    await msg.edit(content = f"[▘]Sending {member.mention}'s Head To Dynamo Gaming")
+    await asyncio.sleep(3)
+    await msg.edit(content = "Hacking Complete, user Under Control")
 @client.command()
 async def vcreate(ctx,*,query):
   if ctx.author.guild_permissions.manage_channels:
@@ -1647,11 +1653,10 @@ async def on_message_edit(before,after):
       pass
 @client.event
 async def on_bulk_message_delete(messages):
-
   if messages[1].guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
     channel = client.get_channel(812652361943875604)
     try:
-      embed= discord.Embed(title = messages[1].guild.name,description = f"**Bulk Message Deletion In {messages[1].channel.mention}, {len(messages)} Messages Deleted**",colour = 0xFF0000)
+      embed= discord.Embed(title = messages[0].guild.name,description = f"**Bulk Message Deletion In {messages[1].channel.mention}, {len(messages)} Messages Deleted**",colour = 0xFF0000)
       await channel.send(embed=embed)
     except discord.HTTPException as e:
       pass
