@@ -1802,5 +1802,9 @@ async def quote(ctx):
   num  = random.randint(1,1500)
   content = results[num]['text']
   await ctx.send(f"**{content}**")
-
+@client.command()
+async def pokedex(ctx,pokemon):
+  results = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon}").json()
+  ability = results['ability']['name']
+  await ctx.send(f"{pokemon}'s Ability:- {ability}")
 client.run(TOKEN)
