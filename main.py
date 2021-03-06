@@ -1810,5 +1810,5 @@ async def pokedex(ctx,pokemon):
 @client.command()
 async def dog(ctx):
   result = requests.get('https://dog.ceo/api/breeds/image/random').json()
-  await ctx.send(result[0]['message'])
+  await ctx.send(result['message'])
 client.run(TOKEN)
