@@ -247,7 +247,7 @@ async def setnick(ctx, member : discord.Member,*,nick):
 @commands.cooldown(1, 10, commands.BucketType.user)
 async def hack(ctx,member : discord.Member = None):
   if member == None:
-    await ctx.send(f"I Got My Setup Ready To Hack Users But Ended Up Realizing You Didn't Mention Anyone! Be Sure To Mention Someone To Be Hacked!")
+    await ctx.send(f"I Got My Setup Ready To Hack Users But Ended Up Realizing You Didn't Mention Anyone!\nBe Sure To Mention Someone To Be Hacked!")
   elif member == ctx.author:
     await ctx.send(f"Bruh, Don't Be So Desperate To Get Yourself Hacked, Ask A Friend To Hack You!")
   else:
