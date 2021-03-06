@@ -1801,6 +1801,6 @@ async def quote(ctx):
   results = requests.get('https://type.fit/api/quotes').json()
   num  = random.randint(1,1500)
   content = results[num]['text']
-  await ctx.send(content)
+  await ctx.send(f"**{content}**")
 
 client.run(TOKEN)
