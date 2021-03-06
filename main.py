@@ -819,9 +819,11 @@ async def suggest(ctx,*,query):
     await ctx.send(f"You Are Blacklisted And Revoked From Using The Suggest Command")
   else:
     suggestion = query
-    channel = client.get_channel(800660800276398121)
+    channel = client.get_channel(810206511136636968)
     embed = discord.Embed(title = f"{ctx.author.name}",colour = 0x00F9FF)
     embed.add_field(name = "Suggestion",value = suggestion,inline = False)
+    embed.add_field(name="Author ID",value = ctx.author.id,inline = False)
+    embed.add_field(name = "Guild Name",value = ctx.guild.name,inline = False)
     op = await channel.send(embed=embed)
     await op.add_reaction("⬆")
     await op.add_reaction("🟡")
@@ -1719,7 +1721,7 @@ async def status(ctx,*,status):
     if answers[0].lower() == "watching":
       await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status))  
     elif answers[0].lower() =="listening":
-      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status))
+      await cliedisnt.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status))
     elif answers[0].lower() == "playing":
       await client.change_presence(activity=discord.Game(name=status))
     elif answers[0].lower() == "streaming":
