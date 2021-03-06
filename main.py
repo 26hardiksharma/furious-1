@@ -1807,4 +1807,8 @@ async def pokedex(ctx,pokemon):
   results = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon.lower()}").json()
   ability = results['abilities'][1]["ability"]['name']
   await ctx.send(f"{pokemon.capitalize()}'s Ability:- {ability}")
+@client.command()
+async def dog(ctx):
+  result = requests.get('https://dog.ceo/api/breeds/image/random').json()
+  await ctx.send(result[0]['message'])
 client.run(TOKEN)
