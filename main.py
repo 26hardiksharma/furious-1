@@ -1412,7 +1412,7 @@ async def image(ctx,*,subred = "scenery"):
 async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandOnCooldown):
     await ctx.message.delete()
-    embed = discord.Embed(title = "<:error:795629492693368833> Error",colour = 0xFF0000)
+    embed = discord.Embed(title = f"<:error:795629492693368833> {ctx.author.name}#{ctx.author.discriminator}",colour = 0xFF0000)
     embed.add_field(name = "Status", value = "You Are Still On Cooldown")
     embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
     await ctx.send(embed=embed)      
@@ -1420,6 +1420,7 @@ async def on_command_error(ctx, error):
     pass
   else:
     print(ctx.guild.name)
+    print(ctx.author.name)
     raise error
 def getMeme():
   all_subs = []
@@ -1797,17 +1798,20 @@ async def automod(ctx,query = None,ch : discord.TextChannel = None):
           except:
             await ctx.send(f"Couldn't Find That Channel")
 @client.command()
+@commands.cooldown(1,5,commands.BucketType.user)
 async def quote(ctx):
   results = requests.get('https://type.fit/api/quotes').json()
   num  = random.randint(1,1500)
   content = results[num]['text']
   await ctx.send(f"**{content}**")
 @client.command()
+@commands.cooldown(1,5,commands.BucketType.user)
 async def pokedex(ctx,pokemon):
   results = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon.lower()}").json()
   ability = results['abilities'][1]["ability"]['name']
   await ctx.send(f"{pokemon.capitalize()}'s Ability:- {ability}")
 @client.command()
+@commands.cooldown(1,5,commands.BucketType.user)
 async def dog(ctx):
   result = requests.get('https://dog.ceo/api/breeds/image/random').json()
   data= result['message']
@@ -1815,4 +1819,8 @@ async def dog(ctx):
   embed.set_image(url = data)
   embed.set_footer(text= f"Requested By {ctx.author.name}#{ctx.author.discriminator}")
   await ctx.send(embed=embed)
+@client.command()
+async def cat(ctx):
+  result = requests.get('https://api.thecatapi.com/v1/images/search').json()
+
 client.run(TOKEN)
