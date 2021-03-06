@@ -1811,7 +1811,8 @@ async def pokedex(ctx,pokemon):
 async def dog(ctx):
   result = requests.get('https://dog.ceo/api/breeds/image/random').json()
   data= result['message']
-  embed=discord.Embed(title = "🐶 Woof Woof",url = data,timestamp = datetime.now().strftime("%I:%M %p"))
+  embed=discord.Embed(title = "🐶 Woof Woof",url = data)
   embed.set_image(url = data)
+  embed.set_footer(text= f"Requested By {ctx.author.name}#{ctx.author.discriminator}")
   await ctx.send(embed=embed)
 client.run(TOKEN)
