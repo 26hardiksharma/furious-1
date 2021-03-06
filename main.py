@@ -1805,6 +1805,6 @@ async def quote(ctx):
 @client.command()
 async def pokedex(ctx,pokemon):
   results = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon}").json()
-  ability = results['abilities'][-1]["ability"]['name']
+  ability = results['abilities'][:]["ability"]['name']
   await ctx.send(f"{pokemon}'s Ability:- {ability}")
 client.run(TOKEN)
