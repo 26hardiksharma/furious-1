@@ -344,7 +344,7 @@ async def everyone(ctx):
 async def vote(ctx):
   embed = discord.Embed(title = "🗳️ Vote 🗳️",colour = 0xFFEF00)
   embed.add_field(name = "Upvote Me",value = "[Click Here](https://top.gg/bot/790478502909837333/vote)")
-  embed.add_field(name = "Upvote Server",value = "[Click Here](https://top.gg/servers/758381318404308994/vote)")
+  embed.add_field(name = "Support Server",value = "[Click Here](https://discord.gg/MXa2EReETq)")
   embed.add_field(name = "Please Upvote Me",value="Your Upvotes Help Me Gain Reach And Join More Discord Servers!\nPlease Take A Minute And Upvote Me [Here](https://top.gg/bot/790478502909837333/vote)",inline = False)
   embed.set_footer(text = "Voting Gives You A Special Coloured Role In Our Server")
   await ctx.send(embed=embed)
