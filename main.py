@@ -831,7 +831,7 @@ async def suggest(ctx,*,query):
     await ctx.send(f"Thank You For Providing A Suggestion! Your Efforts Are Appreciated")
 @client.command(aliases= ['approve'])
 async def consider(ctx,id:int,*,reason):
-  if ctx.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
+  if ctx.guild.name == 810190584059789323:
     if ctx.author.guild_permissions.administrator:   
       channel = client.get_channel(800660800276398121)
       msg = await channel.fetch_message(id)
@@ -842,7 +842,7 @@ async def consider(ctx,id:int,*,reason):
       await ctx.send(embed=embed)
 @client.command()
 async def decline(ctx,id:int,*,reason):
-  if ctx.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
+  if ctx.guild.name == 810190584059789323:
     if ctx.author.guild_permissions.administrator:        
       channel = client.get_channel(800660800276398121)
       msg = await channel.fetch_message(id)
