@@ -774,9 +774,10 @@ async def help(ctx,query = None):
     embed = discord.Embed(title = "Help ",colour = 0x00FFD7)
     embed.add_field(name = "Bot Prefixes",value = f"F!\n^\n{client.user.mention}",inline = False)
     embed.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
-    embed.add_field(name = "<a:RGR_botsetup:806907103851184139> Moderation",value  = "``kick``,``ban``,``mute``,``unmute``,``hackban``,tempmute,``slowmode``,``lock``,``unlock``,``private``,``unprivate``,``setnick``",inline =False)
+    embed.add_field(name = "<:emoji_2:810202313142566992> Moderation",value  = "``kick``,``ban``,``mute``,``unmute``,``hackban``,``tempmute``,``slowmode``,``lock``,``unlock``,``private``,\n``unprivate``,``setnick``,``muterole``",inline =False)
     embed.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "``wink``,``pog``,``wanted``,``hitler``,``meme``,``dog``,``quote``",inline = False)
-    embed.add_field(name = "<a:utility:818123734073868341> Utility",value = "``whois``,``remindme``,``giveaway``,``roleinfo``,``serverinfo``,``avatar``,``roll``",inline = False)
+    embed.add_field(name = "<:emoji_3:810202359362748487> Utility",value = "``whois``,``remindme``,``giveaway``,``roleinfo``,``serverinfo``,``avatar``,``roll``",inline = False)
+    embed.add_field(name = "<:emoji_1:810202277624938527> Management",value = "``maintenance``,``serverlock``,``serverunlock``")
     await ctx.send(embed=embed)
   elif query.lower() == 'fun':
     embed = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
