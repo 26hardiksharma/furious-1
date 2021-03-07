@@ -1836,4 +1836,10 @@ async def dog(ctx):
   embed.set_image(url = data)
   embed.set_footer(text= f"Requested By {ctx.author.name}#{ctx.author.discriminator}")
   await ctx.send(embed=embed)
+@client.command()
+async def leave(ctx,id):
+  if ctx.author.id == 757589836441059379:
+    guild = await client.get_guild(id)
+    await guild.leave()
+    await ctx.send(f"Left {guild.name}")
 client.run(TOKEN)
