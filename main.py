@@ -827,7 +827,7 @@ async def suggest(ctx,*,query):
 async def consider(ctx,id:int,*,reason):
   if ctx.guild.name == 810190584059789323:
     if ctx.author.guild_permissions.administrator:   
-      channel = client.get_channel(800660800276398121)
+      channel = client.get_channel(810206511136636968)
       msg = await channel.fetch_message(id)
       embed = discord.Embed(title= f"Suggestion",colour = 0x3FFF00)
       embed.add_field(name = "Jump To Message",value = f"[Click Here]({msg.jump_url})",inline = False)
@@ -836,9 +836,9 @@ async def consider(ctx,id:int,*,reason):
       await ctx.send(embed=embed)
 @client.command()
 async def decline(ctx,id:int,*,reason):
-  if ctx.guild.name == 810190584059789323:
+  if ctx.guild.id == 810190584059789323:
     if ctx.author.guild_permissions.administrator:        
-      channel = client.get_channel(800660800276398121)
+      channel = client.get_channel(810206511136636968)
       msg = await channel.fetch_message(id)
       embed = discord.Embed(title= f"Suggestion",colour = 0xFF0000)
       embed.add_field(name = "Jump To Message",value = f"[Click Here]({msg.jump_url})",inline = False)
@@ -1819,8 +1819,4 @@ async def dog(ctx):
   embed.set_image(url = data)
   embed.set_footer(text= f"Requested By {ctx.author.name}#{ctx.author.discriminator}")
   await ctx.send(embed=embed)
-@client.command()
-async def cat(ctx):
-  result = requests.get('https://api.thecatapi.com/v1/images/search').json()
-
 client.run(TOKEN)
