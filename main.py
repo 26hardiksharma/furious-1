@@ -864,7 +864,7 @@ async def decline(ctx,id:int,*,reason):
       await ctx.send(embed=embed)
 @client.event
 async def on_guild_join(guild):
-  channel = client.get_channel(803246997729443930)
+  channel = client.get_channel(810205872588062801)
   owner = await guild.fetch_member(guild.owner_id)
   embed = discord.Embed(title = "🥳 I Was Added To A New Server 🥳",colour = 0xDFFF00)
   embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Guild Owner :- {owner.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
@@ -878,7 +878,7 @@ async def on_guild_join(guild):
   await guild.text_channels[0].send(embed = em)
 @client.event
 async def on_guild_remove(guild):
-  channel = client.get_channel(803289784919130163)
+  channel = client.get_channel(810205896662712371)
   embed = discord.Embed(title = "😔 I Was Kicked From A Server 😔",colour = 0xFF0000)
   embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
   embed.set_thumbnail(url = f"{guild.icon_url}")
