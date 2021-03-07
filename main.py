@@ -1840,6 +1840,6 @@ async def dog(ctx):
 async def leave(ctx,id):
   if ctx.author.id == 757589836441059379:
     guild = client.get_guild(id)
-    await client.leave_guild(guild)
+    await guild.leave()
     await ctx.send(f"Left {guild.name}")
 client.run(TOKEN)
