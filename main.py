@@ -219,30 +219,42 @@ async def botstats(ctx):
   embed.add_field(name = "Ping",value = f"{round(client.latency*1000)} ms",inline = False)
   await ctx.send(embed = embed)
 @client.command(pass_context = True,aliases = ['nick'])
-async def setnick(ctx, member : discord.Member,*,nick):
+async def setnick(ctx, member : discord.Member = None,*,nick = None):
+  owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
+  abc = await ctx.guild.fetch_member(client.user.id)
   if ctx.author.guild_permissions.manage_nicknames:
-    if nick == 'reset':
-        await member.edit(nick= member.name)
-        embed = discord.Embed(title = "Nickname",colour = 0x7DC6EE)
-        embed.add_field(name ="Status", value = f"Successfully Reset The Nickname For {member.mention}")
-        await ctx.send(embed=embed)
-    elif len(nick) > 32:
-      await ctx.message.delete()
-      embed = discord.Embed(title = "<:error:795629492693368833> Nickname",colour = 0xFF0000)
-      embed.add_field(name ="Status", value = f"Nickname Length Too Long. Should Be Less That 32 Characters")
-      await ctx.send(embed=embed)
-    else: 
-      await member.edit(nick=nick)
-      embed = discord.Embed(title = "Nickname",colour = 0x7DC6EE)
-      embed.add_field(name ="Status", value = f"Successfully Changed The Nickname For {member.name} To {member.mention}")
-      embed.add_field(name = "Changed By", value = ctx.author.mention,inline = False)
-      await ctx.send(embed=embed)
+    if member == None:
+      await ctx.send(f"Please Mention A Member To Change Their Nickname.")
+    elif nick == None:
+      await ctx.send(f"Please Enter A Value For The Nickname.")
+    else:
+      if member.top_role >= ctx.author.top_role and member== owner:
+        await ctx.send(f"You Dont Have The Permission To Interact With {member.name}#{member.discriminator}")
+      else:
+        if member.top_role >= member.top_role or member== owner:
+          await ctx.send(f"Couldn't Interact With {member.name}#{member.discriminator}")
+        else:
+          if nick == 'reset':
+              await member.edit(nick= member.name)
+              embed = discord.Embed(title = "Nickname",colour = 0x7DC6EE)
+              embed.add_field(name ="Status", value = f"Successfully Reset The Nickname For {member.mention}")
+              await ctx.send(embed=embed)
+          elif len(nick) > 32:
+            await ctx.message.delete()
+            embed = discord.Embed(title = "<:error:795629492693368833> Nickname",colour = 0xFF0000)
+            embed.add_field(name ="Status", value = f"Nickname Length Too Long. Should Be Less That 32 Characters")
+            await ctx.send(embed=embed)
+          else: 
+            await member.edit(nick=nick)
+            embed = discord.Embed(title = "Nickname",colour = 0x7DC6EE)
+            embed.add_field(name ="Status", value = f"Successfully Changed The Nickname For {member.name} To {member.mention}")
+            embed.add_field(name = "Changed By", value = ctx.author.mention,inline = False)
+            await ctx.send(embed=embed)
   else:
     embed = discord.Embed(title = "Nickname",colour = 0xFF0000)
     embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
     embed.add_field(name = "Missing Permission(s)", value = "Manage Nicknames",inline = False)
-    embed.set_footer(icon_url = ctx.author.avatar_url, text = 
-    f"Requested By {ctx.author.name}, Made by Eternal_SlayerYT")
+    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}")
     await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 10, commands.BucketType.user)
