@@ -138,7 +138,7 @@ async def whois(ctx, member : discord.Member = None):
 
 @client.command(aliases = ['av'])
 async def avatar(ctx, member : discord.Member=None):
-  if ctx.author.guild_permissions.manage_roles:
+  if ctx.author.guild_permissions.manage_messages:
     member = member or ctx.author
     embed = discord.Embed(title = f" {member.name}'s Avatar")
     embed.set_image(url = member.avatar_url)
@@ -146,7 +146,7 @@ async def avatar(ctx, member : discord.Member=None):
   else:
     embed = discord.Embed(title = " Avatar")
     embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
-    embed.add_field(name = "Missing Permission(s)", value = "Manage Roles",inline = False)
+    embed.add_field(name = "Missing Permission(s)", value = "Manage Messages",inline = False)
     embed.set_footer(icon_url = ctx.author.avatar_url, text = 
   f"Requested By {ctx.author.name}, Made by Eternal_Slayer#0069")
     await ctx.send(embed=embed)
