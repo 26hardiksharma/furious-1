@@ -772,9 +772,11 @@ async def help(ctx,query = None):
     query = 0
   if query == 0:    
     embed = discord.Embed(title = "Help ",colour = 0x00FFD7)
-    embed.add_field(name="Guide",value = f"Welcome To My Help Page, User\nTo Get Started, Please Use One Of The Modules Listed Below\nUsage :- ^help <module>\nExample :- ^help fun\nIf You Are New To The Bot Or Need More Help, Please Join Our [Support Server](https://discord.gg/MXa2EReETq)",inline= False)
-    embed.add_field(name = "Prefix", value = "1) ^\n2) <@!790478502909837333>\n3) f!",inline = False)
-    embed.add_field(name = "Modules",value = "<:emoji_1:810202277624938527> Moderation\n<:emoji_2:810202313142566992> Fun\n<:emoji_0:810202224947888249> Utility\n<:emoji_4:810202418750029884> Management")
+    embed.add_field(name = "Bot Prefixes",value = f"F!\n^\n{client.user.mention}",inline = False)
+    embed.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
+    embed.add_field(name = "<a:RGR_botsetup:806907103851184139> Moderation",value  = "``kick``,``ban``,``mute``,``unmute``,``hackban``,tempmute,``slowmode``,``lock``,``unlock``,``private``,``unprivate``,``setnick``",inline =False)
+    embed.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "``wink``,``pog``,``wanted``,``hitler``,``meme``,``dog``,``quote``",inline = False)
+    embed.add_field(name = "<a:utility:818123734073868341> Utility",value = "``whois``,``remindme``,``giveaway``,``roleinfo``,``serverinfo``,``avatar``,``roll``",inline = False)
     await ctx.send(embed=embed)
   elif query.lower() == 'fun':
     embed = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
