@@ -1849,6 +1849,6 @@ async def space(ctx):
   data = result['hdurl']
   await ctx.send(data)
 @client.command()
-async def commands(ctx):
+async def commands_list(ctx):
   await ctx.send(f"{client.commands}")
 client.run(TOKEN)
