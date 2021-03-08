@@ -582,7 +582,6 @@ async def giveaway(ctx):
           await channel.send(f"Not Enough Reacts! Couldn't Choose Any Winner 😔")
         else:
           winlist = "• "
-
           for i in range(winners):
             winner = random.choice(users)
             winlist += f"{winner.mention} • "
@@ -610,54 +609,6 @@ async def revive(ctx):
     msg = await ctx.send(f"**Alert!** DEAD CHAT || @everyone ||")
     await msg.edit(content =f"**DEAD CHAT, PLEASE BE ACTIVE**")
 @client.command(aliases = ['info'])
-async def i(ctx):
-  embed = discord.Embed(title = "Level 100 Xerneas",colour = 0x9FE2B8)
-  embed.add_field(name= "Details",value = "**XP:** 2750/2750 \n **Nature:** Hasty",inline = False)
-  embed.add_field(name = "Stats",value = "**HP:** 374 - IV: 7/31 \n **Attack:** 285 – IV: 13/31 \n **Defense:** 198 – IV: 21/31 \n **Sp. Atk:** 302 – IV: 30/31 \n **Sp. Def:** 214 – IV: 8/31 \n **Speed:** 261 – IV: 30/31 \n **Total IV:** 98.76%")
-  embed.set_image(url = "https://assets.poketwo.net/images/716.png?v=26")
-  embed.set_thumbnail(url = f"{ctx.author.avatar_url}")
-  await ctx.send(embed=embed)
-@client.command()
-async def balance(ctx):
-  a = await open_account(ctx.author)
-  user = ctx.author
-  users = await get_bank_data()
-  wallet_amt = users[str(user.id)]["wallet"]
-  bank_amt = users[str(user.id)]["bank"]
-  embed = discord.Embed(title = f"{ctx.author.name}'s Balance",colour = 0xFF0000)
-  embed.add_field(name = "Cash",value = wallet_amt)
-  embed.add_field(name = "Bank",value = bank_amt)
-  await ctx.send(embed=embed)
-async def get_bank_data():
-  with open("mainbank.json", "r") as f:    
-    users = json.load(f)
-    return users
-async def open_account(user):
-  
-  users = await get_bank_data()
-
-  if str(user.id) in users:
-    
-    return False
-  else:
-    
-    users[str(user.id)] = {}
-    users[str(user.id)]["wallet"] = 0
-    users[str(user.id)]["bank"] = 0
-  with open("mainbank.json", "w") as f:
-    json.dump(users, f)
-    return True
-
-@client.command()
-async def beg(ctx):
-  await open_account(ctx.author)
-  
-  users = await get_bank_data()
-  earnings = random.randrange(101)
-  await ctx.send(f"A Wild Pokemon Appeared And Give You {earnings} Coins Out Of Pity!")
-  users[str(user.id)]["wallet"] = users[str(user.id)]["wallet"] + earnings
-  with open("mainbank.json","r") as f:    
-    users = json.load(f)
 @client.command()
 async def wink(ctx):
   embed=discord.Embed(title = f"{ctx.author.name} Is Winking 😉")
@@ -1854,4 +1805,5 @@ async def commands_list(ctx):
   for cmd in client.commands:
     cmd_list += f"{cmd} , "
   await ctx.send(cmd_list)
+
 client.run(TOKEN)
