@@ -1783,7 +1783,7 @@ async def pokedex(ctx,pokemon):
   embed.add_field(name = "Ability",value = ability.capitalize())
   embed.add_field(name= "Height",value = f"{height} m ",inline = False)
   embed.add_field(name= "Weight",value = f"{weight} kg ",inline = False)
-  await ctx.send(f"{pokemon.capitalize()}'s Ability:- {ability}")
+  await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
 async def dog(ctx):
