@@ -1842,4 +1842,9 @@ async def leave(ctx,id):
     guild = client.get_guild(id)
     await guild.leave()
     await ctx.send(f"Left {guild.name}")
+@client.command()
+async def space(ctx):
+  result = requests.get('https://api.nasa.gov/planetary/apod?api_key=stbNlgY7AkCiVZ2l4amvS2Lr8iTnScQC9bO4ZfI3').json()
+  data = result['hdurl']
+  await ctx.send(data)
 client.run(TOKEN)
