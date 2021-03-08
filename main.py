@@ -1,6 +1,6 @@
 import discord
 import os
-from discord.ext import commands
+from discord.ext import commands , SlashCommand , SlashCommandOptionType , SlashContext
 import json
 import asyncio
 import random
@@ -19,6 +19,7 @@ dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQv
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix =["^","<@!790478502909837333> ","F!","f!"],help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot =client,token =dbl_token,webhook_path=dbl_webhook)
+slash = SlashCommand(client,auto_register = True)
 @client.event
 async def on_ready():
   await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"New Prefixes •  f!help"))
@@ -1850,4 +1851,7 @@ async def space(ctx):
 @client.command()
 async def commands(ctx):
   await ctx.send(f"{len(client.commands)}")
+@slash.slash(guild_ids = [758381318404308994])
+async def hello(ctx : SlashContext):
+  await ctx.send(f"Hello")
 client.run(TOKEN)

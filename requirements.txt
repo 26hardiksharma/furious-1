@@ -5,3 +5,4 @@ pillow
 dblpy
 praw
 requests
+discord-py-slash-command
