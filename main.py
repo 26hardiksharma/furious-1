@@ -1847,4 +1847,7 @@ async def space(ctx):
   result = requests.get('https://api.nasa.gov/planetary/apod?api_key=stbNlgY7AkCiVZ2l4amvS2Lr8iTnScQC9bO4ZfI3').json()
   data = result['hdurl']
   await ctx.send(data)
+@client.command()
+async def commands(ctx):
+  await ctx.send(f"{len(client.commands)}")
 client.run(TOKEN)
