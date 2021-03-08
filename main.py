@@ -1850,5 +1850,8 @@ async def space(ctx):
   await ctx.send(data)
 @client.command()
 async def commands_list(ctx):
-  await ctx.send(f"{client.commands}")
+  cmd_list = ""
+  for cmd in client.commands:
+    cmd_list += f"{cmd} , "
+  await ctx.send(cmd_list)
 client.run(TOKEN)
