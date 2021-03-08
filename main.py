@@ -1779,8 +1779,8 @@ async def pokedex(ctx,pokemon):
   embed= discord.Embed(title = pokemon.capitalize())
   ability = results['abilities'][1]["ability"]['name']
   height = results['height']
-  ability = results['weight']
-  embed.add_field(name = "Ability",value = ability)
+  weight = results['weight']
+  embed.add_field(name = "Ability",value = ability.capitalize())
   embed.add_field(name= "Height",value = f"{height} m ",inline = False)
   embed.add_field(name= "Weight",value = f"{weight} kg ",inline = False)
   await ctx.send(f"{pokemon.capitalize()}'s Ability:- {ability}")
