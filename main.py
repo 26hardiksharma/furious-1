@@ -1781,8 +1781,8 @@ async def pokedex(ctx,pokemon):
   height = results['height']
   weight = results['weight']
   embed.add_field(name = "Ability",value = ability.capitalize())
-  embed.add_field(name= "Height",value = f"{height} m ",inline = False)
-  embed.add_field(name= "Weight",value = f"{weight} kg ",inline = False)
+  embed.add_field(name= "Height",value = f"{height / 10} m ",inline = False)
+  embed.add_field(name= "Weight",value = f"{weight / 10} kg ",inline = False)
   await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
