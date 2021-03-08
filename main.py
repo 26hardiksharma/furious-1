@@ -1,6 +1,9 @@
 import discord
 import os
-from discord.ext import commands , SlashCommand , SlashCommandOptionType , SlashContext
+from discord.ext import commands
+from discord.ext import SlashCommand
+from discord.ext import SlashCommandOptionType
+from discord.ext import SlashContext
 import json
 import asyncio
 import random
