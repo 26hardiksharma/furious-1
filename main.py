@@ -609,7 +609,7 @@ async def revive(ctx):
     msg = await ctx.send(f"**Alert!** DEAD CHAT || @everyone ||")
     await msg.edit(content =f"**DEAD CHAT, PLEASE BE ACTIVE**")
 @client.command(aliases = ['info'])
-@client.command()
+
 async def wink(ctx):
   embed=discord.Embed(title = f"{ctx.author.name} Is Winking 😉")
   embed.set_image(url = "https://cdn.discordapp.com/attachments/737780593609408532/737815454046879854/5OHh.gif")
