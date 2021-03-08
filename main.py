@@ -608,8 +608,7 @@ async def revive(ctx):
     await ctx.message.delete()
     msg = await ctx.send(f"**Alert!** DEAD CHAT || @everyone ||")
     await msg.edit(content =f"**DEAD CHAT, PLEASE BE ACTIVE**")
-@client.command(aliases = ['info'])
-
+@client.command()
 async def wink(ctx):
   embed=discord.Embed(title = f"{ctx.author.name} Is Winking 😉")
   embed.set_image(url = "https://cdn.discordapp.com/attachments/737780593609408532/737815454046879854/5OHh.gif")
@@ -1777,7 +1776,13 @@ async def quote(ctx):
 @commands.cooldown(1,5,commands.BucketType.user)
 async def pokedex(ctx,pokemon):
   results = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon.lower()}").json()
+  embed= discord.Embed(title = pokemon.capitalize())
   ability = results['abilities'][1]["ability"]['name']
+  height = results['height']
+  ability = results['weight']
+  embed.add_field(name = "Ability",value = ability.capitalize())
+  embed.add_field(name= "Height",value = f"{height} m ",inline = False)
+  embed.add_field(name= "Weight",value = f"{weight} kg ",inline = False)
   await ctx.send(f"{pokemon.capitalize()}'s Ability:- {ability}")
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
@@ -1805,5 +1810,4 @@ async def commands_list(ctx):
   for cmd in client.commands:
     cmd_list += f"{cmd} , "
   await ctx.send(cmd_list)
-
 client.run(TOKEN)
