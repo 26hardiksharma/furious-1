@@ -1850,5 +1850,5 @@ async def space(ctx):
   await ctx.send(data)
 @client.command()
 async def commands(ctx):
-  await ctx.send(f"{len(client.commands)}")
+  await ctx.send(f"{client.commands}")
 client.run(TOKEN)
