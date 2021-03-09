@@ -232,7 +232,7 @@ async def setnick(ctx, member : discord.Member = None,*,nick = None):
       if member.top_role >= ctx.author.top_role and member== owner:
         await ctx.send(f"You Dont Have The Permission To Interact With {member.name}#{member.discriminator}")
       else:
-        if member.top_role >= member.top_role or member== owner:
+        if member.top_role >= abc.top_role or member== owner:
           await ctx.send(f"Couldn't Interact With {member.name}#{member.discriminator}")
         else:
           if nick == 'reset':
