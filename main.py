@@ -816,6 +816,7 @@ async def decline(ctx,id:int,*,reason):
 @client.event
 async def on_guild_join(guild):
   channel = client.get_channel(810205872588062801)
+  myguild = client.get_guild(810190584059789323)
   owner = await guild.fetch_member(guild.owner_id)
   embed = discord.Embed(title = "🥳 I Was Added To A New Server 🥳",colour = 0xDFFF00)
   embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Guild Owner :- {owner.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
@@ -823,10 +824,13 @@ async def on_guild_join(guild):
   abc = await channel.send(embed=embed)
   await abc.add_reaction("🥳")
   await abc.add_reaction("🙏")
+  ch = guild.fetch_channel(819203341530955787)
+  await ch.edit(name = f"total-bot-guilds : {len(client.guilds)}")
   em = discord.Embed(title = guild.name,description = "Thanks For Adding Me To This Server! I Surely Will Help You With Your Discord Experience And In Managing This Server :)",colour = 0xDAF7A6)
   em.add_field(name = "Some Useful Information",value = "<:emoji_0:810202224947888249> I Am Furious, A Bot Designed To Moderate Servers While Providing Utility And Other Services To Other Server Members\n<:emoji_2:810202313142566992> Command Prefixes :- ^ , <@790478502909837333>\n<:emoji_3:810202359362748487> A Lot Of Useful Commands Which Come In Handy While Using Discord\n<:emoji_5:810202499914268703> Fun Commands\n<:emoji_1:810202277624938527> Much More Discoverable With ``^help``")
   em.add_field(name = "Some Useful Links",value = f"[INVITE ME](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [SUPPORT SERVER](https://discord.gg/gMHkNEYW4H)",inline = False)
   await guild.text_channels[0].send(embed = em)
+
 @client.event
 async def on_guild_remove(guild):
   channel = client.get_channel(810205896662712371)
