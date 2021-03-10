@@ -824,7 +824,7 @@ async def on_guild_join(guild):
   abc = await channel.send(embed=embed)
   await abc.add_reaction("🥳")
   await abc.add_reaction("🙏")
-  ch = guild.get_channel(819203341405519925)
+  ch = myguild.get_channel(819203341405519925)
   await ch.edit(name = f"total-bot-guilds : {len(client.guilds)}")
   em = discord.Embed(title = guild.name,description = "Thanks For Adding Me To This Server! I Surely Will Help You With Your Discord Experience And In Managing This Server :)",colour = 0xDAF7A6)
   em.add_field(name = "Some Useful Information",value = "<:emoji_0:810202224947888249> I Am Furious, A Bot Designed To Moderate Servers While Providing Utility And Other Services To Other Server Members\n<:emoji_2:810202313142566992> Command Prefixes :- ^ , <@790478502909837333>\n<:emoji_3:810202359362748487> A Lot Of Useful Commands Which Come In Handy While Using Discord\n<:emoji_5:810202499914268703> Fun Commands\n<:emoji_1:810202277624938527> Much More Discoverable With ``^help``")
