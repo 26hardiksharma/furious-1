@@ -1816,4 +1816,7 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
     if flag.lower() == "topic":
       await channel.edit(topic = query,reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
       await ctx.send("Success!")
+    elif flag.lower() == "name":
+      await channel.edit(name = query,reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
+      await ctx.send("Success!")
 client.run(TOKEN)
