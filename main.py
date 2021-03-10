@@ -1810,4 +1810,9 @@ async def commands_list(ctx):
   for cmd in client.commands:
     cmd_list += f"{cmd} , "
   await ctx.send(cmd_list)
+@client.command()
+async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
+  if ctx.author.guild_permissions.manage_channels:
+    if flag.lower() == "topic":
+      await channel.edit(topic = query,reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
 client.run(TOKEN)
