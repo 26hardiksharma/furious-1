@@ -441,9 +441,6 @@ async def wiki(ctx,*,query = None):
     except wikipedia.DisambiguationError as e:
       await msg.edit(content = f"<:error:795629492693368833> Results Could Not Be Loaded Because Your Query :- ``{query}`` Is Matching Several Pages! Please Mention Your Query More Specifically!")
 @client.command()
-async def joke(ctx):
-  await ctx.send("Your Life")
-@client.command()
 async def serverinfo(ctx):
   ccount = 0
   for channel in ctx.guild.text_channels:
