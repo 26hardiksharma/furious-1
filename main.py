@@ -1,7 +1,7 @@
 import discord
 import os
 from discord.ext import commands
-
+from discord import Webhook, AsyncWebhookAdapter
 import json
 import asyncio
 import random
@@ -15,6 +15,7 @@ import time
 import dbl
 import requests
 import pyjokes
+import aiohttp
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
@@ -1418,7 +1419,13 @@ async def meme(ctx):
 
 @client.event
 async def on_dbl_vote(data):
-  print(data)
+  async with aiohttp.ClientSession() as session:
+    webhook = Webhook.from_url('https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt', adapter=AsyncWebhookAdapter(session))
+    embed = discord.Embed(title = "Top.gg Vote",colour = 0xFF8700)
+    embed.set_author(name = data['user'])
+    embed.add_field(name = "Recieved An Upvote",value = f"{data['user']} Has Just Voted For Me On [top.gg](https://top.gg/bot/790478502909837333/vote)")
+    embed.set_footer(text = "Thanks For Voting Me ;)")
+    await webhook.send(content = data['user'].mention,embed=embed)
 @client.command()
 async def create(ctx,type,*,query):
   abc = await ctx.guild.fetch_member(client.user.id)
