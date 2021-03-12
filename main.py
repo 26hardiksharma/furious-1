@@ -1425,7 +1425,7 @@ async def on_dbl_vote(data):
     embed.set_author(name = data['user'])
     embed.add_field(name = "Recieved An Upvote",value = f"{data['user']} Has Just Voted For Me On [top.gg](https://top.gg/bot/790478502909837333/vote)")
     embed.set_footer(text = "Thanks For Voting Me ;)")
-    await webhook.send(content = data['user'].mention,embed=embed)
+    await webhook.send(content = data['user'].mention,embed=embed,username = "Furious Vote Logs")
 @client.command()
 async def create(ctx,type,*,query):
   abc = await ctx.guild.fetch_member(client.user.id)
