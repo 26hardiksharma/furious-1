@@ -1025,19 +1025,19 @@ async def create_category(ctx, *, name):
   else:
     await ctx.send(f"You Are Missing The **MANAGE SERVER** Permissions Required To Execute This Command!")
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 5, commands.BucketType.guild)
 async def serverlock(ctx):
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     for channel in ctx.guild.text_channels:
       overwrite = channel.overwrites_for(ctx.guild.default_role)
       overwrite.send_messages = False    
       await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
-      await asyncio.sleep(1)
+      await asyncio.sleep(0.2)
     await ctx.send(f"Successfully Locked All Channels For {ctx.guild.name}")
   else:
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
-@commands.cooldown(1, 60, commands.BucketType.user)
+@commands.cooldown(1, 60, commands.BucketType.guild)
 async def serverunlock(ctx):
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     for channel in ctx.guild.text_channels:
@@ -1045,9 +1045,8 @@ async def serverunlock(ctx):
         overwrite = channel.overwrites_for(ctx.guild.default_role)
         overwrite.send_messages = None    
         await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
-        await asyncio.sleep(1)
-    await ctx.send(f"Successfully Unlocked All Channels Of {ctx.guild.name}|| All Annoucement Channels Are Excluded")
-      
+        await asyncio.sleep(0.2)
+    await ctx.send(f"Successfully Unlocked All Channels Of {ctx.guild.name}\nNote:- All Annoucement Channels Are Excluded And Are Still Lockrf")
   else:
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
@@ -1071,19 +1070,18 @@ async def maintenance(ctx,query = None):
             overwrite = channel.overwrites_for(ctx.guild.default_role)
             overwrite.view_channel = False    
             await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
           await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels")
           for abcdefgh in ctx.guild.voice_channels:
             abcdef = abcdefgh.overwrites_for(ctx.guild.default_role)
             abcdef.view_channel = False    
             await abcdefgh.set_permissions(ctx.guild.default_role, overwrite=abcdef)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
           await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Creating Maintenance Channels")
           abcd = await ctx.guild.create_text_channel(name = f"maintenance-chat")
           efgh = await ctx.guild.create_text_channel(name = f"maintenance-botzone")
           ijkl = await ctx.guild.create_voice_channel(name = f" Maintenance VC")
           await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Creating Maintenance Channels \n <a:tg_02:786959609247432784> Created Channels \n <a:tg_02:786959609247432784> Creating Maintenance Role")
-          muterole = await ctx.guild.create_role(name = "Maintenance",permissions = discord.Permissions(permissions = 0))
           lavda = abcd.overwrites_for(muterole)
           overwrite.view_channel = None  
           await channel.set_permissions(muterole, overwrite=lavda)
@@ -1093,8 +1091,6 @@ async def maintenance(ctx,query = None):
           bhosda = ijkl.overwrites_for(muterole)
           overwrite.view_channel = None  
           await channel.set_permissions(muterole, overwrite=bhosda)
-          for member in ctx.guild.members:
-            await member.add_roles(muterole)
           await ctx.send(f"Successfully Put {ctx.guild.name} On Maintenance")
       elif query == "off":
           msg = await ctx.send(f"<a:tg_02:786959609247432784> Lifting Up Maintenance")
@@ -1102,13 +1098,13 @@ async def maintenance(ctx,query = None):
             overwrite = channel.overwrites_for(ctx.guild.default_role)
             overwrite.view_channel = None
             await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
           await msg.edit(content = f"<a:tg_02:786959609247432784> Lifting Up Maintenance \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels")
           for lol in ctx.guild.voice_channels:
             bhat = lol.overwrites_for(ctx.guild.default_role)
             bhat.view_channel = None
             await lol.set_permissions(ctx.guild.default_role, overwrite=bhat)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
           await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Deleting Maintenance Channels")
           ch = discord.utils.get(ctx.guild.text_channels,name = "maintenance-chat")
           try:
