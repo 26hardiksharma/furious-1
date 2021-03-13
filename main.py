@@ -946,40 +946,64 @@ async def templock(ctx,unit,channel : discord.TextChannel=None):
     await ctx.send("<:kya_bey:796610669549322250>")
 @client.command()
 @commands.cooldown(1, 60, commands.BucketType.guild)
-async def muterole(ctx,query):
-  if ctx.author.guild_permissions.manage_roles:
-    if query == "setup" or "create":
-      mute= discord.utils.get(ctx.guild.roles,name = "Muted")
-      if mute in ctx.guild.roles:
-        
-        await ctx.send("A Muted Role Already Exists In This Guild! What Actions Do You Want me To Perform ?\n1) Set Permissions And Overrides For The Existing Muted Role (Reply With **1** For This)\n2) Delete The Muted Role And Create A New One With Updated Permissions(Reply With **2** For This)")
-        answers = []
-        def check(m):
-          return m.author == ctx.author and m.channel == ctx.channel
-        try:
-          msg = await client.wait_for('message',timeout = 20.0,check = check)
-        except asyncio.TimeoutError:
-          await ctx.send("Time's Up! you Didn't Answer In Time")
-          return
+async def muterole(ctx,query = None):
+  if query == None:
+    embed = discord.Embed(title = "Muterole")
+    embed.add_field(name = "Aliases",value = "None",inline = False)
+    embed.add_field(name = "Required Permission(s)",value = "Manage Roles")
+    embed.add_field(name = "Description",value = "Setups The Muterole In Your Server\n❯ Creates A Muted Role In The Server\n❯ Sets The Send Messages And Add Reactions Permission In Every Text Channel For The Muted Role To False\n❯ Sets The Speak Permission In Every Voice Channel For The Muted Role To False",inline = False)
+    embed.add_field(name = "Cooldown",value = "60 Seconds Per Guild")
+    embed.add_field(name = "Additional Tips",value = "Provide The Bot The **`ADMINISTRATOR`** To Make This Work Flawlessly",inline = False)
+    await ctx.send(embed=embed)
+  else:
+    if ctx.author.guild_permissions.manage_roles:
+      if query == "setup" or "create":
+        mute= discord.utils.get(ctx.guild.roles,name = "Muted")
+        if mute in ctx.guild.roles:
+          
+          await ctx.send("A Muted Role Already Exists In This Guild! What Actions Do You Want me To Perform ?\n1) Set Permissions And Overrides For The Existing Muted Role (Reply With **1** For This)\n2) Delete The Muted Role And Create A New One With Updated Permissions(Reply With **2** For This)")
+          answers = []
+          def check(m):
+            return m.author == ctx.author and m.channel == ctx.channel
+          try:
+            msg = await client.wait_for('message',timeout = 20.0,check = check)
+          except asyncio.TimeoutError:
+            await ctx.send("Time's Up! you Didn't Answer In Time")
+            return
+          else:
+            answers.append(msg.content)
+          if answers[0] == "1":
+            await ctx.send(f"Updating The Muted Role || This May Take Time Depending Upon The Number Of Channels This Server Has!")
+            for channel in ctx.guild.text_channels:
+              perms = channel.overwrites_for(mute)
+              perms.send_messages = False
+              perms.add_reactions = False
+              await channel.set_permissions(mute,overwrite = perms)
+              await asyncio.sleep(0.2)
+            for vc in ctx.guild.voice_channels:
+              vperms = vc.overwrites_for(mute)
+              vperms.speak= False
+              await channel.set_permissions(mute,overwrite=vperms)
+              await asyncio.sleep(0.2)
+            await ctx.send(f"Successfully Setup The Existing Muted Role In Every Channel")
+          elif answers[0] == "2":
+            await ctx.send(f"Setting Up Muterole")
+            await mute.delete()
+            mrole = await ctx.guild.create_role(name = "Muted",permissions = discord.Permissions(permissions = 0))
+            for channel in ctx.guild.text_channels:
+              perms = channel.overwrites_for(mrole)
+              perms.send_messages = False
+              perms.add_reactions = False
+              await channel.set_permissions(mrole,overwrite = perms)
+              await asyncio.sleep(0.2)
+            for vc in ctx.guild.voice_channels:
+              vperms = vc.overwrites_for(mrole)
+              vperms.speak= False
+              await vc.set_permissions(mrole,overwrite=vperms)
+              await asyncio.sleep(0.2)
+            await ctx.send(f"Muterole Setup Successfully Completed")
         else:
-          answers.append(msg.content)
-        if answers[0] == "1":
-          await ctx.send(f"Updating The Muted Role || This May Take Time Depending Upon The Number Of Channels This Server Has!")
-          for channel in ctx.guild.text_channels:
-            perms = channel.overwrites_for(mute)
-            perms.send_messages = False
-            perms.add_reactions = False
-            await channel.set_permissions(mute,overwrite = perms)
-            await asyncio.sleep(0.2)
-          for vc in ctx.guild.voice_channels:
-            vperms = vc.overwrites_for(mute)
-            vperms.speak= False
-            await channel.set_permissions(mute,overwrite=vperms)
-            await asyncio.sleep(0.2)
-          await ctx.send(f"Successfully Setup The Existing Muted Role In Every Channel")
-        elif answers[0] == "2":
-          await ctx.send(f"Setting Up Muterole")
-          await mute.delete()
+          await ctx.send(f"Setting Up Muted Role")
           mrole = await ctx.guild.create_role(name = "Muted",permissions = discord.Permissions(permissions = 0))
           for channel in ctx.guild.text_channels:
             perms = channel.overwrites_for(mrole)
@@ -993,21 +1017,6 @@ async def muterole(ctx,query):
             await vc.set_permissions(mrole,overwrite=vperms)
             await asyncio.sleep(0.2)
           await ctx.send(f"Muterole Setup Successfully Completed")
-      else:
-        await ctx.send(f"Setting Up Muted Role")
-        mrole = await ctx.guild.create_role(name = "Muted",permissions = discord.Permissions(permissions = 0))
-        for channel in ctx.guild.text_channels:
-          perms = channel.overwrites_for(mrole)
-          perms.send_messages = False
-          perms.add_reactions = False
-          await channel.set_permissions(mrole,overwrite = perms)
-          await asyncio.sleep(0.2)
-        for vc in ctx.guild.voice_channels:
-          vperms = vc.overwrites_for(mrole)
-          vperms.speak= False
-          await vc.set_permissions(mrole,overwrite=vperms)
-          await asyncio.sleep(0.2)
-        await ctx.send(f"Muterole Setup Successfully Completed")
 @muterole.error
 async def muterole_error(ctx,error):
   if isinstance(error, commands.CommandOnCooldown):
