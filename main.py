@@ -1508,6 +1508,7 @@ async def coinflip(ctx):
   await ctx.send(embed=embed) 
 @client.command()
 async def roleinfo(ctx,role : discord.Role = None):
+  count = 0
   perms_string = ""
   if role == None:
     await ctx.send(f"Please Mention A Role Or Use It's ID To Get Its Info! ;)")
@@ -1515,6 +1516,7 @@ async def roleinfo(ctx,role : discord.Role = None):
     for perm, true_false in role.permissions:
       if true_false is True:
         perms_string += f"`{str(perm).upper()}`, "
+        count += 1
     embed = discord.Embed(title = role.name,colour = 0xFFC300)
     embed.add_field(name= "ID",value = role.id)
     embed.add_field(name = "Created At",value = role.created_at.strftime("%d/%m/%Y %H:%M:%S UTC"))
@@ -1522,7 +1524,7 @@ async def roleinfo(ctx,role : discord.Role = None):
     embed.add_field(name="Position",value = role.position)
     embed.add_field(name= "Mentionable",value = role.mentionable)
     embed.add_field(name="Colour",value = role.color)
-    if perms_string == None:
+    if count < 1:
       embed.add_field(name = "Permissions",value = "None",inline = False )
     else:
       embed.add_field(name = "Permissions",value = perms_string,inline = False)
