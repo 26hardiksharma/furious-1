@@ -970,12 +970,12 @@ async def muterole(ctx,query):
             perms.send_messages = False
             perms.add_reactions = False
             await channel.set_permissions(mute,overwrite = perms)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
           for vc in ctx.guild.voice_channels:
             vperms = vc.overwrites_for(mute)
             vperms.speak= False
             await channel.set_permissions(mute,overwrite=vperms)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
           await ctx.send(f"Successfully Setup The Existing Muted Role In Every Channel")
         elif answers[0] == "2":
           await ctx.send(f"Setting Up Muterole")
@@ -986,12 +986,12 @@ async def muterole(ctx,query):
             perms.send_messages = False
             perms.add_reactions = False
             await channel.set_permissions(mrole,overwrite = perms)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
           for vc in ctx.guild.voice_channels:
             vperms = vc.overwrites_for(mrole)
             vperms.speak= False
             await vc.set_permissions(mrole,overwrite=vperms)
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.2)
           await ctx.send(f"Muterole Setup Successfully Completed")
       else:
         await ctx.send(f"Setting Up Muted Role")
@@ -1001,12 +1001,12 @@ async def muterole(ctx,query):
           perms.send_messages = False
           perms.add_reactions = False
           await channel.set_permissions(mrole,overwrite = perms)
-          await asyncio.sleep(1)
+          await asyncio.sleep(0.2)
         for vc in ctx.guild.voice_channels:
           vperms = vc.overwrites_for(mrole)
           vperms.speak= False
           await vc.set_permissions(mrole,overwrite=vperms)
-          await asyncio.sleep(1)
+          await asyncio.sleep(0.2)
         await ctx.send(f"Muterole Setup Successfully Completed")
 @client.command(aliases= ["ccreate"])
 async def create_category(ctx, *, name):
