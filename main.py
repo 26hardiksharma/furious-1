@@ -1060,7 +1060,7 @@ async def maintenance(ctx,query = None):
     embed.add_field(name = "Description",value = "❯ Makes All Text Channels Of The Server Private (Taking The View Channel From The @everyone Role In Every Channel)\n❯ Makes All Voice Channels Of The Server Private (Taking The View Channel From The @everyone Role In Every Voice Channel)\n❯ Creates 3 Channels To Keep The Server Activity Going On, Namely\nmaintenance-chat\nmaintenance-botzone\nMaintenance VC",inline = False)
     embed.add_field(name = "Cooldown",value = "60 Seconds Per Guild",inline = False)
     embed.add_field(name = "Usage",value = "❯ Turning On: **`F!maintenance on`**\n❯ Turning Off: **`F!maintenance off`**",inline = False)
-    embed.add_field(name = "Additional Tips",value = "❯ Don't Use This Command Is Your Server Is A Verify-Type Server\n❯ Provide The Bot The **`ADMINISTRATOR`** Permission To Make This Work Flawlessly",inline=False)
+    embed.add_field(name = "Additional Tips",value = "❯ Don't Use This Command Is Your Server Is A Verify-Type Server. Instead, Use **`F!serverlock`**\n❯ Provide The Bot The **`ADMINISTRATOR`** Permission To Make This Work Flawlessly",inline=False)
     await ctx.send(embed=embed)
   else:
     if ctx.author.guild_permissions.administrator:
