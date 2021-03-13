@@ -796,11 +796,14 @@ async def consider(ctx,id:int,*,reason):
     if ctx.author.guild_permissions.administrator:   
       channel = client.get_channel(810206511136636968)
       msg = await channel.fetch_message(id)
+      author = msg.embeds.fields.2.value
       embed = discord.Embed(title= f"Suggestion",colour = 0x3FFF00)
       embed.add_field(name = "Jump To Message",value = f"[Click Here]({msg.jump_url})",inline = False)
       embed.add_field(name= "Suggestion Considered",value = reason,inline = False)
       embed.add_field(name = "Approved By",value = ctx.author,inline = False)
-      await ctx.send(embed=embed)
+      gg = await client.fetch_user(author)
+      await channel.send(embed=embed)
+      await gg.send(f"Your Suggestion Has Been Approved In Furious Official, Congrats")
 @client.command()
 async def decline(ctx,id:int,*,reason):
   if ctx.guild.id == 810190584059789323:
