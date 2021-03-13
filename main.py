@@ -1081,16 +1081,7 @@ async def maintenance(ctx,query = None):
           abcd = await ctx.guild.create_text_channel(name = f"maintenance-chat")
           efgh = await ctx.guild.create_text_channel(name = f"maintenance-botzone")
           ijkl = await ctx.guild.create_voice_channel(name = f" Maintenance VC")
-          await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Creating Maintenance Channels \n <a:tg_02:786959609247432784> Created Channels \n <a:tg_02:786959609247432784> Creating Maintenance Role")
-          lavda = abcd.overwrites_for(muterole)
-          overwrite.view_channel = None  
-          await channel.set_permissions(muterole, overwrite=lavda)
-          chut = efgh.overwrites_for(muterole)
-          overwrite.view_channel = None  
-          await channel.set_permissions(muterole, overwrite=chut)
-          bhosda = ijkl.overwrites_for(muterole)
-          overwrite.view_channel = None  
-          await channel.set_permissions(muterole, overwrite=bhosda)
+          await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Creating Maintenance Channels \n <a:tg_02:786959609247432784> Created Channels \n <a:tg_02:786959609247432784>")
           await ctx.send(f"Successfully Put {ctx.guild.name} On Maintenance")
       elif query == "off":
           msg = await ctx.send(f"<a:tg_02:786959609247432784> Lifting Up Maintenance")
@@ -1121,12 +1112,7 @@ async def maintenance(ctx,query = None):
             await chann.delete()
           except:
             pass
-          await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Deleting Maintenance Channels \n <a:tg_02:786959609247432784> Deleted Channels \n <a:tg_02:786959609247432784> Deleting Maintenance Role")
-          mrole = discord.utils.get(ctx.guild.roles,name = "Maintenance")
-          try:
-            await mrole.delete()
-          except:
-            pass
+          await msg.edit(content = f"<a:tg_02:786959609247432784> Starting Maintenance Procedure \n <a:tg_02:786959609247432784> Applied Overrides On Text Channels\n <a:tg_02:786959609247432784> Applying In Voice Channels \n <a:tg_02:786959609247432784> Applied Overrides In Voice Channels \n <a:tg_02:786959609247432784> Deleting Maintenance Channels \n <a:tg_02:786959609247432784> Deleted Channels")
           await ctx.send(f"Successfully Lifted Up Maintenance From {ctx.guild.name}")
 @client.command()
 async def nuke(ctx,channel : discord.TextChannel = None):
