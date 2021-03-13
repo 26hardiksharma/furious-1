@@ -945,7 +945,7 @@ async def templock(ctx,unit,channel : discord.TextChannel=None):
   else:
     await ctx.send("<:kya_bey:796610669549322250>")
 @client.command()
-@commands.cooldown(1, 60, commands.BucketType.user)
+@commands.cooldown(1, 60, commands.BucketType.guild)
 async def muterole(ctx,query):
   if ctx.author.guild_permissions.manage_roles:
     if query == "setup" or "create":
@@ -1008,6 +1008,12 @@ async def muterole(ctx,query):
           await vc.set_permissions(mrole,overwrite=vperms)
           await asyncio.sleep(0.2)
         await ctx.send(f"Muterole Setup Successfully Completed")
+@muterole.error
+async def muterole_error(ctx,error):
+  if isinstance(error, commands.CommandOnCooldown):
+    await ctx.send(f"This Command Is On A Cooldown For {round(error.retry_after)} Seconds In This Server!")
+  else:
+    raise error
 @client.command(aliases= ["ccreate"])
 async def create_category(ctx, *, name):
   if ctx.author.guild_permissions.manage_guild:
