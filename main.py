@@ -1061,6 +1061,7 @@ async def maintenance(ctx,query = None):
     embed.add_field(name = "Cooldown",value = "60 Seconds Per Guild",inline = False)
     embed.add_field(name = "Usage",value = "❯ Turning On: **`F!maintenance on`**\n❯ Turning Off: **`F!maintenance off`**",inline = False)
     embed.add_field(name = "Additional Tips",value = "❯ Don't Use This Command Is Your Server Is A Verify-Type Server\n❯ Provide The Bot The **`ADMINISTRATOR`** Permission To Make This Work Flawlessly",inline=False)
+    await ctx.send(embed=embed)
   else:
     if ctx.author.guild_permissions.administrator:
       if query == "on":
