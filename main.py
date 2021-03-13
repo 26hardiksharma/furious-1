@@ -796,7 +796,8 @@ async def consider(ctx,id:int,*,reason):
     if ctx.author.guild_permissions.administrator:   
       channel = client.get_channel(810206511136636968)
       msg = await channel.fetch_message(id)
-      author = msg.embeds.fields.2.value
+      if msg.embeds:
+        author = msg.embeds.fields.2.value
       embed = discord.Embed(title= f"Suggestion",colour = 0x3FFF00)
       embed.add_field(name = "Jump To Message",value = f"[Click Here]({msg.jump_url})",inline = False)
       embed.add_field(name= "Suggestion Considered",value = reason,inline = False)
