@@ -1046,7 +1046,7 @@ async def serverunlock(ctx):
         overwrite.send_messages = None    
         await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
         await asyncio.sleep(0.2)
-    await ctx.send(f"Successfully Unlocked All Channels Of {ctx.guild.name}\nNote:- All Annoucement Channels Are Excluded And Are Still Lockrf")
+    await ctx.send(f"Successfully Unlocked All Channels Of {ctx.guild.name}\nNote:- All Annoucement Channels Are Excluded And Are Still Locked")
   else:
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
