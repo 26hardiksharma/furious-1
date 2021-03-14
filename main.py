@@ -1719,65 +1719,6 @@ async def takeprem(ctx,user:discord.User):
   if ctx.author.id == 757589836441059379:
     prem.remove(user.id)
     await ctx.send(f"Took Premium Perks Away From {user.mention}")
-afks=[]
-@client.command()
-async def afk(ctx):
-  afks.append(ctx.author.id)
-  await ctx.send(f"Your Afk Has Been Set!")
-@client.event
-async def on_message(message):
-  test = "discord.gg/"
-  if message.author.id in afks:
-    afks.remove(message.author.id)
-    await message.channel.send(f"Welcome Back {message.author.mention}, I Have Removed Your AFK!")
-  elif test in message.content.lower():
-    if message.guild.id in mod_on:
-      guild= message.guild
-      if message.channel.id not in ignored:
-        if message.author.guild_permissions.manage_messages:
-          pass
-        else:
-          await message.delete()
-          await message.channel.send(f"{message.author.mention}, No Invite Links Allowed")
-  else:
-    for member in message.mentions:
-      if member.id in afks:
-        await message.channel.send(f"{message.author.mention}, {member.name}#{member.discriminator} Is AFK!")
-        break
-      else:
-        pass
-  await client.process_commands(message)
-mod_on = []
-ignored = []
-@client.command()
-async def automod(ctx,query = None,ch : discord.TextChannel = None):
-  if ctx.author.guild_permissions.manage_guild:
-    if query == None:
-      await ctx.send(f"Automod Service \n\n **Automod Commands:** \n`F!automod on`\n`F!autumod off`\n`F!automod ignore #channel")
-    elif query.lower() =="on":
-      if ctx.guild.id in mod_on:
-        await ctx.send(f"Automod Service Is Already Running On This Server")
-      else:
-        mod_on.append(ctx.guild.id)
-        await ctx.send(f"Automod Service Has Been Setup On This Server")
-    elif query.lower() == "off":
-      if ctx.guild.id in mod_on:
-        mod_on.remove(ctx.guild.id)
-        await ctx.send(f"Disabled Automod Service On This Server")
-      else:
-        await ctx.send("Automod Service Is Not Running In This Guild")
-    elif query.lower() == "ignore":
-      if ch == None:
-        await ctx.send(f"Please Mention A Channel To Ignore")
-      else:
-        if ch.id in ignored:
-          await ctx.send(f"{ch.mention} Is Already Being Ignored")
-        else:
-          try:
-            ignored.append(ch.id)
-            await ctx.send(f"Automod Is Now Ignoring {ch.mention}")
-          except:
-            await ctx.send(f"Couldn't Find That Channel")
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
 async def quote(ctx):
