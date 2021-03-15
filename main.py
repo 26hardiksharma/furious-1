@@ -71,7 +71,7 @@ async def ban(ctx,user:discord.Member,*,reason = "No Reason Specified"):
         await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
       else:
         if abc.top_role > user.top_role and user != owner:
-          await user.kick(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+          await user.ban(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
           embed = discord.Embed(title = "Ban",description = f"{user.mention} **Has Been Successfully Banned Because Of** :-  {reason}",colour = 0xFF0000)
           await ctx.send(embed=embed)
           try:
