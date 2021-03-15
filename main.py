@@ -101,11 +101,9 @@ async def unmute(ctx,member : discord.Member):
       await member.remove_roles(muted_role)
       await ctx.message.delete()
       embed = discord.Embed(title = " 🔈Unmute" , description = f" {member.mention} Has Been Successfully Unmuted" , color = discord.Colour.red())
-      embed.set_footer(text = "Made by Eternal_Slayer#0069")
       await ctx.send(embed=embed)
       memberembed = discord.Embed(title = "🔈 Unmute", description = "You Have Been Unmuted", color = discord.Colour.green())
       memberembed.add_field(name = "Moderator :- ", value = ctx.author.name)
-      memberembed.set_footer(text = "Made By EternalSlayer")
       await member.send(embed = memberembed)
     else:
       embed = discord.Embed(title = "<:error:795629492693368833> Unmute",color = discord.Color.red())
@@ -150,8 +148,7 @@ async def avatar(ctx, member : discord.Member=None):
     embed = discord.Embed(title = " Avatar")
     embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
     embed.add_field(name = "Missing Permission(s)", value = "Manage Messages",inline = False)
-    embed.set_footer(icon_url = ctx.author.avatar_url, text = 
-  f"Requested By {ctx.author.name}, Made by Eternal_Slayer#0069")
+    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}")
     await ctx.send(embed=embed)
 
 @client.command()
@@ -203,7 +200,6 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
         memberembed = discord.Embed(title = "🔇 Mute", description = "You Have Been Muted", color = discord.Colour.red(), inline = False)
         memberembed.add_field(name = "Moderator :- ", value = ctx.author.name)
         memberembed.add_field(name = "Reason", value = reason, inline = False)
-        memberembed.set_footer(text = "Made By EternalSlayer#0069")
         await member.send(embed = memberembed)
       except:
         await ctx.send(f"I Cannot Find The ``Muted`` Role Which I Accept As The Mute Role!\n \n Please Type ``^muterole create`` For Instant Setup!")
@@ -295,7 +291,6 @@ async def hack(ctx,member : discord.Member = None):
 async def vcreate(ctx,*,query):
   if ctx.author.guild_permissions.manage_channels:
     try:
-      
       await ctx.guild.create_voice_channel(query)
       embed = discord.Embed(title = "Create Channel",colour = 0x00FFD7)
       embed.add_field(name = "Status",value = "Successfully Created The Channel",)
