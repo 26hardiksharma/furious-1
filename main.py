@@ -150,12 +150,6 @@ async def avatar(ctx, member : discord.Member=None):
     embed.add_field(name = "Missing Permission(s)", value = "Manage Messages",inline = False)
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}")
     await ctx.send(embed=embed)
-
-@client.command()
-async def say(ctx,*,message):
-  if ctx.author.guild_permissions.manage_messages:
-    await ctx.message.delete()
-    await ctx.send(message)
 @client.command(pass_context=True, aliases = ['clear'])
 @commands.cooldown(1,10,commands.BucketType.user)
 async def purge(ctx,amt: int = None):
