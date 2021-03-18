@@ -1765,4 +1765,16 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
 @client.command()
 async def joke(ctx):
   await ctx.send(pyjokes.get_joke())
+@client.command()
+async def delete(ctx,user : discord.Member = None):
+  if user == None:
+    user = ctx.author
+  img = Image.open("plsdelete.jpg")
+  asset = user.avatar_url_as(size = 256)
+  data = BytesIO(await asset.read())
+  pfp = Image.open(data)
+  pfp = pfp.resize((198,192))
+  img.paste(pfp, (118,135))
+  img.save(("profile.jpg"))
+  await ctx.send(file = discord.File("profile.jpg"))
 client.run(TOKEN)
