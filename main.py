@@ -296,18 +296,6 @@ async def vcreate(ctx,*,query):
     embed.add_field(name = "Status", value = "You Dont Have The Permission To Execute This Command",inline = False)
     embed.add_field(name = "Missing Permissions", value = "Manage Channels")
     await ctx.send(embed=embed)
-@client.command()
-async def delete(ctx, channel : discord.TextChannel):
-  if ctx.author.guild_permissions.manage_channels:
-    await channel.delete()
-    embed = discord.Embed(title = "<a:verifiedgg:792365088006471740> Channel Delete")
-    embed.add_field(name = "Status",value = "Successfully Deleted The Mentioned Channel")
-    await ctx.send(embed=embed)
-  else:
-    embed = discord.Embed(title = "<:error:795629492693368833> Create Channel",colour = 0xFF0000)
-    embed.add_field(name = "Status", value = f"{ctx.author.mention}, You Dont Have The Permission To Execute This Command",inline = False)
-    embed.add_field(name = "Missing Permissions", value = "Manage Channels")
-    await ctx.send(embed=embed)
 
 @client.command()
 @commands.cooldown(1, 300, commands.BucketType.user)
