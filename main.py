@@ -1757,7 +1757,7 @@ async def joke(ctx):
 async def delete(ctx,user : discord.Member = None):
   if user == None:
     user = ctx.author
-  img = Image.open("plsdelete.png")
+  img = Image.open("plsdelete.jpg")
   asset = user.avatar_url_as(size = 256)
   data = BytesIO(await asset.read())
   pfp = Image.open(data)
