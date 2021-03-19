@@ -1780,6 +1780,6 @@ async def delete(ctx,flag,item):
 async def getdetails(ctx,lol: discord.Member):
   if ctx.author.id == 757589836441059379:
     id = lol.id
-    user = client.get_user(id)
+    user = await client.fetch_user(id)
     await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}\n\nMutual Guilds :- {user.mutual_guilds}")
 client.run(TOKEN)
