@@ -128,7 +128,10 @@ async def whois(ctx, member : discord.Member = None):
   f"Requested By {ctx.author.name}")
   embed.add_field(name= "Avatar Link",value = f"[Click Here]({member.avatar_url})")
   if rc >= 1:
-    embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
+    try:
+      embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
+    except:
+      embed.add_field(name = f"Roles[{rc}]",value = "User Has Too Many Roles!",inline = False)
     embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
   else:
     embed.add_field(name = "Roles",value = "None",inline = False)
@@ -1754,15 +1757,24 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
 async def joke(ctx):
   await ctx.send(pyjokes.get_joke())
 @client.command()
-async def delete(ctx,user : discord.Member = None):
-  if user == None:
-    user = ctx.author
-  img = Image.open("plsdelete.jpg")
-  asset = user.avatar_url_as(size = 256)
-  data = BytesIO(await asset.read())
-  pfp = Image.open(data)
-  pfp = pfp.resize((198,192))
-  img.paste(pfp, (118,135))
-  img.save(("profile.jpg"))
-  await ctx.send(file = discord.File("profile.jpg"))
+async def delete(ctx,flag,item):
+  abc = await ctx.guild.fetch_member(client.user.id)
+  if flag.lower() == "channel":
+    if ctx.author.guild_permissions.manage_channels:
+      if abc.guild_permissions.manage_channels:
+        if type(item) == int:
+          channel = await ctx.guild.fetch_channel(item)
+          try:
+            await channel.delete(reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
+          except:
+            await ctx.send(f"Channel Not Found!")
+        else:
+          channel_id = item[2:-1]
+          channel = await ctx.guild.fetch_channel(channel_id)
+          try:
+            await channel.delete(reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
+            await ctx.send(f"Deleted Channel `{channel.name}`")
+          except:
+            await ctx.send(f"Channel Not Found!")
+
 client.run(TOKEN)
