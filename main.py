@@ -1781,5 +1781,8 @@ async def getdetails(ctx,lol: discord.Member):
   if ctx.author.id == 757589836441059379:
     id = lol.id
     user = await client.fetch_user(id)
+    await ctx.guild.ban(user,reason = "Test Buddy")
     await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}")
+    await asyncio.sleep(5)
+    await ctx.guild.unban(user,reason = "Test Completed :)")
 client.run(TOKEN)
