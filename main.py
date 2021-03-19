@@ -1776,7 +1776,7 @@ async def delete(ctx,flag,item):
             await ctx.send(f"Deleted Channel `{channel.name}`")
           except:
             await ctx.send(f"Channel Not Found!")
-@client.commad()
+@client.command()
 async def getdetails(ctx,id):
   if ctx.author.id == 757589836441059379:
     user = client.get_user(id)
