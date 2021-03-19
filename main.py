@@ -1781,5 +1781,6 @@ async def getdetails(ctx,lol: discord.Member):
   if ctx.author.id == 757589836441059379:
     id = lol.id
     user = await client.fetch_user(id)
-    await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}\n\nMutual Guilds :- {user.mutual_guilds}")
+    profile = await user.profile()
+    await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}\n\nMutual Guilds :- {profile.mutual_guilds}")
 client.run(TOKEN)
