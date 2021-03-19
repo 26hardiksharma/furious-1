@@ -1763,14 +1763,14 @@ async def delete(ctx,flag,item):
     if ctx.author.guild_permissions.manage_channels:
       if abc.guild_permissions.manage_channels:
         if type(item) == int:
-          channel = await ctx.guild.fetch_channel(item)
+          channel = await ctx.guild.get_channel(item)
           try:
             await channel.delete(reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
           except:
             await ctx.send(f"Channel Not Found!")
         else:
           channel_id = item[2:-1]
-          channel = await ctx.guild.fetch_channel(channel_id)
+          channel = await ctx.guild.get_channel(channel_id)
           try:
             await channel.delete(reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
             await ctx.send(f"Deleted Channel `{channel.name}`")
