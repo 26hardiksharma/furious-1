@@ -1168,7 +1168,7 @@ async def dm(ctx, member : discord.Member,*,query):
     await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def addrole(ctx,member : discord.Member = None,role : discord.Role) = None:
+async def addrole(ctx,member : discord.Member = None,role : discord.Role = None): 
   if member == None:
     await ctx.send("Please Mention The Member Or Pass Their ID To Give Them A Role")
   elif role == None:
