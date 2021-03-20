@@ -1204,28 +1204,38 @@ async def addrole(ctx,member : discord.Member = None,role : discord.Role = None)
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def takerole(ctx,member : discord.Member,role : discord.Role):
-  if ctx.author.guild_permissions.manage_roles:
-    owner= await ctx.guild.fetch_member(ctx.guild.owner_id)
-    abc = await ctx.guild.fetch_member(client.user.id)
-    if role >= abc.top_role:
-      await ctx.send(f"That Role Is Above My Top Role. I Dont Have The Permission To Remove It From Anyone")
-    elif role >= ctx.author.top_role:
-      if ctx.author== owner:
-        await member.remove_roles(role)
-        embed = discord.Embed(title = 'Take Role',colour = 0x00FFE2)
-        embed.add_field(name=f"Role Removed",value= role.mention,inline= False)
-        embed.add_field(name=f"Removed From",value = member.mention,inline = False)
-        embed.add_field(name = f"Removed By",value= ctx.author.mention)
-        await ctx.send(embed=embed)
+  if member == None:
+    await ctx.send("Please Mention The Member Or Pass Their ID To Give Them A Role")
+  elif role == None:
+    await ctx.send("Please Mention A Role Or Pass It's ID To Be Added.")
+  else:
+    if ctx.author.guild_permissions.manage_roles:
+      owner= await ctx.guild.fetch_member(ctx.guild.owner_id)
+      abc = await ctx.guild.fetch_member(client.user.id)
+      if role >= abc.top_role:
+        await ctx.send(f"That Role Is Above My Top Role. I Dont Have The Permission To Remove It From Anyone")
+      elif role >= ctx.author.top_role:
+        if ctx.author== owner:
+          await member.remove_roles(role)
+          embed = discord.Embed(title = 'Take Role',colour = 0x00FFE2)
+          embed.add_field(name=f"Role Removed",value= role.mention,inline= False)
+          embed.add_field(name=f"Removed From",value = member.mention,inline = False)
+          embed.add_field(name = f"Removed By",value= ctx.author.mention)
+          await ctx.send(embed=embed)
+        else:
+          await ctx.send(f"You Dont have The Permission To Interact With That Role")
       else:
-        await ctx.send(f"You Dont have The Permission To Interact With That Role")
-    else:
-      await member.remove_roles(role)
-      embed = discord.Embed(title = 'Take Role',colour = 0x00FFE2)
-      embed.add_field(name=f"Role Removed",value= role.mention,inline= False)
-      embed.add_field(name=f"Removed From",value = member.mention,inline = False)
-      embed.add_field(name = f"Removed By",value= ctx.author.mention)
-      await ctx.send(embed=embed)
+        if role.is_premium_subscriber():
+          await ctx.send("That Role Is The Booster Role For This Server, It Cannot Be Manually Assigned To Anyone!")
+        elif role.is_integration() or role.is_bot_managed():
+          await ctx.send("That Role Is A Bot's Integration Role, It Cannon Be Manually Assigned To Anyone!")
+        else:
+          await member.remove_roles(role)
+          embed = discord.Embed(title = 'Take Role',colour = 0x00FFE2)
+          embed.add_field(name=f"Role Removed",value= role.mention,inline= False)
+          embed.add_field(name=f"Removed From",value = member.mention,inline = False)
+          embed.add_field(name = f"Removed By",value= ctx.author.mention)
+          await ctx.send(embed=embed)
 @client.command()
 async def role(ctx,query,role : discord.Role):
   if ctx.author.guild_permissions.manage_roles:
