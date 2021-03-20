@@ -1172,7 +1172,7 @@ async def addrole(ctx,member : discord.Member = None,role : discord.Role = None)
   if member == None:
     await ctx.send("Please Mention The Member Or Pass Their ID To Give Them A Role")
   elif role == None:
-    await ctx.send("Please Mention A Role Aur Pass It's ID To Be Added.")
+    await ctx.send("Please Mention A Role Or Pass It's ID To Be Added.")
   else:
     if ctx.author.guild_permissions.manage_roles:
       owner= await ctx.guild.fetch_member(ctx.guild.owner_id)
@@ -1192,7 +1192,7 @@ async def addrole(ctx,member : discord.Member = None,role : discord.Role = None)
       else:
         if role.is_premium_subscriber():
           await ctx.send("That Role Is The Booster Role For This Server, It Cannot Be Manually Assigned To Anyone!")
-        elif role.is_integration():
+        elif role.is_integration() or role.is_bot_managed():
           await ctx.send("That Role Is A Bot's Integration Role, It Cannon Be Manually Assigned To Anyone!")
         else:
           await member.add_roles(role)
