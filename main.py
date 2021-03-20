@@ -1168,32 +1168,39 @@ async def dm(ctx, member : discord.Member,*,query):
     await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def addrole(ctx,member : discord.Member,role : discord.Role):
-  if ctx.author.guild_permissions.manage_roles:
-    owner= await ctx.guild.fetch_member(ctx.guild.owner_id)
-    abc = await ctx.guild.fetch_member(client.user.id)
-    if role >= abc.top_role:
-      await ctx.send(f"That Role Is Above My Top Role. I Dont Have The Permission To Assign It To Anyone")
-    elif role >= ctx.author.top_role:
-      if ctx.author==owner:
-        await member.add_roles(role)
-        embed = discord.Embed(title = 'Addrole',colour = 0x00FFE2)
-        embed.add_field(name=f"Role Added",value= role.mention,inline= False)
-        embed.add_field(name=f"Added To",value = member.mention,inline = False)
-        embed.add_field(name = f"Added By",value= ctx.author.mention)
-        await ctx.send(embed=embed)
+async def addrole(ctx,member : discord.Member = None,role : discord.Role) = None:
+  if member == None:
+    await ctx.send("Please Mention The Member Or Pass Their ID To Give Them A Role")
+  elif role == None:
+    await ctx.send("Please Mention A Role Aur Pass It's ID To Be Added.")
+  else:
+    if ctx.author.guild_permissions.manage_roles:
+      owner= await ctx.guild.fetch_member(ctx.guild.owner_id)
+      abc = await ctx.guild.fetch_member(client.user.id)
+      if role >= abc.top_role:
+        await ctx.send(f"That Role Is Above My Top Role. I Dont Have The Permission To Assign It To Anyone")
+      elif role >= ctx.author.top_role:
+        if ctx.author==owner:
+          await member.add_roles(role)
+          embed = discord.Embed(title = 'Addrole',colour = 0x00FFE2)
+          embed.add_field(name=f"Role Added",value= role.mention,inline= False)
+          embed.add_field(name=f"Added To",value = member.mention,inline = False)
+          embed.add_field(name = f"Added By",value= ctx.author.mention)
+          await ctx.send(embed=embed)
+        else:
+          await ctx.send(f"You Dont have The Permission To Interact With That Role")
       else:
-        await ctx.send(f"You Dont have The Permission To Interact With That Role")
-    else:
-      try:
-        await member.add_roles(role)
-        embed = discord.Embed(title = 'Addrole',colour = 0x00FFE2)
-        embed.add_field(name=f"Role Added",value= role.mention,inline= False)
-        embed.add_field(name=f"Added To",value = member.mention,inline = False)
-        embed.add_field(name = f"Added By",value= ctx.author.mention)
-        await ctx.send(embed=embed)
-      except:
-        await ctx.send(f"That Role Is A Bot's Integration Role Or The Server Boosters Role, It Cannot Be Manually Assigned To Anyone ")
+        if role.is_premium_subscriber():
+          await ctx.send("That Role Is The Booster Role For This Server, It Cannot Be Manually Assigned To Anyone!")
+        elif role.is_integration():
+          await ctx.send("That Role Is A Bot's Integration Role, It Cannon Be Manually Assigned To Anyone!")
+        else:
+          await member.add_roles(role)
+          embed = discord.Embed(title = 'Addrole',colour = 0x00FFE2)
+          embed.add_field(name=f"Role Added",value= role.mention,inline= False)
+          embed.add_field(name=f"Added To",value = member.mention,inline = False)
+          embed.add_field(name = f"Responsible Moderator",value= ctx.author.mention)
+          await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def takerole(ctx,member : discord.Member,role : discord.Role):
