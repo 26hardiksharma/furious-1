@@ -1205,9 +1205,9 @@ async def addrole(ctx,member : discord.Member = None,role : discord.Role = None)
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def takerole(ctx,member : discord.Member = None,role : discord.Role = None):
   if member == None:
-    await ctx.send("Please Mention The Member Or Pass Their ID To Give Them A Role")
+    await ctx.send("Please Mention The Member Or Pass Their ID To Remove A Role From Them.")
   elif role == None:
-    await ctx.send("Please Mention A Role Or Pass It's ID To Be Added.")
+    await ctx.send("Please Mention A Role Or Pass It's ID To Be Removed.")
   else:
     if ctx.author.guild_permissions.manage_roles:
       owner= await ctx.guild.fetch_member(ctx.guild.owner_id)
@@ -1226,15 +1226,15 @@ async def takerole(ctx,member : discord.Member = None,role : discord.Role = None
           await ctx.send(f"You Dont have The Permission To Interact With That Role")
       else:
         if role.is_premium_subscriber():
-          await ctx.send("That Role Is The Booster Role For This Server, It Cannot Be Manually Assigned To Anyone!")
+          await ctx.send("That Role Is The Booster Role For This Server, It Cannot Be Manually Removed From Anyone!")
         elif role.is_integration() or role.is_bot_managed():
-          await ctx.send("That Role Is A Bot's Integration Role, It Cannon Be Manually Assigned To Anyone!")
+          await ctx.send("That Role Is A Bot's Integration Role, It Cannon Be Manually Removed From Anyone!")
         else:
           await member.remove_roles(role)
           embed = discord.Embed(title = 'Take Role',colour = 0x00FFE2)
           embed.add_field(name=f"Role Removed",value= role.mention,inline= False)
           embed.add_field(name=f"Removed From",value = member.mention,inline = False)
-          embed.add_field(name = f"Removed By",value= ctx.author.mention)
+          embed.add_field(name = f"Responsible Moderator",value= ctx.author.mention)
           await ctx.send(embed=embed)
 @client.command()
 async def role(ctx,query,role : discord.Role):
