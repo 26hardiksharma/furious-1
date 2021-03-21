@@ -1250,7 +1250,7 @@ async def role(ctx,query,role : discord.Role):
           await member.add_roles(role)
           await asyncio.sleep(1)
 @client.command()
-async def hackban(ctx,member : discord.Member = None,*,reason= None):
+async def hackban(ctx,member : discord.User = None,*,reason= None):
   await ctx.message.delete()
   if ctx.author.guild_permissions.ban_members:
     abc = await ctx.guild.fetch_member(client.user.id)
