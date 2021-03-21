@@ -1265,7 +1265,7 @@ async def hackban(ctx,member : discord.User = None,*,reason= None):
             await ctx.send(f"**{guy.name}** Was Banned From {ctx.guild.name}")
           else:
             await ctx.send(f"**{guy.name}** Was Banned From {ctx.guild.name} Because Of:- {reason}")
-        except commands.UserNotFound as f:
+        except commands.BadArgument as f:
           await ctx.send("I Couldn't Find That User!")
         except discord.Forbidden as e:
           await ctx.send(f'I Am Unable To Ban {member.mention}')
