@@ -1250,33 +1250,29 @@ async def role(ctx,query,role : discord.Role):
           await member.add_roles(role)
           await asyncio.sleep(1)
 @client.command()
-async def hackban(ctx,id: int= None,*,reason= None):
+async def hackban(ctx,member : discord.Member = None,*,reason= None):
   await ctx.message.delete()
   if ctx.author.guild_permissions.ban_members:
     abc = await ctx.guild.fetch_member(client.user.id)
     if abc.guild_permissions.ban_members:
-      if id ==None:
-        await ctx.send(f"Please Pass The ID Of The User To Hackban")
+      if member == None:
+        await ctx.send(f"Please Mention The User Or Pass Their ID To Ban Them.")
       else:
         try:
-          guy = await client.fetch_user(id)
+          guy = await client.fetch_user(member.id)
           await ctx.guild.ban(guy,reason=reason)
           if reason== None:
             await ctx.send(f"**{guy.name}** Was Banned From {ctx.guild.name}")
           else:
             await ctx.send(f"**{guy.name}** Was Banned From {ctx.guild.name} Because Of:- {reason}")
-        except:
-          await ctx.send(f"The ID Entered Was Incorrect! Please Enter A Correct ID To Hackban")
+        except discord.BadArgument:
+          await ctx.send("I Couldn't Find That User!")
+        except discord.Forbidden:
+          await ctx.send(f'I Am Unable To Ban {member.mention}')
     else:
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Command!")
   else:
     await ctx.send(f"You Must Have The **BAN MEMBERS** Permission To Execute This Command!")
-@hackban.error
-async def hackban_error(ctx,error):
-  if isinstance(error, commands.BadArgument):
-    await ctx.send(f"Please Enter An Integer Only ID For The User To Ban")
-  else:
-    raise error
 def rcheck(choice):
   correct =["rock","paper","scissors","Rock","Paper","Scissors","ROCK","PAPER","SCISSORS"]
   if choice not in correct:
