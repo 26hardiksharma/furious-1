@@ -1367,11 +1367,11 @@ async def on_command_error(ctx, error):
   elif isinstance(error,commands.CommandNotFound):
     pass
   elif isinstance(error,commands.UserNotFound):
-    await ctx.send(f"Couldn't Find That User :/")
+    await ctx.send(f"Couldn't Find That User :(")
   elif isinstance(error,commands.MemberNotFound):
-    await ctx.send(f"Couldn't Find That Member In This Server :/")
+    await ctx.send(f"Couldn't Find That Member In This Server :(")
   elif isinstance(error,commands.RoleNotFound):
-    await ctx.send("Couldn't Find That Role In This Server :/")
+    await ctx.send("Couldn't Find That Role In This Server :(")
   else:
     print(ctx.guild.name)
     print(ctx.author.name)
