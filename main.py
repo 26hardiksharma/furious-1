@@ -1139,7 +1139,7 @@ async def ticket(ctx,query = "create" , channel : discord.TextChannel = None):
       if channel == None:
         await ctx.send(f"Please Mention A Ticket To Close")
       else:
-        name = channel.name
+        name = channel.name.lower()
         if "ticket" in name:
           await ctx.send(f"Deleting  {channel.mention}")
           await channel.delete()
@@ -1392,6 +1392,8 @@ async def on_command_error(ctx, error):
     print(ctx.guild.name)
     print(ctx.author.name)
     raise error
+    eternal = await client.fetch_user(757589836441059379)
+    await eternal.send(f"An Error Occured!\n{ctx.guild.name}\n{ctx.author.name}\n{error}")
 def getMeme():
   all_subs = []
   subreddit = reddit.subreddit("meme")   
@@ -1794,7 +1796,7 @@ async def delete(ctx,flag,item):
           except:
             await ctx.send(f"Channel Not Found!")
 @client.command()
-async def getdetails(ctx,lol: discord.Member):
+async def getdetails(ctx,lol: discord.User):
   if ctx.author.id == 757589836441059379:
     id = lol.id
     user = await client.fetch_user(id)
