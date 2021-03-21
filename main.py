@@ -52,14 +52,6 @@ async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
       await ctx.send(f"I Am Missing The **KICK MEMBERS** Permission Required To Execute This Action")
   else:
     await ctx.send(f"You Are Missing The **KICK MEMBERS** Permission Required To Execute This Action")
-
-@kick.error
-async def kick_error(ctx, error):
-  if isinstance(error, commands.MemberNotFound):
-    await ctx.send(f"<:error:795629492693368833> Could Find That User!")
-  else:
-    raise error
-
 @client.command()
 async def ban(ctx,user:discord.Member,*,reason = "No Reason Specified"):
   await ctx.message.delete()
@@ -84,14 +76,6 @@ async def ban(ctx,user:discord.Member,*,reason = "No Reason Specified"):
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Action")
   else:
     await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
-@ban.error
-async def ban_error(ctx, error):
-  if isinstance(error, commands.MemberNotFound):
-    await ctx.send(f"<:error:795629492693368833> Could Find That User!")
-  else:
-    raise error
-
-
 @client.command(aliases = ['um'])
 async def unmute(ctx,member : discord.Member):
   if ctx.author.guild_permissions.manage_messages:
@@ -1271,12 +1255,6 @@ async def hackban(ctx,member : discord.User = None,*,reason= None):
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Command!")
   else:
     await ctx.send(f"You Must Have The **BAN MEMBERS** Permission To Execute This Command!")
-@hackban.error
-async def hackban_error(ctx,error):
-  if isinstance(error, commands.UserNotFound):
-    await ctx.send("Couldn't Find That User :(")
-  else:
-    raise error
 def rcheck(choice):
   correct =["rock","paper","scissors","Rock","Paper","Scissors","ROCK","PAPER","SCISSORS"]
   if choice not in correct:
@@ -1388,12 +1366,18 @@ async def on_command_error(ctx, error):
     await ctx.send(embed=embed)      
   elif isinstance(error,commands.CommandNotFound):
     pass
+  elif isinstance(error,commands.UserNotFound):
+    await ctx.send(f"Couldn't Find That User :/")
+  elif isinstance(error,commands.MemberNotFound):
+    await ctx.send(f"Couldn't Find That Member In This Server :/")
+  elif isinstance(error,commands.RoleNotFound):
+    await ctx.send("Couldn't Find That Role In This Server :/")
   else:
     print(ctx.guild.name)
     print(ctx.author.name)
     print(error)
     eternal = await client.fetch_user(757589836441059379)
-    await eternal.send(f"An Error Occured!\n{ctx.guild.name}\n{ctx.author.name}\n{error}")
+    await eternal.send(f"An Error Occured!\n{ctx.commands.name}\n{ctx.guild.name}\n{ctx.author.name}\n{error}")
 def getMeme():
   all_subs = []
   subreddit = reddit.subreddit("meme")   
