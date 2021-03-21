@@ -1267,12 +1267,16 @@ async def hackban(ctx,member : discord.User = None,*,reason= None):
             await ctx.send(f"**{guy.name}** Was Banned From {ctx.guild.name} Because Of:- {reason}")
         except discord.Forbidden as e:
           await ctx.send(f'I Am Unable To Ban {member.mention}')
-        except:
-          await ctx.send('Couldn\'t Find That User!')
     else:
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Command!")
   else:
     await ctx.send(f"You Must Have The **BAN MEMBERS** Permission To Execute This Command!")
+@hackban.error
+async def hackban_error(ctx,error):
+  if isinstance(error, commands.UserNotFound):
+    await ctx.send("Couldn't Find That User :(")
+  else:
+    raise error
 def rcheck(choice):
   correct =["rock","paper","scissors","Rock","Paper","Scissors","ROCK","PAPER","SCISSORS"]
   if choice not in correct:
