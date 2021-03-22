@@ -181,16 +181,15 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
       else:
         for muted in ctx.guild.roles:
           if "mute" in muted.name.lower():
-            return muted
+            await member.add_roles(muted,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+            embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = 0xFF0000)
+            embed.add_field(name = "Reason", value = reason)
+            memberembed = discord.Embed(title = "🔇 Mute", description = "You Have Been Muted", color = discord.Colour.red(), inline = False)
+            memberembed.add_field(name = "Moderator :- ", value = ctx.author.name)
+            memberembed.add_field(name = "Reason", value = reason, inline = False)
+            await member.send(embed = memberembed)
+            await ctx.send(embed=embed)
             break
-        await member.add_roles(muted,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-        embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = 0xFF0000)
-        embed.add_field(name = "Reason", value = reason)
-        memberembed = discord.Embed(title = "🔇 Mute", description = "You Have Been Muted", color = discord.Colour.red(), inline = False)
-        memberembed.add_field(name = "Moderator :- ", value = ctx.author.name)
-        memberembed.add_field(name = "Reason", value = reason, inline = False)
-        await member.send(embed = memberembed)
-        await ctx.send(embed=embed)
   else:
     await ctx.send("You Are Missing The **`MANAGE MESSAGES`** Permission Required To Execute This Command")
 @client.command()
