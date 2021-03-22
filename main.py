@@ -747,6 +747,7 @@ async def help(ctx,query = None):
       await ctx.send(embed=embed)
   else:
     await ctx.send("I Need The Following Permissions To Display My Help Command Correctly :-\n`SEND MESSAGES`\n`ATTACH FILES`\n`EMBED LINKS`")    
+
 @client.command()
 @commands.cooldown(1,600,commands.BucketType.user)
 async def suggest(ctx,*,query):
