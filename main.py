@@ -53,7 +53,7 @@ async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
   else:
     await ctx.send(f"You Are Missing The **KICK MEMBERS** Permission Required To Execute This Action")
 @client.command()
-async def ban(ctx,user:discord.Member,*,reason = "No Reason Specified"):
+async def ban(ctx,user: discord.Member,*,reason = "No Reason Specified"):
   await ctx.message.delete()
   abc = ctx.guild.get_member(client.user.id)
   owner  = await ctx.guild.fetch_member(ctx.guild.owner_id) 
@@ -170,20 +170,29 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
       embed.add_field(name = "Status",value = f"That User Is A Moderator/Admin. Command Could Not Be Executed!")
       await ctx.send(embed=embed)
     else:
-      try:
-        
-        muted_role = discord.utils.get(member.guild.roles, name='Muted')
-        await member.add_roles(muted_role)
-        await ctx.message.delete()  
-        embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = discord.Colour.red())
+      rc = 0 
+      for r in ctx.guild.roles:
+        if "mute" in r.name.lower():
+          rc += 1
+      if rc == 0:
+        await ctx.send("Couldn't Find A Muted Role In This Server!")
+      elif rc > 1:
+        await ctx.send("Multiple Roles Found Marked As ``Muted`` In This Server! Please Make Sure That There Is Only One Role Named ``Muted`` In This Server")
+      else:
+        for muted in ctx.guild.roles:
+          if "mute" in muted.name.lower():
+            return muted
+            break
+        await member.add_roles(muted,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+        embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = 0xFF0000)
         embed.add_field(name = "Reason", value = reason)
-        await ctx.send(embed=embed)
         memberembed = discord.Embed(title = "🔇 Mute", description = "You Have Been Muted", color = discord.Colour.red(), inline = False)
         memberembed.add_field(name = "Moderator :- ", value = ctx.author.name)
         memberembed.add_field(name = "Reason", value = reason, inline = False)
         await member.send(embed = memberembed)
-      except:
-        await ctx.send(f"I Cannot Find The ``Muted`` Role Which I Accept As The Mute Role!\n \n Please Type ``^muterole create`` For Instant Setup!")
+        await ctx.send(embed=embed)
+  else:
+    await ctx.send("You Are Missing The **`MANAGE MESSAGES`** Permission Required To Execute This Command")
 @client.command()
 async def botstats(ctx):
   num = 0
