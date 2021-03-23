@@ -391,11 +391,24 @@ async def unlock(ctx, channel : discord.TextChannel=None):
     embed=discord
     await ctx.send("<:kya_bey:796610669549322250>")
 @client.command()
-async def unban(ctx, id: int):
+async def unban(ctx, kek : discord.User = None):
+  me = await ctx.guild.fetch_member(client.user.id)
   if ctx.author.guild_permissions.ban_members:
-    user = await client.fetch_user(id)
-    await ctx.guild.unban(user)
-    await ctx.send(f"{user.name} was Unbanned")
+    if me.guild_permissions.ban_members:
+      if kek == None:
+        await ctx.send("Please Mention A User Or Pass Their ID To Unban Them")
+      else:
+        try:
+          user = await client.fetch_user(kek.id)
+          await ctx.guild.unban(user)
+          await ctx.send(f"{user.name}#{user.discriminator} was Unbanned")
+        except discord.NotFound:
+          await ctx.send(f"{user.name}#{user.discriminator} Is Not Banned From This Server!")
+    else:
+      await ctx.send("I Need The `BAN MEMBERS` Permission To Execute This Command!")
+  else:
+    await ctx.send("You Are Missing The `BAN MEMBERS` Permission Required To Execute This Command!")
+
 @client.command(aliases = ['wikipedia'])
 async def wiki(ctx,*,query = None):
   if query == None:
