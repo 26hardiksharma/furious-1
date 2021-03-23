@@ -506,13 +506,18 @@ async def slowmode(ctx, unit):
   if ctx.author.guild_permissions.manage_channels:
     if me.guild_permissions.manage_channels:
       time = convert(unit)
-      if time > 21600:
-        await ctx.send(f"Slowmode Delay Cannot Be Longer Than 6 Hours!")
-      elif time < 0:
-        await ctx.send("Slowmode Delay Cannot Be Negative!")
+      if time == -1:
+        await ctx.send("You Didnt Answer With A Proper Unit, Please Answer With A Proper Unit Next Time\n\nUnit References : [s|h|m]")
+      elif time == -2:
+        await ctx.send("Time Must be An Integer Value!")
       else:
-        await ctx.channel.edit(slowmode_delay=time)
-        await ctx.send(f"Enabled Messages Every {unit}!")
+        if time > 21600:
+          await ctx.send(f"Slowmode Delay Cannot Be Longer Than 6 Hours!")
+        elif time < 0:
+          await ctx.send("Slowmode Delay Cannot Be Negative!")
+        else:
+          await ctx.channel.edit(slowmode_delay=time)
+          await ctx.send(f"Enabled Messages Every {unit}!")
     else:
       await ctx.send("I Need The `MANAGE CHANNELS` Permission Required To Execute This Command!")
   else:
