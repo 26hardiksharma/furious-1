@@ -502,13 +502,21 @@ def convert(time):
   return val*time_dict[unit]
 @client.command()
 async def slowmode(ctx, unit):
+  me = await ctx.guild.fetch_member(client.user.id)
   if ctx.author.guild_permissions.manage_channels:
-    time = convert(unit)
-    if time > 21600:
-      await ctx.send(f"Slowmode Delay Cannot Be Longer Than 6 Hours")
+    if me.guild_permissions.manage_channels:
+      time = convert(unit)
+      if time > 21600:
+        await ctx.send(f"Slowmode Delay Cannot Be Longer Than 6 Hours!")
+      elif time < 0:
+        await ctx.send("Slowmode Delay Cannot Be Negative!")
+      else:
+        await ctx.channel.edit(slowmode_delay=time)
+        await ctx.send(f"Enabled Messages Every {unit}!")
     else:
-      await ctx.channel.edit(slowmode_delay=time)
-      await ctx.send(f"Enabled Messages Every {unit}!")
+      await ctx.send("I Need The `MANAGE CHANNELS` Permission Required To Execute This Command!")
+  else:
+    await ctx.send("You Are Missing The `MANAGE CHANNELS` Permission Required To Execute This Command!") 
 @client.command()
 async def giveaway(ctx):
   if ctx.author.guild_permissions.manage_guild:
