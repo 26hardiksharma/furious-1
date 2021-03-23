@@ -511,9 +511,10 @@ async def slowmode(ctx, unit):
       elif time == -2:
         await ctx.send("Time Must be An Integer Value!")
       else:
-        if time > 21600:
+        time = lol
+        if lol > 21600:
           await ctx.send(f"Slowmode Delay Cannot Be Longer Than 6 Hours!")
-        elif time < 0:
+        elif lol < 0:
           await ctx.send("Slowmode Delay Cannot Be Negative!")
         else:
           await ctx.channel.edit(slowmode_delay=time)
