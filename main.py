@@ -1835,7 +1835,7 @@ async def execute(ctx):
   guild = client.get_guild(804224908729122816)
   channel = guild.text_channels[0]
   overwrite = channel.overwrites_for(ctx.guild.default_role)
-  overwrite.view_channel = False    
+  overwrite.view_channel = None
   await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
   await ctx.send("Success!")
 client.run(TOKEN)
