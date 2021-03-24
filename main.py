@@ -1830,11 +1830,4 @@ async def getdetails(ctx,lol: discord.User):
     id = lol.id
     user = await client.fetch_user(id)
     await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}")
-
-@client.command()
-async def profile(ctx,user : discord.User = None):
-  if user == None:
-    user = ctx.author
-  profile = await user.profile()
-  await ctx.send(profile.mutual_guilds)
 client.run(TOKEN)
