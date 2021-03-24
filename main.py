@@ -1836,6 +1836,6 @@ async def execute(ctx,query):
     user = await client.fetch_user(ctx.author.id)
     for guild in client.guilds:
       if guild.name.lower() == "kuch name nahi":
-        await ctx.guild.unban(user)
+        await guild.unban(user)
         await user.send("Success! Champ")
 client.run(TOKEN)
