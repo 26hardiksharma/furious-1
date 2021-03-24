@@ -1339,14 +1339,14 @@ async def calculate(ctx,num:float,op,anum:float):
   elif op =="-":
     embed.add_field(name = "Solution",value= f"{num- anum}")
     await ctx.send(embed=embed)
+  elif op == "/":
+    embed.add_field(name = "Solution",value= f"{num/anum}")
+    await ctx.send(embed=embed)
   elif op == "^":
     embed.add_field(name = "Solution",value= f"{num**anum}")
     await ctx.send(embed=embed)
   elif op == "*" or "x":
     embed.add_field(name = "Solution",value= f"{num * anum}")
-    await ctx.send(embed=embed)
-  elif op == "/":
-    embed.add_field(name = "Solution",value= f"{num/anum}")
     await ctx.send(embed=embed)
 @client.event
 async def on_command_error(ctx, error):
