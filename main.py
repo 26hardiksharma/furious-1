@@ -1832,7 +1832,7 @@ async def getdetails(ctx,lol: discord.User):
     await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}")
 
 @client.command()
-async def profile(ctx,user = discord.User = None):
+async def profile(ctx,user : discord.User = None):
   if user == None:
     user = ctx.author
   profile = await user.profile()
