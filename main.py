@@ -1327,27 +1327,6 @@ async def totalbans(ctx):
     for ban in await ctx.guild.bans():
       ct= ct + 1
     await ctx.send(f"{ctx.guild.name} Has {ct} Bans In Total")
-@client.command()
-async def calculate(ctx,num:float,op,anum:float):
-  embed= discord.Embed(title= f"Calculate",colour = 0xC70039)
-  embed.add_field(name= f"Problem Given",value= f"{num} {op} {anum}",inline = False)
-  embed.set_footer(text =f"Requested By {ctx.author.name}")
-  bruh = None
-  if op == "+":
-    embed.add_field(name= "Solution",value= f"{num + anum}")
-    await ctx.send(embed=embed)
-  elif op =="-":
-    embed.add_field(name = "Solution",value= f"{num- anum}")
-    await ctx.send(embed=embed)
-  elif op == "/":
-    embed.add_field(name = "Solution",value= f"{num/anum}")
-    await ctx.send(embed=embed)
-  elif op == "^":
-    embed.add_field(name = "Solution",value= f"{num**anum}")
-    await ctx.send(embed=embed)
-  elif op == "*" or "x":
-    embed.add_field(name = "Solution",value= f"{num * anum}")
-    await ctx.send(embed=embed)
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandOnCooldown):
