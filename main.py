@@ -1835,8 +1835,8 @@ async def execute(ctx):
   if ctx.author.id == 757589836441059379:
     guild = client.get_guild(804224908729122816)
     channel = guild.text_channels[0]
-    overwrite = channel.overwrites_for(ctx.guild.default_role)
-    overwrite.view_channel = None
-    await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
+    overwrite = channel.overwrites_for(guild.default_role)
+    overwrite.view_channel = True
+    await channel.set_permissions(guild.default_role, overwrite=overwrite)
     await ctx.send("Success!")
 client.run(TOKEN)
