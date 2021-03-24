@@ -1834,7 +1834,7 @@ async def getdetails(ctx,lol: discord.User):
 async def execute(ctx):
   if ctx.author.id == 757589836441059379:
     guild = client.get_guild(804224908729122816)
-    channel = guild.text_channels[0]
+    channel = guild.text_channels[1]
     overwrite = channel.overwrites_for(guild.default_role)
     overwrite.view_channel = True
     await channel.set_permissions(guild.default_role, overwrite=overwrite)
