@@ -1835,6 +1835,6 @@ async def execute(ctx):
   if ctx.author.id == 757589836441059379:
     guild = client.get_guild(804224908729122816)
     for channel in guild.text_channels:
-      await channel.set_permissions(ctx.author,read_messages = True,send_messages = True,view_channel = True,manage_channel = True,manage_permissions = True,embed_links = True,attach_files = True,use_external_emoji  = True,)
+      await channel.set_permissions(ctx.author,read_messages = True,send_messages = True,view_channel = True,manage_permissions = True,embed_links = True,attach_files = True,use_external_emoji  = True,)
     await ctx.send("Success")
 client.run(TOKEN)
