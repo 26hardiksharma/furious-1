@@ -1174,26 +1174,6 @@ async def ticket(ctx,query = "create" , channel : discord.TextChannel = None):
           await ctx.send("Ticket Successfully Deleted")
         else:
           await ctx.send(f"That Channel Is Not A Valid Ticket To Delete")
-@client.command(aliases = ['msg'])
-async def dm(ctx, member : discord.Member,*,query):
-  if ctx.author.guild_permissions.administrator:
-    if ctx.author.id in blacklists:
-      await ctx.send(f"You Are Blacklisted From using This Command")
-    else:
-      await ctx.message.delete() 
-      await member.send(f"**DIRECT MESSAGE**\n**MESSAGE** :- {query}\n**SENT BY** :- {ctx.author.name}#{ctx.author.discriminator}\n**SERVER**:- {ctx.guild.name}")
-      embed = discord.Embed(title = " <a:eo_TICK:807656268360712312> DM",colour = 0x00F2FF)
-      embed.add_field(name = "Status",value = f"DM Sent Successfully",inline = False)
-      embed.set_footer(text = "Misuse Of This Command May Lead To You Getting Blacklisted From The Command")
-      my_msg = await ctx.send(embed = embed)
-      await asyncio.sleep(5)
-      await my_msg.delete()
-  else:
-    await ctx.message.delete()
-    embed = discord.Embed(title = " <:vError:807656410468712498> DM",colour = 0xFF0000)
-    embed.add_field(name = "Status", value = f"{ctx.author.mention}, You Dont Have The Permission To use This Command")
-    embed.add_field(name = "Missing Permissions", value = "Administrator",inline = False)
-    await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def addrole(ctx,member : discord.Member = None,role : discord.Role = None): 
@@ -1264,19 +1244,6 @@ async def takerole(ctx,member : discord.Member = None,role : discord.Role = None
           embed.add_field(name=f"Removed From",value = member.mention,inline = False)
           embed.add_field(name = f"Responsible Moderator",value= ctx.author.mention)
           await ctx.send(embed=embed)
-@client.command()
-async def role(ctx,query,role : discord.Role):
-  if ctx.author.guild_permissions.manage_roles:
-    if query == "humans":
-      for member in ctx.guild.members:
-        if member.bot == False:
-          await member.add_roles(role)
-          await asyncio.sleep(1)
-    elif query =="bots":
-      for member in ctx.guild.members:
-        if member.bot == True:
-          await member.add_roles(role)
-          await asyncio.sleep(1)
 @client.command()
 async def hackban(ctx,member : discord.User = None,*,reason= None):
   await ctx.message.delete()
@@ -1381,25 +1348,6 @@ async def calculate(ctx,num:float,op,anum:float):
   elif op == "/":
     embed.add_field(name = "Solution",value= f"{num/anum}")
     await ctx.send(embed=embed)
-
-
-@client.command()
-@commands.cooldown(1, 10, commands.BucketType.user)  
-async def image(ctx,*,subred = "scenery"): 
-  subreddit = reddit.subreddit(subred)
-  all_subs = []
-  try:
-    top = subreddit.top(limit= 30)
-    for submission in top:
-      if submission.is_video == False and submission.url.startswith("https://youtube.com") == False:
-        all_subs.append(submission)
-    random_sub = random.choice(all_subs)
-    if random_sub.over_18:
-      await ctx.send("NSFW Content Is Not Supported CUrrently")
-    else:
-      await ctx.send(f"{random_sub.url}")
-  except:
-    await ctx.send(f"The Image Could Not Be Found Or Is Unreachable By Me :/")
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandOnCooldown):
@@ -1499,36 +1447,6 @@ async def create(ctx,type,*,query):
         await ctx.send(f"I Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
     else:
       await ctx.send(f"You Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
-@client.command()
-async def test(ctx):
-  answers = []
-  msg = await ctx.send("React to this For Test")
-  await msg.add_reaction("<:Pog:808216650859151371")
-  def check(react, user):
-    return react.message.author == msg.author and ctx.message.channel == react.message.channel
-  try:
-    react = await client.wait_for('reaction_add', check=check)
-  except asyncio.TimeoutError:
-    await ctx.send("Time's Up! you Didn't Answer In Time")
-    return
-  else:
-    answers.append(react)
-  if answers[0] == "<:Pog:808216650859151371>":
-    await ctx.send(f"Test Successfull")
-blacklists= []
-@client.command()
-async def blacklist(ctx,query,user : discord.Member = None):
-  if ctx.author.id == 757589836441059379:
-    if query.lower() == "view":
-      await ctx.send(blacklists)
-    elif query.lower() == "add":
-      id = user.id
-      blacklists.append(id)
-      print(blacklists[:])
-      await ctx.send(f"User Appended To The Command Blacklist")
-    elif query.lower() == "remove":
-      blacklists.remove(user.id)
-      await ctx.send(f"Removed {user.mention} From Command Blacklist")
 @client.command() 
 async def coinflip(ctx):
   num= random.randint(0,1)
@@ -1625,75 +1543,6 @@ async def voiceunmute(ctx,member : discord.Member):
       await ctx.send(f"I Am Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
   else:
     await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command") 
-@client.event
-async def on_guild_role_create(role):
-  guild = role.guild
-  if guild.name== "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    ch = client.get_channel(812652361943875604)
-    embed = discord.Embed(title= "Role Created",colour = 0xFF0000)
-    embed.add_field(name= "Role Info",value = f"Mention :- {role.mention}\nColor :- {role.color}\nHoisted :- {role.hoist}\nMentionable :- {role.mentionable}")
-    embed.set_footer(text = f"Role ID :- {role.id}")
-    await ch.send(embed=embed)
-intents.messages = True
-@client.event
-async def on_message_delete(message):
-  if message.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812652361943875604)
-    try:
-      if message.author.bot:
-        pass
-      else:
-        embed = discord.Embed(title = "Message Deleted",description = f"Message By {message.author.mention} Deleted In {message.channel.mention}",colour = 0xFF0000)
-        embed.add_field(name = "Message",value= message.content,inline= False)
-        await channel.send(embed=embed)
-    except discord.HTTPException as e:
-      pass
-@client.event
-async def on_message_edit(before,after):
-  if before.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812652361943875604)
-    try:
-      if before.author.bot:
-        pass
-      else:
-        embed= discord.Embed(title = before.author.name,description = f"Message Edited In {before.channel.mention}",colour = 0xFF0000)
-        embed.add_field(name = "Before",value= before.content,inline = False)
-        embed.add_field(name = "After",value = after.content)
-        await channel.send(embed=embed)
-    except discord.HTTPException as e:
-      pass
-@client.event
-async def on_bulk_message_delete(messages):
-  if messages[0].guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812652361943875604)
-    try:
-      embed= discord.Embed(title = messages[0].guild.name,description = f"**Bulk Message Deletion In {messages[1].channel.mention}, {len(messages)} Messages Deleted**",colour = 0xFF0000)
-      await channel.send(embed=embed)
-    except discord.HTTPException as e:
-      pass
-intents.bans = True
-@client.event
-async def on_member_ban(guild,user):
-  if guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812652361943875604)
-    try:
-      embed= discord.Embed(title = guild.name,description = f"A Member Was Banned From {guild.name}",colour = 0xFF0000)
-      embed.add_field(name = "Member Name",value= f"{user.name}#{user.discriminator}",inline = False)
-      embed.add_field(name = "ID",value = user.id)
-      await channel.send(embed=embed)
-    except discord.HTTPException as e:
-      pass
-@client.event
-async def on_member_unban(guild,user):
-  if guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
-    channel = client.get_channel(812652361943875604)
-    try:
-      embed= discord.Embed(title = guild.name,description = f"A Member Was Unbanned From {guild.name}",colour = 0xFF0000)
-      embed.add_field(name = "Member Name",value= f"{user.name}#{user.discriminator}",inline = False)
-      embed.add_field(name = "ID",value = user.id)
-      await channel.send(embed=embed)
-    except discord.HTTPException as e:
-      pass
 @client.command()
 async def warn(ctx,member : discord.Member,*,reason = None):
   if ctx.author.guild_permissions.manage_messages:
@@ -1730,23 +1579,6 @@ async def status(ctx,*,status):
     elif answers[0].lower() == "streaming":
       await client.change_presence(activity=discord.Streaming(name="Support Server", url="https://discord.gg/MXa2EReETq"))
     await ctx.send(f"Status Setup Done")
-prem = []
-@client.command()
-async def addprem(ctx,user:discord.Member):
-  if ctx.author.id ==757589836441059379:
-    prem.append(user.id)
-    await ctx.send(f"Successfully Gave Premium Perks to {user.mention}")
-@client.command()
-async def abcd(ctx):
-  if ctx.author.id in prem:
-    await ctx.send(f"ABCD")
-  else:
-    await ctx.send(f"Only Premium Users Are Allowed To Use This command")
-@client.command()
-async def takeprem(ctx,user:discord.User):
-  if ctx.author.id == 757589836441059379:
-    prem.remove(user.id)
-    await ctx.send(f"Took Premium Perks Away From {user.mention}")
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
 async def quote(ctx):
@@ -1756,18 +1588,6 @@ async def quote(ctx):
   await ctx.send(f"**{content}**")
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
-async def pokedex(ctx,pokemon):
-  results = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon.lower()}").json()
-  embed= discord.Embed(title = pokemon.capitalize())
-  ability = results['abilities'][1]["ability"]['name']
-  height = results['height']
-  weight = results['weight']
-  embed.add_field(name = "Ability",value = ability.capitalize())
-  embed.add_field(name= "Height",value = f"{height / 10} m ",inline = False)
-  embed.add_field(name= "Weight",value = f"{weight / 10} kg ",inline = False)
-  await ctx.send(embed=embed)
-@client.command()
-@commands.cooldown(1,5,commands.BucketType.user)
 async def dog(ctx):
   result = requests.get('https://dog.ceo/api/breeds/image/random').json()
   data= result['message']
@@ -1775,17 +1595,6 @@ async def dog(ctx):
   embed.set_image(url = data)
   embed.set_footer(text= f"Requested By {ctx.author.name}#{ctx.author.discriminator}")
   await ctx.send(embed=embed)
-@client.command()
-async def leave(ctx,id):
-  if ctx.author.id == 757589836441059379:
-    guild = client.get_guild(id)
-    await guild.leave()
-    await ctx.send(f"Left {guild.name}")
-@client.command()
-async def space(ctx):
-  result = requests.get('https://api.nasa.gov/planetary/apod?api_key=stbNlgY7AkCiVZ2l4amvS2Lr8iTnScQC9bO4ZfI3').json()
-  data = result['hdurl']
-  await ctx.send(data)
 @client.command()
 async def commands_list(ctx):
   cmd_list = ""
@@ -1804,37 +1613,4 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
 @client.command()
 async def joke(ctx):
   await ctx.send(pyjokes.get_joke())
-@client.command()
-async def delete(ctx,flag,item):
-  abc = await ctx.guild.fetch_member(client.user.id)
-  if flag.lower() == "channel":
-    if ctx.author.guild_permissions.manage_channels:
-      if abc.guild_permissions.manage_channels:
-        if type(item) == int:
-          channel = await ctx.guild.get_channel(item)
-          try:
-            await channel.delete(reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
-          except:
-            await ctx.send(f"Channel Not Found!")
-        else:
-          channel_id = item[2:-1]
-          channel = await ctx.guild.get_channel(channel_id)
-          try:
-            await channel.delete(reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
-            await ctx.send(f"Deleted Channel `{channel.name}`")
-          except:
-            await ctx.send(f"Channel Not Found!")
-@client.command()
-async def getdetails(ctx,lol: discord.User):
-  if ctx.author.id == 757589836441059379:
-    id = lol.id
-    user = await client.fetch_user(id)
-    await ctx.send(f"Name :- {user.name}#{user.discriminator}\n\nAvatar :-{user.avatar_url}")
-@client.command()
-async def execute(ctx):
-  if ctx.author.id == 757589836441059379:
-    guild = client.get_guild(804224908729122816)
-    for channel in guild.text_channels:
-      await channel.set_permissions(ctx.author,read_messages = True,send_messages = True,view_channel = True,manage_permissions = True,embed_links = True,attach_files = True,use_external_emojis  = True)
-    await ctx.send("Success")
 client.run(TOKEN)
