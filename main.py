@@ -1189,15 +1189,18 @@ async def addrole(ctx,member : discord.Member = None,role : discord.Role = None)
         await ctx.send(f"That Role Is Above My Top Role. I Dont Have The Permission To Assign It To Anyone")
       elif role >= ctx.author.top_role:
         if ctx.author==owner:
-          try:
-            await member.add_roles(role)
-            embed = discord.Embed(title = 'Addrole',colour = 0x00FFE2)
-            embed.add_field(name=f"Role Added",value= role.mention,inline= False)
-            embed.add_field(name=f"Added To",value = member.mention,inline = False)
-            embed.add_field(name = f"Added By",value= ctx.author.mention)
-            await ctx.send(embed=embed)
-          except discord.Forbidden:
-            await ctx.send("Missing Permissions Or Access To That Role :(")
+          if role not in member.roles:
+            try:
+              await member.add_roles(role)
+              embed = discord.Embed(title = 'Addrole',colour = 0x00FFE2)
+              embed.add_field(name=f"Role Added",value= role.mention,inline= False)
+              embed.add_field(name=f"Added To",value = member.mention,inline = False)
+              embed.add_field(name = f"Added By",value= ctx.author.mention)
+              await ctx.send(embed=embed)
+            except discord.Forbidden:
+              await ctx.send("Missing Permissions Or Access To That Role :(")
+          else:
+            await ctx.send(f"{member.name}#{member.discriminator} Already Has The Target Role!")  
         else:
           await ctx.send(f"You Dont have The Permission To Interact With That Role")
       else:
@@ -1212,7 +1215,7 @@ async def addrole(ctx,member : discord.Member = None,role : discord.Role = None)
           except:
             await ctx.send("Missing Permissions Or Access To That Role :(")
         else:
-          await ctx.send(f"{member.name}#{member.discriminator} Already Has The Target Role")
+          await ctx.send(f"{member.name}#{member.discriminator} Already Has The Target Role!")
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def takerole(ctx,member : discord.Member = None,role : discord.Role = None):
