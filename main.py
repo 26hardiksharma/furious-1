@@ -449,45 +449,32 @@ async def serverinfo(ctx):
   await ctx.send(embed=embed)
 @client.command()
 async def kill(ctx,member : discord.Member):
-  if ctx.guild.name == 'VΛИłSĦΣĐ SŁΛҰΣЯS':
-    voter = discord.utils.get(ctx.guild.roles,name = "ᛝ𒅎・SΣЯVΣЯ VΩTΣЯS")
-    if voter in ctx.author.roles:
-      
-      number = random.randint(0,4)
-      if number == 0:
-        await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
-        await asyncio.sleep(2)
-        await ctx.send(f"{ctx.author.name} Locked Aim At {member.name}")
-        await asyncio.sleep(2)
-        await ctx.send(f"{ctx.author.name} Killed {member.mention}! Press F To Pay Respects")
-      elif number == 1:
-        await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
-        await asyncio.sleep(2)
-        await ctx.send(f"{ctx.author.name} Is Prying Out At {member.name}")
-        await asyncio.sleep(2)
-        await ctx.send(f"Turns Out That {member.mention} Is Selmon Bhoi! See Ya Soon **Deer**")
-      elif number == 2:
-        await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
-        await asyncio.sleep(2)
-        await ctx.send(f"{ctx.author.name} Pulled Out His Cleavers")
-        await asyncio.sleep(2)
-        await ctx.send(f"{ctx.author.name} Chopped Down {member.mention}! RIP")
-      else:
-        await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
-        await asyncio.sleep(2)
-        await ctx.send(f"{member.name} Is Suspecting {ctx.author.name}")
-        await asyncio.sleep(2)
-        await ctx.send(f"{member.name} Ringed The Women Helpline... See Ya Soon {ctx.author.mention}!")
-    else:
-      embed = discord.Embed(title = "Kill",colour = 0x00FFD3)
-      embed.add_field(name = "Status", value = "Only Server Voters Are Allowed To Use This Command 😋")
-      embed.add_field(name = "Vote Server",value = "[Click Me](https://top.gg/servers/758381318404308994/vote)",inline = False)
-      await ctx.send(embed=embed)
+  
+  number = random.randint(0,4)
+  if number == 0:
+    await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
+    await asyncio.sleep(2)
+    await ctx.send(f"{ctx.author.name} Locked Aim At {member.name}")
+    await asyncio.sleep(2)
+    await ctx.send(f"{ctx.author.name} Killed {member.mention}! Press F To Pay Respects")
+  elif number == 1:
+    await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
+    await asyncio.sleep(2)
+    await ctx.send(f"{ctx.author.name} Is Prying Out At {member.name}")
+    await asyncio.sleep(2)
+    await ctx.send(f"Turns Out That {member.mention} Is Selmon Bhoi! See Ya Soon **Deer**")
+  elif number == 2:
+    await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
+    await asyncio.sleep(2)
+    await ctx.send(f"{ctx.author.name} Pulled Out His Cleavers")
+    await asyncio.sleep(2)
+    await ctx.send(f"{ctx.author.name} Chopped Down {member.mention}! RIP")
   else:
-    embed = discord.Embed(title = "Hack",colour = 0xFF0000)
-    embed.add_field(name = "Status", value = "This Command Is Currently Limited To Our Official Server Only")
-    embed.add_field(name = "Official Server",value = "[Server Link](https://discord.gg/uKh8Y2fhmJ)",inline = False)
-    await ctx.send(embed=embed)  
+    await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
+    await asyncio.sleep(2)
+    await ctx.send(f"{member.name} Is Suspecting {ctx.author.name}")
+    await asyncio.sleep(2)
+    await ctx.send(f"{member.name} Ringed The Women Helpline... See Ya Soon {ctx.author.mention}!")  
 def convert(time):
   pos = ["s","m","h","d","hr","hour","hours","min","minute","minutes","day","days"]
   
@@ -1200,7 +1187,7 @@ async def addrole(ctx,member : discord.Member = None,role : discord.Role = None)
             except discord.Forbidden:
               await ctx.send("Missing Permissions Or Access To That Role :(")
           else:
-            await ctx.send(f"{member.name}#{member.discriminator} Already Has The Target Role!")  
+            await ctx.send(f"{member.name}#{member.discriminator} Already Has The Target Role!") 
         else:
           await ctx.send(f"You Dont have The Permission To Interact With That Role")
       else:
