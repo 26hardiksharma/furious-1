@@ -448,33 +448,37 @@ async def serverinfo(ctx):
   embed.set_thumbnail(url = ctx.guild.icon_url)
   await ctx.send(embed=embed)
 @client.command()
-async def kill(ctx,member : discord.Member):
-  
-  number = random.randint(0,4)
-  if number == 0:
-    await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
-    await asyncio.sleep(2)
-    await ctx.send(f"{ctx.author.name} Locked Aim At {member.name}")
-    await asyncio.sleep(2)
-    await ctx.send(f"{ctx.author.name} Killed {member.mention}! Press F To Pay Respects")
-  elif number == 1:
-    await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
-    await asyncio.sleep(2)
-    await ctx.send(f"{ctx.author.name} Is Prying Out At {member.name}")
-    await asyncio.sleep(2)
-    await ctx.send(f"Turns Out That {member.mention} Is Selmon Bhoi! See Ya Soon **Deer**")
-  elif number == 2:
-    await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
-    await asyncio.sleep(2)
-    await ctx.send(f"{ctx.author.name} Pulled Out His Cleavers")
-    await asyncio.sleep(2)
-    await ctx.send(f"{ctx.author.name} Chopped Down {member.mention}! RIP")
+async def kill(ctx,member : discord.Member = None):
+  if member == None:
+    await ctx.send("Bruh, Please Mention A Member For Me To Kill Them. I Don't Support Mind Reading Currently :/")
+  elif member == ctx.author:
+    await ctx.send("No. I Wont Kill You!")
   else:
-    await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
-    await asyncio.sleep(2)
-    await ctx.send(f"{member.name} Is Suspecting {ctx.author.name}")
-    await asyncio.sleep(2)
-    await ctx.send(f"{member.name} Ringed The Women Helpline... See Ya Soon {ctx.author.mention}!")  
+    number = random.randint(0,4)
+    if number == 0:
+      await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
+      await asyncio.sleep(2)
+      await ctx.send(f"{ctx.author.name} Locked Aim At {member.name}")
+      await asyncio.sleep(2)
+      await ctx.send(f"{ctx.author.name} Killed {member.mention}! Press F To Pay Respects")
+    elif number == 1:
+      await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
+      await asyncio.sleep(2)
+      await ctx.send(f"{ctx.author.name} Is Prying Out At {member.name}")
+      await asyncio.sleep(2)
+      await ctx.send(f"Turns Out That {member.mention} Is Selmon Bhoi! See Ya Soon **Deer**")
+    elif number == 2:
+      await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
+      await asyncio.sleep(2)
+      await ctx.send(f"{ctx.author.name} Pulled Out His Cleavers")
+      await asyncio.sleep(2)
+      await ctx.send(f"{ctx.author.name} Chopped Down {member.mention}! RIP")
+    else:
+      await ctx.send(f"{ctx.author.mention} Chased {member.mention}.")
+      await asyncio.sleep(2)
+      await ctx.send(f"{member.name} Is Suspecting {ctx.author.name}")
+      await asyncio.sleep(2)
+      await ctx.send(f"{member.name} Ringed The Women Helpline... See Ya Soon {ctx.author.mention}!")  
 def convert(time):
   pos = ["s","m","h","d","hr","hour","hours","min","minute","minutes","day","days"]
   
