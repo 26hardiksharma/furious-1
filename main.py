@@ -1061,6 +1061,7 @@ async def maintenance(ctx,query = None):
       if me.guild_permissions.administrator:
         if query == "on":
             msg = await ctx.send(f"<a:tg_02:786959609247432784> Starting Maintenance Procedure")
+
             for channel in ctx.guild.text_channels:
               overwrite = channel.overwrites_for(ctx.guild.default_role)
               overwrite.view_channel = False    
