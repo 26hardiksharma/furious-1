@@ -365,7 +365,7 @@ async def invite(ctx):
   embed.set_thumbnail(url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
 @client.command()
-async def lock(ctx, channel : discord.TextChannel=None):
+async def lock(ctx,*,channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
       channel = channel or ctx.channel
       overwrite = channel.overwrites_for(ctx.guild.default_role)
@@ -378,7 +378,7 @@ async def lock(ctx, channel : discord.TextChannel=None):
     await ctx.send("<:kya_bey:796610669549322250>")
 
 @client.command()
-async def unlock(ctx, channel : discord.TextChannel=None):
+async def unlock(ctx,*,channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
     channel = channel or ctx.channel
     overwrite = channel.overwrites_for(ctx.guild.default_role)
