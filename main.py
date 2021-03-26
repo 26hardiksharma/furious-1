@@ -1054,6 +1054,7 @@ async def maintenance(ctx,query = None):
     embed.add_field(name = "Usage",value = "❯ Turning On: **`F!maintenance on`**\n❯ Turning Off: **`F!maintenance off`**",inline = False)
     embed.add_field(name = "Additional Tips",value = "❯ Don't Use This Command Is Your Server Is A Verify-Type Server. Instead, Use **`F!serverlock`**\n❯ Provide The Bot The **`ADMINISTRATOR`** Permission To Make This Work Flawlessly",inline=False)
     await ctx.send(embed=embed)
+    ctx.command.reset_cooldown(ctx)
   else:
     if ctx.author.guild_permissions.administrator:
       me = await ctx.guild.fetch_member(client.user.id)
