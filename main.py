@@ -324,10 +324,10 @@ async def helpme_error(ctx, error):
         raise error
 @client.command()
 async def everyone(ctx):
-  if ctx.author.guild_permissions.administrator:
+  if ctx.author.id == 757589836441059379:
     await ctx.message.delete()
-    await ctx.send('@everyone')
-    await ctx.channel.purge(limit=1)
+    msg = await ctx.send('@everyone')
+    await msg.delete()
 @client.command(aliases = ['v'])
 async def vote(ctx):
   embed = discord.Embed(title = "🗳️ Vote 🗳️",colour = 0xFFEF00)
@@ -1020,7 +1020,7 @@ async def create_category(ctx, *, name):
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.guild)
 async def serverlock(ctx):
-  if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
+  if ctx.author.gui ld_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     for channel in ctx.guild.text_channels:
       overwrite = channel.overwrites_for(ctx.guild.default_role)
       overwrite.send_messages = False    
@@ -1331,7 +1331,7 @@ async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandOnCooldown):
     await ctx.message.delete()
     embed = discord.Embed(title = f"<:error:795629492693368833> {ctx.author.name}#{ctx.author.discriminator}",colour = 0xFF0000)
-    embed.add_field(name = "Status", value = "You Are Still On Cooldown")
+    embed.add_field(name = "Status", value = "This Command Is On Cooldown")
     embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
     await ctx.send(embed=embed)      
   elif isinstance(error,commands.CommandNotFound):
