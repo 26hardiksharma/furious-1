@@ -1020,7 +1020,7 @@ async def create_category(ctx, *, name):
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.guild)
 async def serverlock(ctx):
-  if ctx.author.gui ld_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
+  if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     for channel in ctx.guild.text_channels:
       overwrite = channel.overwrites_for(ctx.guild.default_role)
       overwrite.send_messages = False    
