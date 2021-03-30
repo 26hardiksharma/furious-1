@@ -1595,8 +1595,4 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
 @client.command()
 async def joke(ctx):
   await ctx.send(pyjokes.get_joke())
-@client.command()
-async def getav(ctx,user : discord.User):
-  user = await client.fetch_user(user.id)
-  await ctx.send(user.avatar_url)
 client.run(TOKEN)
