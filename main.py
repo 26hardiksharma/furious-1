@@ -1021,18 +1021,20 @@ async def create_category(ctx, *, name):
 @commands.cooldown(1, 5, commands.BucketType.guild)
 async def serverlock(ctx):
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
+    await ctx.send("Starting The Process To Lock All Text Channels Of The Server, Please Be Patient.")
     for channel in ctx.guild.text_channels:
       overwrite = channel.overwrites_for(ctx.guild.default_role)
       overwrite.send_messages = False    
       await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
       await asyncio.sleep(0.2)
-    await ctx.send(f"Successfully Locked All Channels For {ctx.guild.name}")
+    await ctx.send(f"Successfully Locked All Channels Of {ctx.guild.name}")
   else:
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
 @commands.cooldown(1, 60, commands.BucketType.guild)
 async def serverunlock(ctx):
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
+    await ctx.send("Starting The Process To Unlock All Text Channels Of The Server, Please Be Patient.")
     for channel in ctx.guild.text_channels:
       if channel.is_news() == False:
         overwrite = channel.overwrites_for(ctx.guild.default_role)
