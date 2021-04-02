@@ -492,13 +492,16 @@ def convert(time):
     return -2
   return val*time_dict[unit]
 @client.command()
-async def slowmode(ctx, unit):
+async def slowmode(ctx, unit = None):
+  if unit == None:
+    await ctx.send("Please Specify A Value For The Slowmode To Be Applied.\n\nExample: `F!slowmode 1m`")
+    return
   me = await ctx.guild.fetch_member(client.user.id)
   if ctx.author.guild_permissions.manage_channels:
     if me.guild_permissions.manage_channels:
       time = convert(unit)
       if time == -1:
-        await ctx.send("You Didnt Answer With A Proper Unit, Please Answer With A Proper Unit Next Time\n\nUnit References : [s|h|m]")
+        await ctx.send("You Didnt Answer With A Proper Unit, Please Answer With A Proper Unit Next Time\n\nUnit References : [s|m|h]")
       elif time == -2:
         await ctx.send("Time Must be An Integer Value!")
       else:
