@@ -772,20 +772,17 @@ async def help(ctx,query = None):
 @commands.cooldown(1,600,commands.BucketType.user)
 async def suggest(ctx,*,query):
   id = ctx.author.id
-  if id in blacklists:
-    await ctx.send(f"You Are Blacklisted And Revoked From Using The Suggest Command")
-  else:
-    suggestion = query
-    channel = client.get_channel(810206511136636968)
-    embed = discord.Embed(title = f"{ctx.author.name}",colour = 0x00F9FF)
-    embed.add_field(name = "Suggestion",value = suggestion,inline = False)
-    embed.add_field(name="Author ID",value = ctx.author.id,inline = False)
-    embed.add_field(name = "Guild Name",value = ctx.guild.name,inline = False)
-    op = await channel.send(embed=embed)
-    await op.add_reaction("⬆")
-    await op.add_reaction("🟡")
-    await op.add_reaction("⬇")
-    await ctx.send(f"Thank You For Providing A Suggestion! Your Efforts Are Appreciated")
+  suggestion = query
+  channel = client.get_channel(810206511136636968)
+  embed = discord.Embed(title = f"{ctx.author.name}",colour = 0x00F9FF)
+  embed.add_field(name = "Suggestion",value = suggestion,inline = False)
+  embed.add_field(name="Author ID",value = ctx.author.id,inline = False)
+  embed.add_field(name = "Guild Name",value = ctx.guild.name,inline = False)
+  op = await channel.send(embed=embed)
+  await op.add_reaction("⬆")
+  await op.add_reaction("🟡")
+  await op.add_reaction("⬇")
+  await ctx.send(f"Thank You For Providing A Suggestion! Your Efforts Are Appreciated")
 @client.command(aliases= ['approve'])
 async def consider(ctx,id:int,*,reason):
   if ctx.guild.id == 810190584059789323:
