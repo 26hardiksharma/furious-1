@@ -837,7 +837,7 @@ async def on_guild_remove(guild):
 async def trash(ctx, member: discord.Member = None):
   if member== None:
     member = ctx.author
-  trash = Image.open("trash.jpg")
+  trash = Image.open("trash.jpg").convert('RGB')
   asset = member.avatar_url_as(size = 256)
   data = BytesIO(await asset.read())
   pfp = Image.open(data)
