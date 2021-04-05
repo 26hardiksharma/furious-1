@@ -1605,5 +1605,16 @@ async def ascii(ctx,*,text=None):
       return
   kek=text2art(text)
   await ctx.send(f"```\n{kek}\n```")
-
+@client.command()
+async def rip(ctx,member : discord.Member = None):
+  if member == None:
+    member = ctx.author
+  okay = Image.open('rip.png')
+  asset = member.avatar_url_as(size = 256)
+  data = BytesIO(await asset.read())
+  pfp = Image.open(data)
+  pfp= pfp.resize((78,78))
+  okay.paste(pfp,(56,124))
+  okay.save("profile.jpg")
+  await ctx.send(file = discord.File("profile.jpg"))
 client.run(TOKEN)
