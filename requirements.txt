@@ -7,3 +7,4 @@ praw
 requests
 discord-py-slash-command
 pyjokes
+art
