@@ -720,7 +720,7 @@ async def help(ctx,query = None):
       embed.add_field(name = "Bot Prefixes",value = f"F!\n^\n{client.user.mention}",inline = False)
       embed.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
       embed.add_field(name = "<:emoji_2:810202313142566992> Moderation",value  = "`kick`,`ban`,`mute`,`unmute`,`hackban`,`tempmute`,`slowmode`,`lock`,`unlock`,`private`,\n`unprivate`,`setnick`,`muterole`",inline =False)
-      embed.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`",inline = False)
+      embed.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
       embed.add_field(name = "<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`giveaway`,`roleinfo`,`serverinfo`,`avatar`,`roll`",inline = False)
       embed.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
       embed.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation\nUtility\nManagement\nFun\nYou Can Type F!help <module> To Get The Commands Of That Module")
@@ -733,6 +733,8 @@ async def help(ctx,query = None):
       embed.add_field(name = "Wanted!",value = "**^wanted @user**",inline = False)
       embed.add_field(name = "Hitler!",value = "**^hitler @user**",inline = False)
       embed.add_field(name = "Meme",value = "**^meme**")
+      embed.add_field(name = "Trash",value = "**F!Trash <@user>**",inline = False)
+      embed.add_field(name = "Delete",value="**F!delete <@user>**")
       embed.set_footer(text = "[] = Required, <> = Not Neccesary")
       await ctx.send(embed=embed)
     elif query.lower() == 'moderation':
