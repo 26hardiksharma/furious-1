@@ -835,7 +835,7 @@ async def on_guild_remove(guild):
   embed.set_thumbnail(url = f"{guild.icon_url}")
   await channel.send(embed=embed)
 @client.command()
-@commands.cooldown(1, 10, commands.BucketType.user)
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def trash(ctx, member: discord.Member = None):
   if member== None:
     member = ctx.author
