@@ -1617,4 +1617,17 @@ async def rip(ctx,member : discord.Member = None):
   okay.paste(pfp,(56,124))
   okay.save("profile.jpg")
   await ctx.send(file = discord.File("profile.jpg"))
+@client.command()
+async def delete(ctx,member : discord.Member= None):
+  if member == None:
+    member = ctx.author
+  okay = Image.open('plsdelete.jpg').convert('RGB')
+  asset = member.avatar_url_as(size = 256)
+  data = BytesIO(await asset.read())
+  pfp = Image.open(data)
+  pfp= pfp.resize((196,196))
+  okay.paste(pfp,(120,134))
+  okay.save("profile.jpg")
+  await ctx.send(file = discord.File("profile.jpg"))
+  
 client.run(TOKEN)
