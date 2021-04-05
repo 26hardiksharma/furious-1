@@ -1444,7 +1444,7 @@ async def roleinfo(ctx,role : discord.Role = None):
   count = 0
   perms_string = ""
   if role == None:
-    await ctx.send(f"Please Mention A Role Or Use It's ID To Get Its Info! ;)")
+    await ctx.send(f"Please Mention A Role Or Pass It's ID To Get Its Info! ;)")
   else: 
     for perm, true_false in role.permissions:
       if true_false is True:
@@ -1515,7 +1515,6 @@ async def voiceunmute(ctx,member : discord.Member):
         if member.top_role >= abc.top_role or member == owner:
           await ctx.send(f"I Am Unable To Interact With {member}")
         else:
-
           try:
             await member.edit(mute=False,reason = f"Action By {ctx.author}")
             await ctx.send(f"Successfully Unmuted {member.mention} From Voice")
@@ -1595,4 +1594,15 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
 @client.command()
 async def joke(ctx):
   await ctx.send(pyjokes.get_joke())
+@client.command()
+async def ascii(ctx,*,text=None):
+  if text == None:
+      await ctx.send("Please Supply A Text To Be Converted To Ascii :)")
+      return
+  if len(text) > 8:
+      await ctx.send('Text Should Not Be Greater Than 8 Characters ;)')
+      return
+  kek=text2art(text)
+  await ctx.send(f"```\n{kek}\n```")
+
 client.run(TOKEN)
