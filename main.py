@@ -1609,9 +1609,8 @@ async def ascii(ctx,*,text=None):
 async def rip(ctx,member : discord.Member = None):
   if member == None:
     member = ctx.author
-  okay = Image.open('rip.png')
+  okay = Image.open('rip.png').convert('L')
   asset = member.avatar_url_as(size = 256)
-  asset = asset.convert('L')
   data = BytesIO(await asset.read())
   pfp = Image.open(data)
   pfp= pfp.resize((78,78))
