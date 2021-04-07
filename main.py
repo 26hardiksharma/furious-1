@@ -163,7 +163,7 @@ async def purge(ctx,amt: int = None,member : discord.Member = None):
           try:
             await ctx.message.delete()
             await ctx.channel.purge(limit = amt,check=check)
-            msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages")
+            msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages Of {member}")
             await asyncio.sleep(3)
             await msg.delete()
           except commands.BadArgument as e:
