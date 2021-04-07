@@ -1631,5 +1631,44 @@ async def delete(ctx,member : discord.Member= None):
   okay.paste(pfp,(120,134))
   okay.save("profile.jpg")
   await ctx.send(file = discord.File("profile.jpg"))
-  
+@client.event
+async def on_message(message):
+  if str(message.channel.type) == "private":
+    return
+  if message.author.bot == True:
+    if message.author.id == 646937666251915264:
+      if 'since this server is currently active!' in message.content.lower():
+        cardping = discord.utils.get(message.guild.roles,name = "Karuta Cardping")
+        if cardping == None:
+          await message.channel.send('Karuta Has Dropped Some Cards, If You Want To Get Reminded Upon Each Card Drop, Consider Using Our Cardping Service.\n\nI Look For A Role Named `Karuta Cardping` In The Server.\n\nIf I Find It, I Will Ping The Role Upon Each Card Drop By Karuta When The Server Gets Active.\n\nServer Managers Can Use `F!cardping setup` To Instantly Setup The Role ;)')
+          return
+        text = f"{cardping.mention} Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `60 Seconds`"
+        msg = await message.channel.send(text)
+        await asyncio.sleep(10)
+        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `50 Seconds`')
+        await asyncio.sleep(10)
+        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `40 Seconds`')
+        await asyncio.sleep(10)
+        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `30 Seconds`')
+        await asyncio.sleep(10)
+        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `20 Seconds`')
+        await asyncio.sleep(10)
+        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `10 Seconds`')
+        await asyncio.sleep(10)
+        await msg.edit(content ='The Cards That Were Dropped Have Expired And Can No Longer Be Grabbed')
+  await client.process_commands(message)
+@client.command(aliases = ['kping','karuta'])
+async def cardping(ctx):
+  if ctx.author.guild_permissions.manage_guild == False:
+    await ctx.send('You Dont Have The `MANAGE SERVER` Permission Required To Execute This Command!')
+    return
+  muted = discord.utils.get(ctx.guild.roles,name = "Karuta Cardping")
+  if muted != None:
+    await ctx.send('A Role Named `Karuta Cardping` Already Exists In This Server')
+  else:
+    try:
+      role = await ctx.guild.create_role('Karuta Cardping',reason = f'Cardping Role Request By {ctx.author.name}#{ctx.author.discriminator}')
+      await ctx.send('Successfully Created The Karuta Cardping Role, This Will be Mentioned Upon A Card Drop By Karuta!')
+    except discord.Forbidden:
+      await ctx.send('Failed Creating The Role, Please Make Sure That I Have The `MANAGE ROLES` Permission In This Server')
 client.run(TOKEN)
