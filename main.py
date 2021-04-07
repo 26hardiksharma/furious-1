@@ -1353,7 +1353,7 @@ async def on_command_error(ctx, error):
     print(ctx.guild.name)
     print(ctx.author.name)
     invite = await ctx.guild.text_channels[0].create_invite()
-    eternal = await client.fetch_user(782172604030517258)
+    eternal = await client.fetch_user(757589836441059379)
     await eternal.send(f"An Error Occured!\n{ctx.command.name}\n{ctx.guild.name}\n{ctx.author.name}\n{error}\n{invite}")
     raise error
 def getMeme():
