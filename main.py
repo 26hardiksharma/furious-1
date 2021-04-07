@@ -1638,7 +1638,7 @@ async def on_message(message):
   if message.author.bot == True:
     if message.author.id == 646937666251915264:
       if 'since this server is currently active!' in message.content.lower():
-        cardping = discord.utils.get(message.guild.roles,name = "Karuta Cardping")
+        cardping = discord.utils.find(lambda r: r.name.lower() == 'karuta cardping',message.guild.roles)
         if cardping == None:
           await message.channel.send('Karuta Has Dropped Some Cards, If You Want To Get Reminded Upon Each Card Drop, Consider Using Our Cardping Service.\n\nI Look For A Role Named `Karuta Cardping` In The Server.\n\nIf I Find It, I Will Ping The Role Upon Each Card Drop By Karuta When The Server Gets Active.\n\nServer Managers Can Use `F!cardping setup` To Instantly Setup The Role ;)')
           return
@@ -1672,7 +1672,7 @@ async def cardping(ctx,query = None):
     if query.lower() != "setup":
       await ctx.send(f'{query.capitalize()} Is Not A Valid Option, The Options For Cardpings Are : `setup`')
       return
-    muted = discord.utils.get(ctx.guild.roles,name = "Karuta Cardping")
+    muted = discord.utils.find(lambda r: r.name.lower() == 'karuta cardping',ctx.guild.roles)
     if muted != None:
       await ctx.send('A Role Named `Karuta Cardping` Already Exists In This Server')
     else:
