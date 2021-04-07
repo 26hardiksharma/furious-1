@@ -1637,10 +1637,12 @@ async def on_message(message):
     return
   if message.author.bot == True:
     if message.author.id == 646937666251915264:
+      chan = client.get_channel(829005340677767198)
       if 'since this server is currently active!' in message.content.lower():
         cardping = discord.utils.find(lambda r: r.name.lower() == 'karuta cardping',message.guild.roles)
         if cardping == None:
           await message.channel.send('Karuta Has Dropped Some Cards, If You Want To Get Reminded Upon Each Card Drop, Consider Using Our Cardping Service.\n\nI Look For A Role Named `Karuta Cardping` In The Server.\n\nIf I Find It, I Will Ping The Role Upon Each Card Drop By Karuta When The Server Gets Active.\n\nServer Managers Can Use `F!cardping setup` To Instantly Setup The Role ;)')
+          await chan.send(message.attachments[0].url)
           return
         text = f"{cardping.mention} Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `60 Seconds`"
         msg = await message.channel.send(text)
@@ -1656,6 +1658,7 @@ async def on_message(message):
         await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `10 Seconds`')
         await asyncio.sleep(10)
         await msg.edit(content ='The Cards That Were Dropped Have Expired And Can No Longer Be Grabbed')
+        await chan.send(message.attachments[0].url)
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
 async def cardping(ctx,query = None):
