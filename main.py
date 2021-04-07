@@ -1637,7 +1637,7 @@ async def on_message(message):
     return
   if message.author.bot == True:
     if message.author.id == 646937666251915264:
-      chan = client.get_channel(829005340677767198)
+      chan = client.get_channel(829233056632143872)
       if 'since this server is currently active!' in message.content.lower():
         cardping = discord.utils.find(lambda r: r.name.lower() == 'karuta cardping',message.guild.roles)
         if cardping == None:
