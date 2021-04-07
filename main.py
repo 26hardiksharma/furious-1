@@ -1658,17 +1658,27 @@ async def on_message(message):
         await msg.edit(content ='The Cards That Were Dropped Have Expired And Can No Longer Be Grabbed')
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
-async def cardping(ctx):
-  if ctx.author.guild_permissions.manage_guild == False:
-    await ctx.send('You Dont Have The `MANAGE SERVER` Permission Required To Execute This Command!')
+async def cardping(ctx,query = None):
+  if query == None:
+    embed = discord.Embed(title = "Karuta Cardping",colour = ctx.author.colour,timestamp = datetime.datetime.now())
+    embed.add_field(name ='Information',value = 'Karuta Is A Brand New Feature Introduced In Furious Which Helps You Ping People Interested In Playing Karuta.\n\n Execute This Command Creates A Role Named `Karuta Cardping` In The Server.\n\nThis Role Will Be Pinged When Karuta Drops Card Upon Increasing Server Activity.')
+    embed.add_field(name = 'Usage',value = "F!cardping setup",inline = False)
+    await ctx.send(embed=embed)
     return
-  muted = discord.utils.get(ctx.guild.roles,name = "Karuta Cardping")
-  if muted != None:
-    await ctx.send('A Role Named `Karuta Cardping` Already Exists In This Server')
   else:
-    try:
-      role = await ctx.guild.create_role(name = 'Karuta Cardping',reason = f'Cardping Role Request By {ctx.author.name}#{ctx.author.discriminator}')
-      await ctx.send('Successfully Created The Karuta Cardping Role, This Will be Mentioned Upon A Card Drop By Karuta!')
-    except discord.Forbidden:
-      await ctx.send('Failed Creating The Role, Please Make Sure That I Have The `MANAGE ROLES` Permission In This Server')
+    if ctx.author.guild_permissions.manage_guild == False:
+      await ctx.send('You Dont Have The `MANAGE SERVER` Permission Required To Execute This Command!')
+      return
+    if query.lower() != "setup":
+      await ctx.send(f'{query.capitalize()} Is Not A Valid Option, The Options For Cardpings Are : `setup`')
+      return
+    muted = discord.utils.get(ctx.guild.roles,name = "Karuta Cardping")
+    if muted != None:
+      await ctx.send('A Role Named `Karuta Cardping` Already Exists In This Server')
+    else:
+      try:
+        role = await ctx.guild.create_role(name = 'Karuta Cardping',reason = f'Cardping Role Request By {ctx.author.name}#{ctx.author.discriminator}')
+        await ctx.send('Successfully Created The Karuta Cardping Role, This Will be Mentioned Upon A Card Drop By Karuta!')
+      except discord.Forbidden:
+        await ctx.send('Failed Creating The Role, Please Make Sure That I Have The `MANAGE ROLES` Permission In This Server')
 client.run(TOKEN)
