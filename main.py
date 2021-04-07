@@ -1661,7 +1661,7 @@ async def on_message(message):
 async def cardping(ctx,query = None):
   if query == None:
     embed = discord.Embed(title = "Karuta Cardping",colour = ctx.author.colour,timestamp = datetime.datetime.now())
-    embed.add_field(name ='Information',value = 'Karuta Is A Brand New Feature Introduced In Furious Which Helps You Ping People Interested In Playing Karuta.\n\n Execute This Command Creates A Role Named `Karuta Cardping` In The Server.\n\nThis Role Will Be Pinged When Karuta Drops Card Upon Increasing Server Activity.')
+    embed.add_field(name ='Information',value = 'Karuta Cardping Is A Brand New Feature Introduced In Furious Which Helps You Ping People Interested In Playing Karuta.\n\n Execute This Command Creates A Role Named `Karuta Cardping` In The Server.\n\nThis Role Will Be Pinged When Karuta Drops Card Upon Increasing Server Activity.')
     embed.add_field(name = 'Usage',value = "F!cardping setup",inline = False)
     await ctx.send(embed=embed)
     return
