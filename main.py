@@ -159,7 +159,7 @@ async def purge(ctx,amt: int = None,member : discord.Member = None):
               await ctx.send(f"Please Enter Only Integer Value For The Number Of Messages To Be Purged")
         else:
           def check(m):
-            return m.author == member:
+            return m.author == member
           try:
             await ctx.message.delete()
             await ctx.channel.purge(limit = amt,check=check)
