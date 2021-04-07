@@ -1667,7 +1667,7 @@ async def cardping(ctx):
     await ctx.send('A Role Named `Karuta Cardping` Already Exists In This Server')
   else:
     try:
-      role = await ctx.guild.create_role('Karuta Cardping',reason = f'Cardping Role Request By {ctx.author.name}#{ctx.author.discriminator}')
+      role = await ctx.guild.create_role(name = 'Karuta Cardping',reason = f'Cardping Role Request By {ctx.author.name}#{ctx.author.discriminator}')
       await ctx.send('Successfully Created The Karuta Cardping Role, This Will be Mentioned Upon A Card Drop By Karuta!')
     except discord.Forbidden:
       await ctx.send('Failed Creating The Role, Please Make Sure That I Have The `MANAGE ROLES` Permission In This Server')
