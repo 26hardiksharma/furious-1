@@ -48,9 +48,8 @@ async def on_ready():
   client.mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
   client.db = client.mongo['furiousop']
   print('Connected To Collection: furiousop\n\nConnecting With Prefixes')
-  prefixdb = db['stores']
-  client.config = Document(client.db,'config')
-  print('Connected To Prefixes')
+  client.config = Document(client.db,'stores')
+  print('Success')
 
 intents.guilds = True
 @client.command()
@@ -1726,26 +1725,30 @@ async def cardping(ctx,query = None):
       #elif query.lower() == "status":
        #embed = discord.Embed(title = '')
 """ Gao Bhar Ke Functions """
-async def update(dict):
-  await update_by_id(dict)
-async def get_by_id(id):
-  return await find_by_id(id)
-async def find(id):
-  return await find_by_id(id)
-async def remove(id):
-  await delete_by_id(id)
-async def find_by_id(id):
-  return await db.find_one({"_id":id})
-async def delete_by_id(id):
-  if not await find_by_id(id):
-    pass
-  await db.delete_many({"_id":id})
-async def insert(dict):
-  if not isinstance(dict, collections.abc.Mapping):
-    raise TypeError('Expected Dictionary')
-  if not dict["_id"]:
-    raise KeyError("ID Not Found In Supplied Dictionary")
-  await db.insert_one(dict)
+class Document:
+  def __init__(self,connection,document_name):
+    self.db = connection[document_name]
+  
+  async def update(dict):
+    await update_by_id(dict)
+  async def get_by_id(id):
+    return await find_by_id(id)
+  async def find(id):
+    return await find_by_id(id)
+  async def remove(id):
+    await delete_by_id(id)
+  async def find_by_id(id):
+    return await db.find_one({"_id":id})
+  async def delete_by_id(id):
+    if not await find_by_id(id):
+      pass
+    await db.delete_many({"_id":id})
+  async def insert(dict):
+    if not isinstance(dict, collections.abc.Mapping):
+      raise TypeError('Expected Dictionary')
+    if not dict["_id"]:
+      raise KeyError("ID Not Found In Supplied Dictionary")
+    await db.insert_one(dict)
 mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 @client.event
 async def on_member_join(member):
