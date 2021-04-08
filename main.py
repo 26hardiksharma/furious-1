@@ -1754,7 +1754,7 @@ async def cardping(ctx,query = None,*,desc = None):
         else:
           if not ctx.message.role_mentions:
             return await ctx.send('You Did Not Mention A Role To Be Set As The Cardping Role, Please Be Sure To Mention One Next Time!')
-          i = ctx.message.mentions[0]
+          i = ctx.message.role_mentions[0]
           role = discord.utils.get(ctx.guild.roles,id = i.id)
           if role == None:
             await ctx.send(f'No Role Matching {i} Found In This Server')
