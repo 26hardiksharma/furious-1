@@ -1751,6 +1751,8 @@ class Document:
     await db.insert_one(dict)
   async def upsert(dict):
     await db.insert_one(dict)
+  async def __get_raw(id):
+    return await db.find_one({"_id":id})
 
 mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 @client.event
