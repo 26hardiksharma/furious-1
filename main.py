@@ -1732,12 +1732,18 @@ async def cardping(ctx,query = None,*,desc = None):
         return
       if desc == None:
         return await ctx.send('Please Supply A Toggle Value For Me To Apply. Valid Values: `on` / `off`')
-      if desc.lower() != "on" or desc.lower() != "off":
-        await ctx.send('Thats Not A Valid Toggle To Be Applied. Valid Values: `on` / `off`')
-        return 
-      okay = {"_id": ctx.guild.id,"ktoggle":desc.lower()}
-      await client.config.upsert(okay)
-    
+      else: 
+        if desc.lower() == 'on':
+          okay = {"_id": ctx.guild.id,"ktoggle":"on"}
+          await client.config.upsert(okay)
+          await ctx.send('Karuta Cardping Was Toggled To On!')
+        elif desc.lower() == "off":
+          okay = {"_id": ctx.guild.id,"ktoggle":"off"}
+          await client.config.upsert(okay)
+          await ctx.send('Karuta Cardping Was Toggled To On!')
+        else:
+          await ctx.send('Invalid Toggle Supplied!')
+
 
 
 """ Gao Bhar Ke Functions """
