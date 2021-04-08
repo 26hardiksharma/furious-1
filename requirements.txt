@@ -12,4 +12,3 @@ motor
 pysrv
 collections
 pymongo
-pymongo[srv]==3.11
