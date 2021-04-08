@@ -1726,7 +1726,7 @@ async def cardping(ctx,query = None):
        #embed = discord.Embed(title = '')
 """ Gao Bhar Ke Functions """
 class Document:
-  def __init__(connection,document_name):
+  def __init__(self,connection,document_name):
     self.db = connection[document_name]
 
   async def update(dict):
