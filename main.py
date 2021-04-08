@@ -1846,7 +1846,12 @@ class Document:
 
   async def __get_raw(self,id):
     return await self.db.find_one({"_id":id})
-
+  async def unset(self,dict):
+    if not await self.find_by_id(dict["_id"]):
+      return
+    id = dict["_id"]
+    dict.pop("_id")
+    await self.db.update_one({"_id":id},{"$unset":dict})
 mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 @client.event
 async def on_member_join(member):
@@ -1859,6 +1864,10 @@ async def prefix(ctx,prefix = None):
   if ctx.author.guild_permissions.administrator:
     if prefix == None:
       await ctx.send("Please Be Sure To Supply The Prefix You Want To Be Set For This Server While Using This Command!")
+      return
+    if prefix.lower() == "reset":
+      await client.config.unset({"_id":ctx.guild.id},{"prefix":1})
+      await ctx.send('Reset Prefix For This Guild To The Default: `F!`')
       return
     okay = {"_id": ctx.guild.id,"prefix":prefix}
     await client.config.upsert(okay)    
