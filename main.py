@@ -1772,7 +1772,8 @@ async def cardping(ctx,query = None,*,desc = None):
         if not data["krole"]:
           krole = "None"
         else:
-          krole = f"<@!{data["krole"]}>"
+          role = data["krole"]
+          krole = f'<@&{role}>'
         if not data["kmessage"]:
           kmessage = "None"
         else:
@@ -1786,7 +1787,7 @@ async def cardping(ctx,query = None,*,desc = None):
       embed.add_field(name = "Cardping Role",value = krole)
       embed.add_field(name = "Toggle",value = ktoggle)
       await ctx.send(embed = embed)
-      
+
 
       
       
