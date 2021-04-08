@@ -1839,7 +1839,7 @@ class Document:
     if not dict["_id"]:
       raise KeyError("_id Not Found In Supplied Dict")
     if not await self.find_by_id(dict["_id"]):
-      pass
+      return
     id = dict["_id"]
     dict.pop("_id")
     await self.db.update_one({"_id":id},{"$set": dict})
@@ -1847,6 +1847,9 @@ class Document:
   async def __get_raw(self,id):
     return await self.db.find_one({"_id":id})
   async def unset(self,dict):
+    if not dict["_id"]:
+      raise KeyError('_id Not Found!')
+
     if not await self.find_by_id(dict["_id"]):
       return
     id = dict["_id"]
