@@ -1752,6 +1752,8 @@ async def cardping(ctx,query = None,*,desc = None):
         if desc == None:
           await ctx.send("Please Be Sure To Mention A Role To Be Set As The Karuta Cardping Role!")
         else:
+          if not ctx.message.mentions:
+            return await ctx.send('You Did Not Mention A Role To Be Set As The Cardping Role, Please Be Sure To Mention One Next Time!')
           i = ctx.message.mentions[0]
           role = discord.utils.get(ctx.guild.roles,id = i.id)
           if role == None:
@@ -1760,7 +1762,7 @@ async def cardping(ctx,query = None,*,desc = None):
             okay = {"_id": ctx.guild.id,"krole":i.id}
             await client.config.upsert(okay)
             await ctx.send(f'**{i.name}** Was Set As The Karuta Cardping Role And Will Be Pinged Upon A Card Drop By Karuta!')
-            
+
 
 """ Gao Bhar Ke Functions """
 class Document:
