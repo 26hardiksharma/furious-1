@@ -34,7 +34,9 @@ async def on_ready():
   print('Bot ID: {}'.format(client.user.id))
   mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
   datab = mongo['furiousop']
-  print('Le Behen Ke Lode Hogaya Estabilish')
+  print('Connexted To Collection: furiousop\n\nConnecting With Prefixes')
+  prefixdb = datab['stores']
+  print('Connected To Prefixes')
 
 intents.guilds = True
 @client.command()
