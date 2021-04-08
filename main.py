@@ -1737,7 +1737,7 @@ class Document:
     return await self.find_by_id(id)
   async def remove(self,id):
     await self.delete_by_id(id)
-  async def self.find_by_id(id):
+  async def find_by_id(id):
     return await db.find_one({"_id":id})
   async def delete_by_id(self,id):
     if not await self.find_by_id(id):
