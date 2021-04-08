@@ -1749,12 +1749,12 @@ class Document:
     if not dict["_id"]:
       raise KeyError("ID Not Found In Supplied Dictionary")
     await db.insert_one(dict)
-  async def upsert(dict):
-    if await __get_raw(dict["_id"]) != None:
-      await update_by_id(dict)
+  async def upsert(self,dict):
+    if await self.__get_raw(dict["_id"]) != None:
+      await self.update_by_id(dict)
       return
     else:
-      await db.insert_one(dict)
+      await self.db.insert_one(dict)
   async def update_by_id(dict):
     if not dict["_id"]:
       raise KeyError("_id Not Found In Supplied Dict")
