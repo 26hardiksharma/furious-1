@@ -31,7 +31,7 @@ async def getprefix(client,message):
     return commands.when_mentioned_or('F!','f!','^')(client,message)
   try:
     
-    data = await client.prefixes.find(message.guild.id)
+    data = await client.config.find(message.guild.id)
     if not data or "prefix" not in data:
       return commands.when_mentioned_or('F!','f!','^')(client,message)
     return commands.when_mentioned_or(data["prefix"])(client,message)
@@ -50,7 +50,7 @@ async def on_ready():
   client.mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
   client.db = client.mongo['furiousop']
   print('Connected To Collection: furiousop\n\nConnecting With Prefixes')
-  client.prefixes = Document(client.db,'stores')
+  client.config = Document(client.db,'stores')
   print('Success')
 
 intents.guilds = True
@@ -1702,7 +1702,7 @@ async def on_message(message):
         await chan.send(embed=embed)
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
-async def cardping(ctx,query = None):
+async def cardping(ctx,query = None,desc = None):
   if query == None:
     embed = discord.Embed(title = "Karuta Cardping",colour = ctx.author.colour,timestamp = datetime.datetime.now())
     embed.add_field(name ='Information',value = 'Karuta Cardping Is A Brand New Feature Introduced In Furious Which Helps You Ping People Interested In Playing Karuta.\n\n Executing This Command Creates A Role Named `Karuta Cardping` In The Server.\n\nThis Role Will Be Pinged When Karuta Drops Card Upon Increasing Server Activity.')
@@ -1710,22 +1710,21 @@ async def cardping(ctx,query = None):
     await ctx.send(embed=embed)
     return
   else:
-    if ctx.author.guild_permissions.manage_guild == False:
-      await ctx.send('You Dont Have The `MANAGE SERVER` Permission Required To Execute This Command!')
-      return
-    else:
-      muted = discord.utils.find(lambda r: r.name.lower() == 'karuta cardping',ctx.guild.roles)
-      if query.lower() == "setup":
-        if muted != None:
-          await ctx.send('A Role Named `Karuta Cardping` Already Exists In This Server')
-        else:
-          try:
-            role = await ctx.guild.create_role(name = 'Karuta Cardping',reason = f'Cardping Role Request By {ctx.author.name}#{ctx.author.discriminator}')
-            await ctx.send('Successfully Created The Karuta Cardping Role, This Will be Mentioned Upon A Card Drop By Karuta!')
-          except discord.Forbidden:
-            await ctx.send('Failed Creating The Role, Please Make Sure That I Have The `MANAGE ROLES` Permission In This Server')
-      #elif query.lower() == "status":
-       #embed = discord.Embed(title = '')
+    if query.lower() == 'help':
+      embed = discord.Embed(title = 'Karuta Cardping')
+      embed.add_field(name = "Message",value = "F!karuta message <custom Message>",inline = False)
+      embed.add_field(name = "Role",value = "F!karuta role <@role_mention>")
+      embed.add_field(name = 'Toggle',value = 'F!karuta toggle <on/off>')
+      await ctx.send(embed = embed)
+    if query.lower() == 'message':
+      if desc == None:
+        await ctx.send('You Didn\'t Supply A Message. Please Be Sure To Supply A Cardping Message Next Time!')
+        return
+      okay = {"_id": ctx.guild.id,"kmessage":desc}
+      await client.config.upsert(okay)
+      await ctx.send(f'Cardping Message Was Set To `{desc}`')
+
+
 """ Gao Bhar Ke Functions """
 class Document:
   def __init__(self,connection,document_name):
@@ -1784,6 +1783,6 @@ async def prefix(ctx,prefix = None):
       await ctx.send("Please Be Sure To Supply The Prefix You Want To Be Set For This Server While Using This Command!")
       return
     okay = {"_id": ctx.guild.id,"prefix":prefix}
-    await client.prefixes.upsert(okay)    
+    await client.config.upsert(okay)    
     await ctx.send(f'The New Prefix Was Set To `{prefix}` ;)')
 client.run(TOKEN)
