@@ -26,14 +26,14 @@ dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNz
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
 async def getprefix(client,message):
   if not message.guild:
-    return commands.when_mentioned_or('f!')(client,message)
+    return commands.when_mentioned_or('F!','f!','^')(client,message)
   try:
     data = await prefixdb.find(message.guild.id)
     if not data or "prefix" not in data:
-      return commands.when_mentioned_or('f!')(client,message)
+      return commands.when_mentioned_or('F!','f!','^')(client,message)
     return commands.when_mentioned_or(data["prefix"])(client,message)
   except:
-    return commands.when_mentioned_or('f!')(client,message)
+    return commands.when_mentioned_or('f!','F!','^')(client,message)
 
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot = client,token =dbl_token,webhook_path=dbl_webhook)
@@ -47,7 +47,7 @@ async def on_ready():
   db = mongo['furiousop']
   print('Connected To Collection: furiousop\n\nConnecting With Prefixes')
   prefixdb = db['stores']
-  
+
   print('Connected To Prefixes')
 
 intents.guilds = True
@@ -1749,5 +1749,16 @@ mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/m
 async def on_member_join(member):
   channel = discord.utils.find(lambda r: 'welcome' in r.topic.lower(),member.guild.text_channels)
   await channel.send(f'Welcome To {member.guild.name}, {member.mention}\n\nBe Sure To Read The Rules Of The Server And Behave Politely With Everyone.\n\nWe Hope You Enjoy Your Stay Here')
-  #I Need Members Intents For This Purpose     
+  #I Need Members Intents For This Purpose
+  # Dedo Behen Ke Lodo 
+async def upsert(dict):
+  await db.insert_one(dict)
+@client.command()
+async def prefix(ctx,prefix = None):
+  if ctx.author.guild_permissions.administrator:
+    if prefix == None:
+      await ctx.send("Please Be Sure To Supply The Prefix You Want To Be Set For This Server While Using This Command!")
+      return
+    await prefixdb.upsert({"_id": ctx.guild.id,"prefix":prefix})    
+    await ctx.send(f'The New Prefix Was Set To `{prefix}` ;)')
 client.run(TOKEN)
