@@ -48,7 +48,7 @@ async def on_ready():
   client.mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
   client.db = client.mongo['furiousop']
   print('Connected To Collection: furiousop\n\nConnecting With Prefixes')
-  client.config = Document(client.db,'stores')
+  client.prefixes = Document(client.db,'stores')
   print('Success')
 
 intents.guilds = True
@@ -1764,6 +1764,6 @@ async def prefix(ctx,prefix = None):
     if prefix == None:
       await ctx.send("Please Be Sure To Supply The Prefix You Want To Be Set For This Server While Using This Command!")
       return
-    await client.db.insert_one({"_id": ctx.guild.id,"prefix":prefix})    
+    await client.config.upsert({"_id": ctx.guild.id,"prefix":prefix})    
     await ctx.send(f'The New Prefix Was Set To `{prefix}` ;)')
 client.run(TOKEN)
