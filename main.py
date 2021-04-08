@@ -1711,7 +1711,7 @@ async def cardping(ctx,query = None,desc = None):
     return
   else:
     if query.lower() == 'help':
-      embed = discord.Embed(title = 'Karuta Cardping')
+      embed = discord.Embed(title = 'Karuta Cardping',colour = ctx.author.color,timestamp = datetime.datetime.now())
       embed.add_field(name = "Message",value = "F!karuta message <custom Message>",inline = False)
       embed.add_field(name = "Role",value = "F!karuta role <@role_mention>")
       embed.add_field(name = 'Toggle',value = 'F!karuta toggle <on/off>')
