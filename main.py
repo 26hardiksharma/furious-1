@@ -1762,8 +1762,34 @@ async def cardping(ctx,query = None,*,desc = None):
             okay = {"_id": ctx.guild.id,"krole":i.id}
             await client.config.upsert(okay)
             await ctx.send(f'**{i.name}** Was Set As The Karuta Cardping Role And Will Be Pinged Upon A Card Drop By Karuta!')
+    elif query.lower() == "config":
+      data = await client.config.find(ctx.guild.id)
+      if not data:
+        krole = "None"
+        ktoggle = "Off"
+        kmessage = "None"
+      else:
+        if not data["krole"]:
+          krole = "None"
+        else:
+          krole = f"<@!{data["krole"]}>"
+        if not data["kmessage"]:
+          kmessage = "None"
+        else:
+          kmessage = data["kmessage"]
+        if not data["ktoggle"]:
+          ktoggle = "Off"
+        else:
+          ktoggle = str(data["ktoggle"]).capitalize()
+      embed = discord.Embed(title = f"Karuta Cardping Settings Of {ctx.guild.name}",colour = ctx.author.color,timestamp = datetime.datetime.now())
+      embed.add_field(name = "Cardping Message",value = kmessage)
+      embed.add_field(name = "Cardping Role",value = krole)
+      embed.add_field(name = "Toggle",value = ktoggle)
+      await ctx.send(embed = embed)
+      
 
-
+      
+      
 """ Gao Bhar Ke Functions """
 class Document:
   def __init__(self,connection,document_name):
