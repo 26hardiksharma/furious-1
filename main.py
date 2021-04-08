@@ -26,16 +26,16 @@ dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNz
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
 async def getprefix(client,message):
   if not message.guild:
-    return commands.when_mentioned_or(['F!','f!','^'])(client,message)
+    return commands.when_mentioned_or('f!')(client,message)
   try:
     data = await prefixdb.find(message.guild.id)
     if not data or "prefix" not in data:
-      return commands.when_mentioned_or(['F!','f!','^'])(client,message)
+      return commands.when_mentioned_or('f!')(client,message)
     return commands.when_mentioned_or(data["prefix"])(client,message)
   except:
-    return commands.when_mentioned_or(['F!','f!','^'])(client,message)
+    return commands.when_mentioned_or('f!')(client,message)
 
-client = commands.Bot(command_prefix =["^","<@!790478502909837333> ","F!","f!"],help_command=None,case_insensitive = True)
+client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot = client,token =dbl_token,webhook_path=dbl_webhook)
 intents = discord.Intents.default()
 @client.event
