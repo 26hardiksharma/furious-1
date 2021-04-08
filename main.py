@@ -17,6 +17,9 @@ import requests
 import pyjokes
 import aiohttp
 from art import *
+import pymongo
+from pymongo import MongoClient
+import motor.motor_asyncio
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
@@ -28,6 +31,9 @@ async def on_ready():
   await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"New Prefixes •  f!help"))
   print('Connected to bot: {}'.format(client.user.name))
   print('Bot ID: {}'.format(client.user.id))
+  mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
+  datab = mongo['furiousop']
+
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
@@ -1688,16 +1694,46 @@ async def cardping(ctx,query = None):
     if ctx.author.guild_permissions.manage_guild == False:
       await ctx.send('You Dont Have The `MANAGE SERVER` Permission Required To Execute This Command!')
       return
-    if query.lower() != "setup":
-      await ctx.send(f'{query.capitalize()} Is Not A Valid Option, The Options For Cardpings Are : `setup`')
-      return
-    muted = discord.utils.find(lambda r: r.name.lower() == 'karuta cardping',ctx.guild.roles)
-    if muted != None:
-      await ctx.send('A Role Named `Karuta Cardping` Already Exists In This Server')
     else:
-      try:
-        role = await ctx.guild.create_role(name = 'Karuta Cardping',reason = f'Cardping Role Request By {ctx.author.name}#{ctx.author.discriminator}')
-        await ctx.send('Successfully Created The Karuta Cardping Role, This Will be Mentioned Upon A Card Drop By Karuta!')
-      except discord.Forbidden:
-        await ctx.send('Failed Creating The Role, Please Make Sure That I Have The `MANAGE ROLES` Permission In This Server')
+      muted = discord.utils.find(lambda r: r.name.lower() == 'karuta cardping',ctx.guild.roles)
+      if query.lower() == "setup":
+        if muted != None:
+          await ctx.send('A Role Named `Karuta Cardping` Already Exists In This Server')
+        else:
+          try:
+            role = await ctx.guild.create_role(name = 'Karuta Cardping',reason = f'Cardping Role Request By {ctx.author.name}#{ctx.author.discriminator}')
+            await ctx.send('Successfully Created The Karuta Cardping Role, This Will be Mentioned Upon A Card Drop By Karuta!')
+          except discord.Forbidden:
+            await ctx.send('Failed Creating The Role, Please Make Sure That I Have The `MANAGE ROLES` Permission In This Server')
+      #elif query.lower() == "status":
+       #embed = discord.Embed(title = '')
+""" Gao Bhar Ke Functions """
+async def update(dict):
+  await update_by_id(dict)
+async def get_by_id(id):
+  return await find_by_id(id)
+async def find(id):
+  return await find_by_id(id)
+async def remove(id):
+  await delete_by_id(id)
+async def find_by_id(id):
+  return await db.find_one({"_id":id})
+async def delete_by_id(id):
+  if not await find_by_id(id):
+    pass
+  await db.delete_many({"_id":id})
+async def insert(dict):
+  if not isinstance(dict, collections.abc.Mapping):
+    raise TypeError('Expected Dictionary')
+  if not dict["_id"]:
+    raise KeyError("ID Not Found In Supplied Dictionary")
+  await db.insert_one(dict)
+mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+@client.event
+async def on_member_join(member):
+  channel = discord.utils.find(lambda r: 'welcome' in r.topic.lower(),member.guild.text_channels)
+  await channel.send(f'Welcome To {member.guild.name}, 
+  {member.mention}\n\nBe Sure To Read The Rules Of The Server And Behave Politely With Everyone.\n\nWe Hope You Enjoy Your Stay Here')
+  #I Need Members Intents For This Purpose 
+
 client.run(TOKEN)

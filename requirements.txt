@@ -8,3 +8,8 @@ requests
 discord-py-slash-command
 pyjokes
 art
+motor
+pysrv
+collections
+pymongo
+pymongo[srv]
