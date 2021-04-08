@@ -1778,16 +1778,16 @@ async def cardping(ctx,query = None,*,desc = None):
         ktoggle = "Off"
         kmessage = "None"
       else:
-        if not data["krole"]:
+        if not "krole" in data:
           krole = "None"
         else:
           role = data["krole"]
           krole = f'<@&{role}>'
-        if not data["kmessage"]:
+        if not "kmessage" in data:
           kmessage = "None"
         else:
           kmessage = data["kmessage"]
-        if not data["ktoggle"]:
+        if not "ktoggle" in data:
           ktoggle = "Off"
         else:
           ktoggle = str(data["ktoggle"]).capitalize()
