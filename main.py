@@ -24,6 +24,17 @@ import dns
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
+async def getprefix(client,message):
+  if not message.guild:
+    return commands.when_mentioned_or(['F!','f!','^'])(client,message)
+  try:
+    data = await prefixdb.find(message.guild.id)
+    if not data or "prefix" not in data:
+      return commands.when_mentioned_or(['F!','f!','^'])(client,message)
+    return commands.when_mentioned_or(data["prefix"])(client,message)
+  except:
+    return commands.when_mentioned_or(['F!','f!','^'])(client,message)
+
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot = client,token =dbl_token,webhook_path=dbl_webhook)
 intents = discord.Intents.default()
@@ -1737,16 +1748,5 @@ mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/m
 async def on_member_join(member):
   channel = discord.utils.find(lambda r: 'welcome' in r.topic.lower(),member.guild.text_channels)
   await channel.send(f'Welcome To {member.guild.name}, {member.mention}\n\nBe Sure To Read The Rules Of The Server And Behave Politely With Everyone.\n\nWe Hope You Enjoy Your Stay Here')
-  #I Need Members Intents For This Purpose 
-async def getprefix(client,message):
-  if not message.guild:
-    return commands.when_mentioned_or(['F!','f!','^'])(client,message)
-  try:
-    data = await prefixdb.find(message.guild.id)
-    if not data or "prefix" not in data:
-      return commands.when_mentioned_or(['F!','f!','^'])(client,message)
-    return commands.when_mentioned_or(data["prefix"])(client,message)
-  except:
-    return commands.when_mentioned_or(['F!','f!','^'])(client,message)
-    
+  #I Need Members Intents For This Purpose     
 client.run(TOKEN)
