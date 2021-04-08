@@ -46,7 +46,7 @@ async def on_ready():
   mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
   db = mongo['furiousop']
   print('Connected To Collection: furiousop\n\nConnecting With Prefixes')
-  prefixdb = datab['stores']
+  prefixdb = db['stores']
   print('Connected To Prefixes')
 
 intents.guilds = True
