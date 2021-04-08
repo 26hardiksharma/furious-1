@@ -9,6 +9,5 @@ discord-py-slash-command
 pyjokes
 art
 motor
-collections
 pymongo
 pymongo[srv]
