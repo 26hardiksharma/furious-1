@@ -37,8 +37,6 @@ async def getprefix(client,message):
     return commands.when_mentioned_or(data["prefix"])(client,message)
   except:
     return commands.when_mentioned_or('f!','F!','^')(client,message)
-
-
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot = client,token =dbl_token,webhook_path=dbl_webhook)
 intents = discord.Intents.default()
@@ -49,7 +47,7 @@ async def on_ready():
   print('Bot ID: {}'.format(client.user.id))
   client.mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
   client.db = client.mongo['furiousop']
-  print('Connected To Collection: furiousop\n\nConnecting With Prefixes')
+  print('Connected To Collection: furiousop\n\nConnecting With Config')
   client.config = Document(client.db,'stores')
   print('Success')
 
@@ -754,7 +752,12 @@ async def help(ctx,query = None):
       query = 0
     if query == 0:    
       embed = discord.Embed(title = "Help ",colour = 0x00FFD7)
-      embed.add_field(name = "Bot Prefixes",value = f"F!\n^\n{client.user.mention}",inline = False)
+      data = client.config.find(ctx.guild.id)
+      if not data or "prefix" not in data:
+        prefixes ="F!\nf!\n^"
+      else:
+        prefixes = data["prefix"]
+      embed.add_field(name = "Bot Prefixes",value = f"{prefixes}\n{client.user.mention}",inline = False)
       embed.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
       embed.add_field(name = "<:emoji_2:810202313142566992> Moderation",value  = "`kick`,`ban`,`mute`,`unmute`,`hackban`,`tempmute`,`slowmode`,`lock`,`unlock`,`private`,\n`unprivate`,`setnick`,`muterole`",inline =False)
       embed.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
@@ -1709,6 +1712,7 @@ async def on_message(message):
         await msg.edit(content =f'{mention}, Karuta Dropped Some Cards, But They Have Expired And Can No Longer Be Grabbed :/')
         embed.set_image(url = message.attachments[0].url)
         await chan.send(embed=embed)
+
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
 async def cardping(ctx,query = None,*,desc = None):
