@@ -1750,7 +1750,20 @@ class Document:
       raise KeyError("ID Not Found In Supplied Dictionary")
     await db.insert_one(dict)
   async def upsert(dict):
-    await db.insert_one(dict)
+    if await __get_raw(dict["_id"]) != None:
+      await update_by_id(dict)
+      return
+    else:
+      await db.insert_one(dict)
+  async def update_by_id(dict):
+    if not dict["_id"]:
+      raise KeyError("_id Not Found In Supplied Dict")
+    if not await find_by_id(dict["_id"]):
+      pass
+    id = dict["_id"]
+    dict.pop("_id")
+    await db.update_one({"_id":id},{"$set": dict})
+
   async def __get_raw(id):
     return await db.find_one({"_id":id})
 
