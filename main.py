@@ -30,6 +30,7 @@ async def getprefix(client,message):
   if not message.guild:
     return commands.when_mentioned_or('F!','f!','^')(client,message)
   try:
+    
     data = await client.prefixes.find(message.guild.id)
     if not data or "prefix" not in data:
       return commands.when_mentioned_or('F!','f!','^')(client,message)
@@ -1737,7 +1738,7 @@ class Document:
     return await self.find_by_id(id)
   async def remove(self,id):
     await self.delete_by_id(id)
-  async def find_by_id(id):
+  async def find_by_id(self,id):
     return await self.db.find_one({"_id":id})
 
   async def delete_by_id(self,id):
