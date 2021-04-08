@@ -1727,7 +1727,7 @@ async def cardping(ctx,query = None):
 """ Gao Bhar Ke Functions """
 class Document:
   def __init__(connection,document_name):
-    db = connection[document_name]
+    self.db = connection[document_name]
   
   async def update(dict):
     await update_by_id(dict)
