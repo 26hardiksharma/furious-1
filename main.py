@@ -1728,7 +1728,7 @@ async def cardping(ctx,query = None):
 class Document:
   def __init__(connection,document_name):
     self.db = connection[document_name]
-  
+
   async def update(dict):
     await update_by_id(dict)
   async def get_by_id(id):
