@@ -47,6 +47,7 @@ async def on_ready():
   db = mongo['furiousop']
   print('Connected To Collection: furiousop\n\nConnecting With Prefixes')
   prefixdb = db['stores']
+  
   print('Connected To Prefixes')
 
 intents.guilds = True
