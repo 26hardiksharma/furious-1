@@ -12,3 +12,4 @@ motor
 pymongo
 pymongo[srv]
 dnspython
+mongoUtils
