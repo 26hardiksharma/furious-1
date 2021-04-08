@@ -1749,6 +1749,9 @@ class Document:
     if not dict["_id"]:
       raise KeyError("ID Not Found In Supplied Dictionary")
     await db.insert_one(dict)
+  async def upsert(dict):
+    await db.insert_one(dict)
+
 mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 @client.event
 async def on_member_join(member):
@@ -1756,8 +1759,6 @@ async def on_member_join(member):
   await channel.send(f'Welcome To {member.guild.name}, {member.mention}\n\nBe Sure To Read The Rules Of The Server And Behave Politely With Everyone.\n\nWe Hope You Enjoy Your Stay Here')
   #I Need Members Intents For This Purpose
   # Dedo Behen Ke Lodo 
-async def upsert(dict):
-  await db.insert_one(dict)
 @client.command()
 async def prefix(ctx,prefix = None):
   if ctx.author.guild_permissions.administrator:
