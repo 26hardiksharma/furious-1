@@ -1740,7 +1740,8 @@ async def cardping(ctx,query = None,*,desc = None):
         elif desc.lower() == "off":
           okay = {"_id": ctx.guild.id,"ktoggle":"off"}
           await client.config.upsert(okay)
-          await ctx.send('Karuta Cardping Was Toggled To On!')
+          await ctx.send('Karuta Cardping Was Toggled To Off!')
+          
         else:
           await ctx.send('Invalid Toggle Supplied!')
 
