@@ -1752,7 +1752,7 @@ async def cardping(ctx,query = None,*,desc = None):
         if desc == None:
           await ctx.send("Please Be Sure To Mention A Role To Be Set As The Karuta Cardping Role!")
         else:
-          if not ctx.message.mentions:
+          if not ctx.message.role_mentions:
             return await ctx.send('You Did Not Mention A Role To Be Set As The Cardping Role, Please Be Sure To Mention One Next Time!')
           i = ctx.message.mentions[0]
           role = discord.utils.get(ctx.guild.roles,id = i.id)
