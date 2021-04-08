@@ -11,3 +11,4 @@ art
 motor
 pymongo
 pymongo[srv]
+dnspython
