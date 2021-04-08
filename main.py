@@ -752,7 +752,7 @@ async def help(ctx,query = None):
       query = 0
     if query == 0:    
       embed = discord.Embed(title = "Help ",colour = 0x00FFD7)
-      data = client.config.find(ctx.guild.id)
+      data = await client.config.find(ctx.guild.id)
       if not data or "prefix" not in data:
         prefixes ="F!\nf!\n^"
       else:
@@ -1681,7 +1681,7 @@ async def on_message(message):
       embed = discord.Embed(timestamp = datetime.datetime.now(),colour = message.author.color)
       embed.set_footer(text = f"Server: {message.guild.name}")
       if 'since this server is currently active!' in message.content.lower():
-        data = client.config.find(message.guild.id)
+        data = await client.config.find(message.guild.id)
         if not data:
           return
         if "ktoggle" not in data:
