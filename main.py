@@ -1759,6 +1759,9 @@ async def prefix(ctx,prefix = None):
     if prefix == None:
       await ctx.send("Please Be Sure To Supply The Prefix You Want To Be Set For This Server While Using This Command!")
       return
+    mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
+    db = mongo['furiousop']
+    prefixdb = db['stores']
     await prefixdb.upsert({"_id": ctx.guild.id,"prefix":prefix})    
     await ctx.send(f'The New Prefix Was Set To `{prefix}` ;)')
 client.run(TOKEN)
