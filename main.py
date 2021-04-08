@@ -1744,8 +1744,23 @@ async def cardping(ctx,query = None,*,desc = None):
 
         else:
           await ctx.send('Invalid Toggle Supplied!')
-
-
+    elif query.lower() == "role":
+      if ctx.author.guild_permissions.manage_guild == False:
+        await ctx.send('You Need The **`MANAGE SERVER`** Permission To Execute This Command!')
+        return
+      else:
+        if desc == None:
+          await ctx.send("Please Be Sure To Mention A Role To Be Set As The Karuta Cardping Role!")
+        else:
+          i = ctx.message.mentions[0]
+          role = discord.utils.get(ctx.guild.roles,id = i.id)
+          if role == None:
+            await ctx.send(f'No Role Matching {i} Found In This Server')
+          else:
+            okay = {"_id": ctx.guild.id,"krole":i.id}
+            await client.config.upsert(okay)
+            await ctx.send(f'**{i.name}** Was Set As The Karuta Cardping Role And Will Be Pinged Upon A Card Drop By Karuta!')
+            
 
 """ Gao Bhar Ke Functions """
 class Document:
@@ -1809,5 +1824,5 @@ async def prefix(ctx,prefix = None):
     await ctx.send(f'The New Prefix Was Set To `{prefix}` ;)')
   else:
     await ctx.send('You Are Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!')  
-    
+
 client.run(TOKEN)
