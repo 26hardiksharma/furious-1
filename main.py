@@ -1733,8 +1733,7 @@ mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/m
 @client.event
 async def on_member_join(member):
   channel = discord.utils.find(lambda r: 'welcome' in r.topic.lower(),member.guild.text_channels)
-  await channel.send(f'Welcome To {member.guild.name}, 
-  {member.mention}\n\nBe Sure To Read The Rules Of The Server And Behave Politely With Everyone.\n\nWe Hope You Enjoy Your Stay Here')
+  await channel.send(f'Welcome To {member.guild.name}, {member.mention}\n\nBe Sure To Read The Rules Of The Server And Behave Politely With Everyone.\n\nWe Hope You Enjoy Your Stay Here')
   #I Need Members Intents For This Purpose 
 
 client.run(TOKEN)
