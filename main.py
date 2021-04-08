@@ -1729,43 +1729,43 @@ class Document:
   def __init__(self,connection,document_name):
     self.db = connection[document_name]
 
-  async def update(dict):
-    await update_by_id(dict)
-  async def get_by_id(id):
-    return await find_by_id(id)
-  async def find(id):
-    return await find_by_id(id)
-  async def remove(id):
-    await delete_by_id(id)
-  async def find_by_id(id):
+  async def update(self,dict):
+    await self.update_by_id(dict)
+  async def get_by_id(self,id):
+    return await self.find_by_id(id)
+  async def find(self,id):
+    return await self.find_by_id(id)
+  async def remove(self,id):
+    await self.delete_by_id(id)
+  async def self.find_by_id(id):
     return await db.find_one({"_id":id})
-  async def delete_by_id(id):
-    if not await find_by_id(id):
+  async def delete_by_id(self,id):
+    if not await self.find_by_id(id):
       pass
-    await db.delete_many({"_id":id})
-  async def insert(dict):
+    await self.db.delete_many({"_id":id})
+  async def insert(self,dict):
     if not isinstance(dict, collections.abc.Mapping):
       raise TypeError('Expected Dictionary')
     if not dict["_id"]:
       raise KeyError("ID Not Found In Supplied Dictionary")
-    await db.insert_one(dict)
+    await self.db.insert_one(dict)
   async def upsert(self,dict):
     if await self.__get_raw(dict["_id"]) != None:
       await self.update_by_id(dict)
       return
     else:
       await self.db.insert_one(dict)
-  async def update_by_id(dict):
+  async def update_by_id(self,dict):
     if not dict["_id"]:
       raise KeyError("_id Not Found In Supplied Dict")
-    if not await find_by_id(dict["_id"]):
+    if not await self.find_by_id(dict["_id"]):
       pass
     id = dict["_id"]
     dict.pop("_id")
-    await db.update_one({"_id":id},{"$set": dict})
+    await self.db.update_one({"_id":id},{"$set": dict})
 
-  async def __get_raw(id):
-    return await db.find_one({"_id":id})
+  async def __get_raw(self,id):
+    return await self.db.find_one({"_id":id})
 
 mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 @client.event
