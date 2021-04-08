@@ -1741,7 +1741,7 @@ async def cardping(ctx,query = None,*,desc = None):
           okay = {"_id": ctx.guild.id,"ktoggle":"off"}
           await client.config.upsert(okay)
           await ctx.send('Karuta Cardping Was Toggled To Off!')
-          
+
         else:
           await ctx.send('Invalid Toggle Supplied!')
 
@@ -1807,4 +1807,7 @@ async def prefix(ctx,prefix = None):
     okay = {"_id": ctx.guild.id,"prefix":prefix}
     await client.config.upsert(okay)    
     await ctx.send(f'The New Prefix Was Set To `{prefix}` ;)')
+  else:
+    await ctx.send('You Are Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!')  
+    
 client.run(TOKEN)
