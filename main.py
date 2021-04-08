@@ -1678,26 +1678,35 @@ async def on_message(message):
       embed = discord.Embed(timestamp = datetime.datetime.now(),colour = message.author.color)
       embed.set_footer(text = f"Server: {message.guild.name}")
       if 'since this server is currently active!' in message.content.lower():
-        cardping = discord.utils.find(lambda r: r.name.lower() == 'karuta cardping',message.guild.roles)
-        if cardping == None:
-          await message.channel.send('Karuta Has Dropped Some Cards, If You Want To Get Reminded Upon Each Card Drop, Consider Using Our Cardping Service.\n\nI Look For A Role Named `Karuta Cardping` In The Server.\n\nIf I Find It, I Will Ping The Role Upon Each Card Drop By Karuta When The Server Gets Active.\n\nServer Managers Can Use `F!cardping setup` To Instantly Setup The Role ;)')
-          embed.set_image(url = message.attachments[0].url)
-          await chan.send(embed=embed)
+        data = client.config.find(message.guild.id)
+        if not data:
           return
-        text = f"{cardping.mention} Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `60 Seconds`"
+        if "ktoggle" not in data:
+          return
+        if data["ktoggle"] == "off":
+          return
+        if not "krole" in data:
+          return
+        role = data["krole"]
+        mention = f"<@&{role}>"
+        if not data["kmessage"] or "kmessage" not in data:
+          kmsg = "Karuta Has Dropped Some Cards. Be Sure To Grab Them Before They Expire!"
+        else:
+          kmsg = data["kmessage"]
+        text = f"{mention}, {kmsg}\n\nExpires In `60 Seconds`"
         msg = await message.channel.send(text)
         await asyncio.sleep(10)
-        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `50 Seconds`')
+        await msg.edit(content =f'{mention}, {kmsg}\n\nExpires In `50 Seconds`')
         await asyncio.sleep(10)
-        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `40 Seconds`')
+        await msg.edit(content =f'{mention}, {kmsg}\n\nExpires In `40 Seconds`')
         await asyncio.sleep(10)
-        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `30 Seconds`')
+        await msg.edit(content =f'{mention}, {kmsg}\n\nExpires In `30 Seconds`')
         await asyncio.sleep(10)
-        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `20 Seconds`')
+        await msg.edit(content =f'{mention}, {kmsg}\n\nExpires In `20 Seconds`')
         await asyncio.sleep(10)
-        await msg.edit(content =f'{cardping.mention}, Karuta Has Dropped Some Cards, Quickly Grab Them Before They Expire!\n\nExpires In `10 Seconds`')
+        await msg.edit(content =f'{mention}, {kmsg}\n\nExpires In `10 Seconds`')
         await asyncio.sleep(10)
-        await msg.edit(content ='The Cards That Were Dropped Have Expired And Can No Longer Be Grabbed')
+        await msg.edit(content =f'{mention}, Karuta Dropped Some Cards, But They Have Expired And Can No Longer Be Grabbed :/')
         embed.set_image(url = message.attachments[0].url)
         await chan.send(embed=embed)
   await client.process_commands(message)
