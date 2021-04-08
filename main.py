@@ -1702,7 +1702,7 @@ async def on_message(message):
         await chan.send(embed=embed)
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
-async def cardping(ctx,query = None,desc = None):
+async def cardping(ctx,query = None,*,desc = None):
   if query == None:
     embed = discord.Embed(title = "Karuta Cardping",colour = ctx.author.colour,timestamp = datetime.datetime.now())
     embed.add_field(name ='Information',value = 'Karuta Cardping Is A Brand New Feature Introduced In Furious Which Helps You Ping People Interested In Playing Karuta.\n\n Executing This Command Creates A Role Named `Karuta Cardping` In The Server.\n\nThis Role Will Be Pinged When Karuta Drops Card Upon Increasing Server Activity.')
