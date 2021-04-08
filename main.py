@@ -1717,12 +1717,16 @@ async def cardping(ctx,query = None,*,desc = None):
       embed.add_field(name = 'Toggle',value = 'F!karuta toggle <on/off>')
       await ctx.send(embed = embed)
     if query.lower() == 'message':
+      if ctx.author.guild_permissions.manage_guild == False:
+        await ctx.send('You Need The **`MANAGE SERVER`** Permission To Execute This Command!')
+        return
       if desc == None:
         await ctx.send('You Didn\'t Supply A Message. Please Be Sure To Supply A Cardping Message Next Time!')
         return
       okay = {"_id": ctx.guild.id,"kmessage":desc}
       await client.config.upsert(okay)
       await ctx.send(f'Cardping Message Was Set To `{desc}`')
+    
 
 
 """ Gao Bhar Ke Functions """
