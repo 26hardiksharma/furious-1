@@ -1726,6 +1726,17 @@ async def cardping(ctx,query = None,*,desc = None):
       okay = {"_id": ctx.guild.id,"kmessage":desc}
       await client.config.upsert(okay)
       await ctx.send(f'Cardping Message Was Set To `{desc}`')
+    elif query.lower() == "toggle":
+      if ctx.author.guild_permissions.manage_guild == False:
+        await ctx.send('You Need The **`MANAGE SERVER`** Permission To Execute This Command!')
+        return
+      if desc == None:
+        return await ctx.send('Please Supply A Toggle Value For Me To Apply. Valid Values: `on` / `off`')
+      if not desc.lower() == "on" or if not desc.lower() == "off":
+        await ctx.send('Thats Not A Valid Toggle To Be Applied. Valid Values: `on` / `off`')
+        return 
+      okay = {"_id": ctx.guild.id,"ktoggle":desc.lower()}
+      await client.config.upsert(okay)
     
 
 
