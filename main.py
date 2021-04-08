@@ -38,6 +38,7 @@ async def getprefix(client,message):
   except:
     return commands.when_mentioned_or('f!','F!','^')(client,message)
 
+
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True)
 dbl_client = dbl.DBLClient(bot = client,token =dbl_token,webhook_path=dbl_webhook)
 intents = discord.Intents.default()
