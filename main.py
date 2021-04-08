@@ -42,7 +42,7 @@ dbl_client = dbl.DBLClient(bot = client,token =dbl_token,webhook_path=dbl_webhoo
 intents = discord.Intents.default()
 @client.event
 async def on_ready():
-  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"New Prefixes •  f!help"))
+  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"Customizable Karuta Cardping || F!karuta help"))
   print('Connected to bot: {}'.format(client.user.name))
   print('Bot ID: {}'.format(client.user.id))
   client.mongo = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
@@ -397,7 +397,7 @@ async def invite(ctx):
   embed=discord.Embed(title = "Thank You For Choosing Furious",description = "Some Useful Links!",url = "https://dsc.gg/furiousop",colour = 0x00FFD3)
   embed.add_field(name = "Invite Link • Normal",value = "[Click Here](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot)")
   embed.add_field(name = "Invite Link • Administrator",value = "[Click Here](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=8&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot)",inline= False)
-  embed.add_field(name = "Official Server",value = "[Click Here](https://discord.gg/MXa2EReETq)",inline = False)
+  embed.add_field(name = "Official Server",value = "[Click Here](https://dsc.gg/furiousofficial)",inline = False)
   embed.set_thumbnail(url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
 @client.command()
@@ -764,7 +764,7 @@ async def help(ctx,query = None):
       embed.add_field(name = "<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`giveaway`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`",inline = False)
       embed.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
       embed.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation\nUtility\nManagement\nFun\nYou Can Type F!help <module> To Get The Commands Of That Module")
-      embed.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://discord.gg/MXa2EReETq)",inline = False)
+      embed.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://dsc.gg/furiousofficial)",inline = False)
       await ctx.send(embed=embed)
     elif query.lower() == 'fun':
       embed = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
@@ -864,7 +864,7 @@ async def on_guild_join(guild):
   await abc.add_reaction("🙏")
   em = discord.Embed(title = guild.name,description = "Thanks For Adding Me To This Server! I Surely Will Help You With Your Discord Experience And In Managing This Server :)",colour = 0xDAF7A6)
   em.add_field(name = "Some Useful Information",value = "<:emoji_0:810202224947888249> I Am Furious, A Bot Designed To Moderate Servers While Providing Utility And Other Services To Other Server Members\n<:emoji_2:810202313142566992> Command Prefixes :- ^ , <@790478502909837333>\n<:emoji_3:810202359362748487> A Lot Of Useful Commands Which Come In Handy While Using Discord\n<:emoji_5:810202499914268703> Fun Commands\n<:emoji_1:810202277624938527> Much More Discoverable With ``^help``")
-  em.add_field(name = "Some Useful Links",value = f"[INVITE ME](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [SUPPORT SERVER](https://discord.gg/gMHkNEYW4H)",inline = False)
+  em.add_field(name = "Some Useful Links",value = f"[INVITE ME](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [SUPPORT SERVER](https://dsc.gg/furiousofficial)",inline = False)
   await guild.text_channels[0].send(embed = em)
 
 @client.event
