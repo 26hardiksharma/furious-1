@@ -991,10 +991,9 @@ async def muterole(ctx,query = None,role : discord.Role = None):
     await ctx.send(embed=embed)
   else:
     if ctx.author.guild_permissions.manage_roles:
-      if query == "setup" or "create":
+      if query.lower() == "setup" or "create":
         mute= discord.utils.get(ctx.guild.roles,name = "Muted")
         if mute in ctx.guild.roles:
-          
           await ctx.send("A Muted Role Already Exists In This Guild! What Actions Do You Want me To Perform ?\n1) Set Permissions And Overrides For The Existing Muted Role (Reply With **1** For This)\n2) Delete The Muted Role And Create A New One With Updated Permissions(Reply With **2** For This)")
           answers = []
           def check(m):
@@ -1051,7 +1050,7 @@ async def muterole(ctx,query = None,role : discord.Role = None):
             await vc.set_permissions(mrole,overwrite=vperms)
             await asyncio.sleep(0.2)
           await ctx.send(f"Muterole Setup Successfully Completed")
-      if query.lower() == "set":
+      elif query.lower() == "set":
         okay = {"_id":ctx.guild.id,"mrole":role.id}
         await client.config.upsert(okay)
         await ctx.send(f"**{role.name}** Was Set As The New Muted Role For This Server.")
