@@ -1989,7 +1989,7 @@ async def setlogs(ctx,channel : discord.TextChannel = None):
     return await ctx.send('I Need The Following Permissions To Correctly Deliver Logs.\n`SEND MESSAGES`\n`EMBED LINKS`\n`ATTACH FILES`\n`VIEW AUDIT LOG`\nPlease Grant Me The Following Permission And Then Use The Command.')
   kekek = {"_id":ctx.guild.id,"logchannel":channel.id}
   await client.config.upsert(kekek)
-  await ctx.send(f'{channel.mention} Was Set As The Log Channel For This Server.]n]nImportant Actions Taking Place In This Server Will Be Logged There!')
+  await ctx.send(f'{channel.mention} Was Set As The Log Channel For This Server.\n\nImportant Actions Taking Place In This Server Will Be Logged There!')
 @client.event
 async def on_guild_channel_update(before, after):
   data = await client.config.find(before.guild.id)
