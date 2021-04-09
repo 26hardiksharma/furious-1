@@ -1885,6 +1885,7 @@ async def giverep(ctx,member : discord.Member = None):
   if member == None:
     await ctx.send('You Didn\'t Mention A Member To Be Given A Reputation, Be Sure To Mention Someone Next Time!')
     return
+    ctx.command.reset_cooldown(ctx)
   curnt = client.reps.find(ctx.guild.id)
   if not curnt:
     rep = 0
