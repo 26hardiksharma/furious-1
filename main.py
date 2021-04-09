@@ -1977,4 +1977,13 @@ async def on_guild_channel_delete(channel):
   embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
   embed.set_footer(text= f"ID : {channel.id}")
   await logch.send(embed = embed)
+@client.command(aliases = ['logs','modlog'])
+async def setlogs(ctx,channel : discord.TextChannel = None):
+  if ctx.author.guild_permissions.manage_guild == False:
+    return await ctx.send('You Are Missing The **`MANAGE SERVER`** Permission Required To Execute This Command!')
+  kekek = {"_id":ctx.guild.id,"logchannel":channel.id}
+  await client.config.insert(kekek)
+  await ctx.send(f'{channel.mention} Was Set As The Log Channel For This Server. Important Actions Taking Place In This Server Will Be Logged There!')
+  
+
 client.run(TOKEN)
