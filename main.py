@@ -1944,6 +1944,7 @@ async def on_member_ban(guild,user):
   logch = guild.get_channel(data["logchannel"])
   if not logch:
     return
+  await asyncio.sleep(1)
   async for entry in guild.audit_logs(action=discord.AuditLogAction.ban,limit = 1):
     await logch.send(f"⚒️ {entry.user} Banned {entry.target} For Reason : ``{entry.reason}``")
     break
