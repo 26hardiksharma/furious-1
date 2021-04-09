@@ -1935,5 +1935,46 @@ async def reputation(ctx,member :discord.Member = None):
     return await ctx.send(f'{members}\'s Reputation : `0`')
   if not "uid" in curnt:
     return await ctx.send(f"{member}'s Reputation : `0`")
+intents.bans = True 
+@client.event
+async def on_member_ban(guild,user):
+  data = await client.config.find(guild.id)
+  if not data or "logchannel" not in data:
+    return
+  logch = guild.get_channel(data["logchannel"])
+  if not logch:
+    return
+  async for entry in guild.audit_logs(action=discord.AuditLogAction.ban,limit = 1):
+    await logch.send(f"⚒️ {entry.user} Banned {entry.target} For Reason : ``{entry.reason}``")
+    break
+@client.event
+async def on_guild_channel_create(channel):
+  data = await client.config.find(channel.guild.id)
+  if not data or "logchannel" not in data:
+    return
+  logch = channel.guild.get_channel(data["logchannel"])
+  if not logch:
+    return
+  async for entry in channel.guild.audit_logs(action=discord.AuditLogAction.channel_create,limit = 1):
+    member = entry.user
+    break
+  embed = discord.Embed(title = "Channel Created",description = f"Channel Name : **{channel.name}**\nCategory : **{channel.category}**\nType: : **{str(channel.type).capitalize()}**",colour = 0xF2922D,timestamp = datetime.datetime.now())
+  embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
+  await logch.send(embed = embed)
+@client.event
+async def on_guild_channel_delete(channel):
+  data = await client.config.find(channel.guild.id)
+  if not data or "logchannel" not in data:
+    return
+  logch = guild.get_channel(data["logchannel"])
+  if not logch:
+    return
   
+  async for entry in channel.guild.audit_logs(action=discord.AuditLogAction.channel_delete,limit = 1):
+    member = entry.user
+    break
+  embed = discord.Embed(title = "Channel Deleted",description = f"Channel Name : **{channel.name}**\nCategory : **{channel.category}**",colour = 0xF2922D)
+  embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
+  embed.set_footer(text= f"ID : {channel.id}")
+  await logch.send(embed = embed)
 client.run(TOKEN)
