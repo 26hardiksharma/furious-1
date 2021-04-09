@@ -1831,6 +1831,7 @@ async def cardping(ctx,query = None,*,desc = None):
           await ctx.send('Karuta Addrole Is Now Set To Off, Members Cannot Take The Cardping Role By Using The Command.')
         else:
           await ctx.send('Thats Not A Valid Query For The Addrole Configuration.\n\nTry Using `F!karuta addrole on` Or `F!karuta addrole off`!') 
+          
 
          
     elif query.lower() == "config":
