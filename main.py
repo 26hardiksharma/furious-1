@@ -2034,4 +2034,32 @@ async def on_message_delete(message):
     return
   embed = discord.Embed(title = 'Message Deleted',description = f'Message: **{message.content}**\nChannel: <#{message.channel.id}>\nAuthor: {message.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
   await logs.send(embed = embed)
+@client.event
+async def on_guild_update(before,after):
+  data = await client.config.find(after.id)
+  if not data or "logchannel" not in data:
+    return
+  logs = after.get_channel(data["logchannel"])
+  if not logs:
+    return
+  embed = discord.Embed(description = "The Server Has Been Updated!",colour = 0xF2922D,timestamp = datetime.datetime.now())
+  async for entry in after.audit_logs(action=discord.AuditLogAction.guild_update,limit = 1):
+    member = entry.user
+    break
+  if before.name != after.name:
+    embed.add_field(name = "Changes",value = f"Target : Name\nBefore: {before.name}\nAfter: {after.name}")
+    embed.add_field(name = "Responsible User",value = member,inline = False)
+    await logs.send(embed=embed)
+  elif before.icon_url != after.icon_url:
+    embed.add_field(name = "Changes",value = "Target: Icon")
+    embed.add_field(name = "Responsible User",value = member)
+    embed.set_image(url = after.icon_url)
+    await logs.send(embed=embed)
+  elif before.system_channel.id != after.system_channel.id:
+    embed.add_field(name = "Changes",value = f"Target: System Channel\nBefore: {before.system_channel.mention}\nAfter: {after.system_channel.mention}")
+    embed.add_field(name = "Responsible User",value = member)
+    await logs.send(embed=embed)
+  elif before.owner_id != after.owner_id:
+    embed.add_field(name = "Changes",value = f"Target: Owner\nBefore: {before.owner}\nAfter: {after.owner}")
+    await logs.send(embed=embed)
 client.run(TOKEN)
