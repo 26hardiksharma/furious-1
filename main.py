@@ -1326,7 +1326,7 @@ async def hackban(ctx,member : discord.User = None,*,reason= None):
       else:
         try:
           guy = await client.fetch_user(member.id)
-          await ctx.guild.ban(guy,reason=reason)
+          await ctx.guild.ban(guy,reason=f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
           if reason== None:
             await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name}")
           else:
@@ -1967,7 +1967,7 @@ async def on_guild_channel_delete(channel):
   data = await client.config.find(channel.guild.id)
   if not data or "logchannel" not in data:
     return
-  logch = guild.get_channel(data["logchannel"])
+  logch = channel.guild.get_channel(data["logchannel"])
   if not logch:
     return
   
