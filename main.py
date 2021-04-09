@@ -989,6 +989,7 @@ async def muterole(ctx,query = None,role : discord.Role = None):
     embed.add_field(name = "Cooldown",value = "60 Seconds Per Guild")
     embed.add_field(name = "Additional Tips",value = "Provide The Bot The **`ADMINISTRATOR`** To Make This Work Flawlessly",inline = False)
     await ctx.send(embed=embed)
+    ctx.command.reset_cooldown(ctx)
   else:
     if ctx.author.guild_permissions.manage_roles:
       if query.lower() == "setup" or query.lower() == "create":
