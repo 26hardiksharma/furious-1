@@ -1872,6 +1872,8 @@ async def cardping(ctx,query = None,*,desc = None):
         krole = "None"
         ktoggle = "Off"
         kmessage = "None"
+        krmrole = "Off"
+        karole = "Off"
       else:
         if not "krole" in data:
           krole = "None"
@@ -1886,10 +1888,21 @@ async def cardping(ctx,query = None,*,desc = None):
           ktoggle = "Off"
         else:
           ktoggle = str(data["ktoggle"]).capitalize()
+        if not "krmrole" in data:
+          krmrole = "Off"
+        else:
+          krmrole = str(data["krmrole"]).capitalize()
+        if not "karole" in data:
+          karole = "Off"
+        else:
+          karole = str(data["karole"]).capitalize()
+        
       embed = discord.Embed(title = f"Karuta Cardping Settings Of {ctx.guild.name}",colour = ctx.author.color,timestamp = datetime.datetime.now())
       embed.add_field(name = "Cardping Message",value = kmessage)
       embed.add_field(name = "Cardping Role",value = krole,inline = False)
       embed.add_field(name = "Toggle",value = ktoggle)
+      embed.add_field(name = "Addrole",value = karole,inline = False)
+      embed.add_field(name = "Removerole",value = krmrole,inline = False)
       await ctx.send(embed = embed)
 
 
