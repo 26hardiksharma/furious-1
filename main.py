@@ -49,7 +49,9 @@ async def on_ready():
   client.db = client.mongo['furiousop']
   print('Connected To Collection: furiousop\n\nConnecting With Config')
   client.config = Document(client.db,'stores')
-  print('Success')
+  print('Connected To Config\nConnecting With Reputations')
+  client.reps = Document(client.db,'reputations')
+  print('Connection Established')
 
 intents.guilds = True
 @client.command()
@@ -1877,5 +1879,21 @@ async def prefix(ctx,prefix = None):
     await ctx.send(f'The New Prefix Was Set To `{prefix}` ;)')
   else:
     await ctx.send('You Are Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!')  
-
+@client.command()
+@commands.cooldown(1,120,commands.BucketType.user)
+async def giverep(ctx,member : discord.Member = None):
+  if member == None:
+    await ctx.send('You Didn\'t Mention A Member To Be Given A Reputation, Be Sure To Mention Someone Next Time!')
+    return
+  curnt = client.reps.find(ctx.guild.id)
+  if not curnt:
+    rep = 0
+  elif not "uid" in curnt:
+    rep = 0
+  else:
+    rep = curnt["uid"]["reputation"]
+  kek = rep + 1
+  okay = {"_id": ctx.guild.id,"uid":member.id,"reputation":kek}
+  await client.reps.upsert(okay)
+  await ctx.send(f'Gave One Reputation To {member}!')
 client.run(TOKEN)
