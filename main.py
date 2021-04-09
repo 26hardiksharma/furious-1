@@ -2062,4 +2062,18 @@ async def on_guild_update(before,after):
   elif before.owner_id != after.owner_id:
     embed.add_field(name = "Changes",value = f"Target: Owner\nBefore: {before.owner}\nAfter: {after.owner}")
     await logs.send(embed=embed)
+@client.event
+async def on_message_edit(before,after):
+  data = await client.config.find(after.guild.id)
+  if not data or "logchannel" not in data:
+    return
+  logs = after.guild.get_channel(data["logchannel"])
+  if not logs:
+    return
+  if before.content == after.content:
+    return
+
+  embed = discord.Embed(title = 'Message Edited',description = f'Before: **{before.content}\n+ After: {after.content}**\nChannel: <#{after.channel.id}>\nAuthor: {after.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
+  await logs.send(embed=embed)
+
 client.run(TOKEN)
