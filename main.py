@@ -981,7 +981,7 @@ async def templock(ctx,unit,channel : discord.TextChannel=None):
     await ctx.send("<:kya_bey:796610669549322250>")
 @client.command()
 @commands.cooldown(1, 60, commands.BucketType.guild)
-async def muterole(ctx,query = None,role = discord.Role = None):
+async def muterole(ctx,query = None,role : discord.Role = None):
   if query == None:
     embed = discord.Embed(title = "Muterole")
     embed.add_field(name = "Aliases",value = "None",inline = False)
