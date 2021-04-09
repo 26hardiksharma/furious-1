@@ -1848,8 +1848,8 @@ async def cardping(ctx,query = None,*,desc = None):
             await ctx.send('You Don\'t Have The Karuta Cardping Role In Your Roles.')
             return
           try:
-            await ctx.author.remove_roles(role,reason = "Personal Cardping Addrole Request.")
-            await ctx.send(f'You Have Been Given The **{role.name}** On Account Of Your Karuta Addrole Request.')
+            await ctx.author.remove_roles(role,reason = "Personal Cardping Removerole Request.")
+            await ctx.send(f'**{role.name}** Has Been Removed From Your Roles On Account Of Your Karuta Removerole Request.')
           except:
             await ctx.send('I Am Unable To Remove The Cardping Role From Your Roles. Please Make Sure That I Have Appropriate Permissions To Remove It From You!')
 
