@@ -1884,9 +1884,13 @@ async def prefix(ctx,prefix = None):
 async def giverep(ctx,member : discord.Member = None):
   if member == None:
     await ctx.send('You Didn\'t Mention A Member To Be Given A Reputation, Be Sure To Mention Someone Next Time!')
-    return
     ctx.command.reset_cooldown(ctx)
-  curnt = client.reps.find(ctx.guild.id)
+    return
+  if member == ctx.author:
+    await ctx.send('You Cannot Give Rep To Yourself, Bruh.')
+    ctx.command.reset_cooldown(ctx)
+    return
+  curnt = await client.reps.find(ctx.guild.id)
   if not curnt:
     rep = 0
   elif not "uid" in curnt:
