@@ -1987,6 +1987,40 @@ async def setlogs(ctx,channel : discord.TextChannel = None):
   kekek = {"_id":ctx.guild.id,"logchannel":channel.id}
   await client.config.upsert(kekek)
   await ctx.send(f'{channel.mention} Was Set As The Log Channel For This Server. Important Actions Taking Place In This Server Will Be Logged There!')
-
-
+@client.event
+@client.event
+async def on_guild_channel_update(before, after):
+  data = await client.config.find(before.guild.id)
+  if not data or "logchannel" not in data:
+    return
+  logs = before.guild.get_channel(data["logchannel"])
+  if not logs:
+    return
+  
+  async for entry in after.guild.audit_logs(action=discord.AuditLogAction.channel_update,limit = 1):
+    member = entry.user
+    reason = entry.reason
+    break
+  embed = discord.Embed(title = "Channel Updated",description = after.mention,colour = 0xF2922D,timestamp = datetime.datetime.now())
+  embed.set_footer(text = f"ID : {after.id}")
+  if before.name != after.name:
+    embed.add_field(name = "Name [Before]", value = before.name)
+    embed.add_field(name = "Name [After]",value = after.name,inline = False)
+    embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
+    await logs.send(embed=embed)
+  elif before.topic != after.topic:
+    embed.add_field(name = "Topic [Before]",value = before.topic)
+    embed.add_field(name = "Topic [After]",value = after.topic,inline = False)
+    embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
+    await logs.send(embed=embed)
+  elif before.type != after.type:
+    embed.add_field(name = "Type[Before]",value = str(before.type).capitalize(),inline = False)
+    embed.add_field(name = "Type[After]",value = str(after.type).capitalize(),inline = False)
+    embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
+    await logs.send(embed=embed)
+  elif before.slowmode_delay != after.slowmode_delay:
+    embed.add_field(name = "Slowmode[Before]",value = f"{before.slowmode_delay} Seconds")
+    embed.add_field(name = "Slowmode[After]",value = f"{after.slowmode_delay} Seconds",inline=False)
+    embed.add_field(name = "Resposible User",value = member)
+    await logs.send(embed=embed)
 client.run(TOKEN)
