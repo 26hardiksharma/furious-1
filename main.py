@@ -1078,7 +1078,7 @@ async def muterole(ctx,query = None,role : discord.Role = None):
         kekekek = {"_id":ctx.guild.id,"mrole":role.id}
         await client.config.upsert(kekekek)
         await ctx.send(f'**{role.name}** Has Been Set As The Muterole Of This Server!')
-
+        ctx.command.reset_cooldown(ctx)
 @client.command(aliases= ["ccreate"])
 async def create_category(ctx, *, name):
   if ctx.author.guild_permissions.manage_guild:
