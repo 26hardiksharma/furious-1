@@ -981,7 +981,7 @@ async def templock(ctx,unit,channel : discord.TextChannel=None):
     await ctx.send("<:kya_bey:796610669549322250>")
 @client.command()
 @commands.cooldown(1, 60, commands.BucketType.guild)
-async def muterole(ctx,query = None):
+async def muterole(ctx,query = None,role = discord.Role = None):
   if query == None:
     embed = discord.Embed(title = "Muterole")
     embed.add_field(name = "Aliases",value = "None",inline = False)
@@ -1052,6 +1052,10 @@ async def muterole(ctx,query = None):
             await vc.set_permissions(mrole,overwrite=vperms)
             await asyncio.sleep(0.2)
           await ctx.send(f"Muterole Setup Successfully Completed")
+      if query.lower() == "set":
+        okay = {"_id":ctx.guild.id,"mrole":role.id}
+        await client.config.upsert(okay)
+        await ctx.send(f"**{role.name}** Was Set As The New Muted Role For This Server.")
 @client.command(aliases= ["ccreate"])
 async def create_category(ctx, *, name):
   if ctx.author.guild_permissions.manage_guild:
