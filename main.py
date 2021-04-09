@@ -2011,6 +2011,11 @@ async def on_guild_channel_update(before, after):
       embed.add_field(name = "Topic [After]",value = after.topic,inline = False)
       embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
       await logs.send(embed=embed)
+    elif before.slowmode_delay != after.slowmode_delay:
+      embed.add_field(name = "Slowmode[Before]",value = f"{before.slowmode_delay} Seconds")
+      embed.add_field(name = "Slowmode[After]",value = f"{after.slowmode_delay} Seconds",inline=False)
+      embed.add_field(name = "Resposible User",value = member)
+      await logs.send(embed=embed)
   if before.name != after.name:
     embed.add_field(name = "Name [Before]", value = before.name)
     embed.add_field(name = "Name [After]",value = after.name,inline = False)
@@ -2020,11 +2025,6 @@ async def on_guild_channel_update(before, after):
     embed.add_field(name = "Type[Before]",value = str(before.type).capitalize(),inline = False)
     embed.add_field(name = "Type[After]",value = str(after.type).capitalize(),inline = False)
     embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
-    await logs.send(embed=embed)
-  elif before.slowmode_delay != after.slowmode_delay:
-    embed.add_field(name = "Slowmode[Before]",value = f"{before.slowmode_delay} Seconds")
-    embed.add_field(name = "Slowmode[After]",value = f"{after.slowmode_delay} Seconds",inline=False)
-    embed.add_field(name = "Resposible User",value = member)
     await logs.send(embed=embed)
 @client.event
 async def on_message_delete(message):
