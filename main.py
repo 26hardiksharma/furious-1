@@ -2067,6 +2067,8 @@ async def on_guild_update(before,after):
     await logs.send(embed=embed)
 @client.event
 async def on_message_edit(before,after):
+  if message.author.bot: 
+    return
   data = await client.config.find(after.guild.id)
   if not data or "logchannel" not in data:
     return
