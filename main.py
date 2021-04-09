@@ -991,10 +991,31 @@ async def muterole(ctx,query = None,role : discord.Role = None):
     await ctx.send(embed=embed)
   else:
     if ctx.author.guild_permissions.manage_roles:
-      if query.lower() == "setup" or "create":
-        mute= discord.utils.get(ctx.guild.roles,name = "Muted")
-        if mute in ctx.guild.roles:
-          await ctx.send("A Muted Role Already Exists In This Guild! What Actions Do You Want me To Perform ?\n1) Set Permissions And Overrides For The Existing Muted Role (Reply With **1** For This)\n2) Delete The Muted Role And Create A New One With Updated Permissions(Reply With **2** For This)")
+      if query.lower() == "setup" or query.lower() == "create":
+        data = await client.config.get(ctx.guild.id)
+        if not data or "mrole" not in data:
+          await ctx.send(f"Setting Up Muted Role")
+          mrole = await ctx.guild.create_role(name = "Muted",permissions = discord.Permissions(permissions = 0))
+          for channel in ctx.guild.text_channels:
+            perms = channel.overwrites_for(mrole)
+            perms.send_messages = False
+            perms.add_reactions = False
+            await channel.set_permissions(mrole,overwrite = perms)
+            await asyncio.sleep(0.2)
+          for vc in ctx.guild.voice_channels:
+            vperms = vc.overwrites_for(mrole)
+            vperms.speak= False
+            await vc.set_permissions(mrole,overwrite=vperms)
+            await asyncio.sleep(0.2)
+          okay = {"_id":ctx.guild.id,"mrole":mrole.id}
+          await client.config.upsert(okay)
+          await ctx.send(f"Muterole Setup Successfully Completed")
+        else:
+          embed = discord.Embed(title = "Hold Up!",colour = ctx.author.color,timestamp = datetime.datetime.now())
+          embed.add_field(name = "Muterole Conflicts Found!",value = 'A Muted Role has Already Been Setup In This Server. What Actions Do You Want Me To Perform ?')
+          embed.add_field(name = "Actions",value = "1) Set Permissions And Overrides For The Existing Muted Role (Reply With `1` For This)\n\n2) Delete The Muted Role And Create A New One With Updated Permissions(Reply With `2` For This)")
+          embed.add_field(name = "Existing Muterole",value = f'<@&{data["mrole"]}>',inline =False)
+          await ctx.send(embed=embed)
           answers = []
           def check(m):
             return m.author == ctx.author and m.channel == ctx.channel
@@ -1006,6 +1027,13 @@ async def muterole(ctx,query = None,role : discord.Role = None):
           else:
             answers.append(msg.content)
           if answers[0] == "1":
+            mute = discord.utils.get(ctx.guild.roles,id = data["mrole"])
+            if not mute:
+              return await ctx.send('The Existing Muterole Couldn\'t Be Found In This Server, Please Make Sure That It Not Deleted.')
+            me = await ctx.guild.fetch_member(client.user.id)
+            if mute > me.top_role:
+              return await ctx.send('The Existing Muted Role Is Above my Top Role. I Dont Have Permission To Configure It.\nPlease Make Sure That It Is Below My Top Role')
+            
             await ctx.send(f"Updating The Muted Role || This May Take Time Depending Upon The Number Of Channels This Server Has!")
             for channel in ctx.guild.text_channels:
               perms = channel.overwrites_for(mute)
@@ -1021,7 +1049,15 @@ async def muterole(ctx,query = None,role : discord.Role = None):
             await ctx.send(f"Successfully Setup The Existing Muted Role In Every Channel")
           elif answers[0] == "2":
             await ctx.send(f"Setting Up Muterole")
-            await mute.delete()
+            kek = data["mrole"]
+            mute = discord.utils.get(ctx.guild.roles,id = kek)
+            if not mute:
+              return await ctx.send('The Existing Muted Role Could Not Be Found In This Server.\n\nPlease Make Sure It Is Not Deleted!') 
+            try:
+              await mute.delete()
+            except:
+              await ctx.send("The Existing Muted Role Is Above My Top Role, I Am Unable To Delete It :/\nPlease Make Sure That It Is Below My Top Role!")
+              return
             mrole = await ctx.guild.create_role(name = "Muted",permissions = discord.Permissions(permissions = 0))
             for channel in ctx.guild.text_channels:
               perms = channel.overwrites_for(mrole)
@@ -1034,26 +1070,14 @@ async def muterole(ctx,query = None,role : discord.Role = None):
               vperms.speak= False
               await vc.set_permissions(mrole,overwrite=vperms)
               await asyncio.sleep(0.2)
-            await ctx.send(f"Muterole Setup Successfully Completed")
-        else:
-          await ctx.send(f"Setting Up Muted Role")
-          mrole = await ctx.guild.create_role(name = "Muted",permissions = discord.Permissions(permissions = 0))
-          for channel in ctx.guild.text_channels:
-            perms = channel.overwrites_for(mrole)
-            perms.send_messages = False
-            perms.add_reactions = False
-            await channel.set_permissions(mrole,overwrite = perms)
-            await asyncio.sleep(0.2)
-          for vc in ctx.guild.voice_channels:
-            vperms = vc.overwrites_for(mrole)
-            vperms.speak= False
-            await vc.set_permissions(mrole,overwrite=vperms)
-            await asyncio.sleep(0.2)
-          await ctx.send(f"Muterole Setup Successfully Completed")
+            await ctx.send(f"Muterole Setup Has Been Successfully Completed")
       elif query.lower() == "set":
-        okay = {"_id":ctx.guild.id,"mrole":role.id}
-        await client.config.upsert(okay)
-        await ctx.send(f"**{role.name}** Was Set As The New Muted Role For This Server.")
+        if not role:
+          return await ctx.send('Please Mention A Role To Be Set As The Muted Role Of The Server!')
+        kekekek = {"_id":ctx.guild.id,"mrole":role.id}
+        await client.config.upsert(kekekek)
+        await ctx.send(f'**{role.name}** Has Been Set As The Muterole Of This Server!')
+
 @client.command(aliases= ["ccreate"])
 async def create_category(ctx, *, name):
   if ctx.author.guild_permissions.manage_guild:
