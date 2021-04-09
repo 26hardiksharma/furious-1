@@ -2023,16 +2023,15 @@ async def on_guild_channel_update(before, after):
     embed.add_field(name = "Resposible User",value = member)
     await logs.send(embed=embed)
 @client.event
-async def on_raw_message_delete(payload):
-  if payload.cached_message.author.bot:
+async def on_message_delete(message):
+  if message.author.bot:
     return
-  data = await client.config.find(payload.guild_id)
+  data = await client.config.find(message.guild.id)
   if not data or "logchannel" not in data:
     return
-  guild = client.get_guild(payload.guild_id)
-  logs = guild.get_channel(data["logchannel"])
+  logs = message.guild.get_channel(data["logchannel"])
   if not logs:
     return
-  embed = discord.Embed(title = 'Message Deleted',description = f'Message: **{payload.cached_message.content}**\nChannel: <#{payload.channel_id}>\nAuthor: {payload.cached_message.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
+  embed = discord.Embed(title = 'Message Deleted',description = f'Message: **{message.content}**\nChannel: <#{message.channel.id}>\nAuthor: {message.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
   await logs.send(embed = embed)
 client.run(TOKEN)
