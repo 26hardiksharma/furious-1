@@ -1806,7 +1806,7 @@ async def cardping(ctx,query = None,*,desc = None):
         data = await client.config.find(ctx.guild.id)
         if not data or "krole" not in data:
           return await ctx.send('Karuta Cardping Role Is Not Defined On This Server!')
-        if not "karole" in data or "karole" == "off":
+        if not "karole" in data or data["karole"] != "on":
           return await ctx.send('Karuta Addrole Is Set To `Off` In This Server!')
         if data["karole"] == "on":
           role = discord.utils.get(ctx.guild.roles,id = data["krole"])
@@ -1831,7 +1831,7 @@ async def cardping(ctx,query = None,*,desc = None):
           await ctx.send('Karuta Addrole Is Now Set To Off, Members Cannot Take The Cardping Role By Using The Command.')
         else:
           await ctx.send('Thats Not A Valid Query For The Addrole Configuration.\n\nTry Using `F!karuta addrole on` Or `F!karuta addrole off`!') 
-          
+
 
          
     elif query.lower() == "config":
