@@ -1903,7 +1903,7 @@ async def giverep(ctx,member : discord.Member = None):
   await client.reps.upsert(okay)
   await ctx.send(f'Gave One Reputation To {member}!')
 @client.command()
-async def reputation(ctx,member =discord.Member = None):
+async def reputation(ctx,member :discord.Member = None):
   if not member:
     member = ctx.author
   curnt = await client.reps.find(ctx.guild.id)
