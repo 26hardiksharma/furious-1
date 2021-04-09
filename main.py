@@ -1805,7 +1805,7 @@ async def cardping(ctx,query = None,*,desc = None):
       if not desc:
         data = await client.config.find(ctx.guild.id)
         if not data or "krole" not in data:
-          return await ctx.send('Karuta Cardping Role Is Not Defined On This Server!')
+          return await ctx.send('A Karuta Cardping Role Is Not Defined On This Server!')
         if not "karole" in data or data["karole"] != "on":
           return await ctx.send('Karuta Addrole Is Set To `Off` In This Server!')
         if data["karole"] == "on":
@@ -1819,7 +1819,7 @@ async def cardping(ctx,query = None,*,desc = None):
             await ctx.send('I Am Unable To Give You The Cardping Role. Please Make Sure That I Have Appropriate Permissions To Assign It To You!')
       else:
         if ctx.author.guild_permissions.manage_guild == False:
-          await ctx.send('You Dont Have The `MANAGE SERVER` Permission Required To Execute This Command.')
+          await ctx.send('You Dont Have The `MANAGE SERVER` Permission Required To Execute This Command!')
           return
         if desc.lower() == "on":
           kek = {"_id":ctx.guild.id,"karole":"on"}
@@ -1831,9 +1831,41 @@ async def cardping(ctx,query = None,*,desc = None):
           await ctx.send('Karuta Addrole Is Now Set To Off, Members Cannot Take The Cardping Role By Using The Command.')
         else:
           await ctx.send('Thats Not A Valid Query For The Addrole Configuration.\n\nTry Using `F!karuta addrole on` Or `F!karuta addrole off`!') 
+    elif query.lower() == "removerole" or query.lower() == "takerole" or query.lower() == "remove":
+      if not desc:
+        data = await client.config.find(ctx.guild.id)
+        if not data or "krole" not in data:
+          await ctx.send('A Karuta Cardping Role Is Not Defined On This Server')
+          return
+        if not "krmrole" in data or data["krmrole"] != "on":
+          await ctx.send('Karuta Remove Role Is Set To Off In This Server.')
+          return
+        if data["krmrole"] == "on":
+          role = discord.utils.get(ctx.guild.roles,id = data["krole"])
+          if not role:
+            await ctx.send('The Role Set As The Karuta Cardping Role Couldn\'t Be Found In This Server.\n\nPlease Make Sure It Is Not Deleted And Also Is Below My Top Role!')
+          if role not in ctx.author.roles:
+            await ctx.send('You Don\'t Have The Karuta Cardping Role In Your Roles.')
+            return
+          try:
+            await ctx.author.remove_roles(role,reason = "Personal Cardping Addrole Request.")
+            await ctx.send(f'You Have Been Given The **{role.name}** On Account Of Your Karuta Addrole Request.')
+          except:
+            await ctx.send('I Am Unable To Remove The Cardping Role From Your Roles. Please Make Sure That I Have Appropriate Permissions To Remove It From You!')
 
-
-         
+      else:
+        if ctx.author.guild_permissions.manage_guild == False:
+          return await ctx.send('You Don\'t Have The `MANAGE SERVER` Permission Required To Execute This Command!')
+        if desc.lower() == "on":
+          kek = {"_id":ctx.guild.id,"krmrole":"on"}
+          await client.config.upsert(kek)
+          await ctx.send('Karuta Addrole Is Now Set To On, Members Can Remove The Cardping Role By Typing `F!karuta removerole`!')
+        elif desc.lower() == "off":
+          kek = {"_id":ctx.guild.id,"krmrole":"off"}
+          await client.config.upsert(kek)
+          await ctx.send('Karuta Addrole Is Now Set To Off, Members Cannot Remove The Cardping Role By Using The Command.')
+        else:
+          await ctx.send('Thats Not A Valid Query For The Remove Configuration.\n\nTry Using `F!karuta removerole on` Or `F!karuta removerole off`!')     
     elif query.lower() == "config":
       data = await client.config.find(ctx.guild.id)
       if not data:
