@@ -2073,7 +2073,7 @@ async def on_message_edit(before,after):
   if before.content == after.content:
     return
 
-  embed = discord.Embed(title = 'Message Edited',description = f'Before: **{before.content}\n+ After: {after.content}**\nChannel: <#{after.channel.id}>\nAuthor: {after.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
+  embed = discord.Embed(title = 'Message Edited',description = f'**Before: {before.content}\n+ After: {after.content}**\nChannel: <#{after.channel.id}>\nAuthor: {after.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
   await logs.send(embed=embed)
 
 client.run(TOKEN)
