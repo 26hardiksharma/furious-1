@@ -993,7 +993,7 @@ async def muterole(ctx,query = None,role : discord.Role = None):
   else:
     if ctx.author.guild_permissions.manage_roles:
       if query.lower() == "setup" or query.lower() == "create":
-        data = await client.config.get(ctx.guild.id)
+        data = await client.config.find(ctx.guild.id)
         if not data or "mrole" not in data:
           await ctx.send(f"Setting Up Muted Role")
           mrole = await ctx.guild.create_role(name = "Muted",permissions = discord.Permissions(permissions = 0))
