@@ -2005,14 +2005,15 @@ async def on_guild_channel_update(before, after):
     break
   embed = discord.Embed(title = "Channel Updated",description = after.mention,colour = 0xF2922D,timestamp = datetime.datetime.now())
   embed.set_footer(text = f"ID : {after.id}")
+  if str(after.type) == "text":
+    if before.topic != after.topic:
+      embed.add_field(name = "Topic [Before]",value = before.topic)
+      embed.add_field(name = "Topic [After]",value = after.topic,inline = False)
+      embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
+      await logs.send(embed=embed)
   if before.name != after.name:
     embed.add_field(name = "Name [Before]", value = before.name)
     embed.add_field(name = "Name [After]",value = after.name,inline = False)
-    embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
-    await logs.send(embed=embed)
-  elif before.topic != after.topic:
-    embed.add_field(name = "Topic [Before]",value = before.topic)
-    embed.add_field(name = "Topic [After]",value = after.topic,inline = False)
     embed.add_field(name = "Responsible User",value = f"{member.name}#{member.discriminator}")
     await logs.send(embed=embed)
   elif before.type != after.type:
