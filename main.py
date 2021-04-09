@@ -1024,6 +1024,7 @@ async def muterole(ctx,query = None,role : discord.Role = None):
             msg = await client.wait_for('message',timeout = 20.0,check = check)
           except asyncio.TimeoutError:
             await ctx.send("Time's Up! you Didn't Answer In Time")
+            ctx.command.reset_cooldown(ctx)
             return
           else:
             answers.append(msg.content)
