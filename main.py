@@ -208,26 +208,23 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
       embed.add_field(name = "Status",value = f"That User Is A Moderator/Admin. Command Could Not Be Executed!")
       await ctx.send(embed=embed)
     else:
-      rc = 0 
-      for r in ctx.guild.roles:
-        if "mute" in r.name.lower():
-          rc += 1
-      if rc == 0:
-        await ctx.send("Couldn't Find A Muted Role In This Server!")
-      elif rc > 1:
-        await ctx.send("Multiple Roles Found Marked As ``Muted`` In This Server! Please Make Sure That There Is Only One Role Named ``Muted`` In This Server")
+      muted = await client.config.find(ctx.guild.id)
+      if not muted or "mrole" not in muted:
+        return await ctx.send('A Mute Role Is Not Configured In This Server, Use `F!muterole set <@role>` or `F!muterole setup` To Instantly Setup The Role.')
       else:
-        for muted in ctx.guild.roles:
-          if "mute" in muted.name.lower():
-            await member.add_roles(muted,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-            embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = 0xFF0000)
-            embed.add_field(name = "Reason", value = reason)
-            memberembed = discord.Embed(title = "🔇 Mute", description = "You Have Been Muted", color = discord.Colour.red(), inline = False)
-            memberembed.add_field(name = "Moderator :- ", value = ctx.author.name)
-            memberembed.add_field(name = "Reason", value = reason, inline = False)
-            await member.send(embed = memberembed)
-            await ctx.send(embed=embed)
-            break
+        id = muted["mrole"]
+        muterole = discord.utils.get(ctx.guild.roles,id = id)
+        if not muterole:
+          return await ctx.send('The Muted Role Couldn\'t Be Found In This Server. Please Make Sure That The configured Muted Role Was Not Deleted Or Set A New One!')
+        await member.add_roles(muterole,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+        embed = discord.Embed(title = " 🔇 Mute" , description = f" {member.mention} Has Been Successfully Muted" , color = 0xFF0000)
+        embed.add_field(name = "Reason", value = reason)
+        memberembed = discord.Embed(title = "🔇 Mute", description = "You Have Been Muted", color = discord.Colour.red(), inline = False)
+        memberembed.add_field(name = "Moderator :- ", value = ctx.author.name)
+        memberembed.add_field(name = "Reason", value = reason, inline = False)
+        await member.send(embed = memberembed)
+        await ctx.send(embed=embed)
+        break
   else:
     await ctx.send("You Are Missing The **`MANAGE MESSAGES`** Permission Required To Execute This Command")
 @client.command()
@@ -1896,9 +1893,19 @@ async def giverep(ctx,member : discord.Member = None):
   elif not "uid" in curnt:
     rep = 0
   else:
-    rep = curnt["uid"]["reputation"]
+    rep = int(curnt["uid"]["reputation"])
   kek = rep + 1
   okay = {"_id": ctx.guild.id,"uid":member.id,"reputation":kek}
   await client.reps.upsert(okay)
   await ctx.send(f'Gave One Reputation To {member}!')
+@client.command()
+async def reputation(ctx,member =discord.Member = None):
+  if not member:
+    member = ctx.author
+  curnt = await client.reps.find(ctx.guild.id)
+  if not curnt:
+    return await ctx.send(f'{members}\'s Reputation : `0`')
+  if not "uid" in curnt:
+    return await ctx.send(f"{member}'s Reputation : `0`")
+  
 client.run(TOKEN)
