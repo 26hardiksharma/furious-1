@@ -1984,7 +1984,7 @@ async def setlogs(ctx,channel : discord.TextChannel = None):
   if not channel:
     await ctx.send('Please Be Sure To Mention A Channel Or Supply It\'s ID To Be Set As The Log Channel.')
   kekek = {"_id":ctx.guild.id,"logchannel":channel.id}
-  await client.config.insert(kekek)
+  await client.config.upsert(kekek)
   await ctx.send(f'{channel.mention} Was Set As The Log Channel For This Server. Important Actions Taking Place In This Server Will Be Logged There!')
 
 
