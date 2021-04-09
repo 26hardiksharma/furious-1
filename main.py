@@ -1988,7 +1988,6 @@ async def setlogs(ctx,channel : discord.TextChannel = None):
   await client.config.upsert(kekek)
   await ctx.send(f'{channel.mention} Was Set As The Log Channel For This Server. Important Actions Taking Place In This Server Will Be Logged There!')
 @client.event
-@client.event
 async def on_guild_channel_update(before, after):
   data = await client.config.find(before.guild.id)
   if not data or "logchannel" not in data:
@@ -2023,4 +2022,15 @@ async def on_guild_channel_update(before, after):
     embed.add_field(name = "Slowmode[After]",value = f"{after.slowmode_delay} Seconds",inline=False)
     embed.add_field(name = "Resposible User",value = member)
     await logs.send(embed=embed)
+@client.event
+async def on_raw_message_delete(payload):
+  data = await client.config.find(payload.guild_id)
+  if not data or "logchannel" not in data:
+    return
+  guild = client.get_guild(payload.guild_id)
+  logs = guild.get_channel(data["logchannel"])
+  if not logs:
+    return
+  embed = discord.Embed(title = 'Message Deleted',description = f'Message: **{payload.cached_message}**\nChannel: <#{payload.channel_id}>\nAuthor: {payload.cached_message.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
+  await logs.send(embed = embed)
 client.run(TOKEN)
