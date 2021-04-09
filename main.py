@@ -224,7 +224,6 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
         memberembed.add_field(name = "Reason", value = reason, inline = False)
         await member.send(embed = memberembed)
         await ctx.send(embed=embed)
-        break
   else:
     await ctx.send("You Are Missing The **`MANAGE MESSAGES`** Permission Required To Execute This Command")
 @client.command()
