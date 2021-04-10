@@ -1754,7 +1754,7 @@ async def on_message(message):
     guild = message.guild
     if not message.author.guild_permissions.manage_messages:
       channel = message.guild.get_channel(data["schannel"])
-      embed = discord.Embed(title = "Sticky Message",description = data[""],colour = 0x74A3E9)
+      embed = discord.Embed(title = "Sticky Message",description = data["smessage"],colour = 0x74A3E9)
       await message.channel.send(embed=embed)
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
