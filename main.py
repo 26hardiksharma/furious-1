@@ -2242,6 +2242,7 @@ async def stickynote(ctx,query= None,*,desc= None):
     embed = discord.Embed(title = "Sticky Note",description = "<:emoji_2:810202313142566992> Helps You Create Sticky Messages To A Channel.",timestamp = datetime.datetime.now())
     embed.add_field(name = "Setchannel",value = "Set The Sticky Channel For This Server\n\nSyntax: F!stickynote channel #channel")
     embed.add_field(name = "Message",value = "Set The Sticky Message For This Server\n\nSyntax: **F!stickynote message <message>**",inline = False)
+    await ctx.send(embed=embed)
     return
   if query.lower() == "channel":
     if not ctx.message.channel_mentions:
