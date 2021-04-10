@@ -2170,7 +2170,7 @@ async def warnings(ctx,member : discord.Member = None):
   if not data or member.id != data["uid"]:
     return await ctx.send('There Are No Warnings')
   await ctx.send(f'Member: {member}\n\nWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
-class Topgg(client):
+class Topgg():
   def __init__(self,bot):
     self.bot = bot
     self.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
