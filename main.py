@@ -2164,7 +2164,7 @@ async def on_message_edit(before,after):
   embed = discord.Embed(title = 'Message Edited',description = f'**Before: {before.content}\n+ After: {after.content}**\nChannel: <#{after.channel.id}>\nAuthor: {after.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
   await logs.send(embed=embed)
 @client.command()
-async def warnings(ctx,member = discord.Member = None):
+async def warnings(ctx,member : discord.Member = None):
   if not member:
     member = ctx.author
   data = await client.warndb.find(ctx.guild.id)
