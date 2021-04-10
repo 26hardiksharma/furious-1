@@ -1610,7 +1610,7 @@ async def warn(ctx,member : discord.Member,*,reason = None):
         await ctx.send(embed=embed)
       time = datetime.datetime.now().strftime("%a, %#d %B %Y, %I:%M %p UTC")
       okay = {"_id":ctx.guild.id,"uid":member.id,"modid":ctx.author.id,"wtime":time,"warn":reason}
-      await client.warndb.upsert(okay)
+      await client.warndb.insert(okay)
 @client.command()
 async def status(ctx,*,status):
   if ctx.author.id == 757589836441059379:
@@ -2170,5 +2170,5 @@ async def warnings(ctx,member : discord.Member = None):
   data = await client.warndb.find(ctx.guild.id)
   if not data or member.id != data["uid"]:
     return await ctx.send('There Are No Warnings')
-  await ctx.send(f'Member: {member}\nnWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
+  await ctx.send(f'Member: {member}\n\nWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
 client.run(TOKEN)
