@@ -1932,7 +1932,7 @@ class Document:
       pass
     await self.db.delete_many({"_id":id})
   async def insert(self,dict):
-    if not dict["_id"]:
+    if not dict["uid"]:
       raise KeyError("ID Not Found In Supplied Dictionary")
     await self.db.insert_one(dict)
   async def upsert(self,dict):
