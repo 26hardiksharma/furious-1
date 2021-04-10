@@ -1404,11 +1404,7 @@ async def totalbans(ctx):
 @client.event
 async def on_command_error(ctx, error):
   if isinstance(error, commands.CommandOnCooldown):
-    await ctx.message.delete()
-    embed = discord.Embed(title = f"<:error:795629492693368833> {ctx.author.name}#{ctx.author.discriminator}",colour = 0xFF0000)
-    embed.add_field(name = "Status", value = "This Command Is On Cooldown")
-    embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
-    await ctx.send(embed=embed)      
+    await ctx.send(error)      
   elif isinstance(error,commands.CommandNotFound):
     pass
   elif isinstance(error,commands.UserNotFound):
