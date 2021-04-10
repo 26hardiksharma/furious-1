@@ -49,8 +49,8 @@ async def on_ready():
   client.db = client.mongo['furiousop']
   print('Connected To Collection: furiousop\n\nConnecting With Config')
   client.config = Document(client.db,'stores')
-  print('Connected To Config\nConnecting With Reputations')
-  client.reps = Document(client.db,'reputations')
+  print('Connected To Config\nConnecting With Warnings')
+  client.warndb = Document(client.db,'warnings')
   print('Connection Established')
 
 intents.guilds = True
@@ -1599,7 +1599,7 @@ async def warn(ctx,member : discord.Member,*,reason = None):
   if ctx.author.guild_permissions.manage_messages:
     await ctx.message.delete()
     if reason == None:
-      await ctx.send(f"Please Specify A Reason To Warn Someone")
+      await ctx.send(f"Please Specify A Reason To Warn Someone.")
     else:
       try:
         await member.send(f"You Have Been Warned In {ctx.guild.name} For: **{reason}**")
@@ -1608,6 +1608,9 @@ async def warn(ctx,member : discord.Member,*,reason = None):
       except:
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
+      time = datetime.datetime.now().strftime("%a, %#d %B %Y, %I:%M %p UTC")
+      okay = {"_id":ctx.guild.id,"uid":member.id,"modid":ctx.author.id,"wtime":time}
+      await client.warndb.upsert(okay)
 @client.command()
 async def status(ctx,*,status):
   if ctx.author.id == 757589836441059379:
@@ -2062,6 +2065,7 @@ async def setlogs(ctx,channel : discord.TextChannel = None):
     return await ctx.send('You Are Missing The **`MANAGE SERVER`** Permission Required To Execute This Command!')
   if not channel:
     await ctx.send('Please Be Sure To Mention A Channel Or Supply It\'s ID To Be Set As The Log Channel.')
+    return
   me = await ctx.guild.fetch_member(client.user.id)
   if me.guild_permissions.view_audit_log == False or me.guild_permissions.send_messages == False or me.guild_permissions.embed_links == False or me.guild_permissions.attach_files == False:
     return await ctx.send('I Need The Following Permissions To Correctly Deliver Logs.\n`SEND MESSAGES`\n`EMBED LINKS`\n`ATTACH FILES`\n`VIEW AUDIT LOG`\nPlease Grant Me The Following Permission And Then Use The Command.')
