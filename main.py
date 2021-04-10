@@ -2174,7 +2174,7 @@ class Topgg():
   def __init__(self,token:str,bot = discord.client.Client):
     self.bot = bot
     self.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
-  @bot.event
+  @client.event
   async def on_dbl_vote(data):
     print(data)
 
