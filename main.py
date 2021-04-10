@@ -2233,5 +2233,34 @@ async def configuration(ctx):
   embed.set_footer(text = f"Type {prefix}karuta help To See The Karuta Cardping Settings",icon_url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
 
+@client.command()
+async def stickynote(ctx,query= None,*,desc= None):
+  if ctx.author.guild_permissions.manage_guild:
+    await ctx.send('You Don\'t Have Have The **MANAGE SERVER** Permission Required To Execute This Command.')
+    return
+  if not query:
+    embed = discord.Embed(title = "Sticky Note",description = "<:emoji_2:810202313142566992> Helps You Create Sticky Messages To A Channel.",timestamp = datetime.datetime.now())
+    embed.add_field(name = "Setchannel",value = "Set The Sticky Channel For This Server\n\nSyntax: F!stickynote channel #channel")
+    embed.add_field(name = "Message",value = "Set The Sticky Message For This Server\n\nSyntax: **F!stickynote message <message>**",inline = False)
+    return
+  if query.lower() == "channel":
+    if not ctx.message.channel_mentions:
+      await ctx.send('Please Be Sure To Mention A Channel To Be Set As The Sticky Channel.')
+      return
+    channel = ctx.message.channel_mentions[0]
+    chan = discord.utils.get(ctx.guild.text_channels,id = channel.id)
+    if not chan:
+      await ctx.send('That Channel Could Not Be Found. Please Make Sure That It Belongs To This Server!')
+      return
+    okay = {"_id":ctx.guild.id,"schannel":chan.id}
+    await client.config.upsert(okay)
+    await ctx.send(f'{chan.send} Is Now Set As The Sticky Channel For This Server.')
+  elif query.lower() == "message":
+    if not desc:
+      await ctx.send('Please Be Sure To Supply A Message To Be Setup As The Sticky Message.')
+      return
+    okay = {"_id":ctx.guild.id,"smessafe":desc}
+    await client.config.upsert(okay)
+    await ctx.send(f'**{desc}** Is Not Set As The Sticky Message For This Server.')
 
 client.run(TOKEN)
