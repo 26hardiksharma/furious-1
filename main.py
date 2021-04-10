@@ -1867,11 +1867,11 @@ async def cardping(ctx,query = None,*,desc = None):
         if desc.lower() == "on":
           kek = {"_id":ctx.guild.id,"krmrole":"on"}
           await client.config.upsert(kek)
-          await ctx.send('Karuta Addrole Is Now Set To On, Members Can Remove The Cardping Role By Typing `F!karuta removerole`!')
+          await ctx.send('Karuta Remove Is Now Set To On, Members Can Remove The Cardping Role By Typing `F!karuta removerole`!')
         elif desc.lower() == "off":
           kek = {"_id":ctx.guild.id,"krmrole":"off"}
           await client.config.upsert(kek)
-          await ctx.send('Karuta Addrole Is Now Set To Off, Members Cannot Remove The Cardping Role By Using The Command.')
+          await ctx.send('Karuta Remove Is Now Set To Off, Members Cannot Remove The Cardping Role By Using The Command.')
         else:
           await ctx.send('Thats Not A Valid Query For The Remove Configuration.\n\nTry Using `F!karuta removerole on` Or `F!karuta removerole off`!')     
     elif query.lower() == "config":
