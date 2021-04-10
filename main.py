@@ -52,7 +52,7 @@ async def on_ready():
   print('Connected To Config\nConnecting With Warnings')
   client.warndb = Document(client.db,'warnings')
   print('Connection Established')
-
+  client.bot = topgg.DBLClient(client,dbl_token)
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
@@ -1450,7 +1450,7 @@ async def meme(ctx):
   await ctx.send(embed=embed)
   client.nextMeme = getMeme()
 
-@client.event
+@bot.event
 async def on_dbl_vote(data):
   async with aiohttp.ClientSession() as session:
     webhook = Webhook.from_url('https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt', adapter=AsyncWebhookAdapter(session))
@@ -2171,4 +2171,8 @@ async def warnings(ctx,member : discord.Member = None):
   if not data or member.id != data["uid"]:
     return await ctx.send('There Are No Warnings')
   await ctx.send(f'Member: {member}\n\nWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
+class topgg.DBLClient(self,bot,token):
+  self.bot = client
+  self.token = dbl_token
+
 client.run(TOKEN)
