@@ -54,6 +54,7 @@ async def on_ready():
   print('Connection Established\nConnecting  Top.gg')
   client.top = Topgg(client)
   print('Success')
+  print(client.top)
 
 intents.guilds = True
 @client.command()
