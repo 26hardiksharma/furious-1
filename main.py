@@ -1609,7 +1609,7 @@ async def warn(ctx,member : discord.Member,*,reason = None):
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
       time = datetime.datetime.now().strftime("%a, %#d %B %Y, %I:%M %p UTC")
-      okay = {"_id":ctx.guild.id,"uid":member.id,"modid":ctx.author.id,"wtime":time}
+      okay = {"_id":ctx.guild.id,"uid":member.id,"modid":ctx.author.id,"wtime":time,"warn":reason}
       await client.warndb.upsert(okay)
 @client.command()
 async def status(ctx,*,status):
@@ -2163,5 +2163,12 @@ async def on_message_edit(before,after):
 
   embed = discord.Embed(title = 'Message Edited',description = f'**Before: {before.content}\n+ After: {after.content}**\nChannel: <#{after.channel.id}>\nAuthor: {after.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
   await logs.send(embed=embed)
-
+@client.command()
+async def warnings(ctx,member = discord.Member = None):
+  if not member:
+    member = ctx.author
+  data = await client.warndb.find(ctx.guild.id)
+  if not data or member.id != data["uid"]:
+    return await ctx.send('There Are No Warnings')
+  await ctx.send(f'Member: {member}\nnWarning: {data["warn"]}\n\nDate: {data["wdate"]}\n\nModerator: <@!{data["modid"]}>')
 client.run(TOKEN)
