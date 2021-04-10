@@ -2171,8 +2171,8 @@ async def warnings(ctx,member : discord.Member = None):
     return await ctx.send('There Are No Warnings')
   await ctx.send(f'Member: {member}\n\nWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
 class Topgg(client):
-  def __init__(self,token:str,bot = discord.client.Client):
-    self.bot = client
+  def __init__(self,bot):
+    self.bot = bot
     self.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
     self.dblpy = dbl.DBLClient(self.bot,self.token)
   @client.event
