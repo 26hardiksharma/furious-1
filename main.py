@@ -51,7 +51,10 @@ async def on_ready():
   client.config = Document(client.db,'stores')
   print('Connected To Config\nConnecting With Warnings')
   client.warndb = Document(client.db,'warnings')
-  print('Connection Established')
+  print('Connection Established\nConnecting  Top.gg')
+  client.top = Topgg(client)
+  print('Success')
+
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
@@ -2178,5 +2181,7 @@ class Topgg():
   @client.event
   async def on_dbl_vote(self,data):
     print(data)
-
+@client.top.event
+async def on_dbl_vote(data):
+  print(data)
 client.run(TOKEN)
