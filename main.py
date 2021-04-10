@@ -1932,8 +1932,6 @@ class Document:
       pass
     await self.db.delete_many({"_id":id})
   async def insert(self,dict):
-    if not isinstance(dict, collections.abc.Mapping):
-      raise TypeError('Expected Dictionary')
     if not dict["_id"]:
       raise KeyError("ID Not Found In Supplied Dictionary")
     await self.db.insert_one(dict)
