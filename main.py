@@ -2182,7 +2182,7 @@ class Topgg():
   @client.event
   async def on_dbl_vote(self,data):
     print(data)
-@client.command()
+@client.command(aliases = ['config','serverconfig'])
 async def configuration(ctx):
   if ctx.author.guild_permissions.manage_guild == False:
     await ctx.send(f"You Need The **MANAGE SERVER** Permission Required To Execute This Command!")
