@@ -2181,7 +2181,4 @@ class Topgg():
   @client.event
   async def on_dbl_vote(self,data):
     print(data)
-@client.top.event
-async def on_dbl_vote(data):
-  print(data)
 client.run(TOKEN)
