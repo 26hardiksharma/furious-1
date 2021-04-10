@@ -2223,13 +2223,13 @@ async def configuration(ctx):
   embed = discord.Embed(title = "Server Configuration",colour = ctx.author.color,timestamp = datetime.datetime.now())
   embed.add_field(name = "Prefix",value = prefix)
   if logchannel == "None":
-    embed.add_field(name = "Log Channel",value = "None",inline = False)
+    embed.add_field(name = "Log Channel",value = "None")
   else:
-    embed.add_field(name = "Log Channel",value = f"<#{logchannel}>",inline = False)
+    embed.add_field(name = "Log Channel",value = f"<#{logchannel}>")
   if mrole == "None":
-    embed.add_field(name = "Muterole",value = "None",inline= False)
+    embed.add_field(name = "Muterole",value = "None")
   else:
-    embed.add_field(name = "Muterole",value = f"<@&{mrole}>",inline = False)
+    embed.add_field(name = "Muterole",value = f"<@&{mrole}>")
   embed.set_footer(text = f"Type {prefix}karuta help To See The Karuta Cardping Settings",icon_url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
 
