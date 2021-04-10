@@ -2182,4 +2182,56 @@ class Topgg():
   @client.event
   async def on_dbl_vote(self,data):
     print(data)
+@client.command()
+async def configuration(ctx):
+  if ctx.author.guild_permissions.manage_guild == False:
+    await ctx.send(f"You Need The **MANAGE SERVER** Permission Required To Execute This Command!")
+    return
+  data = await client.config.find(ctx.guild.id)
+  if not data:
+    prefix = "F!"
+    logch = "None"
+    mrole = "None"
+    krole = "None"
+    ktoggle = "Off"
+    kmessage = "None"
+  else:
+    if not "prefix" in data:
+      prefix = "F!"
+    else:
+      prefix = data["prefix"]
+    if not "logchannel" in data:
+      logchannel = "None"
+    else:
+      logchannel = data["logchannel"]
+    if not "mrole" in data:
+      mrole = "None"
+    else:
+      mrole = data["mrole"]
+    if not "krole" in data:
+      krole = "None"
+    else:
+      krole = data["krole"]
+    if not "kmessage" in data:
+      kmessage = "None"
+    else:
+      kmessage = data["kmessage"]
+    if not "ktoggle" in data:
+      ktoggle = "Off"
+    else:
+      ktoggle = str(data["ktoggle"]).capitalize()
+  embed = discord.Embed(title = "Server Configuration",colour = ctx.author.color,timestamp = datetime.datetime.now())
+  embed.add_field(name = "Prefix",value = prefix)
+  if logchannel == "None":
+    embed.add_field(name = "Log Channel",value = "None",inline = False)
+  else:
+    embed.add_field(name = "Log Channel",value = f"<#{logchannel}>",inline = False)
+  if mrole == "None":
+    embed.add_field(name = "Muterole",value = "None",inline= False)
+  else:
+    embed.add_field(name = "Muterole",value = f"<@&{mrole}>",inline = False)
+  embed.set_author(text = f"Type {prefix}karuta help To See The Karuta Cardping Settings",icon_url= ctx.author.avatar_url)
+  await ctx.send(embed=embed)
+
+
 client.run(TOKEN)
