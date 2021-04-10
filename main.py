@@ -2170,5 +2170,5 @@ async def warnings(ctx,member : discord.Member = None):
   data = await client.warndb.find(ctx.guild.id)
   if not data or member.id != data["uid"]:
     return await ctx.send('There Are No Warnings')
-  await ctx.send(f'Member: {member}\nnWarning: {data["warn"]}\n\nDate: {data["wdate"]}\n\nModerator: <@!{data["modid"]}>')
+  await ctx.send(f'Member: {member}\nnWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
 client.run(TOKEN)
