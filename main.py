@@ -2262,6 +2262,6 @@ async def stickynote(ctx,query= None,*,desc= None):
       return
     okay = {"_id":ctx.guild.id,"smessafe":desc}
     await client.config.upsert(okay)
-    await ctx.send(f'**{desc}** Is Not Set As The Sticky Message For This Server.')
+    await ctx.send(f'**{desc}** Is Now Set As The Sticky Message For This Server.')
 
 client.run(TOKEN)
