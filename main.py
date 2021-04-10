@@ -2172,7 +2172,7 @@ async def warnings(ctx,member : discord.Member = None):
   await ctx.send(f'Member: {member}\n\nWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
 class Topgg():
   def __init__(self,token:str,bot = discord.client.Client):
-    self.bot = bot
+    self.bot = client
     self.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
   @client.event
   async def on_dbl_vote(data):
