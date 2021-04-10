@@ -2270,7 +2270,7 @@ async def stickynote(ctx,query= None,*,desc= None):
     if not desc:
       await ctx.send('Please Be Sure To Supply A Message To Be Setup As The Sticky Message.')
       return
-    okay = {"_id":ctx.guild.id,"smessafe":desc,"sid":ctx.author.id}
+    okay = {"_id":ctx.guild.id,"smessage":desc,"sid":ctx.author.id}
     await client.config.upsert(okay)
     await ctx.send(f'**{desc}** Is Now Set As The Sticky Message For This Server.')
 
