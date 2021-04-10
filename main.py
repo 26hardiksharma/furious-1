@@ -2235,7 +2235,7 @@ async def configuration(ctx):
 
 @client.command()
 async def stickynote(ctx,query= None,*,desc= None):
-  if ctx.author.guild_permissions.manage_guild:
+  if ctx.author.guild_permissions.manage_guild == False:
     await ctx.send('You Don\'t Have Have The **MANAGE SERVER** Permission Required To Execute This Command.')
     return
   if not query:
