@@ -52,7 +52,8 @@ async def on_ready():
   print('Connected To Config\nConnecting With Warnings')
   client.warndb = Document(client.db,'warnings')
   print('Connection Established')
-  client.bot = topgg.DBLClient(client,dbl_token)
+  client.bot = topgg(client,dbl_token)
+  print('Connected To Top.gg, Bro')
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
@@ -2171,7 +2172,7 @@ async def warnings(ctx,member : discord.Member = None):
   if not data or member.id != data["uid"]:
     return await ctx.send('There Are No Warnings')
   await ctx.send(f'Member: {member}\n\nWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
-class topgg.DBLClient(self,bot,token):
+class topgg(self,bot,token):
   self.bot = client
   self.token = dbl_token
 
