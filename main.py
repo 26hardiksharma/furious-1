@@ -1745,7 +1745,17 @@ async def on_message(message):
         await msg.edit(content =f'{mention}, Karuta Dropped Some Cards, But They Have Expired And Can No Longer Be Grabbed :/')
         embed.set_image(url = message.attachments[0].url)
         await chan.send(embed=embed)
-
+  else:
+    data = await client.config.find(message.guild.id)
+    if not data:
+      return
+    if not data["smessage"] or "schannel" not in data:
+      return
+    guild = message.guild
+    if not message.author.guild_permissions.manage_messages:
+      channel = message.guild.get_channel(data["schannel"])
+      embed = discord.Embed(title = "Sticky Message",description = data[""],colour = 0x74A3E9)
+      await message.channel.send(embed=embed)
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
 async def cardping(ctx,query = None,*,desc = None):
@@ -2260,7 +2270,7 @@ async def stickynote(ctx,query= None,*,desc= None):
     if not desc:
       await ctx.send('Please Be Sure To Supply A Message To Be Setup As The Sticky Message.')
       return
-    okay = {"_id":ctx.guild.id,"smessafe":desc}
+    okay = {"_id":ctx.guild.id,"smessafe":desc,"sid":ctx.author.id}
     await client.config.upsert(okay)
     await ctx.send(f'**{desc}** Is Now Set As The Sticky Message For This Server.')
 
