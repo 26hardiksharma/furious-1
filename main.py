@@ -1745,6 +1745,7 @@ async def on_message(message):
         await msg.edit(content =f'{mention}, Karuta Dropped Some Cards, But They Have Expired And Can No Longer Be Grabbed :/')
         embed.set_image(url = message.attachments[0].url)
         await chan.send(embed=embed)
+  """
   else:
     data = await client.config.find(message.guild.id)
     if not data:
@@ -1756,6 +1757,7 @@ async def on_message(message):
       channel = message.guild.get_channel(data["schannel"])
       embed = discord.Embed(title = "Sticky Message",description = data["smessage"],colour = 0x74A3E9)
       await message.channel.send(embed=embed)
+  """
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
 async def cardping(ctx,query = None,*,desc = None):
@@ -2242,7 +2244,7 @@ async def configuration(ctx):
     embed.add_field(name = "Muterole",value = f"<@&{mrole}>")
   embed.set_footer(text = f"Type {prefix}karuta help To See The Karuta Cardping Settings",icon_url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
-
+"""
 @client.command()
 async def stickynote(ctx,query= None,*,desc= None):
   if ctx.author.guild_permissions.manage_guild == False:
@@ -2273,5 +2275,5 @@ async def stickynote(ctx,query= None,*,desc= None):
     okay = {"_id":ctx.guild.id,"smessage":desc,"sid":ctx.author.id}
     await client.config.upsert(okay)
     await ctx.send(f'**{desc}** Is Now Set As The Sticky Message For This Server.')
-
+"""
 client.run(TOKEN)
