@@ -1754,11 +1754,11 @@ async def cardping(ctx,query = None,*,desc = None):
   else:
     if query.lower() == 'help':
       embed = discord.Embed(title = 'Karuta Cardping',colour = ctx.author.color,timestamp = datetime.datetime.now())
-      embed.add_field(name = "Message",value = "Setup A Custom Message For Cardping\n\nF!karuta message `<custom Message>`",inline = False)
-      embed.add_field(name = "Role",value = "Setup A Role To Be Pinged Upon A Karuta Card Drop\n\nF!karuta role `<@role>`",inline = False)
-      embed.add_field(name = 'Toggle',value = 'Toggle The Entire Karuta Cardping System\n\nF!karuta toggle `<on/off>`')
-      embed.add_field(name = "Addrole",value = f"Member: Adds The Cardping Role To Your Roles If Addrole Is Set To `on`\n\nF!karuta addrole\n\nServer Managers: Turn The Karuta Addrole Service On Or Off\n\nF!karuta addrole `<on\off>`",inline = False)
-      embed.add_field(name = "Removerole",value = f"Member: Removed The Cardping Role From Yur Roles If Removerole Is Set To `on`\n\nF!karuta removerole\n\nServer Managers: Turn The Karuta Removerole Service On Or Off\n\nF!karuta removerole `<on\off>`")
+      embed.add_field(name = "Message",value = "Setup A Custom Message For Cardping\nF!karuta message `<custom Message>`",inline = False)
+      embed.add_field(name = "Role",value = "Setup A Role To Be Pinged Upon A Karuta Card Drop\nF!karuta role `<@role>`",inline = False)
+      embed.add_field(name = 'Toggle',value = 'Toggle The Entire Karuta Cardping System\nF!karuta toggle `<on/off>`')
+      embed.add_field(name = "Addrole",value = f"Member: Adds The Cardping Role To Your Roles If Addrole Is Set To `on`\nF!karuta addrole\nServer Managers: Turn The Karuta Addrole Service On Or Off\nF!karuta addrole `<on\off>`",inline = False)
+      embed.add_field(name = "Removerole",value = f"Member: Removed The Cardping Role From Yur Roles If Removerole Is Set To `on`\nF!karuta removerole\nServer Managers: Turn The Karuta Removerole Service On Or Off\nF!karuta removerole `<on\off>`")
       await ctx.send(embed = embed)
     if query.lower() == 'message':
       if ctx.author.guild_permissions.manage_guild == False:
