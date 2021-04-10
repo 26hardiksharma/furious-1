@@ -1772,7 +1772,7 @@ async def cardping(ctx,query = None,*,desc = None):
         return
       okay = {"_id": ctx.guild.id,"kmessage":desc}
       await client.config.upsert(okay)
-      await ctx.send(f'Cardping Message Was Set To `{desc}`')
+      await ctx.send(f'Cardping Message Was Set To **{desc}**')
     elif query.lower() == "toggle":
       if ctx.author.guild_permissions.manage_guild == False:
         await ctx.send('You Need The **`MANAGE SERVER`** Permission To Execute This Command!')
