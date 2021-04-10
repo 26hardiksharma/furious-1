@@ -2255,7 +2255,7 @@ async def stickynote(ctx,query= None,*,desc= None):
       return
     okay = {"_id":ctx.guild.id,"schannel":chan.id}
     await client.config.upsert(okay)
-    await ctx.send(f'{chan.send} Is Now Set As The Sticky Channel For This Server.')
+    await ctx.send(f'{chan.mention} Is Now Set As The Sticky Channel For This Server.')
   elif query.lower() == "message":
     if not desc:
       await ctx.send('Please Be Sure To Supply A Message To Be Setup As The Sticky Message.')
