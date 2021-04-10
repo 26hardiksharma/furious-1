@@ -2230,7 +2230,7 @@ async def configuration(ctx):
     embed.add_field(name = "Muterole",value = "None",inline= False)
   else:
     embed.add_field(name = "Muterole",value = f"<@&{mrole}>",inline = False)
-  embed.set_author(text = f"Type {prefix}karuta help To See The Karuta Cardping Settings",icon_url= ctx.author.avatar_url)
+  embed.set_footer(text = f"Type {prefix}karuta help To See The Karuta Cardping Settings",icon_url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
 
 
