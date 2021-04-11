@@ -2388,7 +2388,8 @@ async def on_reaction_add(reaction,user):
     return
   if str(reaction.emoji) != "⭐" or str(reaction.emoji) != "🌟":
     return
-  count = await reaction.users().flatten()
+  bruh = await reaction.users().flatten()
+  count = len(bruh)
   if count < data["starlimit"]:
     return
   embed = discord.Embed(colour =reaction.message.author.colour,timestamp = datetime.datetime.now())
