@@ -2395,8 +2395,8 @@ async def on_reaction_add(reaction,user):
   embed.set_author(name = reaction.message.author,icon_url = reaction.message.author.avatar_url)
   if reaction.message.content != None:
     embed.add_field(name = "Content",value = reaction.message.content,inline = False)
-  if message.attachments:
-    embed.set_image(url = message.attachments[0].url)
+  if reaction.message.attachments:
+    embed.set_image(url = reaction.message.attachments[0].url)
   embed.add_field(name = "Source",value = f"[Click Here]({reaction.message.jump_url})")
   await channel.send(content = f"{count} 🌟",embed = embed)
   kek = data["starlimit"] + inc
