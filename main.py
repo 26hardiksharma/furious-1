@@ -2287,6 +2287,9 @@ async def report(ctx,args: discord.Member= None,*,kwargs = None):
   if not kwargs:
     await ctx.send('You Must Specify Your Report Against The Member For Support To Look Up For It!')
     return
+  if args == ctx.author:
+    await ctx.send('You Can\'t Lodge A Report Against Yourself 🗿')
+    return
   channel = discord.utils.get(ctx.guild.text_channels,id = data["reportchannel"])
   if not channel:
     await ctx.send('The Channel Set As The Report Couldn\'t Be Found. Please Make Sure That Is Not Deleted And Is Viewable By Me.\n\nServer Managers Can Set The Channel By Using `F!reportset #channel`')
