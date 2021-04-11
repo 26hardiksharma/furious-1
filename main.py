@@ -2284,11 +2284,11 @@ async def report(ctx,args: discord.Member= None,*,kwargs = None):
   if not args:
     await ctx.send("You Must Mention A Member Or use Their ID To Lodge A Report Against Them!")
     return
-  if not kwargs:
-    await ctx.send('You Must Specify Your Report Against The Member For Support To Look Up For It!')
-    return
   if args == ctx.author:
     await ctx.send('You Can\'t Lodge A Report Against Yourself 🗿')
+    return
+  if not kwargs:
+    await ctx.send('You Must Specify Your Report Against The Member For Support To Look Up For It!')
     return
   channel = discord.utils.get(ctx.guild.text_channels,id = data["reportchannel"])
   if not channel:
