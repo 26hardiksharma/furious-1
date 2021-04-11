@@ -2295,7 +2295,7 @@ async def report(ctx,args: discord.Member= None,*,kwargs = None):
   embed.set_author(name = f"{ctx.author.name}#{ctx.author.discriminator}",url= ctx.author.avatar_url)
   embed.add_field(name = "Member Reported",value = args,inline = False)
   embed.add_field(name = "Report",value = kwargs,inline = False)
-  embed.set_footer(icon_url = client.user.avatat_url)
+  embed.set_footer(icon_url = client.user.avatar_url)
   await channel.send(embed=embed)
 @client.command()
 async def reportset(ctx,channel : discord.TextChannel= None):
