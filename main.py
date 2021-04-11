@@ -482,6 +482,7 @@ async def serverinfo(ctx):
   embed.add_field(name="Explicit Content Filter",value = str(ctx.guild.explicit_content_filter).upper())
   embed.add_field(name ="Text Channels",value = f"{ccount}")
   embed.add_field(name ="Voice Channels",value = f"{vcount}")
+  embed.add_field(name = "Roles",value = len(ctx.guild.roles))
   embed.set_thumbnail(url = ctx.guild.icon_url)
   await ctx.send(embed=embed)
 @client.command()
