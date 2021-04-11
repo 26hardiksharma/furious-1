@@ -2383,7 +2383,7 @@ async def on_reaction_add(reaction,user):
     inc = 0
   else:
     inc = data["starinc"]
-  channel = user.guild.fetch_channel(data["starchannel"])
+  channel = user.guild.get_channel(data["starchannel"])
   if not channel:
     return
   if str(reaction.emoji) != "⭐" or str(reaction.emoji) != "🌟":
