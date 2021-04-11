@@ -2285,7 +2285,7 @@ async def report(ctx,args: discord.Member= None,*,kwargs = None):
       prefix = "F!"
     else:
       prefix = data["prefix"]
-    await ctx.send(f'A Report Channel Is Not Set On This Server!Server Managers Can Set The Channel By Using `{prefix}reportset #channel`')
+    await ctx.send(f'A Report Channel Is Not Set On This Server!\n\nServer Managers Can Set The Channel By Using `{prefix}reportset #channel`')
     return
   if not args:
     await ctx.send("You Must Mention A Member Or use Their ID To Lodge A Report Against Them!")
