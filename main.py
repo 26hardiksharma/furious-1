@@ -2315,5 +2315,62 @@ async def reportset(ctx,channel : discord.TextChannel= None):
   okay = {"_id":ctx.guild.id,"reportchannel":channel.id}
   await client.config.upsert(okay)
   await ctx.send(f'{channel.mention} Has Been Set As The Report Channel For This Server.')
-
+@client.command()
+async def starboard(ctx,args = None,kwargs = None):
+  data = await client.config.find(ctx.guild.id)
+  if not data or "prefix" not in data:
+    prefix = "F!"
+  else:
+    prefix = data["prefix"]
+  if not args:
+    embed = discord.Embed(title = "Starboard",colour = 0xFFC300)
+    embed.add_field(name = "General Info",value = "Starboard Forms A Crucial Part Of Many Servers. Messages Reacted With ⭐ Or 🌟 Are Sent To A Channel Which Is The Hall Of Fame Of Messages.\n\nStarboard Has Also Been Introduced In Furious And You Can Refer To The Methods Stated Below For Setting Up Starboard.")
+    embed.add_field(name = "Channel",value = f"Set A Channel For Starred Messages To Be Sent.\n\nSyntax: **{prefix}starboard channel <#channel>",inline = False)
+    embed.add_field(name = "Limit",value = f"Setup The Minimum React Limit For A Message To Be Sent To The Starboard Channel\n\nSyntax: **{prefix}starboard limit `<number>`**",inline = False)
+    embed.add_field(name = "Increment",value = f"Setup An Increment For The Star Limit.\n\nSyntax: **{prefix}starboard increment `<number>`**\n\nThe Starboard Reaction Limit Is Incremented Everytime A Message Is Sent To The Starboard With This Number.",inline=False)
+    await ctx.send(embed = embed)
+    return
+  if args.lower() == "channel":
+    if not ctx.author.guild_permissions.manage_guild:
+      await ctx.send("You Don\'t Have The **MANAGE SERVER** Permission Required To Execute This Command.")
+      return
+    if not ctx.message.channel_mentions:
+      await ctx.send('Please Be Sure To Mention A Channel Next Time To Be Set As The Starboard Channel.')
+      return
+    channel = discord.utils.get(ctx.guild.text_channels,id = ctx.message.channel_mentions[0].id)
+    if not channel:
+      await ctx.send('That Channel Could Not Be Found. Please Make Sure That It Is In This Server And Is Viewable By Me!')
+      return
+    okay = {"_id": ctx.guild.id,"starchannel":channel.id}
+    await client.config.upsert(okay)
+    await ctx.send(f'{channel.mention} Was Set As The Starboard Channel Of This Server.')
+  elif args.lower() == "limit":
+    if not ctx.author.guild_permissions.manage_guild:
+      await ctx.send("You Don\'t Have The **MANAGE SERVER** Permission Required To Execute This Command.")
+      return
+    if not kwargs:
+      await ctx.send('Please Be Sure To Specify A Limit For The Starboard Next Time!')
+      return
+    try:
+      kek = int(kwargs)
+    except:
+      await ctx.send('Limit Should Be An Integer. Try Again With An Integer Next Time.')
+      return
+    okay = {"_id":ctx.guild.id,"starlimit":kwargs}
+    await ctx.send(f'Starboard Limit Was Set To **{kwargs}**.')
+  elif args.lower() == "increment":
+    if not ctx.author.guild_permissions.manage_guild:
+      await ctx.send("You Don\'t Have The **MANAGE SERVER** Permission Required To Execute This Command.")
+      return
+    if not kwargs:
+      await ctx.send('Please Be Sure To Specify An Increment For The Starboard Limit Next Time!')
+      return
+    try:
+      kek = int(kwargs)
+    except:
+      await ctx.send('Increment Should Be An Integer. Try Again With An Integer Next Time.')
+      return
+    okay = {"_id":ctx.guild.id,"starinc":kwargs}
+    await client.config.upsert(okay)
+    await ctx.send(f"Starboard Increment Was Set To **{kwargs}**.")
 client.run(TOKEN)
