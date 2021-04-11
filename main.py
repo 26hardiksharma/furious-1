@@ -2325,7 +2325,7 @@ async def starboard(ctx,args = None,kwargs = None):
   if not args:
     embed = discord.Embed(title = "Starboard",colour = 0xFFC300)
     embed.add_field(name = "General Info",value = "Starboard Forms A Crucial Part Of Many Servers. Messages Reacted With ⭐ Or 🌟 Are Sent To A Channel Which Is The Hall Of Fame Of Messages.\n\nStarboard Has Also Been Introduced In Furious And You Can Refer To The Methods Stated Below For Setting Up Starboard.")
-    embed.add_field(name = "Channel",value = f"Set A Channel For Starred Messages To Be Sent.\n\nSyntax: **{prefix}starboard channel <#channel>",inline = False)
+    embed.add_field(name = "Channel",value = f"Set A Channel For Starred Messages To Be Sent.\n\nSyntax: **{prefix}starboard channel <#channel>**",inline = False)
     embed.add_field(name = "Limit",value = f"Setup The Minimum React Limit For A Message To Be Sent To The Starboard Channel\n\nSyntax: **{prefix}starboard limit `<number>`**",inline = False)
     embed.add_field(name = "Increment",value = f"Setup An Increment For The Star Limit.\n\nSyntax: **{prefix}starboard increment `<number>`**\n\nThe Starboard Reaction Limit Is Incremented Everytime A Message Is Sent To The Starboard With This Number.",inline=False)
     await ctx.send(embed = embed)
