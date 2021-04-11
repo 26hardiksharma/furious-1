@@ -2374,4 +2374,35 @@ async def starboard(ctx,args = None,kwargs = None):
     okay = {"_id":ctx.guild.id,"starinc":kwargs}
     await client.config.upsert(okay)
     await ctx.send(f"Starboard Increment Was Set To **{kwargs}**.")
+@client.event
+async def on_reaction_add(reaction,user):
+  data = await client.config.get(user.guild.id)
+  if not data or "starchannel" not in data or "starlimit" not in data:
+    return
+  if not data["starinc"]:
+    inc = 0
+  else:
+    inc = data["starinc"]
+  channel = user.guild.fetch_channel(data["starchannel"])
+  if not channel:
+    return
+  if str(reaction.emoji) != "⭐" or str(reaction.emoji) != "🌟":
+    return
+  count = await reaction.users().flatten()
+  if count < data["starlimit"]:
+    return
+  embed = discord.Embed(colour =reaction.message.author.colour,timestamp = datetime.datetime.now())
+  embed.set_author(name = reaction.message.author,url=icon_url = reaction.message.author.avatar_url)
+  if reaction.message.content != None:
+    embed.add_field(name = "Content",value = reaction.message.content,inline = False)
+  if message.attachments:
+    embed.set_image(url = message.attachments[0].url)
+  await channel.send(content = f"{count} 🌟",embed = embed)
+  kek = data["starlimit"] + inc
+  okay = {"_id":user.guild.id,"starinc":kek}
+  await client.config.upsert(okay)
+  await reaction.message.clear_reactions()
+  print('Successful Starboard Log')
+
+
 client.run(TOKEN)
