@@ -2357,6 +2357,7 @@ async def starboard(ctx,args = None,kwargs = None):
       await ctx.send('Limit Should Be An Integer. Try Again With An Integer Next Time.')
       return
     okay = {"_id":ctx.guild.id,"starlimit":kwargs}
+    await client.config.upsert(okay)
     await ctx.send(f'Starboard Limit Was Set To **{kwargs}**.')
   elif args.lower() == "increment":
     if not ctx.author.guild_permissions.manage_guild:
