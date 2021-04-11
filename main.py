@@ -2275,4 +2275,35 @@ async def stickynote(ctx,query= None,*,desc= None):
     await client.config.upsert(okay)
     await ctx.send(f'**{desc}** Is Now Set As The Sticky Message For This Server.')
 """
+@client.command()
+async def report(ctx,args: discord.Member= None,*,kwargs = None):
+  data = await client.config.find(ctx.guild.id)
+  if not data or "reportchannel" not in data:
+    await ctx.send('A Report Channel Is Not Set On This Server!Server Managers Can Set The Channel By Using `F!reportset #channel`')
+    return
+  if not args:
+    await ctx.send("You Must Mention A Member Or use Their ID To Lodge A Report Against Them!")
+    return
+  if not kwargs:
+    await ctx.send('You Must Specify Your Report Against The Member For Support To Look Up For It!')
+    return
+  channel = discord.utils.get(ctx.guild.text_channels,id = data["reportchannel"])
+  if not channel:
+    await ctx.send('The Channel Set As The Report Couldn\'t Be Found. Please Make Sure That Is Not Deleted And Is Viewable By Me.\n\nServer Managers Can Set The Channel By Using `F!reportset #channel`')
+    return
+  embed = discord.Embed(description = f"Report Logged By {ctx.author}",timestamp = datetime.datetime.now(),colour = ctx.author.color)
+  embed.set_author(name = f"{ctx.author.name}#{ctx.author.discriminator}",url= ctx.author.avatar_url)
+  embed.add_field(name = "Member Reported",value = args,inline = False)
+  embed.add_field(name = "Report",value = kwargs,inline = False)
+  embed.set_footer(icon_url = client.user.avatat_url)
+  await channel.send(embed=embed)
+@client.command()
+async def reportset(ctx,channel : discord.TextChannel= None):
+  if not ctx.author.guild_permissions.manage_guild:
+    await ctx.send('You Don\'t Have The **MANAGE SERVER** Permission Required To Execute This Command!')
+    return
+  okay = {"_id":ctx.guild.id,"reportchannel":channel.id}
+  await client.config.upsert(okay)
+  await ctx.send(f'{channel.mention} Has Been Set As The Report Channel For This Server.')
+
 client.run(TOKEN)
