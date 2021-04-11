@@ -2280,7 +2280,12 @@ async def stickynote(ctx,query= None,*,desc= None):
 async def report(ctx,args: discord.Member= None,*,kwargs = None):
   data = await client.config.find(ctx.guild.id)
   if not data or "reportchannel" not in data:
-    await ctx.send('A Report Channel Is Not Set On This Server!Server Managers Can Set The Channel By Using `F!reportset #channel`')
+    prefix = data["prefix"]
+    if not prefix:
+      prefix = "F!"
+    else:
+      prefix = data["prefix"]
+    await ctx.send(f'A Report Channel Is Not Set On This Server!Server Managers Can Set The Channel By Using `{prefix}reportset #channel`')
     return
   if not args:
     await ctx.send("You Must Mention A Member Or use Their ID To Lodge A Report Against Them!")
