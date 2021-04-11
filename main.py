@@ -2294,12 +2294,14 @@ async def report(ctx,args: discord.Member= None,*,kwargs = None):
   if not channel:
     await ctx.send('The Channel Set As The Report Couldn\'t Be Found. Please Make Sure That Is Not Deleted And Is Viewable By Me.\n\nServer Managers Can Set The Channel By Using `F!reportset #channel`')
     return
+  await ctx.message.delete()
   embed = discord.Embed(description = f"Report Logged By {ctx.author}",timestamp = datetime.datetime.now(),colour = ctx.author.color)
   embed.set_author(name = f"{ctx.author.name}#{ctx.author.discriminator}",url= ctx.author.avatar_url)
   embed.add_field(name = "Member Reported",value = args,inline = False)
   embed.add_field(name = "Report",value = kwargs,inline = False)
   embed.set_footer(icon_url = client.user.avatar_url)
   await channel.send(embed=embed)
+  await ctx.send('User Has Been Reported To Proper Authorities.')
 @client.command()
 async def reportset(ctx,channel : discord.TextChannel= None):
   if not ctx.author.guild_permissions.manage_guild:
