@@ -1226,8 +1226,7 @@ async def ticket(ctx,query = "create" , channel : discord.TextChannel = None):
     await ch.set_permissions(ctx.guild.default_role,overwrite = lavda)
     embed= discord.Embed(description = "Thanks For Creating A Ticket!\n Please Be Patient \n Support Will Be Reaching You Shortly",colour= 0x5AFF00)
     embed.set_footer(icon_url = "https://cdn.discordapp.com/avatars/790478502909837333/ffbe1e96004d240eda5385186e145986.webp?size=1024",text = "Furious || ^invite")
-    await ch.send(f"Welcome {ctx.author.mention}")
-    await ch.send(embed=embed)
+    await ch.send(f"Welcome {ctx.author.mention}",embed =embed)
     await ctx.message.add_reaction("<a:verifiedgg:792365088006471740>")
   elif query == "delete":
     if ctx.author.guild_permissions.administrator:
