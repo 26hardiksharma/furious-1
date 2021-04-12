@@ -1750,7 +1750,9 @@ async def on_message(message):
     data = await client.config.find(message.guild.id)
     if not data:
       return
-    if not data["smessage"] or "schannel" not in data:
+    if "schannel" not in data:
+      return
+    if "smessage" not in data:
       return
     guild = message.guild
     if not message.author.guild_permissions.manage_messages:
@@ -1764,7 +1766,7 @@ async def on_message(message):
         await kek.delete()
         return
   if str(message.content.lower) == "<@!790478502909837333>":
-    
+
     embed = discord.Embed(title = "Hey There, Need Help ?",colour = message.author.color)
     data = await client.config.find(message.guild.id)
     if not data or "prefix" not in data:
