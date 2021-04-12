@@ -2205,10 +2205,18 @@ async def on_message_edit(before,after):
 async def warnings(ctx,member : discord.Member = None):
   if not member:
     member = ctx.author
-  data = await client.warndb.find(ctx.guild.id)
-  if not data or member.id != data["uid"]:
-    return await ctx.send('There Are No Warnings')
-  await ctx.send(f'Member: {member}\n\nWarning: {data["warn"]}\n\nDate: {data["wtime"]}\n\nModerator: <@!{data["modid"]}>')
+  warn_filter = {"uid":member.id,"gid":ctx.guild.id}
+  warns = await client.warndb.find_many_by_custom(warn_filter)
+  if not bool(warns):
+    return await ctx.send('There Are No Warnings.')
+  warns = sorted(warns,key= lambda x: x["_id"])
+  lol = ""
+  for kek in warns:
+    description = f"Warn ID : `{kek['_id']}`]\n • Moderator: {kek['mod']}\nReason: {kek['reason']} • Time: {kek['time']}"
+    lol += f"description\n"
+  embed = discord.Embed(title =f"Warnings Of {member}",description = lol)
+  await ctx.send(embed = embed)
+
 class Topgg():
   def __init__(self,bot):
     self.bot = bot
