@@ -2396,7 +2396,7 @@ async def on_reaction_add(reaction,user):
   if not channel:
     print("Channel Not Found")
     return
-  if str(reaction.emoji) != "⭐" or str(reaction.emoji) != "🌟":
+  if not str(reaction.emoji) == '⭐':
     print('Some Other Emoji, Bro.')
     return
   bruh = await reaction.users().flatten()
