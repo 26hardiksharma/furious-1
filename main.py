@@ -2391,7 +2391,7 @@ async def on_reaction_add(reaction,user):
     return
   bruh = await reaction.users().flatten()
   count = len(bruh)
-  if int(data["starlimit"]) > count or int(data["starlimit"]) != count:
+  if int(data["starlimit"]) > count:
     return
   embed = discord.Embed(colour =reaction.message.author.colour,timestamp = datetime.datetime.now())
   embed.set_author(name = reaction.message.author,icon_url = reaction.message.author.avatar_url)
