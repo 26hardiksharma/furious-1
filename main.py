@@ -2430,7 +2430,7 @@ async def on_reaction_add(reaction,user):
     return
   embed = discord.Embed(colour =reaction.message.author.colour,timestamp = datetime.datetime.now())
   embed.set_author(name = reaction.message.author,icon_url = reaction.message.author.avatar_url)
-  if reaction.message.content != None:
+  if len(reaction.message.content) >= 1:
     embed.add_field(name = "Content",value = reaction.message.content,inline = False)
   if reaction.message.attachments:
     embed.set_image(url = reaction.message.attachments[0].url)
