@@ -1763,7 +1763,7 @@ async def on_message(message):
         kek = await message.channel.fetch_message(client.stickymsg.id)
         await kek.delete()
         return
-  if str(message.content.lower) == "<@790478502909837333>":
+  if str(message.content.lower) == "<@!790478502909837333>":
     embed = discord.Embed(title = "Hey There, Need Help ?",colour = message.author.color)
     data = await client.config.find(message.guild.id)
     if not data or "prefix" not in data:
