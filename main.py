@@ -2357,7 +2357,7 @@ async def starboard(ctx,args = None,kwargs = None):
     except:
       await ctx.send('Limit Should Be An Integer. Try Again With An Integer Next Time.')
       return
-    okay = {"_id":ctx.guild.id,"starlimit":kwargs}
+    okay = {"_id":ctx.guild.id,"starlimit":kek}
     await client.config.upsert(okay)
     await ctx.send(f'Starboard Limit Was Set To **{kwargs}**.')
   elif args.lower() == "increment":
@@ -2372,7 +2372,7 @@ async def starboard(ctx,args = None,kwargs = None):
     except:
       await ctx.send('Increment Should Be An Integer. Try Again With An Integer Next Time.')
       return
-    okay = {"_id":ctx.guild.id,"starinc":kwargs}
+    okay = {"_id":ctx.guild.id,"starinc":kek}
     await client.config.upsert(okay)
     await ctx.send(f"Starboard Increment Was Set To **{kwargs}**.")
 @client.event
