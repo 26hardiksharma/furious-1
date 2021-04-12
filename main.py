@@ -2209,14 +2209,14 @@ async def warnings(ctx,member : discord.Member = None):
   warns = await client.warndb.find_many_by_custom(warn_filter)
   if not bool(warns):
     return await ctx.send('There Are No Warnings.')
-  warns = sorted(warns,key= lambda x: x["_id"])
+  hmm = sorted(warns,key= lambda x: x["_id"])
   lol = ""
-  for kek in warns:
+  for kek in hmm:
     description = f"Warn ID : `{kek['_id']}`]\n • Moderator: {kek['mod']}\nReason: {kek['reason']} • Time: {kek['time']}"
     lol += f"description\n"
   embed = discord.Embed(title =f"Warnings Of {member}",description = lol)
   await ctx.send(embed = embed)
-  
+
 
 class Topgg():
   def __init__(self,bot):
