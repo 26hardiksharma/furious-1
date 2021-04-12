@@ -2412,7 +2412,7 @@ async def on_reaction_add(reaction,user):
   embed.add_field(name = "Source",value = f"[Click Here]({reaction.message.jump_url})")
   await channel.send(content = f"{count} 🌟",embed = embed)
   kek = data["starlimit"] + inc
-  okay = {"_id":user.guild.id,"starinc":int(kek)}
+  okay = {"_id":user.guild.id,"starlimit":int(kek)}
   await client.config.upsert(okay)
   await reaction.message.clear_reactions()
   print('Successful Starboard Log')
