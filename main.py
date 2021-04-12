@@ -1765,7 +1765,7 @@ async def on_message(message):
         kek = await message.channel.fetch_message(client.stickymsg.id)
         await kek.delete()
         return
-  if str(message.content.lower) == "<@!790478502909837333>":
+  if message.content.startswith(f"<@!{client.user.id}>") and len(message.content) == len(f"<@!{client.user.id}>"):
 
     embed = discord.Embed(title = "Hey There, Need Help ?",colour = message.author.color)
     data = await client.config.find(message.guild.id)
