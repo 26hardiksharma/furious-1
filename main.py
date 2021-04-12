@@ -1999,6 +1999,8 @@ class Document:
       return await self.insert({**filter_data, **update_data})
     await self.db.update_one(filter_data, {f"${option}": update_data}, *args, **kwargs)
   
+  async def find_by_custom(self, filter):
+    return await self.db.find_one(filter)
 mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 @client.event
 async def on_member_join(member):
