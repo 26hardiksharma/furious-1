@@ -2213,7 +2213,7 @@ async def warnings(ctx,member : discord.Member = None):
   lol = ""
   for kek in hmm:
     description = f"Warn ID : `{kek['_id']}`]\n • Moderator: {kek['mod']}\nReason: {kek['reason']} • Time: {kek['time']}"
-    lol += f"description\n"
+    lol += f"{description}\n"
   embed = discord.Embed(title =f"Warnings Of {member}",description = lol)
   await ctx.send(embed = embed)
 
