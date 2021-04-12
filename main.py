@@ -2379,10 +2379,14 @@ async def starboard(ctx,args = None,kwargs = None):
 async def on_reaction_add(reaction,user):
   data = await client.config.find(user.guild.id)
   if not data:
+    print('Data Not Found.')
     return
   if not data["starlimit"]:
+    print('Starlimit Not Found')
     return
+
   if not data["starchannel"]:
+    print('Starchannel Not Found')
     return
   if not data["starinc"]:
     inc = 0
@@ -2390,12 +2394,15 @@ async def on_reaction_add(reaction,user):
     inc = data["starinc"]
   channel = user.guild.get_channel(data["starchannel"])
   if not channel:
+    print("Channel Not Found")
     return
   if str(reaction.emoji) != "⭐" or str(reaction.emoji) != "🌟":
+    print('Some Other Emoji, Bro.')
     return
   bruh = await reaction.users().flatten()
   count = len(bruh)
   if int(data["starlimit"]) > count:
+    print('Limit Me Bakchodi Hui')
     return
   embed = discord.Embed(colour =reaction.message.author.colour,timestamp = datetime.datetime.now())
   embed.set_author(name = reaction.message.author,icon_url = reaction.message.author.avatar_url)
