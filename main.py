@@ -1615,7 +1615,7 @@ async def warn(ctx,member : discord.Member,*,reason = None):
         await ctx.send(embed=embed)
       time = datetime.datetime.now().strftime("%a, %#d %B %Y, %I:%M %p UTC")
       kekwarn = {"uid":member.id,"gid":ctx.guild.id}
-      kekdata = {"reason":reason,"time":time,"mod":ctx.author}
+      kekdata = {"reason":reason,"time":time,"mod":f"{ctx.author.name}#{ctx.author.discriminator}"}
 
       await client.warndb.upsert_custom(kekwarn,kekdata)
       print('GG')
