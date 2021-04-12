@@ -2391,8 +2391,7 @@ async def on_reaction_add(reaction,user):
   channel = user.guild.get_channel(data["starchannel"])
   if not channel:
     return
-  if not str(reaction.emoji) == '⭐' or str(reaction.emoji) != '🌟':
-    print('Some Other Emoji.')
+  if not str(reaction.emoji) == '⭐':
     return
   bruh = await reaction.users().flatten()
   count = len(bruh)
