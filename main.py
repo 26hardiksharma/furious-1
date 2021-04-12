@@ -2381,11 +2381,10 @@ async def on_reaction_add(reaction,user):
   if not data:
     print('Data Not Found.')
     return
-  if not data["starlimit"]:
+  if "starlimit" not in data:
     print('Starlimit Not Found')
     return
-
-  if not data["starchannel"]:
+  if "starchannel" not in data:
     print('Starchannel Not Found')
     return
   if not data["starinc"]:
