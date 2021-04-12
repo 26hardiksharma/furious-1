@@ -1991,15 +1991,10 @@ class Document:
     dict.pop("_id")
     await self.db.update_one({"_id":id},{"$unset":dict})
   async def find_many_by_custom(self, filter):
-    if not isinstance(filter, collections.abc.Mapping):
-      raise TypeError("Expected Dictionary.")
     return await self.db.find(filter).to_list(None)
   async def upsert_custom(self, filter_data, update_data, option="set", *args, **kwargs):
     await self.update_by_custom(filter_data, update_data, option, upsert=True, *args, **kwargs)
   async def update_by_custom(self, filter_data, update_data, option="set", *args, **kwargs):
-    if not isinstance(filter_data, collections.abc.Mapping) or not isinstance(update_data, collections.abc.Mapping):
-      raise TypeError("Expected Dictionary.")
-
     if not bool(await self.find_by_custom(filter_data)):
       return await self.insert({**filter_data, **update_data})
     await self.db.update_one(filter_data, {f"${option}": update_data}, *args, **kwargs)
