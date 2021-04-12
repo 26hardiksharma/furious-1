@@ -1760,7 +1760,8 @@ async def on_message(message):
       if not hasattr(client,'stickymsg'):
         client.stickymsg = msg
       else:
-        await client.stickymsg.delete()
+        kek = await message.channel.fetch_message(client.stickymsg.id)
+        await kek.delete()
 
   
   await client.process_commands(message)
