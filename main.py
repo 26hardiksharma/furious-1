@@ -1779,6 +1779,21 @@ async def on_message(message):
       embed.add_field(name = "Support",value = "If You Have Any Doubts Or Queries, Consider Joining [Furious Official](https://discord.com/invite/M4BhczFbYc). You Can Talk To My Developer There.",inline = False)
     await message.channel.send(embed=embed)
     return
+  elif message.content.startswith(f"<@{client.user.id}>") and len(message.content) == len(f"<@{client.user.id}>"):
+
+    embed = discord.Embed(title = "Hey There, Need Help ?",colour = message.author.color)
+    data = await client.config.find(message.guild.id)
+    if not data or "prefix" not in data:
+      prefix = "F!"
+    else:
+      prefix = data["prefix"]
+    embed.add_field(name = "Get Started",value = f"You Can View All My Commands By Typing `{prefix}help`")
+    embed.add_field(name = "Invite Me",value = "You Can Invite Me To Your Server From [Here](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot)",inline = False)
+    if message.guild.id != 810190584059789323:
+      embed.add_field(name = "Support",value = "If You Have Any Doubts Or Queries, Consider Joining [Furious Official](https://discord.com/invite/M4BhczFbYc). You Can Talk To My Developer There.",inline = False)
+    await message.channel.send(embed=embed)
+    return
+
 
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
