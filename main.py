@@ -2249,7 +2249,7 @@ async def configuration(ctx):
     embed.add_field(name = "Muterole",value = f"<@&{mrole}>")
   embed.set_footer(text = f"Type {prefix}karuta help To See The Karuta Cardping Settings",icon_url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
-"""
+
 @client.command()
 async def stickynote(ctx,query= None,*,desc= None):
   if ctx.author.guild_permissions.manage_guild == False:
@@ -2280,7 +2280,7 @@ async def stickynote(ctx,query= None,*,desc= None):
     okay = {"_id":ctx.guild.id,"smessage":desc,"sid":ctx.author.id}
     await client.config.upsert(okay)
     await ctx.send(f'**{desc}** Is Now Set As The Sticky Message For This Server.')
-"""
+
 @client.command()
 async def report(ctx,args: discord.Member= None,*,kwargs = None):
   data = await client.config.find(ctx.guild.id)
