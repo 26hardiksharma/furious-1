@@ -2378,7 +2378,11 @@ async def starboard(ctx,args = None,kwargs = None):
 @client.event
 async def on_reaction_add(reaction,user):
   data = await client.config.find(user.guild.id)
-  if not data or "starchannel" not in data or "starlimit" not in data:
+  if not data:
+    return
+  if not data["starlimit"]:
+    return
+  if not data["starchannel"]:
     return
   if not data["starinc"]:
     inc = 0
