@@ -1744,7 +1744,7 @@ async def on_message(message):
         await msg.edit(content =f'{mention}, Karuta Dropped Some Cards, But They Have Expired And Can No Longer Be Grabbed :/')
         embed.set_image(url = message.attachments[0].url)
         await chan.send(embed=embed)
-        return
+        
   else:
     data = await client.config.find(message.guild.id)
     if not data:
@@ -1763,7 +1763,7 @@ async def on_message(message):
       else:
         kek = await message.channel.fetch_message(client.stickymsg.id)
         await kek.delete()
-        return
+        
   if message.content.startswith(f"<@!{client.user.id}>") and len(message.content) == len(f"<@!{client.user.id}>"):
 
     embed = discord.Embed(title = "Hey There, Need Help ?",colour = message.author.color)
@@ -1777,7 +1777,7 @@ async def on_message(message):
     if message.guild.id != 810190584059789323:
       embed.add_field(name = "Support",value = "If You Have Any Doubts Or Queries, Consider Joining [Furious Official](https://discord.com/invite/M4BhczFbYc). You Can Talk To My Developer There.",inline = False)
     await message.channel.send(embed=embed)
-    return
+    
   elif message.content.startswith(f"<@{client.user.id}>") and len(message.content) == len(f"<@{client.user.id}>"):
 
     embed = discord.Embed(title = "Hey There, Need Help ?",colour = message.author.color)
@@ -1791,7 +1791,7 @@ async def on_message(message):
     if message.guild.id != 810190584059789323:
       embed.add_field(name = "Support",value = "If You Have Any Doubts Or Queries, Consider Joining [Furious Official](https://discord.com/invite/M4BhczFbYc). You Can Talk To My Developer There.",inline = False)
     await message.channel.send(embed=embed)
-    return
+    
 
 
   await client.process_commands(message)
