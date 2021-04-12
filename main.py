@@ -1409,6 +1409,7 @@ async def on_command_error(ctx, error):
     embed.add_field(name = "Status", value = "This Command Is On Cooldown")
     embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
     await ctx.send(embed=embed)    
+    print(f"{ctx.author} ID: {ctx.author.id} Used A Command: {ctx.command.name} While Being On Cooldown")
   elif isinstance(error,commands.CommandNotFound):
     pass
   elif isinstance(error,commands.UserNotFound):
@@ -2409,5 +2410,5 @@ async def on_reaction_add(reaction,user):
 @client.command()
 async def getav(ctx,user: discord.User):
   await ctx.author.send(user.avatar_url)
-  
+
 client.run(TOKEN)
