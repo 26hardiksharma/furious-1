@@ -1600,6 +1600,9 @@ async def voiceunmute(ctx,member : discord.Member):
 async def warn(ctx,member : discord.Member,*,reason = None):
   if ctx.author.guild_permissions.manage_messages:
     await ctx.message.delete()
+    if member.bot:
+      await ctx.send("You Cant Warn A Bot!")
+      return
     if reason == None:
       await ctx.send(f"Please Specify A Reason To Warn Someone.")
     else:
@@ -1611,8 +1614,11 @@ async def warn(ctx,member : discord.Member,*,reason = None):
         embed = discord.Embed(description = f"**{member.name}#{member.discriminator} Has Been Warned For: {reason}**",colour = 0x3498DB)
         await ctx.send(embed=embed)
       time = datetime.datetime.now().strftime("%a, %#d %B %Y, %I:%M %p UTC")
-      okay = {"_id":ctx.guild.id,"uid":member.id,"modid":ctx.author.id,"wtime":time,"warn":reason}
-      await client.warndb.insert(okay)
+      kekwarn = {"uid":member.id,"gid":ctx.guild.id}
+      kekdata = {"reason":reason,"time":time,"mod":ctx.author}
+
+      await client.warndb.upsert_custom(kekwarn,kekdata)
+      print('GG')
 @client.command()
 async def status(ctx,*,status):
   if ctx.author.id == 757589836441059379:
@@ -1984,6 +1990,20 @@ class Document:
     id = dict["_id"]
     dict.pop("_id")
     await self.db.update_one({"_id":id},{"$unset":dict})
+  async def find_many_by_custom(self, filter):
+    if not isinstance(filter, collections.abc.Mapping):
+      raise TypeError("Expected Dictionary.")
+    return await self.db.find(filter).to_list(None)
+  async def upsert_custom(self, filter_data, update_data, option="set", *args, **kwargs):
+    await self.update_by_custom(filter_data, update_data, option, upsert=True, *args, **kwargs)
+  async def update_by_custom(self, filter_data, update_data, option="set", *args, **kwargs):
+    if not isinstance(filter_data, collections.abc.Mapping) or not isinstance(update_data, collections.abc.Mapping):
+      raise TypeError("Expected Dictionary.")
+
+    if not bool(await self.find_by_custom(filter_data)):
+      return await self.insert({**filter_data, **update_data})
+    await self.db.update_one(filter_data, {f"${option}": update_data}, *args, **kwargs)
+  
 mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 @client.event
 async def on_member_join(member):
