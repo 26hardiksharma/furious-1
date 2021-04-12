@@ -2388,6 +2388,8 @@ async def starboard(ctx,args = None,kwargs = None):
     except:
       await ctx.send('Limit Should Be An Integer. Try Again With An Integer Next Time.')
       return
+    if kek == 0:
+      return await ctx.send('Starboard Limit Cannot Be 0!')
     okay = {"_id":ctx.guild.id,"starlimit":kek}
     await client.config.upsert(okay)
     await ctx.send(f'Starboard Limit Was Set To **{kwargs}**.')
@@ -2431,7 +2433,7 @@ async def on_reaction_add(reaction,user):
   embed = discord.Embed(colour =reaction.message.author.colour,timestamp = datetime.datetime.now())
   embed.set_author(name = reaction.message.author,icon_url = reaction.message.author.avatar_url)
   if len(reaction.message.content) >= 1:
-    
+
     embed.add_field(name = "Content",value = reaction.message.content,inline = False)
   if reaction.message.attachments:
     embed.set_image(url = reaction.message.attachments[0].url)
