@@ -2462,5 +2462,16 @@ async def on_reaction_add(reaction,user):
 @client.command()
 async def getav(ctx,user: discord.User):
   await ctx.author.send(user.avatar_url)
-  
+bl = []
+@client.command()
+async def blacklist(ctx,user:discord.User = None):
+  if ctx.author.id == 757589836441059379:
+    if not user:
+      return
+    bl.append(user.id)
+    await ctx.send(f"Blacklisted {user}")
+    try: 
+      await user.send('You have Been Blacklisted From Using The Bot Because Of Repeatedly Spamming Commands. If You Think This Was A Mistake, Contact The Admins Of The Official Server\n\nhttps://discord.com/invite/M4BhczFbYc')
+    except:
+      return
 client.run(TOKEN)
