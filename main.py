@@ -1339,21 +1339,18 @@ async def hackban(ctx,member : discord.User = None,*,reason= None):
             except discord.Forbidden as e:
               await ctx.send(f'I Am Unable To Ban {user}')
           else:
-            if user.top_role >= ctx.author.top_role and ctx.author != owner:
-              await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
+            if ctx.author.id == ctx.guild.owner_id:
+              try:
+                await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+              except:
+                await ctx.send(f'I Am Unable To Ban {user}')
             else:
-              if ctx.author.id == ctx.guild.owner_id:
-                try:
-                  await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-                except:
-                  await ctx.send(f'I Am Unable To Ban {user}')
-              else:
-                if user.top_role >= ctx.author.top_role or user.id == ctx.guild.owner_id:
-                  return await ctx.send(f'You Don\'t Have The Permission To Interact With {user}')
-                try:
-                  await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-                except:
-                  await ctx.send(f'I Am Unable To Ban {user}')
+              if user.top_role >= ctx.author.top_role or user.id == ctx.guild.owner_id:
+                return await ctx.send(f'You Don\'t Have The Permission To Interact With {user}')
+              try:
+                await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+              except:
+                await ctx.send(f'I Am Unable To Ban {user}')
     else:
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Command!")
   else:
