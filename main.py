@@ -1340,7 +1340,7 @@ async def hackban(ctx,member : discord.User = None,*,reason= "No Given"):
             except:
               await ctx.send(f'I Am Unable To Ban {member}')
           else:
-            if member.top_role >= ctx.author.top_role:
+            if member.top_role >= ctx.author.top_role or member.id == ctx.guild.owner_id:
               await ctx.send(f"You Dont Have The Permission To Interact With {member}")
               return
             try:
