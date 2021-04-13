@@ -1726,6 +1726,8 @@ async def delete(ctx,member : discord.Member= None):
 async def on_message(message):
   if str(message.channel.type) == "private":
     return
+  if message.author.id in bl:
+    return
   if message.author.bot == True:
     if message.author.id == 646937666251915264:
       chan = client.get_channel(829233056632143872)
