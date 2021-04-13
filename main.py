@@ -1318,7 +1318,7 @@ async def takerole(ctx,member : discord.Member = None,role : discord.Role = None
           embed.add_field(name = f"Responsible Moderator",value= ctx.author.mention)
           await ctx.send(embed=embed)
 @client.command()
-async def hackban(ctx,member : discord.User = None,*,reason= None):
+async def hackban(ctx,member : discord.User = None,*,reason= "No Given"):
   await ctx.message.delete()
   if ctx.author.guild_permissions.ban_members:
     abc = await ctx.guild.fetch_member(client.user.id)
@@ -1326,31 +1326,27 @@ async def hackban(ctx,member : discord.User = None,*,reason= None):
       if member == None:
         await ctx.send(f"Please Mention The User Or Pass Their ID To Ban Them.")
       else:
-        try:
-          guy = await client.fetch_user(member.id)
-          user = await ctx.guild.fetch_member(member.id)
-          if not user:
+        user = await client.fetch_user(member.id)
+        member = await ctx.guild.fetch_member(user.id)
+        if member == None:
+          await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author}")
+          await ctx.send(f'{user} Was Banned. Reason: {reason}')
+        else:
+          if ctx.author.id == ctx.guild.owner_id:
             try:
-              await ctx.guild.ban(guy,reason=f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-              if reason== None:
-                await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name}")
-              else:
-                await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name} Because Of:- {reason}")
-            except discord.Forbidden as e:
-              await ctx.send(f'I Am Unable To Ban {user}')
+              await member.ban(reason = f"{reason} || Action By {ctx.author}")]
+              await ctx.send(f'{user} Was Banned. Reason: **{reason}**')
+            except:
+              await ctx.send(f'I Am Unable To Ban {member}')
           else:
-            if ctx.author.id == ctx.guild.owner_id:
-              try:
-                await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-              except:
-                await ctx.send(f'I Am Unable To Ban {user}')
-            else:
-              if user.top_role >= ctx.author.top_role or user.id == ctx.guild.owner_id:
-                return await ctx.send(f'You Don\'t Have The Permission To Interact With {user}')
-              try:
-                await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-              except:
-                await ctx.send(f'I Am Unable To Ban {user}')
+            if member.top_role >= ctx.author.top_role:
+              await ctx.send(f"You Dont Have The Permission To Interact With {member}")
+              return
+            try:
+              await member.ban(reason = f"{reason} || Action By {ctx.author}")]
+              await ctx.send(f'{user} Was Banned. Reason: **{reason}**')
+            except:
+              await ctx.send(f'I Am Unable To Ban {member}')
     else:
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Command!")
   else:
