@@ -2389,7 +2389,7 @@ async def starboard(ctx,args = None,kwargs = None):
       await ctx.send('Limit Should Be An Integer. Try Again With An Integer Next Time.')
       return
     if kek == 0:
-      return await ctx.send('Starboard Limit Cannot Be 0!')
+      return await ctx.send('Starboard Reaction Limit Cannot Be 0!')
     okay = {"_id":ctx.guild.id,"starlimit":kek}
     await client.config.upsert(okay)
     await ctx.send(f'Starboard Limit Was Set To **{kwargs}**.')
