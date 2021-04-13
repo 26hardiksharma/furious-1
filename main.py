@@ -2449,6 +2449,5 @@ async def on_reaction_add(reaction,user):
 
 @client.command()
 async def getav(ctx,user: discord.User):
-  await ctx.author.send(user.avatar_url))
-
+  await ctx.author.send(user.avatar_url)
 client.run(TOKEN)
