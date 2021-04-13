@@ -8,6 +8,7 @@ import random
 import wikipedia
 import datetime
 import praw 
+import discord.py
 from PIL import Image
 from io import BytesIO
 import datetime
@@ -2448,6 +2449,6 @@ async def on_reaction_add(reaction,user):
 
 @client.command()
 async def getav(ctx,user: discord.User):
-  await ctx.author.send(user.avatar_url)
+  await ctx.author.send(user.avatar_url))
 
 client.run(TOKEN)
