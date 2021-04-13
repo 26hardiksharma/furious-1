@@ -1334,7 +1334,7 @@ async def hackban(ctx,member : discord.User = None,*,reason= "No Given"):
         else:
           if ctx.author.id == ctx.guild.owner_id:
             try:
-              await member.ban(reason = f"{reason} || Action By {ctx.author}")]
+              await member.ban(reason = f"{reason} || Action By {ctx.author}")
               await ctx.send(f'{user} Was Banned. Reason: **{reason}**')
             except:
               await ctx.send(f'I Am Unable To Ban {member}')
