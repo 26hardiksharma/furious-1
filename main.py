@@ -2464,14 +2464,18 @@ async def getav(ctx,user: discord.User):
   await ctx.author.send(user.avatar_url)
 bl = []
 @client.command()
-async def blacklist(ctx,user:discord.User = None):
+async def blacklist(ctx,query = None,user:discord.User = None):
   if ctx.author.id == 757589836441059379:
     if not user:
       return
-    bl.append(user.id)
-    await ctx.send(f"Blacklisted {user}")
-    try: 
-      await user.send('You have Been Blacklisted From Using The Bot Because Of Repeatedly Spamming Commands. If You Think This Was A Mistake, Contact The Admins Of The Official Server\n\nhttps://discord.com/invite/M4BhczFbYc')
-    except:
-      return
+    if query.lower() == "add":
+      bl.append(user.id)
+      await ctx.send(f"Blacklisted {user}")
+      try: 
+        await user.send('You have Been Blacklisted From Using The Bot Because Of Repeatedly Spamming Commands. If You Think This Was A Mistake, Contact The Admins Of The Official Server\n\nhttps://discord.com/invite/M4BhczFbYc')
+      except:
+        return
+    elif query.lower() == "remove":
+      bl.remove(user.id)
+      await ctx.send(f'Unblacklisted {user}')
 client.run(TOKEN)
