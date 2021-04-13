@@ -8,7 +8,6 @@ import random
 import wikipedia
 import datetime
 import praw 
-import discord.py
 from PIL import Image
 from io import BytesIO
 import datetime
