@@ -2434,7 +2434,7 @@ async def on_reaction_add(reaction,user):
   if "starchannel" not in data:
     print('No Starchannel')
     return
-  if "starinc" in data:
+  if not "starinc" in data:
     inc = 0
   else:
     inc = data["starinc"]
