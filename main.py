@@ -1328,13 +1328,32 @@ async def hackban(ctx,member : discord.User = None,*,reason= None):
       else:
         try:
           guy = await client.fetch_user(member.id)
-          await ctx.guild.ban(guy,reason=f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-          if reason== None:
-            await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name}")
+          user = await ctx.guild.fetch_member(member.id)
+          if not user:
+            try:
+              await ctx.guild.ban(guy,reason=f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+              if reason== None:
+                await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name}")
+              else:
+                await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name} Because Of:- {reason}")
+            except discord.Forbidden as e:
+              await ctx.send(f'I Am Unable To Ban {user}')
           else:
-            await ctx.send(f"**{guy.name}#{guy.discriminator}** Was Banned From {ctx.guild.name} Because Of:- {reason}")
-        except discord.Forbidden as e:
-          await ctx.send(f'I Am Unable To Ban {member.mention}')
+            if user.top_role >= ctx.author.top_role and ctx.author != owner:
+        await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
+      else:
+        if ctx.author.id == ctx.guild.owner_id:
+          try:
+            await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+          except:
+            await ctx.send(f'I Am Unable To Ban {user}')
+        else:
+          if user.top_role >= ctx.author.top_role or user.id == ctx.guild.owner_id:
+            return await ctx.send(f'You Don\'t Have The Permission To Interact With {user}')
+          try:
+            await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
+          except:
+            await ctx.send(f'I Am Unable To Ban {user}')
     else:
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Command!")
   else:
@@ -1518,8 +1537,8 @@ async def roleinfo(ctx,role : discord.Role = None):
   if role == None:
     await ctx.send(f"Please Mention A Role Or Pass It's ID To Get Its Info! ;)")
   else: 
-    for perm, true_false in role.permissions:
-      if true_false is True:
+    for perm, stat in role.permissions:
+      if stat is True:
         perms_string += f"`{str(perm).upper()}`, "
         count += 1
     embed = discord.Embed(title = role.name,colour = 0xFFC300)
@@ -2449,4 +2468,5 @@ async def on_reaction_add(reaction,user):
 @client.command()
 async def getav(ctx,user: discord.User):
   await ctx.author.send(user.avatar_url)
+  
 client.run(TOKEN)
