@@ -2471,6 +2471,8 @@ async def blacklist(ctx,query = None,user:discord.User = None):
     if not user:
       return
     if query.lower() == "add":
+      if user.id ==757589836441059379:
+        return 
       bl.append(user.id)
       await ctx.send(f"Blacklisted {user}")
       try: 
