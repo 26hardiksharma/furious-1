@@ -2492,4 +2492,7 @@ async def blacklist(ctx,query = None,user:discord.User = None):
     elif query.lower() == "remove":
       bl.remove(user.id)
       await ctx.send(f'Unblacklisted {user}')
+@client.event
+async def on_command(ctx):
+  print(f"{ctx.author} Used {ctx.command.name} In {ctx.guild.name}")
 client.run(TOKEN)
