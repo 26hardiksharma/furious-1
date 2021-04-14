@@ -1204,7 +1204,7 @@ async def usercount(ctx):
 async def ticket(ctx,query = "create" , channel : discord.TextChannel = None):
   if query == "create":
     num = random.randint(0,100)
-    ch = await ctx.guild.create_text_channel(name = f"ticket {num}")
+    ch = await ctx.guild.create_text_channel(name = f"ticket {ctx.author.discriminator}")
     overwrite = ch.overwrites_for(ctx.author)
     overwrite.view_channel = True
     await ch.set_permissions(ctx.author,overwrite = overwrite)
