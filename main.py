@@ -2078,7 +2078,7 @@ async def on_member_ban(guild,user):
     return
   await asyncio.sleep(1)
   async for entry in guild.audit_logs(action=discord.AuditLogAction.ban,limit = 1):
-    await logch.send(f"⚒️ {entry.user} Banned {entry.target}\n\nID: {user.id}\n\nReason : ``{entry.reason}``")
+    await logch.send(f"⚒️ {entry.user} Banned {entry.target}\n\nID: {user.id}\n\nReason : **{entry.reason}**")
     break
 @client.event
 async def on_guild_channel_create(channel):
@@ -2197,7 +2197,7 @@ async def on_guild_update(before,after):
     embed.add_field(name = "Responsible User",value = member)
     await logs.send(embed=embed)
   elif before.owner_id != after.owner_id:
-    embed.add_field(name = "Changes",value = f"Target: Owner\nBefore: {before.owner}\nAfter: {after.owner}")
+    embed.add_field(name = "Changes",value = f"Target: Owner\nBefore: <@!{before.owner_id}>\nAfter: <@!{after.owner_id}>")
     await logs.send(embed=embed)
 @client.event
 async def on_message_edit(before,after):
