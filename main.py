@@ -200,7 +200,7 @@ async def purge(ctx,amt: int = None,member : discord.Member = None):
       embed = discord.Embed(title = "Purge")
       embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
       embed.add_field(name = "Missing Permission(s)", value = "Manage Messages",inline = False)
-      embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}, Made by Eternal_Slayer#0069")
+      embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}")
       await ctx.send(embed=embed)
 @client.command(aliases = ['m'])
 async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
@@ -683,7 +683,6 @@ async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specif
       memberembed = discord.Embed(title = "🔇 Mute", description = "You Have Been Muted", color = discord.Colour.red(), inline = False)
       memberembed.add_field(name = "Moderator :- ", value = ctx.author.name)
       memberembed.add_field(name = "Reason", value = reason, inline = False)
-      memberembed.set_footer(text = "Made By EternalSlayer#0069")
       await member.send(embed = memberembed)
       await asyncio.sleep(time)
       await member.remove_roles(muted_role)
