@@ -1201,17 +1201,6 @@ async def usercount(ctx):
     num = num + guild.member_count
   await ctx.send(f"I Have {num} Users Currently")
 @client.command()
-async def invites(ctx,member : discord.Member= None):
-  if member == None:
-    member = ctx.author
-  total = 0
-  for i in await ctx.guild.invites():
-    if i.inviter == member:
-      total = total + i.uses
-  embed = discord.Embed(title = "Invites",description = ctx.guild.name,colour = 0x00EAFF)
-  embed.add_field(name= f"{member.name}'s Invites",value = total)
-  await ctx.send(embed=embed)
-@client.command()
 async def ticket(ctx,query = "create" , channel : discord.TextChannel = None):
   if query == "create":
     num = random.randint(0,100)
