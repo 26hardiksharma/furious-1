@@ -1732,7 +1732,7 @@ async def on_message(message):
           return
         role = data["krole"]
         mention = f"<@&{role}>"
-        if not data["kmessage"] or "kmessage" not in data:
+        if "kmessage" not in data:
           kmsg = "Karuta Has Dropped Some Cards. Be Sure To Grab Them Before They Expire!"
         else:
           kmsg = data["kmessage"]
