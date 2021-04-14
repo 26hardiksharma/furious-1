@@ -2427,10 +2427,8 @@ async def on_reaction_add(reaction,user):
   if not data:
     return
   if "starlimit" not in data:
-    print('No Starlimit Set')
     return
   if "starchannel" not in data:
-    print('No Starchannel')
     return
   if not "starinc" in data:
     inc = 0
@@ -2438,15 +2436,12 @@ async def on_reaction_add(reaction,user):
     inc = data["starinc"]
   channel = user.guild.get_channel(data["starchannel"])
   if not channel:
-    print('Channel Not Found.')
     return
   if not str(reaction.emoji) == '⭐':
-    print('Wrong Emoji')
     return
   bruh = await reaction.users().flatten()
   count = len(bruh)
   if int(data["starlimit"]) > count:
-    print('Less Count')
     return
   embed = discord.Embed(colour =reaction.message.author.colour,timestamp = datetime.datetime.now())
   embed.set_author(name = reaction.message.author,icon_url = reaction.message.author.avatar_url)
