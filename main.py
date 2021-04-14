@@ -411,7 +411,7 @@ async def lock(ctx,*,channel : discord.TextChannel=None):
       embed.add_field(name = "Status",value = f"Successfully Locked {channel.mention}")
       await ctx.send(embed=embed)
   else:
-    await ctx.send("<:kya_bey:796610669549322250>")
+    await ctx.send("You Don't Have The **MANAGE CHANNELS** Permission Required To Execute This Command!")
 
 @client.command()
 async def unlock(ctx,*,channel : discord.TextChannel=None):
@@ -424,8 +424,7 @@ async def unlock(ctx,*,channel : discord.TextChannel=None):
     embed.add_field(name = "Status",value = f"Successfully Unlocked {channel.mention} ")
     await ctx.send(embed=embed)
   else:
-    embed=discord
-    await ctx.send("<:kya_bey:796610669549322250>")
+    await ctx.send("You Don't Have The **MANAGE CHANNELS** Permission Required To Execute This Command!")
 @client.command()
 async def unban(ctx, kek : discord.User = None):
   me = await ctx.guild.fetch_member(client.user.id)
