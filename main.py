@@ -2099,16 +2099,30 @@ async def on_guild_channel_delete(channel):
   embed.set_footer(text= f"ID : {channel.id}")
   await logch.send(embed = embed)
 @client.command(aliases = ['logs','modlog'])
-async def setlogs(ctx,channel : discord.TextChannel = None):
+async def setlogs(ctx,query = None:):
   if ctx.author.guild_permissions.manage_guild == False:
     return await ctx.send('You Are Missing The **`MANAGE SERVER`** Permission Required To Execute This Command!')
-  if not channel:
-    await ctx.send('Please Be Sure To Mention A Channel Or Supply It\'s ID To Be Set As The Log Channel.')
+  if not query:
+    embed = discord.Embed(title = "Logs",color = ctx.author.color,timestamp = datetime.datetime.now())
+    embed.add_field(name = "Info",value = 'Set A Log Channel For The Server.\n\nAll Moderation Actions Will Be Logged Here.')
+    embed.add_field(name = "Usage",value='Setting A Channel: **`F!modlog <#channel>`**\n\nTurning Off: **`F!modlog off`**',inline=False)
+    await ctx.send(embed)
+    return
+  if query.lower() == "off":
+    await client.config.unset({"_id":ctx.guild.id,"lohgchannel":1})
+    await ctx.send('Modlogs Are Turned Off And Will Not Be Sent!')
     return
   me = await ctx.guild.fetch_member(client.user.id)
   if me.guild_permissions.view_audit_log == False or me.guild_permissions.send_messages == False or me.guild_permissions.embed_links == False or me.guild_permissions.attach_files == False:
     return await ctx.send('I Need The Following Permissions To Correctly Deliver Logs.\n`SEND MESSAGES`\n`EMBED LINKS`\n`ATTACH FILES`\n`VIEW AUDIT LOG`\nPlease Grant Me The Following Permission And Then Use The Command.')
-  kekek = {"_id":ctx.guild.id,"logchannel":channel.id}
+  if not ctx.message.channel_mentions:
+    return await ctx.send('Please Be Sure To Mention A Channel To Be Set As The Log Channels!')
+    return
+  kek = ctx.guild.get_channel(ctx.message.channel_mentions[0].id)
+  if not kek:
+    await ctx.send('Cannot Find That Channel In This Server!')
+    return
+  kekek = {"_id":ctx.guild.id,"logchannel":kek.id}
   await client.config.upsert(kekek)
   await ctx.send(f'{channel.mention} Was Set As The Log Channel For This Server.\n\nImportant Actions Taking Place In This Server Will Be Logged There!')
 @client.event
