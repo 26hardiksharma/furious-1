@@ -1752,11 +1752,6 @@ async def on_message(message):
         await msg.edit(content =f'{mention}, Karuta Dropped Some Cards, But They Have Expired And Can No Longer Be Grabbed :/')
         embed.set_image(url = message.attachments[0].url)
         await chan.send(embed=embed)
-    elif message.author.id == 716390085896962058:
-      if message.embeds:
-        if len(message.embeds[0].description) >= 1:
-          if 'guess the pokémon and type' in str(message.embeds[0].description).lower():
-            print(f"Tracked A Pokemon In {message.guild.name}: {message.embeds[0].image.url}")
   """      
   else:
     data = await client.config.find(message.guild.id)
