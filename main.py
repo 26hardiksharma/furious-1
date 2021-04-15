@@ -1983,15 +1983,15 @@ class Document:
 
   async def __get_raw(self,id):
     return await self.db.find_one({"_id":id})
-  async def unset(self,dict):
+  async def unset(self, dict):
     if not dict["_id"]:
-      raise KeyError('_id Not Found!')
-
+      raise KeyError("_id not found in supplied dict.")
     if not await self.find_by_id(dict["_id"]):
       return
+    
     id = dict["_id"]
     dict.pop("_id")
-    await self.db.update_one({"_id":id},{"$unset":dict})
+    await self.db.update_one({"_id": id}, {"$unset": dict})
   async def find_many_by_custom(self, filter):
     return await self.db.find(filter).to_list(None)
   async def upsert_custom(self, filter_data, update_data, option="set", *args, **kwargs):
