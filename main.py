@@ -1988,7 +1988,6 @@ class Document:
       raise KeyError("_id not found in supplied dict.")
     if not await self.find_by_id(dict["_id"]):
       return
-    
     id = dict["_id"]
     dict.pop("_id")
     await self.db.update_one({"_id": id}, {"$unset": dict})
@@ -2017,7 +2016,7 @@ async def prefix(ctx,prefix = None):
       await ctx.send("Please Be Sure To Supply The Prefix You Want To Be Set For This Server While Using This Command!")
       return
     if prefix.lower() == "reset":
-      await client.config.unset({"_id":ctx.guild.id},{"prefix":1})
+      await client.config.unset({"_id":ctx.guild.id})
       await ctx.send('Reset Prefix For This Guild To The Default: `F!`')
       return
     okay = {"_id": ctx.guild.id,"prefix":prefix}
