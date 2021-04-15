@@ -2124,7 +2124,7 @@ async def setlogs(ctx,query = None):
     return
   kekek = {"_id":ctx.guild.id,"logchannel":kek.id}
   await client.config.upsert(kekek)
-  await ctx.send(f'{channel.mention} Was Set As The Log Channel For This Server.\n\nImportant Actions Taking Place In This Server Will Be Logged There!')
+  await ctx.send(f'{kek.mention} Was Set As The Log Channel For This Server.\n\nImportant Actions Taking Place In This Server Will Be Logged There!')
 @client.event
 async def on_guild_channel_update(before, after):
   data = await client.config.find(before.guild.id)
