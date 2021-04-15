@@ -1316,7 +1316,7 @@ async def hackban(ctx,member : discord.User = None,*,reason= "No Given"):
         await ctx.send(f"Please Mention The User Or Pass Their ID To Ban Them.")
       else:
         user = await client.fetch_user(member.id)
-        member = await ctx.guild.fetch_member(user.id)
+        member = ctx.guild.get_member(user.id)
         if member == None:
           await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author}")
           await ctx.send(f'{user} Was Banned. Reason: {reason}')
