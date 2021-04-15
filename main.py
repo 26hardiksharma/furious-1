@@ -2109,7 +2109,7 @@ async def setlogs(ctx,query = None):
     await ctx.send(embed)
     return
   if query.lower() == "off":
-    await client.config.unset({"_id":ctx.guild.id,"lohgchannel":1})
+    await client.config.unset({"_id":ctx.guild.id,"logchannel":1})
     await ctx.send('Modlogs Are Turned Off And Will Not Be Sent!')
     return
   me = await ctx.guild.fetch_member(client.user.id)
