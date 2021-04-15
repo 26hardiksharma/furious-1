@@ -2016,7 +2016,7 @@ async def prefix(ctx,prefix = None):
       await ctx.send("Please Be Sure To Supply The Prefix You Want To Be Set For This Server While Using This Command!")
       return
     if prefix.lower() == "reset":
-      await client.config.unset({"_id":ctx.guild.id})
+      await client.config.unset({"_id":ctx.guild.id,"prefix":1})
       await ctx.send('Reset Prefix For This Guild To The Default: `F!`')
       return
     okay = {"_id": ctx.guild.id,"prefix":prefix}
