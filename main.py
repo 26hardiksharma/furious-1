@@ -2099,7 +2099,7 @@ async def on_guild_channel_delete(channel):
   embed.set_footer(text= f"ID : {channel.id}")
   await logch.send(embed = embed)
 @client.command(aliases = ['logs','modlog'])
-async def setlogs(ctx,query = None:):
+async def setlogs(ctx,query = None):
   if ctx.author.guild_permissions.manage_guild == False:
     return await ctx.send('You Are Missing The **`MANAGE SERVER`** Permission Required To Execute This Command!')
   if not query:
