@@ -1307,7 +1307,7 @@ async def takerole(ctx,member : discord.Member = None,role : discord.Role = None
           embed.add_field(name = f"Responsible Moderator",value= ctx.author.mention)
           await ctx.send(embed=embed)
 @client.command()
-async def hackban(ctx,member : discord.User = None,*,reason= "No Given"):
+async def hackban(ctx,member : discord.User = None,*,reason= "No Reason Specified."):
   await ctx.message.delete()
   if ctx.author.guild_permissions.ban_members:
     abc = await ctx.guild.fetch_member(client.user.id)
