@@ -2017,7 +2017,7 @@ async def prefix(ctx,prefix = None):
       return
     if prefix.lower() == "reset":
       await client.config.unset({"_id":ctx.guild.id,"prefix":1})
-      await ctx.send('Reset Prefix For This Guild To The Default: `F!`')
+      await ctx.send('The Prefix Was Successfully Reset To The Default: `F!`')
       return
     okay = {"_id": ctx.guild.id,"prefix":prefix}
     await client.config.upsert(okay)    
