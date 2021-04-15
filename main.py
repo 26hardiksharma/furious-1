@@ -54,6 +54,8 @@ async def on_ready():
   print('Connection Established\nConnecting  Top.gg')
   client.top = Topgg(client)
   print('Success')
+  client.nextMeme = getMeme()
+  print('Fetched A Meme!')
   print(client.top)
 
 intents.guilds = True
