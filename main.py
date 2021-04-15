@@ -2106,7 +2106,7 @@ async def setlogs(ctx,query = None):
     embed = discord.Embed(title = "Logs",color = ctx.author.color,timestamp = datetime.datetime.now())
     embed.add_field(name = "Info",value = 'Set A Log Channel For The Server.\n\nAll Moderation Actions Will Be Logged Here.')
     embed.add_field(name = "Usage",value='Setting A Channel: **`F!modlog <#channel>`**\n\nTurning Off: **`F!modlog off`**',inline=False)
-    await ctx.send(embed)
+    await ctx.send(embed = embed)
     return
   if query.lower() == "off":
     await client.config.unset({"_id":ctx.guild.id,"logchannel":1})
