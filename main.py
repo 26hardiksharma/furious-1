@@ -2393,8 +2393,8 @@ async def starboard(ctx,args = None,kwargs = None):
     except:
       await ctx.send('Limit Should Be An Integer. Try Again With An Integer Next Time.')
       return
-    if kek == 0:
-      return await ctx.send('Starboard Reaction Limit Cannot Be 0!')
+    if kek <= 0:
+      return await ctx.send('Starboard Reaction Limit Cannot Be 0 Or Less Than 0!')
     okay = {"_id":ctx.guild.id,"starlimit":kek}
     await client.config.upsert(okay)
     await ctx.send(f'Starboard Limit Was Set To **{kwargs}**.')
@@ -2410,6 +2410,8 @@ async def starboard(ctx,args = None,kwargs = None):
     except:
       await ctx.send('Increment Should Be An Integer. Try Again With An Integer Next Time.')
       return
+    if kek < 0:
+      return await ctx.send("Starboard Increment Cannot Be Negative!")
     okay = {"_id":ctx.guild.id,"starinc":kek}
     await client.config.upsert(okay)
     await ctx.send(f"Starboard Increment Was Set To **{kwargs}**.")
@@ -2474,7 +2476,7 @@ async def on_reaction_add(reaction,user):
     if reaction.message.embeds[0].image:
       embed.set_image(url = reaction.message.embeds[0].image.url)
     if len(reaction.message.embeds[0].fields) >= 1:
-      for i reaction.message.embeds.fields:
+      for i in reaction.message.embeds.fields:
         embed.add_field(name = reaction.message.embeds.fields[i].name,value = reaction.message.embeds.fields[i].value,inline= False)
   embed.add_field(name = "Source",value = f"[Click Here]({reaction.message.jump_url})")
   await channel.send(content = f"{count} 🌟",embed = embed)
