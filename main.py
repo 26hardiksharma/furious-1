@@ -60,25 +60,38 @@ async def on_ready():
   print('Fetched A Meme!')
 intents.guilds = True
 @client.command()
-async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
+async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
   await ctx.message.delete()
   abc = ctx.guild.get_member(client.user.id)
   owner  = await ctx.guild.fetch_member(ctx.guild.owner_id) 
   if ctx.author.guild_permissions.kick_members:
     if abc.guild_permissions.kick_members:
-      if user.top_role >= ctx.author.top_role and ctx.author != owner:
-        await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
+      if not user:
+        return await ctx.send('Please be Sure To Mention A Member Or use There ID To Kick Them!')
+      if ctx.author.id == ctx.guild.owner_id:
+        try:
+          await user.kick(reason = f"{reason} || Action By {ctx.author}")
+          await ctx.send(f'Kicked {member} From {ctx.guild.name} || Reason: {reason}')
+        except:
+          await ctx.send(f'I Am Unable To Interact With {user}')
+          return
+        try:
+          await member.send(f'You Have Been Kicked From {ctx.guild.name} Because Of {reason}')
+        except:
+          return
       else:
-        if abc.top_role > user.top_role and user != owner:
-          await user.kick(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-          embed = discord.Embed(title = "Kick",description = f"{user.mention} **Has Been Successfully Kicked Out Because Of** :-  {reason}",colour = 0xFF0000)
-          await ctx.send(embed=embed)
-          try:
-            await member.send(f"**You Have Been Kicked From {ctx.guild} Because Of : {reason}**")
-          except:
-            pass
-        else:
-          await ctx.send(f"Unable To Interact With {user.name}#{user.discriminator}")
+        if user.top_role>= ctx.author.top_role or user.id == ctx.guild.owner_id:
+          return await ctx.send(f'You Dont Have Permission To Interact With {user}!')
+        try:
+          await user.kick(reason = f"{reason} || Action By {ctx.author}")
+          await ctx.send(f'Kicked {user} From {ctx.guild.name} || Reason: {reason}')
+        except:
+          await ctx.send(f'I Am Unable To Interact With {user}')
+          return
+        try:
+          await user.send(f'You Have Been Kicked From {ctx.guild.name} Because Of {reason}')
+        except:
+          return
     else:
       await ctx.send(f"I Am Missing The **KICK MEMBERS** Permission Required To Execute This Action")
   else:
