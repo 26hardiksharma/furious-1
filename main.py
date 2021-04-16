@@ -2475,9 +2475,11 @@ async def on_reaction_add(reaction,user):
       embed.add_field(name = "Description",value = reaction.message.embeds[0].description,inline = False)
     if reaction.message.embeds[0].image:
       embed.set_image(url = reaction.message.embeds[0].image.url)
+    kek = 0
     if len(reaction.message.embeds[0].fields) >= 1:
       for i in reaction.message.embeds[0].fields:
-        embed.add_field(name = reaction.message.embeds[0].fields[i].name,value = reaction.message.embeds[0].fields[i].value,inline= False)
+        embed.add_field(name = reaction.message.embeds[0].fields[kek].name,value = reaction.message.embeds[0].fields[kek].value,inline= False)
+        kek += 1
   embed.add_field(name = "Source",value = f"[Click Here]({reaction.message.jump_url})")
   await channel.send(content = f"{count} 🌟",embed = embed)
   kek = data["starlimit"] + inc
