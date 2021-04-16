@@ -40,7 +40,7 @@ async def getprefix(client,message):
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True)
 
 
-client.dblpy = dbl.DBLClient(client,dbl_token,webhook_port = 5000)
+client.dblpy = dbl.DBLClient(client,dbl_token,webhook_path = '/dblwebhook',webhook_auth = 'pogchamp',webhook_port = 5000)
 
 
 intents = discord.Intents.default()
