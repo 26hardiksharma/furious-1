@@ -2478,4 +2478,7 @@ async def ticket(ctx,query = None,*,desc = None):
     embed = discord.Embed(title = "Ticket Support",description = "Thank You For Creating A Ticket\nSupport Will Be Reaching You Shortly.\nPlease Be Patient.",colour = ctx.author.color,timestamp = dateime.datetime.now())
     embed.set_footer(text = "Furious || F!invite",icon_url=client.user.avatar_url)
     await channel.send(content = ctx.author.mention,embed=embed)
+@client.event
+async def on_dbl_test(data):
+  print(f"Tested {data}")
 client.run(TOKEN)

@@ -13,4 +13,3 @@ pymongo
 pymongo[srv]
 dnspython
 utils
-discord.py
