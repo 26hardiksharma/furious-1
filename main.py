@@ -2465,7 +2465,7 @@ async def on_command(ctx):
   print(f"{ctx.author} Used {ctx.command.name} In {ctx.guild.name}")
 @client.command()
 async def ticket(ctx,query = None,*,desc = None):
-  if query == None:
+  if query == None or query.lower() != "create" or query.lower() != "delete":
     query = "create"
   if query.lower() == "create":
     if not desc:
@@ -2477,7 +2477,7 @@ async def ticket(ctx,query = None,*,desc = None):
     lavda = channel.overwrites_for(ctx.guild.default_role)
     lavda.view_channel = False
     await channel.set_permissions(ctx.guild.default_role,overwrite = lavda)
-    embed = discord.Embed(title = "Ticket Support",description = "Thank You For Creating A Ticket\nSupport Will Be Reaching You Shortly.\nPlease Be Patient.",colour = ctx.author.color,timestamp = dateime.datetime.now())
+    embed = discord.Embed(title = "Ticket Support",description = "Thank You For Creating A Ticket\nSupport Will Be Reaching You Shortly.\nPlease Be Patient.",colour = ctx.author.color,timestamp = datetime.datetime.now())
     embed.add_field(name = "Reason For Creating Ticket",value = desc,inline=False)
     embed.set_footer(text = "Furious || F!invite",icon_url=client.user.avatar_url)
     await channel.send(content = ctx.author.mention,embed=embed)
@@ -2504,4 +2504,7 @@ async def ticket(ctx,query = None,*,desc = None):
 @client.event
 async def on_dbl_test(data):
   print(f"Tested {data}")
+@client.event
+async def on_command_completion(ctx):
+  print(f'Completed {ctx.command.name}')
 client.run(TOKEN)
