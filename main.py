@@ -25,7 +25,7 @@ import dns
 
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
-dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt/dblwebhook"
+dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
 async def getprefix(client,message):
   if not message.guild:
     return commands.when_mentioned_or('F!','f!','^')(client,message)
@@ -40,7 +40,7 @@ async def getprefix(client,message):
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True)
 
 
-client.dblpy = dbl.DBLClient(client,dbl_token,webhook_path=dbl_webhook,webhook_auth = 'pogchamp',webhook_port = 5000)
+client.dblpy = dbl.DBLClient(client,dbl_token,webhook_path=f"/dblwebhook{dbl_webhook}",webhook_auth = 'pogchamp',webhook_port = 5000)
 
 
 intents = discord.Intents.default()
