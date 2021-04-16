@@ -2427,7 +2427,7 @@ async def starboard(ctx,args = None,kwargs = None):
       if "starchannel" not in data:
         starchannel = "Not Set"
       else:
-        starchannel = f"<#{data["starchannel"]}>"
+        starchannel = f'<#{data["starchannel"]}>'
       if "starlimit" not in data:
         starlimit = "Not Set"
       else: 
