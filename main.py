@@ -2413,6 +2413,30 @@ async def starboard(ctx,args = None,kwargs = None):
     okay = {"_id":ctx.guild.id,"starinc":kek}
     await client.config.upsert(okay)
     await ctx.send(f"Starboard Increment Was Set To **{kwargs}**.")
+  elif args.lower() in ('config','settings','configuration'):
+    data = await client.config.find(ctx.guild.id)
+    if not data:
+      starincrement = "Not Set"
+      starlimit = "Not Set"
+      starchannel = "Not Set"
+    else:
+      if "starinc" not in data:
+        starincrement = "Not Set"
+      else:
+        starincrement = data["starinc"]
+      if "starchannel" not in data:
+        starchannel = "Not Set"
+      else:
+        starchannel = f"<#{data["starchannel"]}>"
+      if "starlimit" not in data:
+        starlimit = "Not Set"
+      else: 
+        starlimit = data["starlimit"]
+    embed = discord.Embed(title = f"Starboard Config For {ctx.guild.name}",color = ctx.author.color,timestamp = datetime.datetime.now())
+    embed.add_field(name = 'Starboard Channel',value = starchannel)
+    embed.add_field(name = "Star Requirement",value = starlimit,inline = False)
+    embed.add_field(name = "Starboard Increment",value = starincrement)
+    await ctx.send(embed = embed)
 @client.event
 async def on_reaction_add(reaction,user):
   data = await client.config.find(user.guild.id)
