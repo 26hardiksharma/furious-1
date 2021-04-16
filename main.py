@@ -25,7 +25,7 @@ import dns
 
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
-dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
+dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt/dblwebhook"
 async def getprefix(client,message):
   if not message.guild:
     return commands.when_mentioned_or('F!','f!','^')(client,message)
@@ -38,7 +38,11 @@ async def getprefix(client,message):
   except:
     return commands.when_mentioned_or('f!','F!','^')(client,message)
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True)
-dbl_client = dbl.DBLClient(bot = client,token =dbl_token,webhook_path=dbl_webhook)
+
+
+client.dblpy = dbl.DBLClient(client,dbl_token,webhook_path=dbl_webhook,webhook_auth = 'pogchamp',webhook_port = 5000)
+
+
 intents = discord.Intents.default()
 @client.event
 async def on_ready():
@@ -51,13 +55,9 @@ async def on_ready():
   client.config = Document(client.db,'stores')
   print('Connected To Config\nConnecting With Warnings')
   client.warndb = Document(client.db,'warnings')
-  print('Connection Established\nConnecting  Top.gg')
-  client.top = Topgg(client)
-  print('Success')
+  print('Connection Established')
   client.nextMeme = getMeme()
   print('Fetched A Meme!')
-  print(client.top)
-
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member,*,reason = "No Reason Specified"):
@@ -866,7 +866,12 @@ async def on_guild_join(guild):
   em = discord.Embed(title = guild.name,description = "Thanks For Adding Me To This Server! I Surely Will Help You With Your Discord Experience And In Managing This Server :)",colour = 0xDAF7A6)
   em.add_field(name = "Some Useful Information",value = "<:emoji_0:810202224947888249> I Am Furious, A Bot Designed To Moderate Servers While Providing Utility And Other Services To Other Server Members\n<:emoji_2:810202313142566992> Command Prefixes :- ^ , <@790478502909837333>\n<:emoji_3:810202359362748487> A Lot Of Useful Commands Which Come In Handy While Using Discord\n<:emoji_5:810202499914268703> Fun Commands\n<:emoji_1:810202277624938527> Much More Discoverable With ``^help``")
   em.add_field(name = "Some Useful Links",value = f"[INVITE ME](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [SUPPORT SERVER](https://dsc.gg/furiousofficial)",inline = False)
-  await guild.text_channels[0].send(embed = em)
+  for channel in guild.text_channels:
+    try:
+      await channel.send(embed=em)
+      break
+    except:
+      continue
 
 @client.event
 async def on_guild_remove(guild):
@@ -1203,33 +1208,6 @@ async def usercount(ctx):
     num = num + guild.member_count
   await ctx.send(f"I Have {num} Users Currently")
 @client.command()
-async def ticket(ctx,query = "create" , channel : discord.TextChannel = None):
-  if query == "create":
-    num = random.randint(0,100)
-    ch = await ctx.guild.create_text_channel(name = f"ticket {ctx.author.discriminator}")
-    overwrite = ch.overwrites_for(ctx.author)
-    overwrite.view_channel = True
-    await ch.set_permissions(ctx.author,overwrite = overwrite)
-    lavda = ch.overwrites_for(ctx.guild.default_role)
-    lavda.view_channel = False
-    await ch.set_permissions(ctx.guild.default_role,overwrite = lavda)
-    embed= discord.Embed(description = "Thanks For Creating A Ticket!\n Please Be Patient \n Support Will Be Reaching You Shortly",colour= 0x5AFF00)
-    embed.set_footer(icon_url = "https://cdn.discordapp.com/avatars/790478502909837333/ffbe1e96004d240eda5385186e145986.webp?size=1024",text = "Furious || ^invite")
-    await ch.send(f"Welcome {ctx.author.mention}",embed =embed)
-    await ctx.message.add_reaction("<a:verifiedgg:792365088006471740>")
-  elif query == "delete":
-    if ctx.author.guild_permissions.administrator:
-      if channel == None:
-        await ctx.send(f"Please Mention A Ticket To Close")
-      else:
-        name = channel.name.lower()
-        if "ticket" in name:
-          await ctx.send(f"Deleting  {channel.mention}")
-          await channel.delete()
-          await ctx.send("Ticket Successfully Deleted")
-        else:
-          await ctx.send(f"That Channel Is Not A Valid Ticket To Delete")
-@client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def addrole(ctx,member : discord.Member = None,role : discord.Role = None): 
   if member == None:
@@ -1456,13 +1434,7 @@ async def meme(ctx):
 
 @client.event
 async def on_dbl_vote(data):
-  async with aiohttp.ClientSession() as session:
-    webhook = Webhook.from_url('https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt', adapter=AsyncWebhookAdapter(session))
-    embed = discord.Embed(title = "Top.gg Vote",colour = 0xFF8700)
-    embed.set_author(name = data['user'])
-    embed.add_field(name = "Recieved An Upvote",value = f"{data['user']} Has Just Voted For Me On [top.gg](https://top.gg/bot/790478502909837333/vote)")
-    embed.set_footer(text = "Thanks For Voting Me ;)")
-    await webhook.send(content = data['user'].mention,embed=embed,username = "Furious Vote Logs")
+  print(f'Vote Received\n\n{data}')
 @client.command()
 async def create(ctx,type,*,query):
   abc = await ctx.guild.fetch_member(client.user.id)
@@ -2239,9 +2211,6 @@ class Topgg():
     self.bot = bot
     self.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
     self.dblpy = dbl.DBLClient(self.bot,self.token)
-  @client.event
-  async def on_dbl_vote(self,data):
-    print(data)
 @client.command(aliases = ['config','serverconfig'])
 async def configuration(ctx):
   if ctx.author.guild_permissions.manage_guild == False:
@@ -2494,4 +2463,19 @@ async def blacklist(ctx,query = None,user:discord.User = None):
 @client.event
 async def on_command(ctx):
   print(f"{ctx.author} Used {ctx.command.name} In {ctx.guild.name}")
+@client.command()
+async def ticket(ctx,query = None,*,desc = None):
+  if query == None:
+    query = "create"
+  if query == "create":
+    channel = await ctx.guild.create_text_channel(name = f"ticket {ctx.author.discriminator}",reason = f"Ticket Support Request By {ctx.author}")
+    overwrite = channel.overwrites_for(ctx.author)
+    overwrite.view_channel = True
+    await channel.set_permissions(ctx.author,overwrite = overwrite)
+    lavda = channel.overwrites_for(ctx.guild.default_role)
+    lavda.view_channel = False
+    await channel.set_permissions(ctx.guild.default_role,overwrite = lavda)
+    embed = discord.Embed(title = "Ticket Support",description = "Thank You For Creating A Ticket\nSupport Will Be Reaching You Shortly.\nPlease Be Patient.",colour = ctx.author.color,timestamp = dateime.datetime.now())
+    embed.set_footer(text = "Furious || F!invite",icon_url=client.user.avatar_url)
+    await channel.send(content = ctx.author.mention,embed=embed)
 client.run(TOKEN)
