@@ -2478,7 +2478,7 @@ async def on_reaction_add(reaction,user):
     kek = 0
     if len(reaction.message.embeds[0].fields) >= 1:
       for i in reaction.message.embeds[0].fields:
-        embed.add_field(name = reaction.message.embeds[0].fields[kek].name,value = reaction.message.embeds[0].fields[kek].value,inline= False)
+        embed.add_field(name = reaction.message.embeds[0].fields[kek].name,value = reaction.message.embeds[0].fields[kek].value,inline= reaction.message.embeds[0].fields[kek].inline)
         kek += 1
   embed.add_field(name = "Source",value = f"[Click Here]({reaction.message.jump_url})")
   await channel.send(content = f"{count} 🌟",embed = embed)
