@@ -2485,7 +2485,7 @@ async def on_reaction_add(reaction,user):
   kek = data["starlimit"] + inc
   okay = {"_id":user.guild.id,"starlimit":int(kek)}
   await client.config.upsert(okay)
-  lol = 0"
+  lol = 0
   try:
     await reaction.message.clear_reaction('⭐')
   except:
