@@ -2467,7 +2467,9 @@ async def on_command(ctx):
 async def ticket(ctx,query = None,*,desc = None):
   if query == None:
     query = "create"
-  if query == "create":
+  if query.lower() == "create":
+    if not desc:
+      return await ctx.send('You Must Provide A Reason To Create A Ticket!')
     channel = await ctx.guild.create_text_channel(name = f"ticket {ctx.author.discriminator}",reason = f"Ticket Support Request By {ctx.author}")
     overwrite = channel.overwrites_for(ctx.author)
     overwrite.view_channel = True
@@ -2476,8 +2478,29 @@ async def ticket(ctx,query = None,*,desc = None):
     lavda.view_channel = False
     await channel.set_permissions(ctx.guild.default_role,overwrite = lavda)
     embed = discord.Embed(title = "Ticket Support",description = "Thank You For Creating A Ticket\nSupport Will Be Reaching You Shortly.\nPlease Be Patient.",colour = ctx.author.color,timestamp = dateime.datetime.now())
+    embed.add_field(name = "Reason For Creating Ticket",value = desc,inline=False)
     embed.set_footer(text = "Furious || F!invite",icon_url=client.user.avatar_url)
     await channel.send(content = ctx.author.mention,embed=embed)
+  elif query.lower() == "delete":
+    if ctx.author.guild_permissions.administrator == False:
+      return await ctx.send("You Are Missing The **ADMINISTRATOR** Permission Required To Delete Tickets!")
+    if not ctx.message.channel_mentions:
+      await ctx.send("Please Mention A Valid Ticket To Delete It While Using This Command!")
+      return
+    channel = discord.utils.get(ctx.guild.text_channels,id = ctx.message.channel_mentions[0].id)
+    if not channel:
+      return await ctx.send("Cannot Find That Channel In This Server!")
+    if not "ticket" in channel.name.lower():
+      return await ctx.send('That Channel Is Not A Valid Ticket To Delete!')
+    try:
+      await channel.delete(reason = "Ticket Delete Request.")
+    except:
+      await ctx.send('I Am Unable To Delete That Ticket, Please Provide Me The **MANAGE CHANNELS** Permission!')
+      return
+    try:
+      await ctx.send('Deleted The Mentioned Ticket!')
+    except:
+      return
 @client.event
 async def on_dbl_test(data):
   print(f"Tested {data}")
