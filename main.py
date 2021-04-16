@@ -2485,7 +2485,7 @@ async def on_reaction_add(reaction,user):
   kek = data["starlimit"] + inc
   okay = {"_id":user.guild.id,"starlimit":int(kek)}
   await client.config.upsert(okay)
-  await reaction.message.clear_reactions()
+  await reaction.message.clear_reaction('⭐')
   await reaction.message.add_reaction('🌟')
   print('Successful Starboard Log')
 
