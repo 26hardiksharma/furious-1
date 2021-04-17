@@ -2584,13 +2584,13 @@ async def uptime(ctx):
   min = (seconds % 3600) // 60
   if seconds > 60:
     min = min + 1
-    seconds = seconds - 60
+    seconds = 0
   hour = seconds // 3600
   if min > 60:
     hour = hour + 1
-    min = min - 60
+    min = 0
   if hour > 24:
-    hour - hour - 24
+    hour = 0
     day = day + 1
   embed = discord.Embed(title = "Uptime",color = ctx.author.color,description = "Calculating Uptime <a:Loading:818320610077179934>")
   msg = await ctx.send(embed = embed)
@@ -2606,6 +2606,8 @@ async def evaluate(ctx, *, arg = None):
     await ctx.send('I Got Nothing To Evaluate, Bro!')
     return
   result = eval(arg)
+  if "token" in arg.lower():
+    return await ctx.send('My Token Is Damn Secret And Cannot Be Leaked.')
   embed = discord.Embed(title = "Eval",color = ctx.author.color)
   embed.add_field(name = "Command",value = f"```py\n{arg}\n```")
   embed.add_field(name = "Result",value = result,inline= False)
