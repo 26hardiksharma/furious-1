@@ -1716,13 +1716,26 @@ async def on_message(message):
       if 'since this server is currently active!' in message.content.lower():
         data = await client.config.find(message.guild.id)
         if not data:
-          return
+          lmfao = "Karuta Cardping Service, Which Was Launched In Furious Is Now Configurable!\n\nYou Can Get more Info About The Karuta Cardping Service By Typing `F!karuta Help`\nNote: **This Message   Is Only Shown Once**"
+          await message.channel.send(lmfao)
+          data = {"_id":message.guild.id,"kreminded":"yes"}
+          await client.config.upsert(data)
         if "ktoggle" not in data:
-          return
+          if not "kreminded" in data:
+            lmfao = "Karuta Cardping Service, Which Was Launched In Furious Is Now Configurable!\n\nYou Can Get more Info About The Karuta Cardping Service By Typing `F!karuta Help`\nNote: **This Is Only Shown Once**"
+            await message.channel.send(lmfao)
+            data = {"_id":message.guild.id,"kreminded":"yes"}
+            await client.config.upsert(data)
+            return
         if data["ktoggle"] == "off":
           return
         if not "krole" in data:
-          return
+          if not "kreminded" in data:
+            lmfao = "Karuta Cardping Service, Which Was Launched In Furious Is Now Configurable!\n\nYou Can Get more Info About The Karuta Cardping Service By Typing `F!karuta Help`\nNote: **This Is Only Shown Once**"
+            await message.channel.send(lmfao)
+            data = {"_id":message.guild.id,"kreminded":"yes"}
+            await client.config.upsert(data)
+            return
         role = data["krole"]
         mention = f"<@&{role}>"
         if "kmessage" not in data:
