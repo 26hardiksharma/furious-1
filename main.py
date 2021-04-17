@@ -2577,13 +2577,18 @@ async def on_command_completion(ctx):
   print(f'Completed {ctx.command.name}')
 @client.command()
 async def uptime(ctx):
+  if not ctx.author.id == 757589836441059379:
+    return
   day = (datetime.datetime.now() - client.nowtime).days
   seconds = (datetime.datetime.now() - client.nowtime).seconds
   min = (seconds % 3600) // 60
+  if seconds > 60:
+    min = min + 1
+    seconds = seconds - 60
   hour = seconds // 3600
   embed = discord.Embed(title = "Uptime",color = ctx.author.color,description = "Calculating Uptime <a:Loading:818320610077179934>")
   msg = await ctx.send(embed = embed)
   await asyncio.sleep(2)
-  em = discord.Embed(title = "Uptime",description = f"**{day}** Days **{hour}** Hours **{min}** Minutes **{seconds}** Seconds")
+  em = discord.Embed(title = "Uptime",description = f"**{day}** Days **{hour}** Hours **{min}** Minutes **{seconds}** Seconds",color = ctx.author.color)
   await msg.edit(embed = em)
 client.run(TOKEN)
