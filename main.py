@@ -2605,14 +2605,12 @@ async def evaluate(ctx, *, arg = None):
   if arg == None:
     await ctx.send('I Got Nothing To Evaluate, Bro!')
     return
+  if "token" in arg.lower():
+    return await ctx.send('My Token Is Damn Secret And Cannot Be Leaked.')
   try:
     result = eval(arg)
   except:
     result = eval(await arg)
-
-
-  if "token" in arg.lower():
-    return await ctx.send('My Token Is Damn Secret And Cannot Be Leaked.')
   embed = discord.Embed(title = "Eval",color = ctx.author.color)
   embed.add_field(name = "Command",value = f"```py\n{arg}\n```")
   embed.add_field(name = "Result",value = result,inline= False)
