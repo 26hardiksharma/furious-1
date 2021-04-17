@@ -2618,7 +2618,7 @@ async def evaluate(ctx, *, arg = None):
   local_variables = {
     "discord": discord,
     "commands": commands,
-    "bot": bot,
+    "client": client,
     "ctx": ctx,
     "channel": ctx.channel,
     "author": ctx.author,
