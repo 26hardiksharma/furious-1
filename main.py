@@ -2597,4 +2597,17 @@ async def uptime(ctx):
   await asyncio.sleep(2)
   em = discord.Embed(title = "Uptime",description = f"**{day}** Days **{hour}** Hours **{min}** Minutes **{seconds}** Seconds",color = ctx.author.color)
   await msg.edit(embed = em)
+@client.command()
+async def evaluate(ctx, *, arg = None):
+  if not ctx.author.id == 757589836441059379:
+    await ctx.send('Nah, No Evals For You!.')
+    return
+  if arg == None:
+    await ctx.send('I Got Nothing To Evaluate, Bro!')
+    return
+  result = eval(arg)
+  embed = discord.Embed(title = "Eval",color = ctx.author.color)
+  embed.add_field(name = "Command",value = "```py\n{arg}\n```")
+  embed.add_field(name = "Result",value = result,inline= False)
+  await ctx.send(embed = embed)
 client.run(TOKEN)
