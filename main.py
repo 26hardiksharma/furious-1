@@ -2614,7 +2614,7 @@ async def evaluate(ctx, *, arg = None):
     return
   if "token" in arg.lower():
     return await ctx.send('My Token Is Damn Secret And Cannot Be Leaked.')
-  code = clean_code(code)
+  code = clean_code(arg)
   local_variables = {
     "discord": discord,
     "commands": commands,
