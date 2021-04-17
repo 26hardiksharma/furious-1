@@ -2578,7 +2578,7 @@ async def on_command_completion(ctx):
 @client.command()
 async def uptime(ctx):
   day = (datetime.datetime.now() - client.nowtime).days
-  seconds = (datetime.datetime.now() - client.nowtime).second
+  seconds = (datetime.datetime.now() - client.nowtime).seconds
   min = (seconds % 3600) // 60
   hour = seconds // 3600
   embed = discord.Embed(title = "Uptime",color = ctx.author.color,description = "Calculating Uptime <a:Loading:818320610077179934>")
