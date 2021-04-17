@@ -2608,10 +2608,7 @@ async def evaluate(ctx, *, arg = None):
   if "token" in arg.lower():
     return await ctx.send('My Token Is Damn Secret And Cannot Be Leaked.')
   if 'await' in arg.lower():
-    try:
-      result = eval(await arg)
-    except: 
-      result = await eval(arg)
+    result = await eval(arg[5])
   else:
     result = eval(arg)
 
