@@ -2586,6 +2586,12 @@ async def uptime(ctx):
     min = min + 1
     seconds = seconds - 60
   hour = seconds // 3600
+  if min > 60:
+    hour = hour + 1
+    min = min - 60
+  if hour > 24:
+    hour - hour - 24
+    day = day + 1
   embed = discord.Embed(title = "Uptime",color = ctx.author.color,description = "Calculating Uptime <a:Loading:818320610077179934>")
   msg = await ctx.send(embed = embed)
   await asyncio.sleep(2)
