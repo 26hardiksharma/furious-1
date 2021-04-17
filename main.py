@@ -2614,6 +2614,7 @@ async def evaluate(ctx, *, arg = None):
       result = await eval(arg)
   else:
     result = eval(arg)
+
   embed = discord.Embed(title = "Eval",color = ctx.author.color)
   embed.add_field(name = "Command",value = f"```py\n{arg}\n```")
   embed.add_field(name = "Result",value = result,inline= False)
