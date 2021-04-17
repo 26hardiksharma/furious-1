@@ -2608,9 +2608,9 @@ async def evaluate(ctx, *, arg = None):
   try:
     result = eval(arg)
   except:
-    result = await eval(arg)
+    result = eval(await arg)
 
-    
+
   if "token" in arg.lower():
     return await ctx.send('My Token Is Damn Secret And Cannot Be Leaked.')
   embed = discord.Embed(title = "Eval",color = ctx.author.color)
