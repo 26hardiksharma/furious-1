@@ -2597,6 +2597,13 @@ async def uptime(ctx):
   await asyncio.sleep(2)
   em = discord.Embed(title = "Uptime",description = f"**{day}** Days **{hour}** Hours **{min}** Minutes **{seconds}** Seconds",color = ctx.author.color)
   await msg.edit(embed = em)
+import io
+import contextlib
+def clean_code(content):
+  if content.startswith("```") and content.endswith("```"):
+    return "\n".join(content.split("\n")[1:])[:-3]
+  else:
+    return content
 @client.command()
 async def evaluate(ctx, *, arg = None):
   if not ctx.author.id == 757589836441059379:
@@ -2607,11 +2614,25 @@ async def evaluate(ctx, *, arg = None):
     return
   if "token" in arg.lower():
     return await ctx.send('My Token Is Damn Secret And Cannot Be Leaked.')
-  if 'await' in arg.lower():
-    result = await eval(arg[5])
-  else:
-    result = eval(arg)
+  code = clean_code(code)
+  local_variables = {
+    "discord": discord,
+    "commands": commands,
+    "bot": bot,
+    "ctx": ctx,
+    "channel": ctx.channel,
+    "author": ctx.author,
+    "guild": ctx.guild,
+    "message": ctx.message}
 
+  stdout = io.StringIO()
+  try:
+    with contextlib.redirect_stdout(stdout):
+      exec(f"async def func():\n{textwrap.indent(code, '    ')}", local_variables,)
+      obj = await local_variables["func"]()
+      result = f"{stdout.getvalue()}\n-- {obj}\n"
+  except Exception as e:
+    result = "".join(format_exception(e, e, e.__traceback__))
   embed = discord.Embed(title = "Eval",color = ctx.author.color)
   embed.add_field(name = "Command",value = f"```py\n{arg}\n```")
   embed.add_field(name = "Result",value = result,inline= False)
