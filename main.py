@@ -2636,7 +2636,7 @@ async def evaluate(ctx, *, arg = None):
     kekek = f"{e}, {e}, {e.__traceback__}"
     result = "".join(kekek)
   embed = discord.Embed(title = "Eval",color = ctx.author.color)
-  embed.add_field(name = "Command",value = f"```py\n{arg}\n```")
+  embed.add_field(name = "Command",value = f"{arg}")
   embed.add_field(name = "Result",value = result,inline= False)
   await ctx.send(embed = embed)
 client.run(TOKEN)
