@@ -2632,7 +2632,7 @@ async def evaluate(ctx, *, arg = None):
       obj = await local_variables["func"]()
       result = f"{stdout.getvalue()}\n-- {obj}\n"
   except Exception as e:
-    result = "".join(e, e, e.__traceback__)
+    result = "".join(e.__traceback__)
   embed = discord.Embed(title = "Eval",color = ctx.author.color)
   embed.add_field(name = "Command",value = f"```py\n{arg}\n```")
   embed.add_field(name = "Result",value = result,inline= False)
