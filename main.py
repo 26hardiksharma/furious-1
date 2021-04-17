@@ -2604,6 +2604,7 @@ def clean_code(content):
     return "\n".join(content.split("\n")[1:])[:-3]
   else:
     return content
+import textwrap
 @client.command()
 async def evaluate(ctx, *, arg = None):
   if not ctx.author.id == 757589836441059379:
