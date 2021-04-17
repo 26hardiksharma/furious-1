@@ -58,6 +58,7 @@ async def on_ready():
   print('Connection Established')
   client.nextMeme = getMeme()
   print('Fetched A Meme!')
+  client.nowtime = datetime.datetime.now()
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
@@ -2574,4 +2575,15 @@ async def on_dbl_test(data):
 @client.event
 async def on_command_completion(ctx):
   print(f'Completed {ctx.command.name}')
+@client.command()
+async def uptime(ctx):
+  day = (datetime.datetime.now() - client.nowtime).days
+  hour = (datetime.datetime.now() - client.nowtime).hours
+  min = (datetime.datetime.now() - client.nowtime).minutes
+  seconds = (datetime.datetime.now() - client.nowtime).seconds
+  embed = discord.Embed(title = "Uptime",color = ctx.author.color,description = "Calculating Uptime <a:Loading:818320610077179934>")
+  msg = await ctx.send(embed = embed)
+  await asyncio.sleep(2)
+  em = discord.Embed(title = "Uptime",description = f"**{day}** Days **{hour}** Hours **{min}** Minutes **{seconds}** Seconds")
+  await msg.edit(embed = em)
 client.run(TOKEN)
