@@ -2632,6 +2632,4 @@ async def evaluate(ctx, *, arg = None):
   embed.add_field(name = "Command",value = f"{arg}")
   embed.add_field(name = "Result",value = result,inline= False)
   await ctx.send(embed = embed)
-@client.command()
-async def mediaonly(ctx,)
 client.run(TOKEN)
