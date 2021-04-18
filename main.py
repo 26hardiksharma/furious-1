@@ -1714,7 +1714,7 @@ async def on_message(message):
           await message.channel.send(lmfao)
           data = {"_id":message.guild.id,"kreminded":"yes"}
           await client.config.upsert(data)
-        if "ktoggle" not in data:
+        if not "ktoggle" in data:
           if not "kreminded" in data:
             lmfao = "Karuta Cardping Service, Which Was Launched In Furious Is Now Configurable!\n\nYou Can Get more Info About The Karuta Cardping Service By Typing `F!karuta Help`\nNote: **This Is Only Shown Once**"
             await message.channel.send(lmfao)
