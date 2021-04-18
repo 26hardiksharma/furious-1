@@ -629,15 +629,18 @@ async def giveaway(ctx):
     await ctx.send(f"You Need The **MANAGE SERVER** Permission To Start A Giveaway In This Server!")
 @client.command()
 async def reroll(ctx,channel : discord.TextChannel, id_ : int):
-  try:
-    new_msg = await channel.fetch_message(id_)
-  except:
-    await ctx.send("The ID Entered Was Incorrect!")
-    return
-  users = await new_msg.reactions[0].users().flatten()
-  users.pop(users.index(client.user))
-  winner = random.choice(users)
-  await channel.send(f"The New Winner Is {winner.mention}! Congratulations!")
+  if ctx.author.guild_permissions.manage_guild:
+    try:
+      new_msg = await channel.fetch_message(id_)
+    except:
+      await ctx.send("The ID Entered Was Incorrect!")
+      return
+    users = await new_msg.reactions[0].users().flatten()
+    users.pop(users.index(client.user))
+    winner = random.choice(users)
+    await channel.send(f"The New Winner Is {winner.mention}! Congratulations!")
+  else:
+    await ctx.send('You Dont Have The **MANAGE SERVER** Permission Required To Execute This Command!')
 @client.command()
 async def revive(ctx):
   if ctx.author.guild_permissions.administrator:
