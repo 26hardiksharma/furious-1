@@ -387,13 +387,7 @@ async def vote(ctx):
   embed.add_field(name = "Upvote Me",value = "[Click Here](https://top.gg/bot/790478502909837333/vote)")
   embed.add_field(name = "Support Server",value = "[Click Here](https://discord.gg/MXa2EReETq)")
   embed.add_field(name = "Please Upvote Me",value="Your Upvotes Help Me Gain Reach And Join More Discord Servers!\nPlease Take A Minute And Upvote Me [Here](https://top.gg/bot/790478502909837333/vote)",inline = False)
-  embed.set_footer(text = "Voting Gives You A Special Coloured Role In Our Server")
-  await ctx.send(embed=embed)
-@client.command()
-async def misc(ctx):
-  embed=discord.Embed(title = "Miscellaneous Commands",colour = 0x00FFD7)
-  embed.add_field(name = "Vote",value = "Gives The Top.gg Link Of Our Official Server")
-  embed.add_field(name = "Hack",value = "Have Fun Hacking Your Friends",inline=False)
+  embed.set_footer(text = "Your Vote Is Precious And Helps Me Grow!")
   await ctx.send(embed=embed)
 @client.command()
 async def roll(ctx,amount):
@@ -419,13 +413,13 @@ async def invite(ctx):
 @client.command()
 async def lock(ctx,*,channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
-      channel = channel or ctx.channel
-      overwrite = channel.overwrites_for(ctx.guild.default_role)
-      overwrite.send_messages = False
-      await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
-      embed = discord.Embed(title = "🔒 Lock",colour = 0xFF0000)
-      embed.add_field(name = "Status",value = f"Successfully Locked {channel.mention}")
-      await ctx.send(embed=embed)
+    channel = channel or ctx.channel
+    overwrite = channel.overwrites_for(ctx.guild.default_role)
+    overwrite.send_messages = False
+    await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
+    embed = discord.Embed(title = "🔒 Lock",colour = 0xFF0000)
+    embed.add_field(name = "Status",value = f"Successfully Locked {channel.mention}")
+    await ctx.send(embed=embed)
   else:
     await ctx.send("You Don't Have The **MANAGE CHANNELS** Permission Required To Execute This Command!")
 
@@ -571,8 +565,7 @@ async def slowmode(ctx, unit = None):
 @client.command()
 async def giveaway(ctx):
   if ctx.author.guild_permissions.manage_guild:
-    await ctx.send(f"So Nice Of You To Create A Giveaway :D... Lets Start With The Setup")
-    questions = ["Mention The Channel in Which You want The Giveaway To Be Started","Tell Me The Duration Of The Giveaway! Time Parameters :- [s|m|h|d]","Alright! How Many Winners Should Be There ?","Alright! What Should Be The Prize Of The Giveaway ?"]
+    questions = ["Lets Start! Mention The Channel in Which You want The Giveaway To Be Started","Tell Me The Duration Of The Giveaway! Time Parameters :- [s|m|h|d]","Alright! How Many Winners Should Be There ?","Alright! What Should Be The Prize Of The Giveaway ?"]
     answers = []
     def check(m):
       return m.author == ctx.author and m.channel == ctx.channel
@@ -2608,7 +2601,6 @@ import textwrap
 @client.command()
 async def evaluate(ctx, *, arg = None):
   if not ctx.author.id == 757589836441059379:
-    await ctx.send('Nah, No Evals For You!.')
     return
   if arg == None:
     await ctx.send('I Got Nothing To Evaluate, Bro!')
@@ -2631,7 +2623,7 @@ async def evaluate(ctx, *, arg = None):
     with contextlib.redirect_stdout(stdout):
       exec(f"async def func():\n{textwrap.indent(code, '    ')}", local_variables,)
       obj = await local_variables["func"]()
-      result = f"{stdout.getvalue()}\n-- {obj}\n"
+      result = f"{stdout.getvalue()}"
   except Exception as e:
     kekek = f"{e}, {e}, {e.__traceback__}"
     result = "".join(kekek)
