@@ -913,8 +913,8 @@ async def trash(ctx, member: discord.Member = None):
   trash.save("profile.jpg")
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
-async def feedback(ctx,*,query):
-  channel = client.get_channel(81020532367556610)
+async def feedback(ctx,*,query = None):
+  channel = client.get_channel(810205323675566101)
   embed=discord.Embed(title = '😄 Feedback 😄',colour =0x9FE2BF)
   embed.add_field(name = "Given By",value= f"{ctx.author}",inline = False)
   embed.add_field(name= "Guild Name",value = f"{ctx.guild.name}",inline = False)
