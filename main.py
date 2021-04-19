@@ -2646,7 +2646,8 @@ async def evaluate(ctx, *, arg = None):
   embed.add_field(name = "Command",value = f"{arg}")
   embed.add_field(name = "Result",value = result,inline= False)
   await ctx.send(embed = embed)
-client.ses = aiohttp.CliensSession()
+client.ses = aiohttp.ClientSession()
+
 @client.command()
 async def addemoji(ctx,name = None,url = None):
   if ctx.author.guild_permissions.manage_emojis:
