@@ -2646,4 +2646,13 @@ async def evaluate(ctx, *, arg = None):
   embed.add_field(name = "Command",value = f"{arg}")
   embed.add_field(name = "Result",value = result,inline= False)
   await ctx.send(embed = embed)
+@client.command()
+async def addemoji(ctx,name = None):
+  if ctx.author.guild_permissions.manage_emojis:
+    if not name:
+      return await ctx.send('You Must Specify A Name For The Emoji!')
+    if not ctx.message.attachments:
+      return await ctx.send('Please Provide An image To Be Uploaded As An Emoji!')
+    emoji = await ctx.guild.create_custom_emoji(name = name,image = message.attachments[0])
+    await ctx.send(f'Created Emoji {emoji}')
 client.run(TOKEN)
