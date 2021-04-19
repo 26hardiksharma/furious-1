@@ -2664,4 +2664,6 @@ async def addemoji(ctx,name = None,url = None):
         bytes = img.getvalue()
         emoji = await ctx.guild.create_custom_emoji(name = name,image = bytes)
         await ctx.send(f'Created Emoji <:{emoji.name}:{emoji.id}>')
+      except:
+        await ctx.send('File Size Is Too Big!')
 client.run(TOKEN)
