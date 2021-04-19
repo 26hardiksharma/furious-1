@@ -2653,6 +2653,7 @@ async def addemoji(ctx,name = None):
       return await ctx.send('You Must Specify A Name For The Emoji!')
     if not ctx.message.attachments:
       return await ctx.send('Please Provide An image To Be Uploaded As An Emoji!')
-    emoji = await ctx.guild.create_custom_emoji(name = name,image = ctx.message.attachments[0])
+    bytes = message.attachments[0].getvalue()
+    emoji = await ctx.guild.create_custom_emoji(name = name,image = bytes)
     await ctx.send(f'Created Emoji {emoji}')
 client.run(TOKEN)
