@@ -63,8 +63,7 @@ intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
   await ctx.message.delete()
-  abc = ctx.guild.get_member(client.user.id)
-  owner  = await ctx.guild.fetch_member(ctx.guild.owner_id) 
+  abc = ctx.guild.get_member(client.user.id) 
   if ctx.author.guild_permissions.kick_members:
     if abc.guild_permissions.kick_members:
       if not user:
@@ -98,25 +97,35 @@ async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
   else:
     await ctx.send(f"You Are Missing The **KICK MEMBERS** Permission Required To Execute This Action")
 @client.command()
-async def ban(ctx,user: discord.Member,*,reason = "No Reason Specified"):
-  await ctx.message.delete()
-  abc = ctx.guild.get_member(client.user.id)
-  owner  = await ctx.guild.fetch_member(ctx.guild.owner_id) 
+async def ban(ctx,user: discord.Member = None,*,reason = "No Reason Specified"):
   if ctx.author.guild_permissions.ban_members:
     if abc.guild_permissions.ban_members:
-      if user.top_role >= ctx.author.top_role and ctx.author != owner:
-        await ctx.send(f"You Dont Have The Permission To Interact With {user.name}#{user.discriminator}")
+      if not user:
+        return await ctx.send('Please be Sure To Mention A Member Or use There ID To Ban Them!')
+      if ctx.author.id == ctx.guild.owner_id:
+        try:
+          await user.ban(reason = f"{reason} || Action By {ctx.author}")
+          await ctx.send(f'Banned {user} From {ctx.guild.name} || Reason: {reason}')
+        except:
+          await ctx.send(f'I Am Unable To Interact With {user}')
+          return
+        try:
+          await member.send(f'You Have Been Banned From {ctx.guild.name} Because Of {reason}')
+        except:
+          return
       else:
-        if abc.top_role > user.top_role and user != owner:
-          await user.ban(reason = f"{reason} || Action By {ctx.author.name}#{ctx.author.discriminator}")
-          embed = discord.Embed(title = "Ban",description = f"{user.mention} **Has Been Successfully Banned Because Of** :-  {reason}",colour = 0xFF0000)
-          await ctx.send(embed=embed)
-          try:
-            await member.send(f"**You Have Been Banned From {ctx.guild} Because Of : {reason}**")
-          except:
-            pass
-        else:
-          await ctx.send(f"Unable To Interact With {user.name}#{user.discriminator}")
+        if user.top_role>= ctx.author.top_role or user.id == ctx.guild.owner_id:
+          return await ctx.send(f'You Dont Have Permission To Interact With {user}!')
+        try:
+          await user.ban(reason = f"{reason} || Action By {ctx.author}")
+          await ctx.send(f'Banned {user} From {ctx.guild.name} || Reason: {reason}')
+        except:
+          await ctx.send(f'I Am Unable To Interact With {user}')
+          return
+        try:
+          await user.send(f'You Have Been Banned From {ctx.guild.name} Because Of {reason}')
+        except:
+          return
     else:
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Action")
   else:
@@ -905,7 +914,7 @@ async def trash(ctx, member: discord.Member = None):
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
 async def feedback(ctx,*,query):
-  channel = client.get_channel(802203624566030366)
+  channel = client.get_channel(81020532367556610)
   embed=discord.Embed(title = '😄 Feedback 😄',colour =0x9FE2BF)
   embed.add_field(name = "Given By",value= f"{ctx.author}",inline = False)
   embed.add_field(name= "Guild Name",value = f"{ctx.guild.name}",inline = False)
