@@ -913,6 +913,7 @@ async def trash(ctx, member: discord.Member = None):
   trash.save("profile.jpg")
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
+@commands.cooldown(1,60,commands.BucketType.user)
 async def feedback(ctx,*,query = None):
   channel = client.get_channel(810205323675566101)
   embed=discord.Embed(title = '😄 Feedback 😄',colour =0x9FE2BF)
