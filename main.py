@@ -72,7 +72,7 @@ async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
       if ctx.author.id == ctx.guild.owner_id:
         try:
           await user.kick(reason = f"{reason} || Action By {ctx.author}")
-          await ctx.send(f'Kicked {member} From {ctx.guild.name} || Reason: {reason}')
+          await ctx.send(f'Kicked {user} From {ctx.guild.name} || Reason: {reason}')
         except:
           await ctx.send(f'I Am Unable To Interact With {user}')
           return
