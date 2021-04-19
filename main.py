@@ -2657,14 +2657,11 @@ async def addemoji(ctx,name = None,url = None):
       await ctx.send('Please Specify A Url for The Emoji!')
       return
     async with client.ses.get(url) as r:
-      try:
-        if not r.status in range(200,299):
-          return await ctx.send('Error While Making A Request.')
-          
-        img = BytesIO(await r.read())
-        bytes = img.getvalue()
-        emoji = await ctx.guild.create_custom_emoji(name = name,image = bytes)
-        await ctx.send(f'Created Emoji <:{emoji.name}:{emoji.id}>')
-      except:
-        await ctx.send('File Size Is Too Big!')
+      if not r.status in range(200,299):
+        return await ctx.send('Error While Making A Request.')
+        
+      img = BytesIO(await r.read())
+      bytes = img.getvalue()
+      emoji = await ctx.guild.create_custom_emoji(name = name,image = bytes)
+      await ctx.send(f'Created Emoji <:{emoji.name}:{emoji.id}>')
 client.run(TOKEN)
