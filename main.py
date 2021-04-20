@@ -2546,9 +2546,12 @@ async def blacklist(ctx,query = None,user:discord.User = None):
       except:
         return
     elif query.lower() == "remove":
-      data = {"_id":user.id,"blacklisted":1}
-      await client.bls.unset(data)
-      await ctx.send(f'Unblacklisted {user}')
+      try:
+        data = {"_id":user.id,"blacklisted":1}
+        await client.bls.unset(data)
+        await ctx.send(f'Unblacklisted {user}')
+      except:
+        await ctx.send('Unknown Blacklist Entry.')
 @client.event
 async def on_command(ctx):
   print(f"{ctx.author} Used {ctx.command.name} In {ctx.guild.name}")
