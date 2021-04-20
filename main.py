@@ -784,7 +784,7 @@ async def help(ctx,query = None):
       embed.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
       embed.add_field(name = "<:emoji_2:810202313142566992> Moderation",value  = "`kick`,`ban`,`mute`,`unmute`,`hackban`,`tempmute`,`slowmode`,`lock`,`unlock`,`private`,\n`unprivate`,`setnick`,`muterole`",inline =False)
       embed.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
-      embed.add_field(name = "<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`giveaway`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`",inline = False)
+      embed.add_field(name = "<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`giveaway`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`,`starboard`",inline = False)
       embed.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
       embed.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation\nUtility\nManagement\nFun\nYou Can Type F!help <module> To Get The Commands Of That Module")
       embed.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://dsc.gg/furiousofficial)",inline = False)
