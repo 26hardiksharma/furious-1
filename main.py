@@ -2711,9 +2711,9 @@ async def tag(ctx,query = None,name= None,*,desc = None):
     await ctx.send(f'Created Tag `{lmao}`')
   else:
     data = await client.config.find(ctx.guild.id)
-    if str(f"tag{query}") not in data:
+    if str(f"tag{query.lower()}") not in data:
       return await ctx.send(f'No Tag Named `{query}` Found!')
-    lol = f"tag{query}"
+    lol = f"tag{query.lower()}"
     await ctx.send(data[lol])
 
   
