@@ -1223,8 +1223,10 @@ async def maintenance(ctx,query = None):
           ctx.command.reset_cooldown(ctx)
       else:
         await ctx.send("I Am Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!")
+        ctx.commands.reset_cooldown(ctx)
     else:
-      await cts.send("You Are Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!")      
+      await ctx.send("You Are Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!") 
+      ctx.commands.reset_cooldown(ctx)     
 @client.command()
 async def nuke(ctx,channel : discord.TextChannel = None):
   if ctx.author.guild_permissions.manage_channels:
