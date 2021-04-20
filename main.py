@@ -2695,6 +2695,8 @@ async def tag(ctx,query = None,name= None,*,desc = None):
     await ctx.send(embed = embed)
     return
   if query.lower() == "create":
+    if not ctx.author.guild_permissions.manage_guild:
+      return await ctx.send('You Need The **MANAGE SERVER** Permissions To Be Able To Create Tags!')
     if not name:
       await ctx.send(f'Please Specify A Name For The Tag\n\nUsage: **`F!tag <name> <description>`**')
       return
@@ -2709,9 +2711,18 @@ async def tag(ctx,query = None,name= None,*,desc = None):
     data = {"_id":ctx.guild.id,f"tag{lmao}":lmfao}
     await client.config.upsert(data)
     await ctx.send(f'Created Tag `{lmao}`')
+  elif query.lower() == "delete":
+    if not ctx.author.guild_permissions.manage_guild:
+      return await ctx.send('You Need The **MANAGE SERVER** Permission To Be Able To Delete Tags!')
+    data = await client.config.find(ctx.guild.id)
+    if not data or str(f"tag{name.lower()}") not in data:
+      return await ctx.send(f'No Tag Named {name} Found!')
+    okay = {"_id":ctx.guild.id,f"tag{name.lower()}:1"}
+    await client.config.unset(okay)
+    await ctx.send(f"Deleted Tag {name.lower()}")
   else:
     data = await client.config.find(ctx.guild.id)
-    if str(f"tag{query.lower()}") not in data:
+    if not data or str(f"tag{query.lower()}") not in data:
       return await ctx.send(f'No Tag Named `{query}` Found!')
     lol = f"tag{query.lower()}"
     await ctx.send(data[lol])
