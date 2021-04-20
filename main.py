@@ -1716,11 +1716,6 @@ async def delete(ctx,member : discord.Member= None):
 async def on_message(message):
   if str(message.channel.type) == "private":
     return
-  data = await client.bls.find(message.author.id)
-  if data is not None:
-    if "blacklisted" in data:
-      if data["blacklisted"] == "yes":
-        return
   if message.author.bot == True:
     if message.author.id == 646937666251915264:
       chan = client.get_channel(829233056632143872)
@@ -1774,7 +1769,12 @@ async def on_message(message):
         embed.set_image(url = message.attachments[0].url)
     
         await chan.send(embed=embed)
-
+  else:
+    data = await client.bls.find(message.author.id)
+    if data is not None:
+      if "blacklisted" in data:
+        if data["blacklisted"] == "yes":
+          return
   """      
   else:
     data = await client.config.find(message.guild.id)
