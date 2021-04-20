@@ -56,6 +56,9 @@ async def on_ready():
   print('Connected To Config\nConnecting With Warnings')
   client.warndb = Document(client.db,'warnings')
   print('Connection Established')
+  print('Connecting With Blacklist')
+  client.bls = Document(client.db,'blacklists')
+  print('Connected With Blacklist')
   client.nextMeme = getMeme()
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
@@ -2532,14 +2535,16 @@ async def blacklist(ctx,query = None,user:discord.User = None):
     if query.lower() == "add":
       if user.id ==757589836441059379:
         return 
-      bl.append(user.id)
+      data = {"_id":user.id,"blacklisted" : "yes"}
+      await client.bls.upsert(data)
       await ctx.send(f"Blacklisted {user}")
       try: 
         await user.send('You have Been Blacklisted From Using The Bot Because Of Repeatedly Spamming Commands. If You Think This Was A Mistake, Contact The Admins Of The Official Server\n\nhttps://discord.com/invite/M4BhczFbYc')
       except:
         return
     elif query.lower() == "remove":
-      bl.remove(user.id)
+      data = {"_id":user.id,"blacklisted":1}
+      await client.bls.unset(data)
       await ctx.send(f'Unblacklisted {user}')
 @client.event
 async def on_command(ctx):
