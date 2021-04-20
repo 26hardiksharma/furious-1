@@ -890,7 +890,8 @@ async  def on_guild_join(guild):
   em.add_field(name = "Some Useful Links",value = f"[Invite Me](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [Support Server](https://dsc.gg/furiousofficial)",inline = False)
   for channel in guild.text_channels:
     try:
-      if channel.is_news() == False
+      if channel.is_news() == False:
+        
         await channel.send(embed=em)
         break
     except:
