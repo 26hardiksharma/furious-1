@@ -2714,6 +2714,8 @@ async def tag(ctx,query = None,name= None,*,desc = None):
   elif query.lower() == "delete":
     if not ctx.author.guild_permissions.manage_guild:
       return await ctx.send('You Need The **MANAGE SERVER** Permission To Be Able To Delete Tags!')
+    if not name:
+      return await ctx.send(f"Please Be Syre To Mention The Name Of The Tag To Be Deleted!")
     data = await client.config.find(ctx.guild.id)
     if not data or str(f"tag{name.lower()}") not in data:
       return await ctx.send(f'No Tag Named {name} Found!')
