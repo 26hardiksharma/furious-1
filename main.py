@@ -2686,4 +2686,34 @@ async def addemoji(ctx,name = None,url = None):
         await ctx.send(f'Failed Creating The Emoji.\nThis May Happen If The File Size Is Too Big Or Your Server Has Reached The Maximum Emoji Limit!')
       except discord.Forbidden:
         await ctx.send('Failed Creating The Emoji, Perhaps I Am Missing The **MANAGE EMOJIS** Permission!')
+@client.command()
+async def tag(ctx,query = None,name= None,*,desc = None):
+  if not query:
+    embed = discord.Embed(title = "Tag",color = ctx.author.color,timestamp = datetime.datetime.now())
+    embed.add_field(name = 'Usage',value = "**`F!tag [name]`**",inline=False)
+    embed.add_field(name = "Creating Tags",value = f"**F!tag create `<tag name>` `<tag value>`**")
+    await ctx.send(embed = embed)
+    return
+  if query.lower() == "create":
+    if not name:
+      await ctx.send(f'Please Specify A Name For The Tag\n\nUsage: **`F!tag <name> <description>`**')
+      return
+    if not desc:
+      await ctx.send(f"Please Specify A Description For The Tag\n\nUsage: **`F!tag <name> <description>`**")
+      return
+    if name.lower() in ('create','delete'):
+      await ctx.send('Tag Could Not Be Creating Because Of Conflicting Aliases. Did You Use Words Such As `Create` And `Delete` ?')
+      return
+    lmao = name.lower()
+    lmfao = desc.lower()
+    data = {"_id":ctx.guild.id,lmao:lmfao}
+    await client.config.upsert(data)
+    await ctx.send(f'Created Tag `{lmao}`')
+  else:
+    data = await client.config.find(ctx.guild.id)
+    if str(query) not in data:
+      return await ctx.send(f'No Tag Named `{query}` Found!')
+    await ctx.send(data[f"{quer.lower()}"])
+
+  
 client.run(TOKEN)
