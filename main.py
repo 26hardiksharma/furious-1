@@ -2273,9 +2273,9 @@ async def configuration(ctx):
     else:
       prefix = data["prefix"]
     if not "logchannel" in data:
-      logchannel = "None"
+      logch = "None"
     else:
-      logchannel = data["logchannel"]
+      logch = data["logchannel"]
     if not "mrole" in data:
       mrole = "None"
     else:
@@ -2294,10 +2294,10 @@ async def configuration(ctx):
       ktoggle = str(data["ktoggle"]).capitalize()
   embed = discord.Embed(title = "Server Configuration",colour = ctx.author.color,timestamp = datetime.datetime.now())
   embed.add_field(name = "Prefix",value = prefix)
-  if logchannel == "None":
+  if logch == "None":
     embed.add_field(name = "Log Channel",value = "None")
   else:
-    embed.add_field(name = "Log Channel",value = f"<#{logchannel}>")
+    embed.add_field(name = "Log Channel",value = f"<#{logch}>")
   if mrole == "None":
     embed.add_field(name = "Muterole",value = "None")
   else:
