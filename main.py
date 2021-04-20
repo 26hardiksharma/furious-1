@@ -1766,7 +1766,9 @@ async def on_message(message):
         await asyncio.sleep(10)
         await msg.edit(content =f'{mention}, Karuta Dropped Some Cards, But They Have Expired And Can No Longer Be Grabbed :/')
         embed.set_image(url = message.attachments[0].url)
+    
         await chan.send(embed=embed)
+
   """      
   else:
     data = await client.config.find(message.guild.id)
