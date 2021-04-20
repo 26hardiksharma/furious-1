@@ -2630,7 +2630,7 @@ def clean_code(content):
   else:
     return content
 import textwrap
-@client.command()
+@client.command(aliases = ['eval'])
 async def evaluate(ctx, *, arg = None):
   if not ctx.author.id == 757589836441059379:
     return
@@ -2715,7 +2715,7 @@ async def tag(ctx,query = None,name= None,*,desc = None):
     if not ctx.author.guild_permissions.manage_guild:
       return await ctx.send('You Need The **MANAGE SERVER** Permission To Be Able To Delete Tags!')
     if not name:
-      return await ctx.send(f"Please Be Syre To Mention The Name Of The Tag To Be Deleted!")
+      return await ctx.send(f"Please Be Sure To Mention The Name Of The Tag To Be Deleted!")
     data = await client.config.find(ctx.guild.id)
     if not data or str(f"tag{name.lower()}") not in data:
       return await ctx.send(f'No Tag Named {name} Found!')
