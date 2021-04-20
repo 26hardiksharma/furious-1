@@ -2717,7 +2717,7 @@ async def tag(ctx,query = None,name= None,*,desc = None):
     data = await client.config.find(ctx.guild.id)
     if not data or str(f"tag{name.lower()}") not in data:
       return await ctx.send(f'No Tag Named {name} Found!')
-    okay = {"_id":ctx.guild.id,f"tag{name.lower()}:1"}
+    okay = {"_id":ctx.guild.id,f"tag{name.lower()}":1}
     await client.config.unset(okay)
     await ctx.send(f"Deleted Tag {name.lower()}")
   else:
