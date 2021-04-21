@@ -2673,6 +2673,8 @@ async def addemoji(ctx,name = None,url = None):
     if not url:
       await ctx.send('Please Specify A Url for The Emoji!')
       return
+    if not url.startswith('https://'):
+      return await ctx.send('An Invalid URL Has Been Passed!')
     async with client.ses.get(url) as r:
       try:
         if not r.status in range(200,299):
