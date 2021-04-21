@@ -2546,8 +2546,9 @@ async def blacklist(ctx,query = None,user:discord.User = None):
       await client.bls.upsert(data)
       await ctx.send(f"Blacklisted {user}")
       try: 
-        await user.send('You have Been Blacklisted From Using The Bot Because Of Repeatedly Spamming Commands. If You Think This Was A Mistake, Contact The Admins Of The Official Server\n\nhttps://discord.com/invite/M4BhczFbYc')
+        await user.send(f'You have Been Blacklisted From Using The Bot Because Of Repeatedly Spamming Commands. If You Think This Was A Mistake, Contact The Admins Of The Official Server\n\nhttps://discord.com/invite/M4BhczFbYc')
       except:
+        print('DMs Off bruh')
         return
     elif query.lower() == "remove":
       try:
