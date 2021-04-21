@@ -616,7 +616,7 @@ async def giveaway(ctx):
         embed.add_field(name = "Host",value = f"{ctx.author.mention}",inline = False)
 
         embed.add_field(name = "Participate",value = "React With 🎉 To Enter")
-        embed.set_footer(text = f"{winners} Winners • Ends At {end}")
+        embed.set_footer(text = f"{winners} Winners • Ends At {end.strftime("%a, %#d %B %Y, %I:%M %p UTC")}")
         my_msg = await channel.send(embed=embed)
         await my_msg.add_reaction("🎉")                   
         await ctx.send(f"Alright! The Giveaway Of {prize} Is Starting In {channel.mention} And Will Last {answers[1]}")
@@ -2557,6 +2557,8 @@ async def blacklist(ctx,query = None,user:discord.User = None):
         await ctx.send(f'Unblacklisted {user}')
       except:
         await ctx.send('Unknown Blacklist Entry.')
+    elif query.lower() == "view":
+      
 @client.event
 async def on_command(ctx):
   print(f"{ctx.author} Used {ctx.command.name} In {ctx.guild.name}")
