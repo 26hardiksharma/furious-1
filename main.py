@@ -616,7 +616,7 @@ async def giveaway(ctx):
         embed.add_field(name = "Host",value = f"{ctx.author.mention}",inline = False)
 
         embed.add_field(name = "Participate",value = "React With 🎉 To Enter")
-        embed.set_footer(text = f"{winners} Winners • Ends At {end.strftime("%a, %#d %B %Y, %I:%M %p UTC")}")
+        embed.set_footer(text = f'{winners} Winners • Ends At {end.strftime("%a, %#d %B %Y, %I:%M %p UTC")}')
         my_msg = await channel.send(embed=embed)
         await my_msg.add_reaction("🎉")                   
         await ctx.send(f"Alright! The Giveaway Of {prize} Is Starting In {channel.mention} And Will Last {answers[1]}")
