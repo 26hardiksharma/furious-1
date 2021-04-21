@@ -2558,7 +2558,7 @@ async def blacklist(ctx,query = None,user:discord.User = None):
       except:
         await ctx.send('Unknown Blacklist Entry.')
     elif query.lower() == "view":
-      
+      return
 @client.event
 async def on_command(ctx):
   print(f"{ctx.author} Used {ctx.command.name} In {ctx.guild.name}")
