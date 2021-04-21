@@ -1226,7 +1226,7 @@ async def maintenance(ctx,query = None):
         ctx.commands.reset_cooldown(ctx)
     else:
       await ctx.send("You Are Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!") 
-      ctx.commands.reset_cooldown(ctx)     
+      ctx.command.reset_cooldown(ctx)     
 @client.command()
 async def nuke(ctx,channel : discord.TextChannel = None):
   if ctx.author.guild_permissions.manage_channels:
@@ -2674,7 +2674,7 @@ async def addemoji(ctx,name = None,url = None):
       await ctx.send('Please Specify A Url for The Emoji!')
       return
     if not url.startswith('https://'):
-      return await ctx.send('An Invalid URL Has Been Passed!')
+      return await ctx.send('An Invalid URL Has Been Passed!a')
     async with client.ses.get(url) as r:
       try:
         if not r.status in range(200,299):
