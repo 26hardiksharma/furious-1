@@ -2475,6 +2475,8 @@ async def starboard(ctx,args = None,kwargs = None):
     await ctx.send(embed = embed)
 @client.event
 async def on_reaction_add(reaction,user):
+  if user.bot:
+    return
   data = await client.config.find(user.guild.id)
   if not data:
     return
