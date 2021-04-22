@@ -70,7 +70,7 @@ async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
   if ctx.author.guild_permissions.kick_members:
     if abc.guild_permissions.kick_members:
       if not user:
-        return await ctx.send('Please be Sure To Mention A Member Or use There ID To Kick Them!')
+        return await ctx.send('Please be Sure To Mention A Member Or use Their ID To Kick Them!')
       if ctx.author.id == ctx.guild.owner_id:
         try:
           await user.kick(reason = f"{reason} || Action By {ctx.author}")
@@ -104,7 +104,7 @@ async def ban(ctx,user: discord.Member = None,*,reason = "No Reason Specified"):
   if ctx.author.guild_permissions.ban_members:
     if abc.guild_permissions.ban_members:
       if not user:
-        return await ctx.send('Please be Sure To Mention A Member Or use There ID To Ban Them!')
+        return await ctx.send('Please be Sure To Mention A Member Or use Their ID To Ban Them!')
       if ctx.author.id == ctx.guild.owner_id:
         try:
           await user.ban(reason = f"{reason} || Action By {ctx.author}")
