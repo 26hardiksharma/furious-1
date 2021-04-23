@@ -2769,7 +2769,7 @@ async def rob(ctx,member : discord.Member = None):
       if int(data["cash"]) == 500:
         kekw = int(smh["cash"]) + 500
         lol = {"_id":member.id,"cash":kekw}
-        
+
         await client.economy.upsert(lol)
         await client.economy.upsert({"_id":ctx.author.id,"cash":0})
         await ctx.send(f"You Failed Robbing {member} And Ended Up Paying Them $ 500.")
@@ -2777,7 +2777,7 @@ async def rob(ctx,member : discord.Member = None):
       else:
         some = random.randint(500,data["cash"])
         lmao = int(smh["cash"]) + some
-        lol = {"id":member.id,cash : lmao}
+        lol = {"id":member.id,"cash" : lmao}
         smfh = int(data["cash"]) - some
         await client.economy.upsert(lol)
         await client.economy.upsert({"_id":ctx.author.id,"cash":smfh})
