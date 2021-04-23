@@ -2738,7 +2738,7 @@ async def tag(ctx,query = None,name= None,*,desc = None):
     await ctx.send(data[lol])
 
 @client.command()
-async def rob(ctx,member = discord.Member = None):
+async def rob(ctx,member : discord.Member = None):
   data = await client.economy.find(ctx.author.id)
   if not data:
     await ctx.send('You Need Atleast $ 500 To Rob Someone!')
