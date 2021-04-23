@@ -274,7 +274,7 @@ async def botstats(ctx):
   embed.add_field(name = "Library",value = f"<:discord:835142396236005406> Discord.py",inline = False)
   embed.add_field(name = "Databse",value = f"<:mongo:835140375882366976> MongoDB",inline = False)
   embed.add_field(name = "Ping",value = f"{round(client.latency*1000)} ms",inline = False)
-  embed.add_field(name = "Important Links",value = f"[Invite Me](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) [Official Server](https://discord.gg/5zbU6wEhkh)")
+  embed.add_field(name = "Important Links",value = f"[___Invite Me___](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) || [___Official Server___](https://discord.gg/5zbU6wEhkh)")
   await ctx.send(embed = embed)
 @client.command(pass_context = True,aliases = ['nick'])
 async def setnick(ctx, member : discord.Member = None,*,nick = None):
