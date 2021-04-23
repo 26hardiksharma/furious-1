@@ -2777,7 +2777,7 @@ async def rob(ctx,member : discord.Member = None):
       else:
         some = random.randint(500,data["cash"])
         lmao = int(smh["cash"]) + some
-        lol = {"id":member.id,"cash" : lmao}
+        lol = {"_id":member.id,"cash" : lmao}
         smfh = int(data["cash"]) - some
         await client.economy.upsert(lol)
         await client.economy.upsert({"_id":ctx.author.id,"cash":smfh})
