@@ -2764,8 +2764,8 @@ async def rob(ctx,member : discord.Member = None):
       return await ctx.send('The Member Doesn\'t Have Atleast $ 500 In Their Wallet, Not Worth Robbing.')
     if int(smh["cash"]) < 500:
       return await ctx.send('The Member Doesn\'t Have Atleast $ 500 In Their Wallet, Not Worth Robbing.')
-    attempt = random.choice['fail','pass']
-    if attempt == 'fail':
+    attempt = random.randint[1,2]
+    if attempt == 1:
       if int(data["cash"]) == 500:
         kekw = int(smh["cash"]) + 500
         lol = {"_id":member.id,cash:kekw}
@@ -2781,7 +2781,6 @@ async def rob(ctx,member : discord.Member = None):
         await client.economy.upsert(lol)
         await client.economy.upsert({"_id":ctx.author.id,"cash":smfh})
         await ctx.send(f"You Failed Robbing {member} And Ended Up Paying Them $ {some}.")
-      
-    num = random.randint(0,)
+
 
 client.run(TOKEN)
