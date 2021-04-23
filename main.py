@@ -265,12 +265,16 @@ async def botstats(ctx):
     num = num + guild.member_count
   embed = discord.Embed(title = "Bot Stats", description = "<@!790478502909837333>", colour = 0x7FFFD4)
   embed.set_thumbnail(url = 'https://cdn.discordapp.com/avatars/790478502909837333/ffbe1e96004d240eda5385186e145986.webp?size=1024')
-  embed.add_field(name = "Creator", value = f"<@!757589836441059379>",inline = False)
-  embed.add_field(name= "Prefix",value = "' ^ ', <@!790478502909837333> " )
+  embed.add_field(name = "Creator", value = f"<:dev:835140540482846790> <@!757589836441059379>",inline = False)
+  embed.add_field(name = "Total Commands",value = len(client.commands),inline = False)
   embed.add_field(name = "Total Servers Joined", value = str(len
   (client.guilds)),inline = False)
   embed.add_field(name= "Total Users",value = num,inline = False)
+  embed.add_field(name = "Language",value = f"<:python:835141091480043570> Python",inline = False)
+  embed.add_field(name = "Library",value = f"<:discord:835142396236005406> Discord.py",inline = False)
+  embed.add_field(name = "Databse",value = f"<:mongo:835140375882366976> MongoDB",inline = False)
   embed.add_field(name = "Ping",value = f"{round(client.latency*1000)} ms",inline = False)
+  embed.add_field(name = "Important Links",value = f"(Invite Me)[https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot] (Official Server)[https://discord.gg/5zbU6wEhkh]")
   await ctx.send(embed = embed)
 @client.command(pass_context = True,aliases = ['nick'])
 async def setnick(ctx, member : discord.Member = None,*,nick = None):
@@ -420,7 +424,7 @@ async def ping(ctx):
 async def invite(ctx):
   embed=discord.Embed(title = "Thank You For Choosing Furious",description = "Some Useful Links!",url = "https://dsc.gg/furiousop",colour = 0x00FFD3)
   embed.add_field(name = "Invite Link",value = "[Click Here](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot)",inline= False)
-  embed.add_field(name = "Official Server",value = "[Click Here](https://dsc.gg/furiousofficial)",inline = False)
+  embed.add_field(name = "Official Server",value = "[Click Here](https://discord.gg/5zbU6wEhkh)",inline = False)
   embed.set_thumbnail(url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
 @client.command()
