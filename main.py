@@ -59,6 +59,7 @@ async def on_ready():
   print('Connecting With Blacklist')
   client.bls = Document(client.db,'blacklists')
   print('Connected With Blacklist')
+  client.economy = Document(client.db,'economy')
   client.nextMeme = getMeme()
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
@@ -2736,5 +2737,29 @@ async def tag(ctx,query = None,name= None,*,desc = None):
     lol = f"tag{query.lower()}"
     await ctx.send(data[lol])
 
-  
+@client.command()
+async def rob(ctx,member = discord.Member = None):
+  data = await client.economy.find(ctx.author.id)
+  if not data:
+    await ctx.send('You Need Atleast $ 500 To Rob Someone!')
+    okay= {
+      "_id":ctx.author.id,
+      "cash":0,
+      "bank":0
+    }
+    await client.economy.upsert(okay)
+  else:
+    if int(data["cash"]) < 500:
+      return await ctx.send('You Need Atleast $ 500 To Rob Someone!')
+    if not member:
+      return await ctx.send('You Need To Mention A Member To Attempt A Robbery On Them!')
+    smh = await client.economy.find(member.id)
+    if not smh:
+      okay= {
+      "_id":member.id,
+      "cash":0,
+      "bank":0}
+      await client.economy.upsert(okay)
+      return await ctx.send('The Member Doesn\'t Have Atleast $ 500 In Their Wallet, Not Worth Robbing.')
+
 client.run(TOKEN)
