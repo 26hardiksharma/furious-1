@@ -2764,7 +2764,7 @@ async def rob(ctx,member : discord.Member = None):
       return await ctx.send('The Member Doesn\'t Have Atleast $ 500 In Their Wallet, Not Worth Robbing.')
     if int(smh["cash"]) < 500:
       return await ctx.send('The Member Doesn\'t Have Atleast $ 500 In Their Wallet, Not Worth Robbing.')
-    attempt = random.randint[1,2]
+    attempt = random.randint(1,2)
     if attempt == 1:
       if int(data["cash"]) == 500:
         kekw = int(smh["cash"]) + 500
