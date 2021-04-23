@@ -2782,6 +2782,18 @@ async def rob(ctx,member : discord.Member = None):
         await client.economy.upsert(lol)
         await client.economy.upsert({"_id":ctx.author.id,"cash":smfh})
         await ctx.send(f"You Failed Robbing {member} And Ended Up Paying Them $ {some}.")
-
-
+    else:
+      somenum = random.randint(500,smh["cash"])
+      if smh["cash"] == 500:
+        oki = int(data["cash"]) + 500
+        nope = 0
+        await client.config.upsert({"_id":ctx.author.id,"cash":oki})
+        await client.config.upsert({"_id":member.id,"cash":0})
+        await ctx.send(f'You Managed To Rake Up $ 500 From {member}')
+        return
+      kekek = int(data["cash"]) + somenum
+      lolbro = int(smh["cash"]) - somenum
+      await client.config.upsert({"_id":ctx.author.id,"cash":kekek})
+      await client.config.upsert({"_id":member.id,"cash":lolbro})
+      await ctx.send(f'You Managed To Rake Up $ {somenum} From {member}')
 client.run(TOKEN)
