@@ -1442,9 +1442,9 @@ async def on_command_error(ctx, error):
     eternal = await client.fetch_user(757589836441059379)
     await eternal.send(f"An Error Occured!\n{ctx.command.name}\n{ctx.guild.name}\n{ctx.author.name}\n{error}")
     raise error
-def getMeme():
+async def getMeme():
   all_subs = []
-  subreddit = reddit.subreddit("meme",fetch= True)   
+  subreddit = await reddit.subreddit("meme",fetch= True)   
   async for submission in subreddit.top(limit = 250):
     if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
