@@ -1458,19 +1458,16 @@ async def getMeme():
     return name, url
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def meme(ctx,query = "meme"):
-  all_subs = []
-  subreddit = await reddit.subreddit(query,fetch= True)   
-  async for submission in subreddit.top(limit = 500):
-    if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
-      all_subs.append(submission)
-  random_sub = random.choice(all_subs)
-  if random_sub.over_18:
-    return await ctx.send('NSFW Is Not Supported Currently')
-  embed = discord.Embed(title = random_sub.title,url = random_sub.url)
-  embed.set_image(url = random_sub.url)
-  embed.set_footer(text = f"©️ By Subreddit")
+async def meme(ctx):
+  if not hasattr(client, 'nextMeme'):
+    client.nextMeme = await getMeme()
+  name, url = client.nextMeme
+  embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
+  embed.set_image(url=url)
+  embed.set_footer(text=f"©️ By Subreddit",icon_url = client.user.avatar_url)
   await ctx.send(embed=embed)
+  client.nextMeme = await getMeme()
+
 @client.event
 async def on_dbl_vote(data):
   print(f'Vote Received\n\n{data}')
