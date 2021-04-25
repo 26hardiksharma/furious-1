@@ -1460,13 +1460,13 @@ async def getMeme():
 @commands.cooldown(1, 10, commands.BucketType.user)
 async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
-    client.nextMeme = getMeme()
+    client.nextMeme = await getMeme()
   name, url = client.nextMeme
   embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
   embed.set_image(url=url)
   embed.set_footer(text=f"©️ By Subreddit",icon_url = client.user.avatar_url)
   await ctx.send(embed=embed)
-  client.nextMeme = getMeme()
+  client.nextMeme = await getMeme()
 
 @client.event
 async def on_dbl_vote(data):
