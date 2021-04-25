@@ -60,7 +60,7 @@ async def on_ready():
   client.bls = Document(client.db,'blacklists')
   print('Connected With Blacklist')
   client.economy = Document(client.db,'economy')
-  client.nextMeme = getMeme()
+  client.nextMeme = await getMeme()
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
 intents.guilds = True
