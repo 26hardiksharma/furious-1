@@ -7,7 +7,7 @@ import asyncio
 import random
 import wikipedia
 import datetime
-import praw 
+import asyncpraw 
 from PIL import Image
 from io import BytesIO
 import datetime
@@ -715,8 +715,7 @@ async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specif
       await member.send(embed = memberembed)
       await asyncio.sleep(time)
       await member.remove_roles(muted_role)
-reddit = praw.Reddit(client_id = "HavE-E7-h3pXDQ",client_secret = "TYAmuss0lnMFOXMZA_si6v-SmfkFJQ",user_agent = "prawop",check_for_async= False)
-subreddit = reddit.subreddit("memes")
+reddit = asyncpraw.Reddit(client_id = "HavE-E7-h3pXDQ",client_secret = "TYAmuss0lnMFOXMZA_si6v-SmfkFJQ",user_agent = "prawop")
 @client.command()
 async def tour(ctx):
   if ctx.guild.name == "VΛИłSĦΣĐ SŁΛҰΣЯS":
@@ -1445,9 +1444,8 @@ async def on_command_error(ctx, error):
     raise error
 def getMeme():
   all_subs = []
-  subreddit = reddit.subreddit("meme")   
-  top = subreddit.top(limit=250)
-  for submission in top:
+  subreddit = await reddit.subreddit("meme")   
+  async for submission in subreddit.top(limit = 250):
     if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
   random_sub = random.choice(all_subs) 
