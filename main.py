@@ -1445,7 +1445,7 @@ async def on_command_error(ctx, error):
 async def getMeme():
   all_subs = []
   subreddit = await reddit.subreddit("meme",fetch= True)   
-  async for submission in subreddit.top(limit = 500):
+  async for submission in subreddit.top(limit = 300):
     if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
   random_sub = random.choice(all_subs) 
