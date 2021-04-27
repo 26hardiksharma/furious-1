@@ -1460,7 +1460,8 @@ async def getMeme():
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
-    client.nextM  eme = await getMeme()
+    client.nextMeme = await getMeme()
+    
   name, url = client.nextMeme
   embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
   embed.set_image(url=url)
