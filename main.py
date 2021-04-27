@@ -258,7 +258,7 @@ async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
         await ctx.send(embed=embed)
   else:
     await ctx.send("You Are Missing The **`MANAGE MESSAGES`** Permission Required To Execute This Command")
-@client.command()
+@client.command(aliases = ['botinfo','stats'])
 async def botstats(ctx):
   num = 0
   for guild in client.guilds:
@@ -272,7 +272,7 @@ async def botstats(ctx):
   embed.add_field(name= "Total Users",value = num,inline = False)
   embed.add_field(name = "Language",value = f"<:python:835141091480043570> Python",inline = False)
   embed.add_field(name = "Library",value = f"<:discord:835142396236005406> Discord.py",inline = False)
-  embed.add_field(name = "Databse",value = f"<:mongo:835140375882366976> MongoDB",inline = False)
+  embed.add_field(name = "Database",value = f"<:mongo:835140375882366976> MongoDB",inline = False)
   embed.add_field(name = "Ping",value = f"{round(client.latency*1000)} ms",inline = False)
   embed.add_field(name = "Important Links",value = f"[___Invite Me___](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) || [___Official Server___](https://discord.gg/5zbU6wEhkh)")
   await ctx.send(embed = embed)
@@ -1460,7 +1460,7 @@ async def getMeme():
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
-    client.nextMeme = await getMeme()
+    client.nextM  eme = await getMeme()
   name, url = client.nextMeme
   embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
   embed.set_image(url=url)
