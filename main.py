@@ -2799,4 +2799,31 @@ async def rob(ctx,member : discord.Member = None):
       await client.config.upsert({"_id":ctx.author.id,"cash":kekek})
       await client.config.upsert({"_id":member.id,"cash":lolbro})
       await ctx.send(f'You Managed To Rake Up $ {somenum} From {member}')
+@client.command()
+async def test(ctx):
+  if ctx.author.id == 757589836441059379:
+    embed = discord.Embed(title = 'Test')
+    embed.add_field(name = f"React To This For Test, Bro.")
+    reactions = ['⬅️','⏹️','➡️']
+    msg = await ctx.send(embed=embed)
+    for i in reactions:
+      await msg.add_reaction(i)
+    embed1 = discord.Embed(title = "Pog")
+    embed2= discord.Embed(title = "Poggers")
+    embed3 = discord.Embed(title = "Stopped")
+    def check(reaction,user):
+      return user == ctx.author
+    try:
+      reaction,user = await client.wait_for('reaction_add',timeout = 10.0,check=check)
+    except asyncio.TimeoutError:
+      await msg.clear_reactions()
+    else:
+      if str(reaction.emoji) == "⬅️":
+        await msg.edit(embed = embed1)
+      elif str(reaction.emoji) == "⏹️":
+        await msg.edit(embed=embed3)
+      elif str(reaction.emoji) == "➡️":
+        await msg.edit(embed=embed2)
+      else:
+        await msg.clear_reactions()
 client.run(TOKEN)
