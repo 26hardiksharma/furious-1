@@ -2803,7 +2803,7 @@ async def rob(ctx,member : discord.Member = None):
 async def test(ctx):
   if ctx.author.id == 757589836441059379:
     embed = discord.Embed(title = 'Test')
-    embed.add_field(name = f"React To This For Test, Bro.")
+    embed.add_field(name = f"React To This For Test, Bro.",value = "Test")
     reactions = ['⬅️','⏹️','➡️']
     msg = await ctx.send(embed=embed)
     for i in reactions:
