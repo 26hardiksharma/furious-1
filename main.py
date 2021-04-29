@@ -1733,6 +1733,7 @@ async def on_message(message):
         embed.add_field(name = user,value = f"Thank You For Voting For Me On [Top.gg](https://top.gg/bot/790478502909837333/vote)")
         channel = client.get_channel(814151238177259520)
         await channel.send(content = f"{user.mention}",embed = embed)
+        return
   if message.author.bot == True:
     if message.author.id == 646937666251915264:
       chan = client.get_channel(829233056632143872)
