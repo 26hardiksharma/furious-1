@@ -2892,4 +2892,31 @@ async def setmodrole(ctx,role: discord.Role = None):
     data = {"_id":ctx.guild.id,"modrole":role.id}
     await client.config.upsert(data)
     await ctx.send(f"**{role.name}** Has Been Setup As The Mod Role Of This Server.\nThis Will Be Pinged When Any Security Issues Occur In The Server!")
+@client.command()
+async def security(ctx,query = None):
+  if not query:
+    embed = discord.Embed(title = "Security",color = ctx.author.color,timestamp = datetime.datetime.now())
+    embed.add_field(name = "About",value = f"Security Service Helps You Keep A Watch On The Hostile Activites Going Around In Your Server!",inline = False)
+    embed.add_field(name = f"Information",value = f"If The @everyone Role Of The Server Is Granted Any Moderation Permissions, It Would Be Automatically Turned Off And The Moderator Will Be Notified!",inline = False)
+    embed.add_field(name = "Methods",value = f"• **`F!setmodrole <@role>`**\n• **`F!security <on/off>`**")
+    return
+  if query.lower() == "on":
+    if not ctx.author.guid_permissions.manage_guild:
+      return await ctx.send(f"You Don't Have The **MANAGE SERVER** Permission Required To Execute This Command!")
+    if not ctx.guild.me.guild_permissions.manage_guild:
+      return await ctx.send(f"I Need The **ADMINISRATOR** In Order To Correctly Deliver Security Services!")
+    data = {"_id":ctx.guild.id,"stoggle":"on"}
+    await client.config.upsert(data)
+    await ctx.send(f"Security Services Are Now Toggled On!")
+    return
+  if query.lower() == "off":
+    if not ctx.author.guid_permissions.manage_guild:
+      return await ctx.send(f"You Don't Have The **MANAGE SERVER** Permission Required To Execute This Command!")
+    if not ctx.guild.me.guild_permissions.manage_guild:
+      return await ctx.send(f"I Need The **ADMINISRATOR** In Order To Correctly Deliver Security Services!")
+    data = {"_id":ctx.guild.id,"stoggle":"off"}
+    await client.config.upsert(data)
+    await ctx.send(f"Security Services Are Now Toggled Off!")
+    return
+
 client.run(TOKEN)
