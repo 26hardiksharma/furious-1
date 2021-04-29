@@ -2901,7 +2901,7 @@ async def security(ctx,query = None):
     embed.add_field(name = "Methods",value = f"• **`F!setmodrole <@role>`**\n• **`F!security <on/off>`**")
     return
   if query.lower() == "on":
-    if not ctx.author.guid_permissions.manage_guild:
+    if not ctx.author.guild_permissions.manage_guild:
       return await ctx.send(f"You Don't Have The **MANAGE SERVER** Permission Required To Execute This Command!")
     if not ctx.guild.me.guild_permissions.manage_guild:
       return await ctx.send(f"I Need The **ADMINISRATOR** In Order To Correctly Deliver Security Services!")
@@ -2910,7 +2910,7 @@ async def security(ctx,query = None):
     await ctx.send(f"Security Services Are Now Toggled On!")
     return
   if query.lower() == "off":
-    if not ctx.author.guid_permissions.manage_guild:
+    if not ctx.author.guild_permissions.manage_guild:
       return await ctx.send(f"You Don't Have The **MANAGE SERVER** Permission Required To Execute This Command!")
     if not ctx.guild.me.guild_permissions.manage_guild:
       return await ctx.send(f"I Need The **ADMINISRATOR** In Order To Correctly Deliver Security Services!")
