@@ -2886,4 +2886,10 @@ async def on_guild_role_update(before,after):
       return
     if len(hostile_perms) > 1:
         await channel.send(content = f"<@&{data['modrole']}>\nThe Everyone Role Was Granted These Hostile Permissions:\n{hostile_perms}")
+@client.command()
+async def setmodrole(ctx,role: discord.Role = None):
+  if ctx.author.guild_permissions.manage_guild:
+    data = {"_id":ctx.guild.id,"modrole":role.id}
+    await client.config.upsert(data)
+    await ctx.send(f"**{role.name}** Has Been Setup As The Mod Role Of This Server.\nThis Will Be Pinged When Any Security Issues Occur In The Server!")
 client.run(TOKEN)
