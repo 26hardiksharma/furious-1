@@ -103,7 +103,7 @@ async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
 @client.command()
 async def ban(ctx,user: discord.Member = None,*,reason = "No Reason Specified"):
   if ctx.author.guild_permissions.ban_members:
-    if abc.guild_permissions.ban_members:
+    if ctx.guild.me.guild_permissions.ban_members:
       if not user:
         return await ctx.send('Please be Sure To Mention A Member Or use Their ID To Ban Them!')
       if ctx.author.id == ctx.guild.owner_id:
