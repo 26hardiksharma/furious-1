@@ -2889,9 +2889,13 @@ async def on_guild_role_update(before,after):
 @client.command()
 async def setmodrole(ctx,role: discord.Role = None):
   if ctx.author.guild_permissions.manage_guild:
+    if not role:
+      return await ctx.send(f"Please Mention A Role To Be Set As The Modrole For This Server.")
     data = {"_id":ctx.guild.id,"modrole":role.id}
     await client.config.upsert(data)
     await ctx.send(f"**{role.name}** Has Been Setup As The Mod Role Of This Server.\nThis Will Be Pinged When Any Security Issues Occur In The Server!")
+  else:
+    return await ctx.send(f"You Need The **MANAGE SERVER** Permission Required To Execute This Command!")
 @client.command()
 async def security(ctx,query = None):
   if not query:
