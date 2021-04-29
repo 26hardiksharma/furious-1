@@ -1724,6 +1724,15 @@ async def delete(ctx,member : discord.Member= None):
 async def on_message(message):
   if str(message.channel.type) == "private":
     return
+  if message.guild.id == 832905293481771028:
+    if message.channel.id == 837307457688436776:
+      if isinstance(message.author,discord.Webhook):
+        id = int(message.content)
+        user = await client.fetch_user(id)
+        embed = discord.Embed(title = f"Vote Logged",timestamp = datetime.datetime.now(),color = 0xFF80ED)
+        embed.add_field(name = user,value = f"Thank You For Voting For Me On [Top.gg](https://top.gg/bot/790478502909837333/vote)")
+        channel = client.get_channel(814151238177259520)
+        await channel.send(content = f"{user.mention}",embed = embed)
   if message.author.bot == True:
     if message.author.id == 646937666251915264:
       chan = client.get_channel(829233056632143872)
