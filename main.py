@@ -2842,6 +2842,7 @@ async def on_guild_role_update(before,after):
   if after.id == after.guild.id:
     hostile_perms = ""
     async for entry in after.guild.audit_logs(action = discord.AuditLogAction.role_update,limit = 1):
+      
       user = entry.user
       break
     if after.permissions.administrator:
