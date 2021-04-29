@@ -2899,6 +2899,7 @@ async def security(ctx,query = None):
     embed.add_field(name = "About",value = f"Security Service Helps You Keep A Watch On The Hostile Activites Going Around In Your Server!",inline = False)
     embed.add_field(name = f"Information",value = f"If The @everyone Role Of The Server Is Granted Any Moderation Permissions, It Would Be Automatically Turned Off And The Moderator Will Be Notified!",inline = False)
     embed.add_field(name = "Methods",value = f"• **`F!setmodrole <@role>`**\n• **`F!security <on/off>`**")
+    await ctx.send(embed=embed)
     return
   if query.lower() == "on":
     if not ctx.author.guild_permissions.manage_guild:
