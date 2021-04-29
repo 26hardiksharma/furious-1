@@ -1730,7 +1730,8 @@ async def on_message(message):
       user = await client.fetch_user(id)
       embed = discord.Embed(title = f"Vote Logged",timestamp = datetime.datetime.now(),color = 0xFF80ED)
       embed.add_field(name = user,value = f"Thank You For Voting For Me On [Top.gg](https://top.gg/bot/790478502909837333/vote)")
-      channel = client.get_channel(814151238177259520)
+      guild = client.get_guild(810190584059789323)
+      channel = discord.utils.get(guild.text_channels,id = 814151238177259520)
       await channel.send(content = f"{user.mention}",embed = embed)
       return
   if message.author.bot == True:
