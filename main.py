@@ -2841,7 +2841,7 @@ async def on_guild_role_update(before,after):
     return
   if after.id == after.guild.id:
     hostile_perms = ""
-    async for i in after.guild.audit_logs(action = discord.AuditLogAction.role_update,limit = 1):
+    async for entry in after.guild.audit_logs(action = discord.AuditLogAction.role_update,limit = 1):
       user = entry.user
       break
     if after.permissions.administrator:
@@ -2886,7 +2886,7 @@ async def on_guild_role_update(before,after):
     if not channel:
       return
     if len(hostile_perms) > 1:
-        await channel.send(content = f"<@&{data['modrole']}>\n{user} Granted The Eeryone Role These Hostile Permissions:\n{hostile_perms}")
+      await channel.send(content = f"<@&{data['modrole']}>\n{user} Granted The Eeryone Role These Hostile Permissions:\n{hostile_perms}")
 @client.command()
 async def setmodrole(ctx,role: discord.Role = None):
   if ctx.author.guild_permissions.manage_guild:
