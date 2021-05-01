@@ -505,7 +505,7 @@ async def serverinfo(ctx):
     else:
       ct += 1
       cc+= f"<:{i.name}:{i.id}> "
-  embed.add_field(name = f"Emojis",value = f"**Count:** {len(ctx.guild.emojis)}\n**Animated:** [{act}] {ac}\n**Non-Animated:** [{ct}] {cc}",inline = False)
+  embed.add_field(name = f"Emojis",value = f"**Count:** {len(ctx.guild.emojis)}\n**Animated:** __{act}__ \n**Non-Animated:** __{ct}__",inline = False)
   await ctx.send(embed=embed)
 @client.command()
 async def kill(ctx,member : discord.Member = None):
