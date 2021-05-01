@@ -490,25 +490,22 @@ async def wiki(ctx,*,query = None):
       await msg.edit(content = f"<:error:795629492693368833> Results Could Not Be Loaded Because Your Query :- ``{query}`` Is Matching Several Pages! Please Mention Your Query More Specifically!")
 @client.command()
 async def serverinfo(ctx):
-  ccount = 0
-  for channel in ctx.guild.text_channels:
-    ccount = ccount + 1
-  vcount= 0
-  for vc in ctx.guild.voice_channels:
-    vcount = vcount + 1
+  embed = discord.Embed(title = f"Information Of {ctx.guild.name}",color = 0x00FFFF)
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
-  embed = discord.Embed(title = f"{ctx.guild.name}",colour = 0x00FF12)
-  embed.add_field(name = "Owner",value = owner.mention)
-  embed.add_field(name = "Region",value = f"{ctx.guild.region}")
-  embed.add_field(name = "Member Count",value = f"{ctx.guild.member_count}")
-  embed.add_field(name = "Boosts",value = ctx.guild.premium_subscription_count)
-  embed.add_field(name ="Boost Tier",value = f"{ctx.guild.premium_tier}")
-  embed.add_field(name = "Verification Level",value= str(ctx.guild.verification_level).upper())
-  embed.add_field(name="Explicit Content Filter",value = str(ctx.guild.explicit_content_filter).upper())
-  embed.add_field(name ="Text Channels",value = f"{ccount}")
-  embed.add_field(name ="Voice Channels",value = f"{vcount}")
-  embed.add_field(name = "Roles",value = len(ctx.guild.roles))
-  embed.set_thumbnail(url = ctx.guild.icon_url)
+  embed.add_field("General Info",value = f"**Name:** __{ctx.guild.name}__\n**Owner:** **{owner}**\n**Region:** {str(ctx.guild.region).capitalize()}",inline = False)
+  embed.add_field(name = f"Counts",value = f"**Members:** __{ctx.guild.member_count}__\n**Roles:** {len(ctx.guild.roles)}\n**Text Channels:** {len(ctx.guild.text_channels)}\n**Voice Channels:** {len(ctx.guild.voice_channels)}",inline = False)
+  act = 0
+  ac = ""
+  ct = 0
+  cc = ""
+  for i in ctx.guild.emojis:
+    if i.animated:
+      act += 1
+      ac += f"<:{i.name}:{i.id}> "
+    else:
+      ct += 1
+      cc+= f"<:{i.name}:{i.id}> "
+  embed.add_field(name = f"Emojis",value = f"**Count:** {len(ctx.guild.emojis)}\n**Animated:** [{act}] {ac}\n**Non-Animated:** [{ct}] {cc}",inline = False)
   await ctx.send(embed=embed)
 @client.command()
 async def kill(ctx,member : discord.Member = None):
