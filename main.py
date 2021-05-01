@@ -363,36 +363,6 @@ async def vcreate(ctx,*,query):
     await ctx.send(embed=embed)
 
 @client.command()
-@commands.cooldown(1, 300, commands.BucketType.user)
-async def helpme(ctx,member : discord.Member,*,query):
-  if member.guild_permissions.manage_messages:
-    await ctx.message.delete()
-    dmembed = discord.Embed(title = "Help",description = f"{ctx.author} Needs Your Help", colour = 0x00F2FF)
-    dmembed.add_field(name = "Sent By", value = ctx.author,inline= False)
-    dmembed.add_field(name = "Message", value = query,inline = False)
-    dmembed.add_field(name = "Server",value = ctx.guild.name)
-    await member.send(embed=dmembed)
-    embed = discord.Embed(title = " <a:tick:796380226963636234> Help Me",colour = 0x00F2FF)
-    embed.add_field(name = "Status",value = f"Successfully Sent The Help Call  To {member.mention}",inline = False)
-    embed.add_field(name = "Sent By",value = f"{ctx.author.mention}")
-    await ctx.send(embed = embed)
-  else:
-
-    await ctx.message.delete()
-    embed = discord.Embed(title = "<:error:795629492693368833> Help Me",colour = 0xFF0000)
-    embed.add_field(name = "Status", value = f"{ctx.author.mention},The Member You Mentioned Is Not A Moderator/Admin")
-    await ctx.send(embed=embed)
-@helpme.error
-async def helpme_error(ctx, error):
-    if isinstance(error, commands.CommandOnCooldown):
-      await ctx.message.delete()
-      embed = discord.Embed(title = "<:error:795629492693368833> Help Me",colour = 0xFF0000)
-      embed.add_field(name = "Status", value = "You Are Still On Cooldown")
-      embed.add_field(name = "Time Remaining",value = '{:.2f}s'.format(error.retry_after),inline = False)
-      await ctx.send(embed=embed)      
-    else:
-        raise error
-@client.command()
 async def everyone(ctx):
   if ctx.author.id == 757589836441059379:
     await ctx.message.delete()
