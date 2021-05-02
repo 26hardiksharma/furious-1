@@ -2676,7 +2676,7 @@ async def addemoji(ctx,name = None,url = None):
         img = BytesIO(await r.read())
         bytes = img.getvalue()
         def check(reaction,user):
-          return user == ctx.author:
+          return user == ctx.author and str(reaction.emoji) == "✅" or str(reaction.emoji) == "❎"
         msg = await ctx.send(f"Are You Sure You Want To Add This Emoji ?\n{url}")
         for i in ('✅','❎'):
           await msg.add_reaction(i)
@@ -2697,7 +2697,7 @@ async def addemoji(ctx,name = None,url = None):
             except discord.Forbidden:
           
               await ctx.send('Failed Creating The Emoji, Perhaps I Am Missing The **MANAGE EMOJIS** Permission!')
-          else:
+          elif str(reaction.emoji) == "❎":
             return await ctx.send("Aborted The Emoji Creation Process")
 @client.command()
 async def tag(ctx,query = None,name= None,*,desc = None):
