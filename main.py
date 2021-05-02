@@ -2699,6 +2699,9 @@ async def addemoji(ctx,name = None,url = None):
               await ctx.send('Failed Creating The Emoji, Perhaps I Am Missing The **MANAGE EMOJIS** Permission!')
           elif str(reaction.emoji) == "❎":
             return await ctx.send("Aborted The Emoji Creation Process")
+
+
+
 @client.command()
 async def tag(ctx,query = None,name= None,*,desc = None):
   if not query:
