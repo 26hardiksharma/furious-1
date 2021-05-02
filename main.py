@@ -2683,6 +2683,7 @@ async def addemoji(ctx,name = None,url = None):
         try:
           reaction,user = await client.wait_for('reaction_add',check = check,timeout = 20.0)
         except asyncio.TimeoutError:
+          await ctx.send(f'Time\'s Up!')
           return
         else:
           if str(reaction.emoji) == "✅":
@@ -2695,7 +2696,6 @@ async def addemoji(ctx,name = None,url = None):
             except discord.HTTPException:
               await ctx.send(f'Failed Creating The Emoji.\nThis May Happen If The File Size Is Too Big Or Your Server Has Reached The Maximum Emoji Limit!')
             except discord.Forbidden:
-          
               await ctx.send('Failed Creating The Emoji, Perhaps I Am Missing The **MANAGE EMOJIS** Permission!')
           elif str(reaction.emoji) == "❎":
             return await ctx.send("Aborted The Emoji Creation Process")
