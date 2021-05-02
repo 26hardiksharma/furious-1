@@ -173,7 +173,7 @@ async def whois(ctx, member : discord.Member = None):
   embed.add_field(name= "Avatar Link",value = f"[Click Here]({member.avatar_url})")
   for perm, stat in role.permissions:
     if stat is True:
-      perms_string += f"`{str(perm).upper()}` "
+      perms_string += f"{str(perm).upper()} "
       count += 1
   if rc >= 1:
     if len(role_str) <= 1024:
