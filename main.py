@@ -2672,7 +2672,7 @@ async def addemoji(ctx,name = None,url = None):
       try:
         if not r.status in range(200,299):
           return await ctx.send('Error While Making A Request.')
-          
+      except:
         img = BytesIO(await r.read())
         bytes = img.getvalue()
         def check(reaction,user):
