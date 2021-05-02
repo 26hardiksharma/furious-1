@@ -2678,7 +2678,8 @@ async def addemoji(ctx,name = None,url = None):
         def check(reaction,user):
           return user == ctx.author and str(reaction.emoji) == "✅" or str(reaction.emoji) == "❎"
         msg = await ctx.send(f"Are You Sure You Want To Add This Emoji ?\n{url}")
-        for i in ('✅','❎'):
+        list = ['✅','❎']
+        for i in list:
           await msg.add_reaction(i)
         try:
           reaction,user = await client.wait_for('reaction_add',check = check,timeout = 20.0)
