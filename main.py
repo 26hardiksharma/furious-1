@@ -176,9 +176,9 @@ async def whois(ctx, member : discord.Member = None):
       perms_string += f"`{str(perm).upper()}` "
       count += 1
   if rc >= 1:
-    try:
+    if len(role_str) <= 1024:
       embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
-    except:
+    else:
       embed.add_field(name = f"Roles[{rc}]",value = "User Has Too Many Roles!",inline = False)
     embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
   else:
