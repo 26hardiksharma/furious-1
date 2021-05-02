@@ -156,6 +156,8 @@ async def unmute(ctx,member : discord.Member):
 async def whois(ctx, member : discord.Member = None):
   if member == None:
     member = ctx.author
+  count = 0
+  perms_string = ""
   rc = 0
   role_str = ""
   for role in member.roles[1:]:
@@ -169,6 +171,10 @@ async def whois(ctx, member : discord.Member = None):
   embed.set_footer(icon_url = ctx.author.avatar_url, text = 
   f"Requested By {ctx.author.name}")
   embed.add_field(name= "Avatar Link",value = f"[Click Here]({member.avatar_url})")
+  for perm, stat in role.permissions:
+    if stat is True:
+      perms_string += f"`{str(perm).upper()}` "
+      count += 1
   if rc >= 1:
     try:
       embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
@@ -177,11 +183,11 @@ async def whois(ctx, member : discord.Member = None):
     embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
   else:
     embed.add_field(name = "Roles",value = "None",inline = False)
+  if count >= 1:
+    embed.add_field(name = f"Key Permissions",value = f"```\n{perms_string}\n```")
+  else:
+    embed.add_field(name = "Key Permissions",value = "None")
   await ctx.send(embed=embed)
-
-
-
-
 @client.command(aliases = ['av'])
 async def avatar(ctx, member : discord.Member=None):
   if ctx.author.guild_permissions.manage_messages:
