@@ -463,8 +463,8 @@ async def serverinfo(ctx):
   embed = discord.Embed(title = f"Information Of {ctx.guild.name}",color = 0x00FFFF)
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
   embed.set_thumbnail(url = ctx.guild.icon_url)
-  embed.add_field(name="General Info",value = f"**Name:** __{ctx.guild.name}__\n**Owner:** **{owner}**\n**Region:** {str(ctx.guild.region).capitalize()}",inline = False)
-  embed.add_field(name = f"Counts",value = f"**Members:** __{ctx.guild.member_count}__\n**Roles:** {len(ctx.guild.roles)}\n**Text Channels:** {len(ctx.guild.text_channels)}\n**Voice Channels:** {len(ctx.guild.voice_channels)}",inline = False)
+  embed.add_field(name="General Info",value = f"**Name:** __{ctx.guild.name}__\n**Owner:** **{owner}**\n**Region:** __{str(ctx.guild.region).capitalize()}__",inline = False)
+  embed.add_field(name = f"Counts",value = f"**Members:** __{ctx.guild.member_count}__\n**Roles:** __{len(ctx.guild.roles)}__\n**Text Channels:** __{len(ctx.guild.text_channels)}__\n**Voice Channels:** __{len(ctx.guild.voice_channels)}__",inline = False)
   act = 0
   ac = ""
   ct = 0
