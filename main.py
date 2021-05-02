@@ -171,7 +171,7 @@ async def whois(ctx, member : discord.Member = None):
   embed.set_footer(icon_url = ctx.author.avatar_url, text = 
   f"Requested By {ctx.author.name}")
   embed.add_field(name= "Avatar Link",value = f"[Click Here]({member.avatar_url})")
-  for perm, stat in role.permissions:
+  for perm, stat in member.guild_permissions:
     if stat is True:
       perms_string += f"{str(perm).upper()} "
       count += 1
