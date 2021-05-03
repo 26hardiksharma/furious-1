@@ -2955,7 +2955,7 @@ async def on_bulk_message_delete(messages):
   async for i in messages[0].guild.audit_logs(action = discord.AuditLogAction.message_bulk_delete,limit = 1):
     user = i.user
     break
-  embed.add_field(name = f"Information",value = f"{user} Deleted {len(messages)} Messages In {messages[0].channel.mentions}",inline = False)
+  embed.add_field(name = f"Information",value = f"{user} Deleted {len(messages)} Messages In {messages[0].channel.mention}",inline = False)
   embed.add_field(name = f"Quick Links",value = f"[**View**]({uploadurl}) • [**Download**]({msg.attachments[0].url})")
   await log.send(embed=embed)
 client.run(TOKEN)
