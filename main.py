@@ -2676,37 +2676,35 @@ async def addemoji(ctx,name = None,url = None):
     if not url.startswith('https://'):
       return await ctx.send('An Invalid URL Has Been Passed!')
     async with client.ses.get(url) as r:
+      if not r.status in range(200,299):
+        return await ctx.send('Error While Making A Request.')
+      img = BytesIO(await r.read())
+      bytes = img.getvalue()
+      def check(reaction,user):
+        return user == ctx.author and str(reaction.emoji) == "✅" or str(reaction.emoji) == "❎"
+      msg = await ctx.send(f"Are You Sure You Want To Add This Emoji ?\n{url}")
+      list = ['✅','❎']
+      for i in list:
+        await msg.add_reaction(i)
       try:
-        if not r.status in range(200,299):
-          return await ctx.send('Error While Making A Request.')
+        reaction,user = await client.wait_for('reaction_add',check = check,timeout = 20.0)
+      except asyncio.TimeoutError:
+        await ctx.send(f'Time\'s Up!')
+        return
       else:
-        img = BytesIO(await r.read())
-        bytes = img.getvalue()
-        def check(reaction,user):
-          return user == ctx.author and str(reaction.emoji) == "✅" or str(reaction.emoji) == "❎"
-        msg = await ctx.send(f"Are You Sure You Want To Add This Emoji ?\n{url}")
-        list = ['✅','❎']
-        for i in list:
-          await msg.add_reaction(i)
-        try:
-          reaction,user = await client.wait_for('reaction_add',check = check,timeout = 20.0)
-        except asyncio.TimeoutError:
-          await ctx.send(f'Time\'s Up!')
-          return
-        else:
-          if str(reaction.emoji) == "✅":
-            try:
-              emoji = await ctx.guild.create_custom_emoji(name = name,image = bytes)
-              if emoji.animated == False:
-                await ctx.send(f'Created Emoji <:{emoji.name}:{emoji.id}>')
-              else:
-                await ctx.send(f'Created Emoji <a:{emoji.name}:{emoji.id}>')
-            except discord.HTTPException:
-              await ctx.send(f'Failed Creating The Emoji.\nThis May Happen If The File Size Is Too Big Or Your Server Has Reached The Maximum Emoji Limit!')
-            except discord.Forbidden:
-              await ctx.send('Failed Creating The Emoji, Perhaps I Am Missing The **MANAGE EMOJIS** Permission!')
-          elif str(reaction.emoji) == "❎":
-            return await ctx.send("Aborted The Emoji Creation Process")
+        if str(reaction.emoji) == "✅":
+          try:
+            emoji = await ctx.guild.create_custom_emoji(name = name,image = bytes)
+            if emoji.animated == False:
+              await ctx.send(f'Created Emoji <:{emoji.name}:{emoji.id}>')
+            else:
+              await ctx.send(f'Created Emoji <a:{emoji.name}:{emoji.id}>')
+          except discord.HTTPException:
+            await ctx.send(f'Failed Creating The Emoji.\nThis May Happen If The File Size Is Too Big Or Your Server Has Reached The Maximum Emoji Limit!')
+          except discord.Forbidden:
+            await ctx.send('Failed Creating The Emoji, Perhaps I Am Missing The **MANAGE EMOJIS** Permission!')
+        elif str(reaction.emoji) == "❎":
+          return await ctx.send("Aborted The Emoji Creation Process")
 
 
 
