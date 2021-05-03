@@ -218,6 +218,7 @@ async def purge(ctx,amt = None,member : discord.Member = None):
             def kekcheck(m):
               return m.pinned == False
             await ctx.channel.purge(limit = amt,check=kekcheck)
+
             msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages")
             await asyncio.sleep(3)
             await msg.delete()
@@ -1310,8 +1311,11 @@ async def hackban(ctx,member : discord.User = None,*,reason= "No Reason Specifie
         user = await client.fetch_user(member.id)
         member = ctx.guild.get_member(user.id)
         if member == None:
-          await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author}")
-          await ctx.send(f'{user} Was Banned. Reason: {reason}')
+          try:
+            await ctx.guild.ban(user,reason = f"{reason} || Action By {ctx.author}")
+            await ctx.send(f'{user} Was Banned. Reason: {reason}')
+          except:
+            return await ctx.send(f"Failed Banning {member}! Perhaps I Am Missing Certain Permissions.")
         else:
           if ctx.author.id == ctx.guild.owner_id:
             try:
@@ -2957,7 +2961,6 @@ async def on_bulk_message_delete(messages):
     reason = i.reason
     break
   embed.add_field(name = f"Information",value = f"{user} Deleted {len(messages)} Messages In {messages[0].channel.mention}",inline = False)
-  embed.add_field(name = "Reason",value = reason,inline = False)
   embed.add_field(name = f"Quick Links",value = f"[**View**]({uploadurl}) • [**Download**]({msg.attachments[0].url})")
   await log.send(embed=embed)
 client.run(TOKEN)
