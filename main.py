@@ -203,26 +203,29 @@ async def avatar(ctx, member : discord.Member=None):
     await ctx.send(embed=embed)
 @client.command(pass_context=True, aliases = ['clear'])
 @commands.cooldown(1,10,commands.BucketType.user)
-async def purge(ctx,amt: int = None,member : discord.Member = None):
+async def purge(ctx,amt = None,member : discord.Member = None):
     if ctx.author.guild_permissions.manage_messages:
       if amt == None:
         await ctx.send(f"Please Specify The Number Of Messages To Be Purged")
+      try:
+        amt = int(amt)
+      except:
+        await ctx.send("Only Integer Values Can Be Used To Execute A Purge Command.")
       else:
-        if member == None:
-          if amt > 100:
-            await ctx.send(f"The Maximum Amount You Can Purge At A Time Is 100!\nPlease Use The Command Multiple Times To Purge More Messages")   
-          else:
-            try:
-              await ctx.message.delete()
-              await ctx.channel.purge(limit = amt)
-              msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages")
-              await asyncio.sleep(3)
-              await msg.delete()
-            except commands.BadArgument as e:
-              await ctx.send(f"Please Enter Only Integer Value For The Number Of Messages To Be Purged")
+        if member == None:   
+          try:
+            await ctx.message.delete()
+            def kekcheck(m):
+              return m.pinned == False
+            await ctx.channel.purge(limit = amt,check=kekcheck)
+            msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages")
+            await asyncio.sleep(3)
+            await msg.delete()
+          except commands.BadArgument as e:
+            await ctx.send(f"Please Enter Only Integer Value For The Number Of Messages To Be Purged")
         else:
           def check(m):
-            return m.author == member
+            return m.author == member and m.pinned == False
           try:
             await ctx.message.delete()
             await ctx.channel.purge(limit = amt,check=check)
