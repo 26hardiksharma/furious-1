@@ -2951,8 +2951,11 @@ async def on_bulk_message_delete(messages):
   msg = await channel.send(file = discord.File("delmsgs.txt"))
   url = msg.attachments[0].url[39:-4]
   uploadurl = f"https://txt.discord.website/?txt={url}"
-  print(uploadurl)
-  embed = discord.Embed(description = f"{len(messages)} Messages Were Purged In {messages[0].channel.mention}\n\n [📱 View]({uploadurl}) • [📥 Download]({msg.attachments[0].url})",timestamp = datetime.datetime.now(),color = messages[0].author.color)
-  
+  embed = discord.Embed(title = "⚠️ Bulk Delete"timestamp = datetime.datetime.now(),color = messages[0].author.color,url = "https://discord.gg/5zbU6wEhkh")
+  async for i in messages[0].guild.audit_logs(action = discord.AuditLogAction.message_bulk_delete,limit = 1):
+    user = i.user
+    break
+  embed.add_field(name = f"Information",value = f"{user} Deleted {len(messages)} Messages In {messages[0].channel.mentions}",inline = False)
+  embed.add_field(name = f"Quick Links",value = f"[**View**]({uploadurl}) • [**Download**]({msg.attachments[0].url})")
   await log.send(embed=embed)
 client.run(TOKEN)
