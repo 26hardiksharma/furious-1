@@ -2949,6 +2949,7 @@ async def on_bulk_message_delete(messages):
     for i in range(len(messages)):
       f.write(f"{messages[i].author}: {messages[i].content}\n\n")
   msg = await channel.send(file = discord.File("delmsgs.txt"))
-  url = msg.attachments[0].url
-  print(url)
+  url = msg.attachments[0].url[38:-4]
+  uploadurl = f"https://txt.discord.website/?txt={url}"
+  embed = discord.Embed(description = f"{len(messages)} Messages Were Purged In {messages[0].channel.mention}\n\n [📱 View](uploadurl) [📥 Download]({msg.attachments[0].url})")
 client.run(TOKEN)
