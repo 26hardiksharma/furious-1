@@ -2681,7 +2681,7 @@ async def addemoji(ctx,name = None,url = None):
       img = BytesIO(await r.read())
       bytes = img.getvalue()
       def check(reaction,user):
-        return user == ctx.author and str(reaction.emoji) == "✅" or str(reaction.emoji) == "❎"
+        return user == ctx.author and str(reaction.emoji) in ("✅","❎")
       msg = await ctx.send(f"Are You Sure You Want To Add This Emoji ?\n{url}")
       list = ['✅','❎']
       for i in list:
