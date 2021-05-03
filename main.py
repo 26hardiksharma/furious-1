@@ -217,7 +217,7 @@ async def purge(ctx,amt = None,member : discord.Member = None):
             await ctx.message.delete()
             def kekcheck(m):
               return m.pinned == False
-            await ctx.channel.purge(limit = amt,check=kekcheck,reason = f"Action By {ctx.author}")
+            await ctx.channel.purge(limit = amt,check=kekcheck)
             msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages")
             await asyncio.sleep(3)
             await msg.delete()
@@ -228,7 +228,7 @@ async def purge(ctx,amt = None,member : discord.Member = None):
             return m.author == member and m.pinned == False
           try:
             await ctx.message.delete()
-            await ctx.channel.purge(limit = amt,check=check,reason = f"Action By {ctx.author}")
+            await ctx.channel.purge(limit = amt,check=check)
             msg = await ctx.send(f"<a:EO_rtick:798248741429706814> Successfully Purged {amt} Messages Of {member}")
             await asyncio.sleep(3)
             await msg.delete()
