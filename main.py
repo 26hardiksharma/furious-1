@@ -2947,6 +2947,8 @@ async def on_bulk_message_delete(messages):
   channel = client.get_channel(833262747801878608)
   with open("delmsgs.txt","w") as f:
     for i in range(len(messages)):
-      f.write(f"{messages[i].author}: {messages[i].content}\n")
-  await channel.send(file = discord.File("delmsgs.txt"))
+      f.write(f"{messages[i].author}: {messages[i].content}\n\n")
+  msg = await channel.send(file = discord.File("delmsgs.txt"))
+  url = msg.attachments[0].url
+  print(url)
 client.run(TOKEN)
