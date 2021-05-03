@@ -201,8 +201,8 @@ async def avatar(ctx, member : discord.Member=None):
     embed.add_field(name = "Missing Permission(s)", value = "Manage Messages",inline = False)
     embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}")
     await ctx.send(embed=embed)
-@client.command(pass_context=True, aliases = ['clear'])
-@commands.cooldown(1,10,commands.BucketType.user)
+@client.command(aliases = ['clear'])
+@commands.cooldown(1,5,commands.BucketType.user)
 async def purge(ctx,amt = None,member : discord.Member = None):
     if ctx.author.guild_permissions.manage_messages:
       if amt == None:
@@ -2934,5 +2934,19 @@ async def security(ctx,query = None):
     await client.config.upsert(data)
     await ctx.send(f"Security Services Are Now Toggled Off!")
     return
-
+@client.event
+async def on_bulk_message_delete(messages):
+  data = await client.config.find(messages[0].guild.id)
+  if not data:
+    return
+  if not "logchannel" in data:
+    return
+  log = discord.utils.get(messages[0].guild.text_channels,id = data["logchannel"])
+  if not log:
+    return
+  channel = client.get_channel(833262747801878608)
+  with open("delmsgs.txt","w") as f:
+    for i in messages:
+      f.write(f"{messages[i].author}: {messages[i].content}\n")
+  await channel.send(file = discord.File("delmsgs.txt"))
 client.run(TOKEN)
