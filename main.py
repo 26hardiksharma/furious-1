@@ -2959,6 +2959,6 @@ async def on_bulk_message_delete(messages):
     reason = i.reason
     break
   embed.add_field(name = f"Information",value = f"{user} Deleted {len(messages)} Messages In {messages[0].channel.mention}",inline = False)
-  embed.add_field(name = f"Quick Links",value = f"[**View**]({uploadurl}) • [**Download**]({msg.attachments[0].url})")
+  embed.add_field(name = f"Quick Links",value = f"[** View **]({uploadurl}) • [** Download **]({msg.attachments[0].url})")
   await log.send(embed=embed)
 client.run(TOKEN)
