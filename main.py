@@ -2966,4 +2966,8 @@ async def on_bulk_message_delete(messages):
   embed.add_field(name = f"Quick Links",value = f"[View]({uploadurl}) • [Download]({msg.attachments[0].url})")
   
   await log.send(embed=embed)
+@client.command()
+async def wyr(ctx):
+  data = requests.get('http://either.io').json()
+  print(data)
 client.run(TOKEN)
