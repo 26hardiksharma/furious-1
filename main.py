@@ -412,6 +412,8 @@ async def lock(ctx,*,channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
     channel = channel or ctx.channel
     overwrite = channel.overwrites_for(ctx.guild.default_role)
+    if overwrite.send_messages == False:
+      return await ctx.send(f"{channel.mention} Is Already Locked Down.")
     overwrite.send_messages = False
     await channel.set_permissions(ctx.guild.default_role, overwrite=overwrite)
     embed = discord.Embed(title = "🔒 Lock",colour = 0xFF0000)
@@ -425,6 +427,8 @@ async def unlock(ctx,*,channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
     channel = channel or ctx.channel
     overwrite = channel.overwrites_for(ctx.guild.default_role)
+    if overwrite.send_messages == None or overwrite.send_messages == True:
+      return await ctx.send(f"{channel.mention} Is Not Locked Down.")
     overwrite.send_messages = None
     await channel.set_permissions(ctx.guild.default_role,overwrite=overwrite)
     embed=discord.Embed(title = "🔓Unlock",colour = 0x00FFD3)
@@ -2960,5 +2964,6 @@ async def on_bulk_message_delete(messages):
     break
   embed.add_field(name = f"Information",value = f"{user} Deleted {len(messages)} Messages In {messages[0].channel.mention}",inline = False)
   embed.add_field(name = f"Quick Links",value = f"[View]({uploadurl}) • [Download]({msg.attachments[0].url})")
+  
   await log.send(embed=embed)
 client.run(TOKEN)
