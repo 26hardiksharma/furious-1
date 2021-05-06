@@ -1044,6 +1044,7 @@ async def muterole(ctx,query = None,role : discord.Role = None):
             mute = discord.utils.get(ctx.guild.roles,id = data["mrole"])
             if not mute:
               return await ctx.send('The Existing Muterole Couldn\'t Be Found In This Server, Please Make Sure That It Not Deleted.')
+              
             me = await ctx.guild.fetch_member(client.user.id)
             if mute > me.top_role:
               return await ctx.send('The Existing Muted Role Is Above my Top Role. I Dont Have Permission To Configure It.\nPlease Make Sure That It Is Below My Top Role')
@@ -2961,10 +2962,30 @@ async def on_bulk_message_delete(messages):
 @client.command()
 async def messagelogs(ctx,query = None):
   if ctx.author.guild_permissions.manage_guild:
-    if not ctx.message.channel_mentions:
-      return await ctx.send(f"Please Mention a Channel To Be Set As The Message Logs Or ")
-    if not channel:
-      return await ctx.send(f"Cannot Find That Channel In This Server!")
-    id = channel.id
-    await client.config.upsert()
+    if query.lower() == "on":
+      lmao = {"_id":ctx.guild.id,"mlogs":'on'}
+      await client.config.upsert(lmao)
+      await ctx.send("Message Logs Are Now Turned On!")
+    elif query.lower() == "off":
+      lmao = {"_id":ctx.guild.id,"mlogs":"off"}
+      await client.config.upsert(lmao)
+      await ctx.send("Message Logs Are Now Turned Off!")
+    else:
+      if not ctx.message.channel_mentions:
+        return await ctx.send(f"Please Mention a Channel To Be Set As The Message Logs Or ")
+      channel = discord.utils.get(ctx.guild.text_channels,id = ctx.message.channel_mentions[0].id)
+      if not channel:
+        return await ctx.send(f"Cannot Find That Channel In This Server!")
+      id = channel.id
+      kek ={"_id":ctx.guild.id,"mlogch":id}
+      await client.config.upsert(kek)
+      await ctx.send("Set The Message Logs To <#{}>".format(id))
+@client.command()
+async def attachmentfilter(ctx,query = None,desc = None):
+  if query == None or desc == None:
+    embed = discord.Embed(title = "📌 Attachment Filter",color = ctx.author.color,timestamp = datetime.datetime.now(),url = "https://discord.gg/5zbU6wEhkh")
+    embed.add_field(name = "About",value = f"Attachment Filter Is An Effective Method Of Filtering Out All Malicious Attachments And Files Which Users Send Over Discord.",inline = False)
+    embed.add_field(name ="How It Works ?",value = f"Once Turned On, Attachment Filter Will Check For All Files And Attachments In A Message.\n\nIf Any Attachment Of A Malicious Format Is Found, The Bot Will Immediately Delete The Message And Perform An Action On The Sender **`[Configurable]`**",inline = False)
+    embed.add_field(name = "Ignored Formats",value = f"**`png`**, **`jpg`**,**`jpeg`**,**`webp`**,**`mp3`**,**`mp4`**")
+    embed.add_field(name = "Usage",value = f"**`F!attachmentfilter <on/off>`**\n**`F!attachmentfilter action <kick/ban/mute>`**")
 client.run(TOKEN)
