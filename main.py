@@ -63,9 +63,6 @@ async def on_ready():
   client.nextMeme = await getMeme()
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
-  for i in client.guilds:
-    if 'yt tutoria' in i.name.lower():
-      print("{} ID:- {}".format(i.name,i.id))
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
