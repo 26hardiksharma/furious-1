@@ -2988,4 +2988,5 @@ async def attachmentfilter(ctx,query = None,desc = None):
     embed.add_field(name ="How It Works ?",value = f"Once Turned On, Attachment Filter Will Check For All Files And Attachments In A Message.\n\nIf Any Attachment Of A Malicious Format Is Found, The Bot Will Immediately Delete The Message And Perform An Action On The Sender **`[Configurable]`**",inline = False)
     embed.add_field(name = "Ignored Formats",value = f"**`png`**, **`jpg`**,**`jpeg`**,**`webp`**,**`mp3`**,**`mp4`**")
     embed.add_field(name = "Usage",value = f"**`F!attachmentfilter <on/off>`**\n**`F!attachmentfilter action <kick/ban/mute>`**")
+    await ctx.send(embed=embed)
 client.run(TOKEN)
