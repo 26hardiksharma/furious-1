@@ -63,6 +63,9 @@ async def on_ready():
   client.nextMeme = await getMeme()
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
+  for i in client.guilds:
+    if 'yt tutoria' in i.name.lower():
+      print(f"{} ID:- {}".format(i.name,i.id))
 intents.guilds = True
 @client.command()
 async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
@@ -2982,12 +2985,50 @@ async def messagelogs(ctx,query = None):
       await ctx.send("Set The Message Logs To <#{}>".format(id))
 @client.command()
 async def attachmentfilter(ctx,query = None,desc = None):
-  if query == None or desc == None:
+  if query == None or query.lower()== "help":
     embed = discord.Embed(title = "📌 Attachment Filter",color = ctx.author.color,timestamp = datetime.datetime.now(),url = "https://discord.gg/5zbU6wEhkh")
     embed.add_field(name = "About",value = f"Attachment Filter Is An Effective Method Of Filtering Out All Malicious Attachments And Files Which Users Send Over Discord.",inline = False)
     embed.add_field(name ="How It Works ?",value = f"Once Turned On, Attachment Filter Will Check For All Files And Attachments In A Message.\n\nIf Any Attachment Of A Malicious Format Is Found, The Bot Will Immediately Delete The Message And Perform An Action On The Sender **`[Configurable]`**",inline = False)
     embed.add_field(name = "Ignored Formats",value = f"**`png`**, **`jpg`**,**`jpeg`**,**`webp`**,**`mp3`**,**`mp4`**")
     embed.add_field(name = "Usage",value = f"**`F!attachmentfilter <on/off>`**\n**`F!attachmentfilter action <kick/ban/mute>`**",inline = False)
-    
     await ctx.send(embed=embed)
+    return
+  queries= ['on','off','action']
+  if not query.lower() in queries:
+    return await ctx.channel.send("An Invalid Query Has Been Passed!")
+  if query.lower() == "on":
+    if not ctx.author.guild_permissions.administrator:
+      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permissions Required To Execute This Command!")
+    lol = {"_id":ctx.guild.id,"atoggle":"on"}
+    await client.config.upsert(lol)
+    await ctx.send("Attachment Filter Is Now Toggled On!")
+  elif query.lower() == "off":
+    if not ctx.author.guild_permissions.administrator:
+      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permissions Required To Execute This Command!")
+    lol = {"_id":ctx.guild.id,"atoggle":"off"}
+    await client.config.upsert(lol)
+    await ctx.send("Attachment Filter Is Now Toggled Off!")
+  elif query.lower() == "action":
+    if not ctx.author.guild_permissions.administrator:
+      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permissions Required To Execute This Command!")
+    if not desc:
+      return await ctx.send("Please Provide A Valid Action.\nValid Actions: **`Kick`**,**`Ban`**,**`Mute`**,**`Delete`**")
+    if not desc.lower() in ("kick","ban","mute","delete"):
+      return await ctx.send("Please Provide A Valid Action.\nValid Actions: **`Kick`**,**`Ban`**,**`Mute`**,**`Delete`**")
+    if desc.lower() == "kick":
+      data = {"_id":ctx.guild.id,"aaction":"kick"}
+      await client.config.upsert(data)
+      return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Kick`**. Suspicious Attachments Will Be Deleted And The Sender Will Be Kicked Upon Sending!")
+    if desc.lower() == "ban":
+      data = {"_id":ctx.guild.id,"aaction":"ban"}
+      await client.config.upsert(data)
+      return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Ban`**. Suspicious Attachments Will Be Deleted And The Sender Will Be Banned Upon Sending!")
+    if desc.lower() == "mute:
+      data = {"_id":ctx.guild.id,"aaction":"mute"}
+      await client.config.upsert(data)
+      return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Mute`**. Suspicious Attachments Will Be Deleted And The Sender Will Be Muted Upon Sending!\nAlso Be Sure To Use **`F!muterole setup`** Or **`F!muterole set <@role>`** To Set A Muted Role!")
+    if desc.lower() == "delete":
+      data = {"_id":ctx.guild.id,"aaction":"delete"}
+      await client.config.upsert(data)
+      return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Delete`**. Suspicious Attachments Will Be Deleted Automatically!")
 client.run(TOKEN)
