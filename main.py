@@ -190,17 +190,10 @@ async def whois(ctx, member : discord.Member = None):
   await ctx.send(embed=embed)
 @client.command(aliases = ['av'])
 async def avatar(ctx, member : discord.Member=None):
-  if ctx.author.guild_permissions.manage_messages:
-    member = member or ctx.author
-    embed = discord.Embed(title = f" {member.name}'s Avatar")
-    embed.set_image(url = member.avatar_url)
-    await ctx.send(embed=embed)
-  else:
-    embed = discord.Embed(title = " Avatar")
-    embed.add_field(name = "Status", value = f" {ctx.author.mention}, You Don't Have The Permission To Execute This Command",inline = False)
-    embed.add_field(name = "Missing Permission(s)", value = "Manage Messages",inline = False)
-    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}")
-    await ctx.send(embed=embed)
+  member = member or ctx.author
+  embed = discord.Embed(title = f" {member.name}'s Avatar",url = member.avatar_url)
+  embed.set_image(url = member.avatar_url)
+  await ctx.send(embed=embed)
 @client.command(aliases = ['clear'])
 @commands.cooldown(1,5,commands.BucketType.user)
 async def purge(ctx,amt = None,member : discord.Member = None):
@@ -2033,8 +2026,7 @@ mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/m
 async def on_member_join(member):
   channel = discord.utils.find(lambda r: 'welcome' in r.topic.lower(),member.guild.text_channels)
   await channel.send(f'Welcome To {member.guild.name}, {member.mention}\n\nBe Sure To Read The Rules Of The Server And Behave Politely With Everyone.\n\nWe Hope You Enjoy Your Stay Here')
-  #I Need Members Intents For This Purpose
-  # Dedo Behen Ke Lodo 
+  #I Need Members Intents 
 @client.command()
 async def prefix(ctx,prefix = None):
   if ctx.author.guild_permissions.administrator:
@@ -2965,5 +2957,14 @@ async def on_bulk_message_delete(messages):
   embed.add_field(name = f"Information",value = f"{user} Deleted {len(messages)} Messages In {messages[0].channel.mention}",inline = False)
   embed.add_field(name = f"Quick Links",value = f"[View]({uploadurl}) • [Download]({msg.attachments[0].url})")
   
-  await log.send(embed=embed)
+  await log.send(embed=embed) 
+@client.command()
+async def messagelogs(ctx,query = None):
+  if ctx.author.guild_permissions.manage_guild:
+    if not ctx.message.channel_mentions:
+      return await ctx.send(f"Please Mention a Channel To Be Set As The Message Logs Or ")
+    if not channel:
+      return await ctx.send(f"Cannot Find That Channel In This Server!")
+    id = channel.id
+    await client.config.upsert()
 client.run(TOKEN)
