@@ -3023,7 +3023,7 @@ async def attachmentfilter(ctx,query = None,desc = None):
       data = {"_id":ctx.guild.id,"aaction":"ban"}
       await client.config.upsert(data)
       return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Ban`**. Suspicious Attachments Will Be Deleted And The Sender Will Be Banned Upon Sending!")
-    if desc.lower() == "mute:
+    if desc.lower() == "mute":
       data = {"_id":ctx.guild.id,"aaction":"mute"}
       await client.config.upsert(data)
       return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Mute`**. Suspicious Attachments Will Be Deleted And The Sender Will Be Muted Upon Sending!\nAlso Be Sure To Use **`F!muterole setup`** Or **`F!muterole set <@role>`** To Set A Muted Role!")
