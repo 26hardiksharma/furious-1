@@ -2630,6 +2630,7 @@ def clean_code(content):
   else:
     return content
 import textwrap
+"""
 @client.command(aliases = ['eval'])
 async def evaluate(ctx, *, arg = None):
   if not ctx.author.id == 757589836441059379:
@@ -2663,6 +2664,7 @@ async def evaluate(ctx, *, arg = None):
   embed.add_field(name = "Command",value = f"{arg}")
   embed.add_field(name = "Result",value = result,inline= False)
   await ctx.send(embed = embed)
+"""
 client.ses = aiohttp.ClientSession()
 
 @client.command()
