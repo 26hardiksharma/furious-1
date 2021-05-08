@@ -1781,7 +1781,11 @@ async def on_message(message):
       for i in types:
         for j in message.attachments:
           if not j.url.endswith(i) and 'avatar' not in j.url:
-            await message.delete()
+            try:
+              await message.delete()
+            except:
+              pass
+            
             break
       if action == "kick":
         try:
