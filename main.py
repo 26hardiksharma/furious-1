@@ -1769,7 +1769,7 @@ async def on_message(message):
   else:
     if message.attachments:
       data= await client.config.find(message.guild.id)
-      if not data or "atoggle" in data:
+      if not data or "atoggle" not in data:
         return
       if not data["atoggle"] == "on":
         return
