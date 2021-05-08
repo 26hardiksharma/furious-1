@@ -1780,9 +1780,9 @@ async def on_message(message):
       types = ['png','jepg','webp','mp3','mp4','jpg']
       for i in types:
         for j in message.attachments:
-          if not j.url.endswith(i)
-          await message.delete()
-          break
+          if not j.url.endswith(i):
+            await message.delete()
+            break
       if action == "kick":
         try:
           await message.author.kick(reason = f"Tried Posting A Suspicious Format File In #{message.channel.name}")
