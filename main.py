@@ -1777,7 +1777,7 @@ async def on_message(message):
         action ="delete"
       else:
         action = data['aaction']
-      types = ['png','jepg','webp','mp3','mp4','jpg']
+      types = ['png','jepg','webp','mp3','mp4','jpg','txt']
       for i in types:
         for j in message.attachments:
           if not j.url.endswith(i) and 'avatar' not in j.url:
@@ -1785,7 +1785,7 @@ async def on_message(message):
               await message.delete()
             except:
               pass
-            
+
             break
       if action == "kick":
         try:
