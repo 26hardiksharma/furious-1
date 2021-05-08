@@ -1777,7 +1777,7 @@ async def on_message(message):
         action ="delete"
       else:
         action = data['aaction']
-      types = ['.png','jepg','webp','.mp3','.mp4','.jpg','.txt','.pdf',]
+      types = ['.png','jepg','jpeg','webp','.mp3','.mp4','.jpg','.txt','.pdf',]
       for i in types:
         for j in message.attachments:
           if not 'avatar' in j.url:
