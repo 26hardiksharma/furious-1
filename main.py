@@ -1768,8 +1768,8 @@ async def on_message(message):
         await chan.send(embed=embed)
   else:
     if message.attachments:
-      checks = await client.config.find(message.guild.id)
-      if not checks or "atoggle" in data:
+      data= await client.config.find(message.guild.id)
+      if not data or "atoggle" in data:
         return
       if not data["atoggle"] == "on":
         return
@@ -1794,9 +1794,9 @@ async def on_message(message):
         except:
           pass
       elif action == "mute":
-        if not "mrole" in checks:
+        if not "mrole" in data:
           return
-        muted = message.guild.get_role(checks["mrole"])
+        muted = message.guild.get_role(data["mrole"])
         if not muted:
           return
         try:
