@@ -1780,7 +1780,7 @@ async def on_message(message):
       types = ['png','jepg','webp','mp3','mp4','jpg']
       for i in types:
         for j in message.attachments:
-          if not j.url.endswith(i):
+          if not j.url.endswith(i) and j.url.startswith("https://cdn.discordapp.com/") == False:
             await message.delete()
             break
       if action == "kick":
