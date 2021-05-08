@@ -1777,10 +1777,11 @@ async def on_message(message):
         action ="delete"
       else:
         action = data['aaction']
-      types = ['png','jepg','webp','mp3','mp4','jpg','txt','pdf',]
+      types = ['.png','jepg','webp','.mp3','.mp4','.jpg','.txt','.pdf',]
       for i in types:
         for j in message.attachments:
-          if not j.url.endswith(i) and 'avatar' not in j.url:
+          kek = j.url[-4]
+          if not kek in types:
             try:
               await message.delete()
             except:
