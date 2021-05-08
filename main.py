@@ -1767,6 +1767,42 @@ async def on_message(message):
     
         await chan.send(embed=embed)
   else:
+    if message.attachments:
+      checks = await client.config.find(message.guild.id)
+      if not checks or "atoggle" in data:
+        return
+      if not data["atoggle"] == "on":
+        return
+      if not "aaction" in data:
+        action ="delete"
+      else:
+        action = data['aaction']
+      types = ['png','jepg','webp','mp3','mp4','jpg']
+      for i in types:
+        for j in message.attachments:
+          if not j.url.endswith(i)
+          await message.delete()
+          break
+      if action == "kick":
+        try:
+          await message.author.kick(reason = f"Tried Posting A Suspicious Format File In #{message.channel.name}")
+        except:
+          pass
+      elif action == "ban":
+        try:
+          await message.author.ban(reason = f"Tried Posting A Suspicious Format File In #{message.channel.name}")
+        except:
+          pass
+      elif action == "mute":
+        if not "mrole" in checks:
+          return
+        muted = message.guild.get_role(checks["mrole"])
+        if not muted:
+          return
+        try:
+          await message.author.add_roles(muted,reason = f"Tried Posting A Suspicious Format File In #{message.channel.name}")
+        except:
+          return
     data = await client.bls.find(message.author.id)
     if data is not None:
       if "blacklisted" in data:
