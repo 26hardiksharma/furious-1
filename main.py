@@ -862,15 +862,12 @@ async  def on_guild_join(guild):
   embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Guild Owner :- {owner.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
   embed.set_thumbnail(url = f"{guild.icon_url}")
   abc = await channel.send(embed=embed)
-  await abc.add_reaction("🥳")
-  await abc.add_reaction("🙏")
   em = discord.Embed(title = guild.name,description = "Thanks For Adding Me To This Server! I Surely Will Help You With Your Discord Experience And In Managing This Server :)",colour = 0xDAF7A6)
   em.add_field(name = "Some Useful Information",value = "<:emoji_0:810202224947888249> I Am Furious, A Bot Designed To Moderate Servers While Providing Utility And Other Services To Other Server Members\n<:emoji_2:810202313142566992> Command Prefixes :- ^ , <@790478502909837333>\n<:emoji_3:810202359362748487> A Lot Of Useful Commands Which Come In Handy While Using Discord\n<:emoji_5:810202499914268703> Fun Commands\n<:emoji_1:810202277624938527> Much More Discoverable With ``^help``")
   em.add_field(name = "Some Useful Links",value = f"[Invite Me](https://discord.com/api/oauth2/authorize?client_id=790478502909837333&permissions=2099244279&redirect_uri=https%3A%2F%2Fdiscord.gg%2F4DqmNbUTXa&scope=bot) || [Support Server](https://dsc.gg/furiousofficial)",inline = False)
   for channel in guild.text_channels:
     try:
       if channel.is_news() == False:
-        
         await channel.send(embed=em)
         break
     except:
