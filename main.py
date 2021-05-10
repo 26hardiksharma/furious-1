@@ -3024,8 +3024,8 @@ async def attachmentfilter(ctx,query = None,desc = None):
   if query == None or query.lower()== "help":
     embed = discord.Embed(title = "📌 Attachment Filter",color = ctx.author.color,timestamp = datetime.datetime.now(),url = "https://discord.gg/5zbU6wEhkh")
     embed.add_field(name = "About",value = f"Attachment Filter Is An Effective Method Of Filtering Out All Malicious Attachments And Files Which Users Send Over Discord.",inline = False)
-    embed.add_field(name ="How It Works ?",value = f"Once Turned On, Attachment Filter Will Check For All Files And Attachments In A Message.\n\nIf Any Attachment Of A Malicious Format Is Found, The Bot Will Immediately Delete The Message And Perform An Action On The Sender **`[Configurable]`**",inline = False)
-    embed.add_field(name = "Ignored Formats",value = f"**`png`**, **`jpg`**,**`jpeg`**,**`webp`**,**`mp3`**,**`mp4`**")
+    embed.add_field(name ="How It Works ?",value = f"Once Turned On, Attachment Filter Will Check For All Files And Attachments In A Message.\n\nIf Any Attachment Of A Suspicious Format Is Found, The Bot Will Immediately Delete The Message And Perform An Action On The Sender **`[Configurable]`**",inline = False)
+    embed.add_field(name = "Ignored Formats",value = f"**`png`**, **`jpg`**,**`jpeg`**,**`webp`**,**`mp3`**,**`mp4`**,**`txt`**,**`pdf`**")
     embed.add_field(name = "Usage",value = f"**`F!attachmentfilter <on/off>`**\n**`F!attachmentfilter action <kick/ban/mute>`**",inline = False)
     await ctx.send(embed=embed)
     return
