@@ -3019,7 +3019,7 @@ async def messagelogs(ctx,query = None):
       kek ={"_id":ctx.guild.id,"mlogch":id}
       await client.config.upsert(kek)
       await ctx.send("Set The Message Logs To <#{}>".format(id))
-@client.command()
+@client.command(aliases = ['af','filter'])
 async def attachmentfilter(ctx,query = None,desc = None):
   if query == None or query.lower()== "help":
     embed = discord.Embed(title = "📌 Attachment Filter",color = ctx.author.color,timestamp = datetime.datetime.now(),url = "https://discord.gg/5zbU6wEhkh")
