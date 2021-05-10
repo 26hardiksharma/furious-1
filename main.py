@@ -3034,19 +3034,19 @@ async def attachmentfilter(ctx,query = None,desc = None):
     return await ctx.channel.send("An Invalid Query Has Been Passed!")
   if query.lower() == "on":
     if not ctx.author.guild_permissions.administrator:
-      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permissions Required To Execute This Command!")
+      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permission Required To Execute This Command!")
     lol = {"_id":ctx.guild.id,"atoggle":"on"}
     await client.config.upsert(lol)
     await ctx.send("Attachment Filter Is Now Toggled On!")
   elif query.lower() == "off":
     if not ctx.author.guild_permissions.administrator:
-      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permissions Required To Execute This Command!")
+      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permission Required To Execute This Command!")
     lol = {"_id":ctx.guild.id,"atoggle":"off"}
     await client.config.upsert(lol)
     await ctx.send("Attachment Filter Is Now Toggled Off!")
   elif query.lower() == "action":
     if not ctx.author.guild_permissions.administrator:
-      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permissions Required To Execute This Command!")
+      return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permission Required To Execute This Command!")
     if not desc:
       return await ctx.send("Please Provide A Valid Action.\nValid Actions: **`Kick`**,**`Ban`**,**`Mute`**,**`Delete`**")
     if not desc.lower() in ("kick","ban","mute","delete"):
