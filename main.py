@@ -1764,7 +1764,6 @@ async def on_message(message):
     
         await chan.send(embed=embed)
   else:
-    """
     if message.attachments:
       data= await client.config.find(message.guild.id)
       if not data or "atoggle" not in data:
@@ -1779,7 +1778,7 @@ async def on_message(message):
       for i in types:
         for j in message.attachments:
           if not 'avatar' in j.url:
-            kek = j.url[-4]
+            kek = j.url[-4:]
             if not kek in types:
               try:
                 await message.delete()
@@ -1806,7 +1805,6 @@ async def on_message(message):
           await message.author.add_roles(muted,reason = f"Tried Posting A Suspicious Format File In #{message.channel.name}")
         except:
           return
-    """
     data = await client.bls.find(message.author.id)
     if data is not None:
       if "blacklisted" in data:
