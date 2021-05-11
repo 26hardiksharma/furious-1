@@ -173,7 +173,7 @@ async def whois(ctx, member : discord.Member = None):
   embed.add_field(name= "Avatar Link",value = f"[Click Here]({member.avatar_url})")
   for perm, stat in member.guild_permissions:
     if stat is True:
-      perms_string += f"{str(perm).upper()} "
+      perms_string += f"**`{str(perm).upper()}`** "
       count += 1
   if rc >= 1:
     if len(role_str) <= 1024:
@@ -184,7 +184,7 @@ async def whois(ctx, member : discord.Member = None):
   else:
     embed.add_field(name = "Roles",value = "None",inline = False)
   if count >= 1:
-    embed.add_field(name = f"Key Permissions",value = f"```\n{perms_string}\n```")
+    embed.add_field(name = f"Key Permissions",value = f"{perms_string}")
   else:
     embed.add_field(name = "Key Permissions",value = "None")
   await ctx.send(embed=embed)
