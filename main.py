@@ -1416,7 +1416,7 @@ async def on_command_error(ctx, error):
     print(ctx.guild.name)
     print(ctx.author.name)
     eternal = await client.fetch_user(757589836441059379)
-    await eternal.send(f"An Error Occured!\n{ctx.command.name}\n{ctx.guild.name}\n{ctx.author.name}\n{error}")
+    await eternal.send(f"An Error Occured!\n{ctx.command.name}\n{ctx.guild.name}\n{ctx.author.name}:- {ctx.author.id} \n{error}")
     raise error
 async def getMeme():
   all_subs = []
