@@ -2932,9 +2932,9 @@ async def on_guild_role_update(before,after):
     channel = discord.utils.get(after.guild.text_channels,id = data["logchannel"])
     if not channel:
       return
-    if not "ping" in data:
+    if not "sping" in data:
       ping == "off"
-    elif data["ping"] != "on":
+    elif data["sping"] != "on":
       ping == "off"
     else:
       ping == "on"
