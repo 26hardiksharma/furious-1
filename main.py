@@ -5,6 +5,7 @@ from discord import Webhook, AsyncWebhookAdapter
 import json
 import asyncio
 import random
+from discord.raw_models import RawMessageDeleteEvent
 import wikipedia
 import datetime
 import asyncpraw 
@@ -1646,6 +1647,8 @@ async def dog(ctx):
   await ctx.send(embed=embed)
 @client.command()
 async def commands_list(ctx):
+  if not ctx.author.id == 757589836441059379:
+    return
   cmd_list = ""
   for cmd in client.commands:
     cmd_list += f"{cmd} , "
@@ -2346,6 +2349,7 @@ async def configuration(ctx):
 
 @client.command()
 async def stickynote(ctx,query= None,*,desc= None):
+  return
   if ctx.author.guild_permissions.manage_guild == False:
     await ctx.send('You Don\'t Have Have The **MANAGE SERVER** Permission Required To Execute This Command.')
     return
