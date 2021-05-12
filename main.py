@@ -2878,20 +2878,17 @@ async def on_guild_role_update(before,after):
   data = await client.config.find(after.guild.id)
   if not data:
     return
-  if not "modrole" in data:
-    return
   if not "stoggle" in data:
-    return
-  if not "logchannel" in data:
     return
   if data["stoggle"] != "on":
     return
   if after.id == after.guild.id:
     hostile_perms = ""
     async for entry in after.guild.audit_logs(action = discord.AuditLogAction.role_update,limit = 1):
-
       user = entry.user
       break
+    if user.bot:
+      return
     if after.permissions.administrator:
       hostile_perms += f"• Administrator\n"
       await after.edit(permissions = before.permissions)
@@ -2930,11 +2927,25 @@ async def on_guild_role_update(before,after):
     if after.permissions.ban_members:
       await after.edit(permissions = before.permissions)
       hostile_perms += f"• Ban Members\n"
+    if not "logchannel" in data:
+      return
     channel = discord.utils.get(after.guild.text_channels,id = data["logchannel"])
     if not channel:
       return
+    if not "ping" in data:
+      ping == "off"
+    elif data["ping"] != "on":
+      ping == "off"
+    else:
+      ping == "on"
     if len(hostile_perms) > 1:
-      await channel.send(content = f"<@&{data['modrole']}>\n{user} Granted The **`@everyone`** Role These Moderation Permissions:\n{hostile_perms}")
+      if ping == "off":
+        await channel.send(content = f"{user} Granted The **`@everyone`** Role These Moderation Permissions:\n{hostile_perms}")
+      else:
+        if not "modrole" in data:
+          await channel.send(content = f"{user} Granted The **`@everyone`** Role These Moderation Permissions:\n{hostile_perms}")
+        else:
+          await channel.send(content = f"<@&{data['modrole']}>\n{user} Granted The **`@everyone`** Role These Moderation Permissions:\n{hostile_perms}")
 @client.command()
 async def setmodrole(ctx,role: discord.Role = None):
   if ctx.author.guild_permissions.manage_guild:
