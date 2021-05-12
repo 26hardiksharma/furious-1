@@ -2958,7 +2958,7 @@ async def setmodrole(ctx,role: discord.Role = None):
     return await ctx.send(f"You Need The **MANAGE SERVER** Permission Required To Execute This Command!")
 @client.command()
 async def security(ctx,query = None,desc = None):
-  if not query:
+  if not query or query.lower() == "help":
     embed = discord.Embed(title = "Security",color = ctx.author.color,timestamp = datetime.datetime.now())
     embed.add_field(name = "About",value = f"Security Service Helps You Keep A Watch On The Hostile Activites Going Around In Your Server!",inline = False)
     embed.add_field(name = f"Information",value = f"If The @everyone Role Of The Server Is Granted Any Moderation Permissions, It Would Be Automatically Turned Off And The Moderators Will Be Notified!",inline = False)
