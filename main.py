@@ -1723,7 +1723,7 @@ async def on_message(message):
           data = {"_id":message.guild.id,"kreminded":"yes"}
           await client.config.upsert(data)
           return
-        if "ktoggle" not in data:
+        if not "ktoggle" in data:
           if not "kreminded" in data:
             lmfao = "Karuta Cardping Service, Which Was Launched In Furious Is Now Configurable!\n\nYou Can Get more Info About The Karuta Cardping Service By Typing `F!karuta Help`\nNote: **This Is Only Shown Once**"
             await message.channel.send(lmfao)
@@ -2933,11 +2933,11 @@ async def on_guild_role_update(before,after):
     if not channel:
       return
     if not "sping" in data:
-      ping == "off"
-    elif data["sping"] != "on":
-      ping == "off"
-    else:
-      ping == "on"
+      ping = "off"
+    if data["sping"] == "off":
+      ping = "off"
+    if data['sping'] == "on":
+      ping = "on" 
     if len(hostile_perms) > 1:
       if ping == "off":
         await channel.send(content = f"{user} Granted The **`@everyone`** Role These Moderation Permissions:\n{hostile_perms}")
