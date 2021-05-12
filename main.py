@@ -2957,32 +2957,42 @@ async def setmodrole(ctx,role: discord.Role = None):
   else:
     return await ctx.send(f"You Need The **MANAGE SERVER** Permission Required To Execute This Command!")
 @client.command()
-async def security(ctx,query = None):
+async def security(ctx,query = None,desc = None):
   if not query:
     embed = discord.Embed(title = "Security",color = ctx.author.color,timestamp = datetime.datetime.now())
     embed.add_field(name = "About",value = f"Security Service Helps You Keep A Watch On The Hostile Activites Going Around In Your Server!",inline = False)
     embed.add_field(name = f"Information",value = f"If The @everyone Role Of The Server Is Granted Any Moderation Permissions, It Would Be Automatically Turned Off And The Moderators Will Be Notified!",inline = False)
-    embed.add_field(name = "Methods",value = f"• **`F!setmodrole <@role>`**\n• **`F!security <on/off>`**")
+    embed.add_field(name = "Methods",value = f"• **`F!setmodrole <@role>`**\n• **`F!security <on/off>`**\n**`F!security ping <on/off>`**")
     await ctx.send(embed=embed)
     return
   if query.lower() == "on":
-    if not ctx.author.guild_permissions.manage_guild:
-      return await ctx.send(f"You Don't Have The **MANAGE SERVER** Permission Required To Execute This Command!")
+    if not ctx.author.guild_permissions.administrator:
+      return await ctx.send(f"You Don't Have The **`ADMINISTRATOR`** Permission Required To Execute This Command!")
     if not ctx.guild.me.guild_permissions.manage_guild:
-      return await ctx.send(f"I Need The **ADMINISRATOR** In Order To Correctly Deliver Security Services!")
+      return await ctx.send(f"I Need The **`ADMINISRATOR`** In Order To Correctly Deliver Security Services!")
     data = {"_id":ctx.guild.id,"stoggle":"on"}
     await client.config.upsert(data)
     await ctx.send(f"Security Services Are Now Toggled On!")
     return
   if query.lower() == "off":
-    if not ctx.author.guild_permissions.manage_guild:
-      return await ctx.send(f"You Don't Have The **MANAGE SERVER** Permission Required To Execute This Command!")
-    if not ctx.guild.me.guild_permissions.manage_guild:
-      return await ctx.send(f"I Need The **ADMINISRATOR** In Order To Correctly Deliver Security Services!")
+    if not ctx.author.guild_permissions.administratoe:
+      return await ctx.send(f"You Don't Have The **`ADMINISTRATOR`** Permission Required To Execute This Command!")
     data = {"_id":ctx.guild.id,"stoggle":"off"}
     await client.config.upsert(data)
     await ctx.send(f"Security Services Are Now Toggled Off!")
     return
+  if query.lower() == "ping":
+    if not ctx.author.guild_permissions.administratoe:
+      return await ctx.send(f"You Don't Have The **`ADMINISTRATOR`** Permission Required To Execute This Command!")
+    if not desc or desc.lower() not in ('on','off'):
+      return await ctx.send("Please Supply A Valid Ping Toggle: **`<on/off>`**")
+    if desc.lower() == "on":
+      data = {"_id":ctx.guild.id,"sping":"on"}
+      return await ctx.send("Security Ping Has Been Turned On. The Modrole Will Be Pinged Upon Security Issues!")
+    if desc.lower() == "off":
+      data = {"_id":ctx.guild.id,"sping":"off"}
+      return await ctx.send("Security Ping Has Been Turned Off. The Modrole Will Not Be Pinged Upon Security Issues!")
+
 @client.event
 async def on_bulk_message_delete(messages):
   data = await client.config.find(messages[0].guild.id)
