@@ -2975,7 +2975,7 @@ async def security(ctx,query = None,desc = None):
     await ctx.send(f"Security Services Are Now Toggled On!")
     return
   if query.lower() == "off":
-    if not ctx.author.guild_permissions.administratoe:
+    if not ctx.author.guild_permissions.administrator:
       return await ctx.send(f"You Don't Have The **`ADMINISTRATOR`** Permission Required To Execute This Command!")
     data = {"_id":ctx.guild.id,"stoggle":"off"}
     await client.config.upsert(data)
