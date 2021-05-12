@@ -2934,9 +2934,9 @@ async def on_guild_role_update(before,after):
       return
     if not "sping" in data:
       ping = "off"
-    if data["sping"] == "off":
+    elif data["sping"] == "off":
       ping = "off"
-    if data['sping'] == "on":
+    elif data['sping'] == "on":
       ping = "on" 
     if len(hostile_perms) > 1:
       if ping == "off":
