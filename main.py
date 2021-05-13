@@ -169,8 +169,7 @@ async def whois(ctx, member : discord.Member = None):
   embed.set_thumbnail(url = member.avatar_url)
   embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
   embed.add_field(name="Joined Server On:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
-  embed.set_footer(icon_url = ctx.author.avatar_url, text = 
-  f"Requested By {ctx.author.name}")
+  embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}")
   embed.add_field(name= "Avatar Link",value = f"[Click Here]({member.avatar_url})")
   for perm, stat in member.guild_permissions:
     if stat is True:
@@ -178,10 +177,10 @@ async def whois(ctx, member : discord.Member = None):
       count += 1
   if rc >= 1:
     if len(role_str) <= 1024:
-      embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
+      embed.add_field(name=f"Roles[{rc}]", value=role_str)
     else:
       embed.add_field(name = f"Roles[{rc}]",value = "User Has Too Many Roles!",inline = False)
-    embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
+    embed.add_field(name="Highest Role:", value=member.top_role.mention)
   else:
     embed.add_field(name = "Roles",value = "None",inline = False)
   if count >= 1:
