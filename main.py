@@ -183,7 +183,7 @@ async def whois(ctx, member : discord.Member = None):
   else:
     embed.add_field(name = "Roles",value = "None",inline = False)
   if count >= 1:
-    embed.add_field(name = f"Key Permissions",value = f"{perms_string}")
+    embed.add_field(name = f"Key Permissions",value = f"{perms_string}",inline = False)
   else:
     embed.add_field(name = "Key Permissions",value = "None")
   await ctx.send(embed=embed)
