@@ -176,14 +176,14 @@ async def whois(ctx, member : discord.Member = None):
       count += 1
   if rc >= 1:
     if len(role_str) <= 1024:
-      embed.add_field(name=f"Roles[{rc}]", value=role_str)
+      embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
     else:
-      embed.add_field(name = f"Roles[{rc}]",value = "User Has Too Many Roles!")
-    embed.add_field(name="Highest Role:", value=member.top_role.mention)
+      embed.add_field(name = f"Roles[{rc}]",value = "User Has Too Many Roles!",inline = False)
+    embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
   else:
     embed.add_field(name = "Roles",value = "None",inline = False)
   if count >= 1:
-    embed.add_field(name = f"Key Permissions",value = f"{perms_string}",inline = False)
+    embed.add_field(name = f"Key Permissions",value = f"{perms_string}")
   else:
     embed.add_field(name = "Key Permissions",value = "None")
   await ctx.send(embed=embed)
