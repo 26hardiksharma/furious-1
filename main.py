@@ -165,7 +165,6 @@ async def whois(ctx, member : discord.Member = None):
     role_str += f"{role.mention} "
     rc += 1
   embed = discord.Embed(title = "User Info" , description = member.mention , colour = 0xE91E63)
-  embed.add_field(name = "ID", value = member.id)  
   embed.set_thumbnail(url = member.avatar_url)
   embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
   embed.add_field(name="Joined Server On:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
@@ -177,10 +176,10 @@ async def whois(ctx, member : discord.Member = None):
       count += 1
   if rc >= 1:
     if len(role_str) <= 1024:
-      embed.add_field(name=f"Roles[{rc}]", value=role_str)
+      embed.add_field(name=f"Roles[{rc}]", value=role_str,inline = False)
     else:
       embed.add_field(name = f"Roles[{rc}]",value = "User Has Too Many Roles!",inline = False)
-    embed.add_field(name="Highest Role:", value=member.top_role.mention)
+    embed.add_field(name="Highest Role:", value=member.top_role.mention,inline = False)
   else:
     embed.add_field(name = "Roles",value = "None",inline = False)
   if count >= 1:
