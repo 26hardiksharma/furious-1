@@ -3090,4 +3090,10 @@ async def attachmentfilter(ctx,query = None,desc = None):
       data = {"_id":ctx.guild.id,"aaction":"delete"}
       await client.config.upsert(data)
       return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Delete`**. Suspicious Attachments Will Be Deleted Automatically!")
+@client.command()
+async def website(ctx):
+  list = [0xFF80ED,0x3498DB,0x2ECC71,0x00FFFF]
+  embed = discord.Embed(title = "Thank You For Choosing Furious",url = "https://discord.gg/5zbU6wEhkh",timestamp = datetime.datetime.now(),colour = random.choice(list))
+  embed.add_field(name = "Click Below To View Our Website!",value="[Click Me!](https://drumpybuds.gq/)")
+  await ctx.send(embed=embed)
 client.run(TOKEN)
