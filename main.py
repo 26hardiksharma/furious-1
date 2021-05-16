@@ -758,7 +758,7 @@ async def help(ctx,query = None):
       embed.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
       embed.add_field(name = "<:emoji_2:810202313142566992> Moderation",value  = "`kick`,`ban`,`mute`,`unmute`,`hackban`,`tempmute`,`slowmode`,`lock`,`unlock`,`private`,\n`unprivate`,`setnick`,`muterole`",inline =False)
       embed.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
-      embed.add_field(name = f"<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`giveaway`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`,\n`starboard`",inline = False)
+      embed.add_field(name = f"<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`,\n`starboard`",inline = False)
       embed.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
       embed.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation\nUtility\nManagement\nFun\nYou Can Type F!help <module> To Get The Commands Of That Module")
       embed.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://dsc.gg/furiousofficial)",inline = False)
@@ -793,7 +793,9 @@ async def help(ctx,query = None):
     elif query.lower() == 'utility':
       embed = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = 0x00FFD7)
       embed.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious",inline = True)
+      """
       embed.add_field(name = "Giveaway",value = "<:emoji_2:810202313142566992> Starts A Giveaway Setup In The Server\nUsage :- ^giveaway",inline = True)
+      """
       embed.add_field(name = "Roll",value = "<:emoji_0:810202224947888249> Pick A Random Number From The Choice Provided\nUsage :- ^roll [quantity]\nExample :- ^roll 100",inline = True)
       embed.add_field(name = "Wiki",value = "<:emoji_4:810202418750029884> Search Wikipedia For A Topic\nUsage :- ^wiki [topic]\nExample :- ^wiki plants",inline = True)
       embed.add_field(name = "Whois",value = "<:emoji_3:810202359362748487> Get The Info Of A User\nUsage :- ^whois <@user>\nExample :- ^whois <@!790478502909837333>",inline =True)
