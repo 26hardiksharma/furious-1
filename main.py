@@ -3094,4 +3094,39 @@ async def website(ctx):
   embed = discord.Embed(title = "Thank You For Choosing Furious",url = "https://discord.gg/5zbU6wEhkh",timestamp = datetime.datetime.now(),colour = random.choice(list))
   embed.add_field(name = "Click Below To View Our Website!",value="[Click Me!](https://drumpybuds.gq/)")
   await ctx.send(embed=embed)
+@client.command()
+async def softban(ctx,user: discord.Member = None,*,reason = "No Reason Specified"):
+  if ctx.author.guild_permissions.ban_members:
+    if ctx.guild.me.guild_permissions.ban_members:
+      if not user:
+        return await ctx.send('Please be Sure To Mention A Member Or use Their ID To Ban Them!')
+      if ctx.author.id == ctx.guild.owner_id:
+        try:
+          await user.ban(reason = f"{reason} || Action By {ctx.author}",delete_message_days=0)
+          await ctx.send(f'Softbanned {user} From {ctx.guild.name} || Reason: {reason}')
+        except:
+          await ctx.send(f'I Am Unable To Interact With {user}')
+          return
+        try:
+          await member.send(f'You Have Been Banned From {ctx.guild.name} Because Of {reason}')
+        except:
+          return
+      else:
+        if user.top_role>= ctx.author.top_role or user.id == ctx.guild.owner_id:
+          return await ctx.send(f'You Dont Have Permission To Interact With {user}!')
+        try:
+          await user.ban(reason = f"{reason} || Action By {ctx.author}",delete_message_days=0)
+          await ctx.send(f'Softbanned {user} From {ctx.guild.name} || Reason: {reason}')
+        except:
+          await ctx.send(f'I Am Unable To Interact With {user}')
+          return
+        try:
+          await user.send(f'You Have Been Banned From {ctx.guild.name} Because Of {reason}')
+        except:
+          return
+    else:
+      await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Action")
+  else:
+    await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
+
 client.run(TOKEN)
