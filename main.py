@@ -553,6 +553,7 @@ async def slowmode(ctx, unit = None):
       await ctx.send("I Need The `MANAGE CHANNELS` Permission Required To Execute This Command!")
   else:
     await ctx.send("You Are Missing The `MANAGE CHANNELS` Permission Required To Execute This Command!") 
+"""
 @client.command()
 async def giveaway(ctx):
   if ctx.author.guild_permissions.manage_guild:
@@ -632,12 +633,7 @@ async def reroll(ctx,channel : discord.TextChannel, id_ : int):
     await channel.send(f"The New Winner Is {winner.mention}! Congratulations!")
   else:
     await ctx.send('You Dont Have The **MANAGE SERVER** Permission Required To Execute This Command!')
-@client.command()
-async def revive(ctx):
-  if ctx.author.guild_permissions.administrator:
-    await ctx.message.delete()
-    msg = await ctx.send(f"**Alert!** DEAD CHAT || @everyone ||")
-    await msg.edit(content =f"**DEAD CHAT, PLEASE BE ACTIVE**")
+"""
 @client.command()
 async def wink(ctx):
   embed=discord.Embed(title = f"{ctx.author.name} Is Winking 😉")
