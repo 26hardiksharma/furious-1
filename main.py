@@ -1775,7 +1775,7 @@ async def on_message(message):
         action = data['aaction']
       types = ['.png','jepg','jpeg','webp','.mp3','.mp4','.jpg','.txt','.pdf',]
       for j in message.attachments:
-        kek = str(j.filename[-4:])
+        kek = j.filename[-4:]
         if not kek in types:
           try:
             await message.delete()
