@@ -1784,12 +1784,12 @@ async def on_message(message):
           break
       if action == "kick":
         try:
-          await message.author.kick(reason = f"Tried Posting A Suspicious Format File In #{message.channel.name}")
+          await message.author.kick(reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
         except:
           pass
       elif action == "ban":
         try:
-          await message.author.ban(reason = f"Tried Posting A Suspicious Format File In #{message.channel.name}")
+          await message.author.ban(reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
         except:
           pass
       elif action == "mute":
@@ -1799,7 +1799,7 @@ async def on_message(message):
         if not muted:
           return
         try:
-          await message.author.add_roles(muted,reason = f"Tried Posting A Suspicious Format File In #{message.channel.name}")
+          await message.author.add_roles(muted,reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
         except:
           return
     data = await client.bls.find(message.author.id)
