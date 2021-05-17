@@ -154,7 +154,7 @@ async def unmute(ctx,member : discord.Member):
       await ctx.send(embed=embed)
 
 @client.command(aliases=['user'])
-async def whois(ctx, member : discord.Member = None):
+async def whois(ctx, *,member : discord.Member = None):
   if member == None:
     member = ctx.author
   count = 0
@@ -188,7 +188,7 @@ async def whois(ctx, member : discord.Member = None):
     embed.add_field(name = "Key Permissions",value = "None")
   await ctx.send(embed=embed)
 @client.command(aliases = ['av'])
-async def avatar(ctx, member : discord.Member=None):
+async def avatar(ctx,*, member : discord.Member=None):
   member = member or ctx.author
   embed = discord.Embed(title = f" {member.name}'s Avatar",url = member.avatar_url)
   embed.set_image(url = member.avatar_url)
