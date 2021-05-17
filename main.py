@@ -1781,27 +1781,27 @@ async def on_message(message):
             await message.delete()
           except:
             pass
-          break
-      if action == "kick":
-        try:
-          await message.author.kick(reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
-        except:
-          pass
-      elif action == "ban":
-        try:
-          await message.author.ban(reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
-        except:
-          pass
-      elif action == "mute":
-        if not "mrole" in data:
-          return
-        muted = message.guild.get_role(data["mrole"])
-        if not muted:
-          return
-        try:
-          await message.author.add_roles(muted,reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
-        except:
-          return
+          if action == "kick":
+            try:
+              await message.author.kick(reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
+            except:
+              pass
+          elif action == "ban":
+            try:
+              await message.author.ban(reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
+            except:
+              pass
+          elif action == "mute":
+            if not "mrole" in data:
+              return
+            muted = message.guild.get_role(data["mrole"])
+            if not muted:
+              return
+            try:
+              await message.author.add_roles(muted,reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
+            except:
+              return
+            break
     data = await client.bls.find(message.author.id)
     if data is not None:
       if "blacklisted" in data:
