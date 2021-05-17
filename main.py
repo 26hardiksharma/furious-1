@@ -1801,7 +1801,10 @@ async def on_message(message):
               await message.author.add_roles(muted,reason = f"Tried Posting A {kek} Format File In #{message.channel.name}")
             except:
               return
-            break
+          elif action == "warn":
+            await ctx.send("{}, No {} Files Allowed!".format(message.author.mention,kek))
+            return
+          break
     data = await client.bls.find(message.author.id)
     if data is not None:
       if "blacklisted" in data:
@@ -3068,9 +3071,9 @@ async def attachmentfilter(ctx,query = None,desc = None):
     if not ctx.author.guild_permissions.administrator:
       return await ctx.send(f"You Are Missing The **ADMINISTRATOR** Permission Required To Execute This Command!")
     if not desc:
-      return await ctx.send("Please Provide A Valid Action.\nValid Actions: **`Kick`**,**`Ban`**,**`Mute`**,**`Delete`**")
-    if not desc.lower() in ("kick","ban","mute","delete"):
-      return await ctx.send("Please Provide A Valid Action.\nValid Actions: **`Kick`**,**`Ban`**,**`Mute`**,**`Delete`**")
+      return await ctx.send("Please Provide A Valid Action.\nValid Actions: **`Kick`**,**`Ban`**,**`Mute`**,**`Warn`**")
+    if not desc.lower() in ("kick","ban","mute","warn"):
+      return await ctx.send("Please Provide A Valid Action.\nValid Actions: **`Kick`**,**`Ban`**,**`Mute`**,**`Warn`**")
     if desc.lower() == "kick":
       data = {"_id":ctx.guild.id,"aaction":"kick"}
       await client.config.upsert(data)
@@ -3083,10 +3086,10 @@ async def attachmentfilter(ctx,query = None,desc = None):
       data = {"_id":ctx.guild.id,"aaction":"mute"}
       await client.config.upsert(data)
       return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Mute`**. Suspicious Attachments Will Be Deleted And The Sender Will Be Muted Upon Sending!\nAlso Be Sure To Use **`F!muterole setup`** Or **`F!muterole set <@role>`** To Set A Muted Role!")
-    if desc.lower() == "delete":
-      data = {"_id":ctx.guild.id,"aaction":"delete"}
+    if desc.lower() == "warn":
+      data = {"_id":ctx.guild.id,"aaction":"warn"}
       await client.config.upsert(data)
-      return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Delete`**. Suspicious Attachments Will Be Deleted Automatically!")
+      return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Warn`**. Suspicious Attachments Will Be Deleted Automatically And The Sender Will Be Warned!")
 @client.command()
 async def website(ctx):
   list = [0xFF80ED,0x3498DB,0x2ECC71,0x00FFFF]
