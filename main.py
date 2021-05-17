@@ -1802,7 +1802,7 @@ async def on_message(message):
             except:
               return
           elif action == "warn":
-            await ctx.send("{}, No {} Files Allowed!".format(message.author.mention,kek))
+            await message.channel.send("{}, No {} Files Allowed!".format(message.author.mention,kek))
             return
           break
     data = await client.bls.find(message.author.id)
