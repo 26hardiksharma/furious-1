@@ -1815,11 +1815,6 @@ async def on_message(message):
             await message.channel.send("{}, No {} Files Allowed!".format(message.author.mention,kek))
             return
           break
-    data = await client.bls.find(message.author.id)
-    if data is not None:
-      if "blacklisted" in data:
-        if data["blacklisted"] == "yes":
-          return
   """      
   else:
     data = await client.config.find(message.guild.id)
