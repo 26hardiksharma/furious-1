@@ -779,7 +779,7 @@ async def hitler(ctx, member: discord.Member = None):
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def help(ctx,query = None):
+async def  help(ctx,query = None):
   me = await ctx.guild.fetch_member(client.user.id)
   if me.guild_permissions.send_messages and me.guild_permissions.attach_files and me.guild_permissions.attach_files:
     if query == None:
@@ -1448,6 +1448,7 @@ async def totalbans(ctx):
     await ctx.send(f"{ctx.guild.name} Has {ct} Bans In Total")
 @client.event
 async def on_command_error(ctx, error):
+  ctx.command.reset_cooldown(ctx)
   if isinstance(error, commands.CommandOnCooldown):
     await ctx.message.delete()
     embed = discord.Embed(title = f"<:error:795629492693368833> {ctx.author.name}#{ctx.author.discriminator}",colour = 0xFF0000)
