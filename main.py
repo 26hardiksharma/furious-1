@@ -76,6 +76,8 @@ def blcheck():
       return False
   return commands.check(lol)
 @client.command()
+@commands.cooldown(1,5,commands.BucketType.user)
+@blcheck()
 async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
   await ctx.message.delete()
   abc = ctx.guild.get_member(client.user.id) 
@@ -112,6 +114,8 @@ async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
   else:
     await ctx.send(f"You Are Missing The **KICK MEMBERS** Permission Required To Execute This Action")
 @client.command()
+@commands.cooldown(1,5,commands.BucketType.user)
+@blcheck()
 async def ban(ctx,user: discord.Member = None,*,reason = "No Reason Specified"):
   if ctx.author.guild_permissions.ban_members:
     if ctx.guild.me.guild_permissions.ban_members:
@@ -146,6 +150,7 @@ async def ban(ctx,user: discord.Member = None,*,reason = "No Reason Specified"):
   else:
     await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
 @client.command(aliases = ['um'])
+@blcheck()
 async def unmute(ctx,member : discord.Member):
   if ctx.author.guild_permissions.manage_messages:
     muted_role = discord.utils.get(member.guild.roles, name='Muted')
@@ -164,6 +169,7 @@ async def unmute(ctx,member : discord.Member):
       await ctx.send(embed=embed)
 
 @client.command(aliases=['user'])
+@blcheck()
 async def whois(ctx, *,member : discord.Member = None):
   if member == None:
     member = ctx.author
@@ -198,6 +204,7 @@ async def whois(ctx, *,member : discord.Member = None):
     embed.add_field(name = "Key Permissions",value = "None")
   await ctx.send(embed=embed)
 @client.command(aliases = ['av'])
+@blcheck()
 async def avatar(ctx,*, member : discord.Member=None):
   member = member or ctx.author
   embed = discord.Embed(title = f" {member.name}'s Avatar",url = member.avatar_url)
@@ -205,6 +212,7 @@ async def avatar(ctx,*, member : discord.Member=None):
   await ctx.send(embed=embed)
 @client.command(aliases = ['clear'])
 @commands.cooldown(1,5,commands.BucketType.user)
+@blcheck()
 async def purge(ctx,amt = None,member : discord.Member = None):
     if ctx.author.guild_permissions.manage_messages:
       if amt == None:
@@ -243,6 +251,7 @@ async def purge(ctx,amt = None,member : discord.Member = None):
       embed.add_field(name = "Missing Permission(s)", value = "Manage Messages",inline = False)
       embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Requested By {ctx.author.name}")
       await ctx.send(embed=embed)
+@blcheck()
 @client.command(aliases = ['m'])
 async def mute(ctx,member : discord.Member,*,reason = "No reason Specified"):
   if ctx.author.guild_permissions.manage_messages:
@@ -289,6 +298,7 @@ async def botstats(ctx):
   embed.add_field(name = "Important Links",value = f"[___Invite Me___](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) || [___Official Server___](https://discord.gg/5zbU6wEhkh)")
   await ctx.send(embed = embed)
 @client.command(pass_context = True,aliases = ['nick'])
+@blcheck()
 async def setnick(ctx, member : discord.Member = None,*,nick = None):
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
   abc = await ctx.guild.fetch_member(client.user.id)
@@ -328,6 +338,7 @@ async def setnick(ctx, member : discord.Member = None,*,nick = None):
     await ctx.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 10, commands.BucketType.user)
+@blcheck()
 async def hack(ctx,member : discord.Member = None):
   if member == None:
     await ctx.send(f"I Got My Setup Ready To Hack Users But Ended Up Realizing You Didn't Mention Anyone!\nBe Sure To Mention Someone To Be Hacked!")
@@ -359,6 +370,7 @@ async def hack(ctx,member : discord.Member = None):
     await asyncio.sleep(3)
     await msg.edit(content = "Hacking Complete, user Under Control")
 @client.command()
+@blcheck()
 async def vcreate(ctx,*,query):
   if ctx.author.guild_permissions.manage_channels:
     try:
@@ -381,6 +393,7 @@ async def everyone(ctx):
     msg = await ctx.send('@everyone')
     await msg.delete()
 @client.command(aliases = ['v'])
+@blcheck()
 async def vote(ctx):
   embed = discord.Embed(title = "🗳️ Vote 🗳️",colour = 0xFFEF00)
   embed.add_field(name = "Upvote Me",value = "[Click Here](https://top.gg/bot/790478502909837333/vote)")
@@ -389,6 +402,7 @@ async def vote(ctx):
   embed.set_footer(text = "Your Vote Is Precious And Helps Me Grow!")
   await ctx.send(embed=embed)
 @client.command()
+@blcheck()
 async def roll(ctx,amount):
   entry = int(amount)
   outcome = random.randint(1,entry)
@@ -410,6 +424,7 @@ async def invite(ctx):
   embed.set_thumbnail(url= ctx.author.avatar_url)
   await ctx.send(embed=embed)
 @client.command()
+@blcheck()
 async def lock(ctx,*,channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
     channel = channel or ctx.channel
@@ -425,6 +440,7 @@ async def lock(ctx,*,channel : discord.TextChannel=None):
     await ctx.send("You Don't Have The **MANAGE CHANNELS** Permission Required To Execute This Command!")
 
 @client.command()
+@blcheck()
 async def unlock(ctx,*,channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
     channel = channel or ctx.channel
@@ -439,6 +455,7 @@ async def unlock(ctx,*,channel : discord.TextChannel=None):
   else:
     await ctx.send("You Don't Have The **MANAGE CHANNELS** Permission Required To Execute This Command!")
 @client.command()
+@blcheck()
 async def unban(ctx, kek : discord.User = None):
   me = await ctx.guild.fetch_member(client.user.id)
   if ctx.author.guild_permissions.ban_members:
@@ -458,6 +475,7 @@ async def unban(ctx, kek : discord.User = None):
     await ctx.send("You Are Missing The `BAN MEMBERS` Permission Required To Execute This Command!")
 
 @client.command(aliases = ['wikipedia'])
+@blcheck()
 async def wiki(ctx,*,query = None):
   if query == None:
 
@@ -475,6 +493,7 @@ async def wiki(ctx,*,query = None):
     except wikipedia.DisambiguationError as e:
       await msg.edit(content = f"<:error:795629492693368833> Results Could Not Be Loaded Because Your Query :- ``{query}`` Is Matching Several Pages! Please Mention Your Query More Specifically!")
 @client.command()
+@blcheck()
 async def serverinfo(ctx):
   embed = discord.Embed(title = f"Information Of {ctx.guild.name}",color = 0x00FFFF)
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
@@ -495,6 +514,7 @@ async def serverinfo(ctx):
   embed.add_field(name = f"Emojis",value = f"**Count:** {len(ctx.guild.emojis)}\n**Animated:** __{act}__ \n**Non-Animated:** __{ct}__",inline = False)
   await ctx.send(embed=embed)
 @client.command()
+@blcheck()
 async def kill(ctx,member : discord.Member = None):
   if member == None:
     await ctx.send("Bruh, Please Mention A Member For Me To Kill Them. I Don't Support Mind Reading Currently :/")
@@ -539,6 +559,7 @@ def convert(time):
     return -2
   return val*time_dict[unit]
 @client.command()
+@blcheck()
 async def slowmode(ctx, unit = None):
   me = await ctx.guild.fetch_member(client.user.id)
   if ctx.author.guild_permissions.manage_channels:
@@ -645,16 +666,19 @@ async def reroll(ctx,channel : discord.TextChannel, id_ : int):
     await ctx.send('You Dont Have The **MANAGE SERVER** Permission Required To Execute This Command!')
 """
 @client.command()
+@blcheck()
 async def wink(ctx):
   embed=discord.Embed(title = f"{ctx.author.name} Is Winking 😉")
   embed.set_image(url = "https://cdn.discordapp.com/attachments/737780593609408532/737815454046879854/5OHh.gif")
   await ctx.send(embed=embed) 
 @client.command()
+@blcheck()
 async def pog(ctx):
   embed=discord.Embed(title = f"{ctx.author.name} Is Pogging <:pog:819172397621837895>")
   embed.set_image(url = "https://cdn.discordapp.com/attachments/796260664577359883/801735309913096223/pog.gif")
   await ctx.send(embed=embed)   
 @client.command()
+@blcheck()
 async def remindme(ctx,time,*,msg):
   unit = convert(time)
   if unit == -1:
@@ -669,6 +693,7 @@ async def remindme(ctx,time,*,msg):
     await ctx.send(f"Reminder {ctx.author.mention}:- **{msg}**")
     await ctx.author.send(f"Reminder {ctx.author.mention}:- **{msg}**")  
 @client.command(aliases = ['tm'])
+@blcheck()
 async def tempmute(ctx,member : discord.Member,unit,*,reason = "No reason Specified"):
   if member.guild_permissions.manage_messages:
     await ctx.message.delete()
@@ -725,6 +750,7 @@ async def tour(ctx):
 
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
+@blcheck()
 async def wanted(ctx, member: discord.Member = None):
   
   if member == None:
@@ -739,6 +765,7 @@ async def wanted(ctx, member: discord.Member = None):
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
+@blcheck()
 async def hitler(ctx, member: discord.Member = None):
   if member== None:
     member = ctx.author
@@ -822,6 +849,7 @@ async def help(ctx,query = None):
 
 @client.command()
 @commands.cooldown(1,600,commands.BucketType.user)
+@blcheck()
 async def suggest(ctx,*,query):
   id = ctx.author.id
   suggestion = query
@@ -862,7 +890,7 @@ async def decline(ctx,id:int,*,reason):
       embed.add_field(name = "Declined By",value = ctx.author,inline = False)
       await ctx.send(embed=embed)
 @client.event
-async  def on_guild_join(guild):
+async def on_guild_join(guild):
   channel = client.get_channel(810205872588062801)
   owner = await guild.fetch_member(guild.owner_id)
   embed = discord.Embed(title = "🥳 I Was Added To A New Server 🥳",colour = 0xDFFF00)
@@ -889,6 +917,7 @@ async def on_guild_remove(guild):
   await channel.send(embed=embed)
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
+@blcheck()
 async def trash(ctx, member: discord.Member = None):
   if member== None:
     member = ctx.author
@@ -902,6 +931,7 @@ async def trash(ctx, member: discord.Member = None):
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
 @commands.cooldown(1,60,commands.BucketType.user)
+@blcheck()
 async def feedback(ctx,*,query = None):
   channel = client.get_channel(810205323675566101)
   embed=discord.Embed(title = '😄 Feedback 😄',colour =0x9FE2BF)
@@ -912,6 +942,7 @@ async def feedback(ctx,*,query = None):
   await channel.send(embed=embed)
   await ctx.send(f"Thanks For Giving A Feedback! We Really Appreciate Your Efforts :D")
 @client.command()
+@blcheck()
 async def private(ctx, channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
       channel = channel or ctx.channel
@@ -925,6 +956,7 @@ async def private(ctx, channel : discord.TextChannel=None):
     await ctx.send("You Dont Have The **MANAGE CHANNELS** Permissions Requiered To Execute This Command")
 
 @client.command()
+@blcheck()
 async def unprivate(ctx, channel : discord.TextChannel=None):
   if ctx.author.guild_permissions.manage_channels:
       channel = channel or ctx.channel
@@ -967,6 +999,7 @@ async def voter_mode(ctx,word,channel : discord.TextChannel=None):
     else:
       await ctx.send("You Are Missing The **ADMINISTRATOR** Permission Required To Execute This Command")
 @client.command()
+@blcheck()
 async def templock(ctx,unit,channel : discord.TextChannel=None):
   
   if ctx.author.guild_permissions.manage_channels:
@@ -996,6 +1029,7 @@ async def templock(ctx,unit,channel : discord.TextChannel=None):
     await ctx.send("<:kya_bey:796610669549322250>")
 @client.command()
 @commands.cooldown(1, 60, commands.BucketType.guild)
+@blcheck()
 async def muterole(ctx,query = None,role : discord.Role = None):
   if query == None:
     embed = discord.Embed(title = "Muterole")
@@ -1098,6 +1132,7 @@ async def muterole(ctx,query = None,role : discord.Role = None):
         await ctx.send(f'**{role.name}** Has Been Set As The Muterole Of This Server!')
         ctx.command.reset_cooldown(ctx)
 @client.command(aliases= ["ccreate"])
+@blcheck()
 async def create_category(ctx, *, name):
   if ctx.author.guild_permissions.manage_guild:
     await ctx.guild.create_category(name)
@@ -1105,6 +1140,7 @@ async def create_category(ctx, *, name):
   else:
     await ctx.send(f"You Are Missing The **MANAGE SERVER** Permissions Required To Execute This Command!")
 @client.command()
+@blcheck()
 @commands.cooldown(1, 5, commands.BucketType.guild)
 async def serverlock(ctx):
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
@@ -1119,6 +1155,7 @@ async def serverlock(ctx):
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
 @commands.cooldown(1, 60, commands.BucketType.guild)
+@blcheck()
 async def serverunlock(ctx):
   if ctx.author.guild_permissions.manage_guild and ctx.author.guild_permissions.manage_channels:
     await ctx.send("Starting The Process To Unlock All Text Channels Of The Server, Please Be Patient.")
@@ -1133,6 +1170,7 @@ async def serverunlock(ctx):
     await ctx.send(f"You Dont Have The **MANAGE CHANNELS** AND **MANAGE MESSAGES** Permissions Required To Execute This Command!")
 @client.command()
 @commands.cooldown(1, 60, commands.BucketType.guild)
+@blcheck()
 async def maintenance(ctx,query = None):
   if query == None:
     embed = discord.Embed(title = "Maintenance")
@@ -1212,6 +1250,7 @@ async def maintenance(ctx,query = None):
       await ctx.send("You Are Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!") 
       ctx.command.reset_cooldown(ctx)     
 @client.command()
+@blcheck()
 async def nuke(ctx,channel : discord.TextChannel = None):
   if ctx.author.guild_permissions.manage_channels:
     if channel == None:
@@ -1226,6 +1265,7 @@ async def usercount(ctx):
   await ctx.send(f"I Have {num} Users Currently")
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
+@blcheck()
 async def addrole(ctx,member : discord.Member = None,role : discord.Role = None): 
   if member == None:
     await ctx.send("Please Mention The Member Or Pass Their ID To Give Them A Role")
@@ -1268,6 +1308,7 @@ async def addrole(ctx,member : discord.Member = None,role : discord.Role = None)
           await ctx.send(f"{member.name}#{member.discriminator} Already Has The Target Role!")
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
+@blcheck()
 async def takerole(ctx,member : discord.Member = None,role : discord.Role = None):
   if member == None:
     await ctx.send("Please Mention The Member Or Pass Their ID To Remove A Role From Them.")
@@ -1302,6 +1343,7 @@ async def takerole(ctx,member : discord.Member = None,role : discord.Role = None
           embed.add_field(name = f"Responsible Moderator",value= ctx.author.mention)
           await ctx.send(embed=embed)
 @client.command()
+@blcheck()
 async def hackban(ctx,member : discord.User = None,*,reason= "No Reason Specified."):
   await ctx.message.delete()
   if ctx.author.guild_permissions.ban_members:
@@ -1344,6 +1386,7 @@ def rcheck(choice):
   if choice not in correct:
     return -1
 @client.command()
+@blcheck()
 async def embed(ctx):
   questions = ["Enter The Title You Want For The Embed","Enter The Description For Your Embed!","Enter A Field For Your Embed","Enter The Value For Your Field\nIf You Want To Add Hyperlink Type [Field Text](link)"]
   answers = []
@@ -1363,6 +1406,7 @@ async def embed(ctx):
   embed.add_field(name= answers[2],value= f"{answers[3]}")
   await ctx.send(embed=embed)
 @client.command()
+@blcheck()
 async def pin(ctx,id :int):
   if ctx.author.guild_permissions.manage_messages:
     abc = await ctx.guild.fetch_member(client.user.id)
@@ -1379,6 +1423,7 @@ async def pin(ctx,id :int):
   else:
     await ctx.send(f"You Are Missing The **MANAGE MESSAGES** Permissions To Execute This Command")
 @client.command()
+@blcheck()
 async def unpin(ctx,id :int):
   if ctx.author.guild_permissions.manage_messages:
     abc = await ctx.guild.fetch_member(client.user.id)
@@ -1394,6 +1439,7 @@ async def unpin(ctx,id :int):
   else:
     await ctx.send(f"You Are Missing The **MANAGE MESSAGES** Permissions To Execute This Command")
 @client.command()
+@blcheck()
 async def totalbans(ctx):
   if ctx.author.guild_permissions.ban_members:
     ct = 0
@@ -1410,7 +1456,7 @@ async def on_command_error(ctx, error):
     await ctx.send(embed=embed)    
     print(f"{ctx.author} ID: {ctx.author.id} Used A Command: {ctx.command.name} While Being On Cooldown")
   elif isinstance(error,commands.CommandNotFound):
-    pass
+    return
   elif isinstance(error,commands.UserNotFound):
     await ctx.send(f"Couldn't Find That User :(")
   elif isinstance(error,commands.MemberNotFound):
@@ -1443,6 +1489,7 @@ async def getMeme():
     return name, url
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
+@blcheck()
 async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = await getMeme()
@@ -1498,6 +1545,7 @@ async def create(ctx,type,*,query):
     else:
       await ctx.send(f"You Need The **MANAGE CHANNELS** Permission To Be Able To Execute This Command")
 @client.command() 
+@blcheck()
 async def coinflip(ctx):
   num= random.randint(0,1)
   if num == 0:
@@ -1508,6 +1556,7 @@ async def coinflip(ctx):
   embed.add_field(name = "Outcome",value = val)
   await ctx.send(embed=embed) 
 @client.command()
+@blcheck()
 async def roleinfo(ctx,role : discord.Role = None):
   count = 0
   perms_string = ""
@@ -1531,6 +1580,7 @@ async def roleinfo(ctx,role : discord.Role = None):
       embed.add_field(name = "Permissions",value = perms_string,inline = False)
     await ctx.send(embed=embed)
 @client.command(aliases = ['vmute'])
+@blcheck()
 async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"):
   abc = await ctx.guild.fetch_member(client.user.id)
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
@@ -1562,6 +1612,7 @@ async def voicemute(ctx,member : discord.Member,*, reason = "No Reason Provided"
   else:
     await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command")
 @client.command(aliases = ['vunmute'])
+@blcheck()
 async def voiceunmute(ctx,member : discord.Member):
   abc = await ctx.guild.fetch_member(client.user.id)
   owner = await ctx.guild.fetch_member(ctx.guild.owner_id)
@@ -1593,6 +1644,7 @@ async def voiceunmute(ctx,member : discord.Member):
   else:
     await ctx.send(f"You Are Missing The **MUTE MEMBERS** Permission Required To Execute This Command") 
 @client.command()
+@blcheck()
 async def warn(ctx,member : discord.Member,*,reason = None):
   if ctx.author.guild_permissions.manage_messages:
     await ctx.message.delete()
@@ -1616,7 +1668,7 @@ async def warn(ctx,member : discord.Member,*,reason = None):
       await client.warndb.upsert_custom(kekwarn,kekdata)
       print('GG')
 @client.command()
-async def status(ctx,*,status):
+async def status(ctx,*,status = None):
   if ctx.author.id == 757589836441059379:
     answers = []
     def check(m):
@@ -1639,6 +1691,7 @@ async def status(ctx,*,status):
     await ctx.send(f"Status Setup Done")
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
+@blcheck()
 async def quote(ctx):
   results = requests.get('https://type.fit/api/quotes').json()
   num  = random.randint(1,1500)
@@ -1646,6 +1699,7 @@ async def quote(ctx):
   await ctx.send(f"**{content}**")
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
+@blcheck()
 async def dog(ctx):
   result = requests.get('https://dog.ceo/api/breeds/image/random').json()
   data= result['message']
@@ -1654,6 +1708,7 @@ async def dog(ctx):
   embed.set_footer(text= f"Requested By {ctx.author.name}#{ctx.author.discriminator}")
   await ctx.send(embed=embed)
 @client.command()
+@blcheck()
 async def commands_list(ctx):
   if not ctx.author.id == 757589836441059379:
     return
@@ -1662,6 +1717,7 @@ async def commands_list(ctx):
     cmd_list += f"{cmd} , "
   await ctx.send(cmd_list)
 @client.command()
+@blcheck()
 async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
   if ctx.author.guild_permissions.manage_channels:
     if flag.lower() == "topic":
@@ -1671,9 +1727,11 @@ async def editchannel(ctx,channel :discord.TextChannel,flag,*, query):
       await channel.edit(name = query,reason = f"Action By {ctx.author.name}#{ctx.author.discriminator}")
       await ctx.send("Success!")
 @client.command()
+@blcheck()
 async def joke(ctx):
   await ctx.send(pyjokes.get_joke())
 @client.command()
+@blcheck()
 async def ascii(ctx,*,text=None):
   if text == None:
       await ctx.send("Please Supply A Text To Be Converted To Ascii :)")
@@ -1684,6 +1742,7 @@ async def ascii(ctx,*,text=None):
   kek=text2art(text)
   await ctx.send(f"```\n{kek}\n```")
 @client.command()
+@blcheck()
 async def rip(ctx,member : discord.Member = None):
   if member == None:
     member = ctx.author
@@ -1696,6 +1755,7 @@ async def rip(ctx,member : discord.Member = None):
   okay.save("profile.jpg")
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
+@blcheck()
 async def delete(ctx,member : discord.Member= None):
   if member == None:
     member = ctx.author
@@ -1839,6 +1899,7 @@ async def on_message(message):
   """
   await client.process_commands(message)
 @client.command(aliases = ['kping','karuta'])
+@blcheck()
 async def cardping(ctx,query = None,*,desc = None):
   if query == None:
     embed = discord.Embed(title = "Karuta Cardping",colour = ctx.author.colour,timestamp = datetime.datetime.now())
@@ -2074,6 +2135,7 @@ async def on_member_join(member):
   await channel.send(f'Welcome To {member.guild.name}, {member.mention}\n\nBe Sure To Read The Rules Of The Server And Behave Politely With Everyone.\n\nWe Hope You Enjoy Your Stay Here')
   #I Need Members Intents 
 @client.command()
+@blcheck()
 async def prefix(ctx,prefix = None):
   if ctx.author.guild_permissions.administrator:
     if prefix == None:
@@ -2088,6 +2150,7 @@ async def prefix(ctx,prefix = None):
     await ctx.send(f'The New Prefix Was Set To `{prefix}` ;)')
   else:
     await ctx.send('You Are Missing The **`ADMINISTRATOR`** Permission Required To Execute This Command!')  
+"""
 @client.command()
 @commands.cooldown(1,120,commands.BucketType.user)
 async def giverep(ctx,member : discord.Member = None):
@@ -2119,6 +2182,7 @@ async def reputation(ctx,member :discord.Member = None):
     return await ctx.send(f'{members}\'s Reputation : `0`')
   if not "uid" in curnt:
     return await ctx.send(f"{member}'s Reputation : `0`")
+"""
 intents.bans = True 
 @client.event
 async def on_member_ban(guild,user):
@@ -2163,6 +2227,7 @@ async def on_guild_channel_delete(channel):
   embed.set_footer(text= f"ID : {channel.id}")
   await logch.send(embed = embed)
 @client.command(aliases = ['logs','modlog'])
+@blcheck()
 async def setlogs(ctx,query = None):
   if ctx.author.guild_permissions.manage_guild == False:
     return await ctx.send('You Are Missing The **`MANAGE SERVER`** Permission Required To Execute This Command!')
@@ -2281,6 +2346,7 @@ async def on_message_edit(before,after):
   embed = discord.Embed(title = 'Message Edited',description = f'**Before: {before.content}\n+ After: {after.content}**\nChannel: <#{after.channel.id}>\nAuthor: {after.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
   await logs.send(embed=embed)
 @client.command()
+@blcheck()
 async def warnings(ctx,member : discord.Member = None):
   if not member:
     member = ctx.author
@@ -2302,6 +2368,7 @@ class Topgg():
     self.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
     self.dblpy = dbl.DBLClient(self.bot,self.token)
 @client.command(aliases = ['config','serverconfig'])
+@blcheck()  
 async def configuration(ctx):
   if ctx.author.guild_permissions.manage_guild == False:
     await ctx.send(f"You Need The **MANAGE SERVER** Permission Required To Execute This Command!")
@@ -2385,6 +2452,7 @@ async def stickynote(ctx,query= None,*,desc= None):
     await ctx.send(f'**{desc}** Is Now Set As The Sticky Message For This Server.')
 
 @client.command()
+@blcheck()
 async def report(ctx,args: discord.Member= None,*,kwargs = None):
   data = await client.config.find(ctx.guild.id)
   if not data or "reportchannel" not in data:
@@ -2417,6 +2485,7 @@ async def report(ctx,args: discord.Member= None,*,kwargs = None):
   await channel.send(embed=embed)
   await ctx.send('User Has Been Reported To Proper Authorities.')
 @client.command()
+@blcheck()
 async def reportset(ctx,channel : discord.TextChannel= None):
   if not ctx.author.guild_permissions.manage_guild:
     await ctx.send('You Don\'t Have The **MANAGE SERVER** Permission Required To Execute This Command!')
@@ -2425,6 +2494,7 @@ async def reportset(ctx,channel : discord.TextChannel= None):
   await client.config.upsert(okay)
   await ctx.send(f'{channel.mention} Has Been Set As The Report Channel For This Server.')
 @client.command()
+@blcheck()
 async def starboard(ctx,args = None,kwargs = None):
   data = await client.config.find(ctx.guild.id)
   if not data or "prefix" not in data:
@@ -2571,6 +2641,7 @@ async def on_reaction_add(reaction,user):
   print('Successful Starboard Log')
 
 @client.command()
+@blcheck()
 async def getav(ctx,user: discord.User):
   await ctx.author.send(user.avatar_url)
 bl = []
@@ -2711,6 +2782,7 @@ async def evaluate(ctx, *, arg = None):
 client.ses = aiohttp.ClientSession()
 
 @client.command()
+@blcheck()
 async def addemoji(ctx,name = None,url = None):
   if ctx.author.guild_permissions.manage_emojis:
     if not name:
@@ -2754,6 +2826,7 @@ async def addemoji(ctx,name = None,url = None):
 
 
 @client.command()
+@blcheck()
 async def tag(ctx,query = None,name= None,*,desc = None):
   if not query:
     embed = discord.Embed(title = "Tag",color = ctx.author.color,timestamp = datetime.datetime.now())
@@ -2797,6 +2870,7 @@ async def tag(ctx,query = None,name= None,*,desc = None):
     await ctx.send(data[lol])
 
 @client.command()
+@blcheck()
 async def rob(ctx,member : discord.Member = None):
   data = await client.economy.find(ctx.author.id)
   if not data:
@@ -2956,6 +3030,7 @@ async def on_guild_role_update(before,after):
         else:
           await channel.send(content = f"<@&{data['modrole']}>\n{user} Granted The **`@everyone`** Role These Moderation Permissions:\n{hostile_perms}")
 @client.command()
+@blcheck()
 async def setmodrole(ctx,role: discord.Role = None):
   if ctx.author.guild_permissions.manage_guild:
     if not role:
@@ -2966,6 +3041,7 @@ async def setmodrole(ctx,role: discord.Role = None):
   else:
     return await ctx.send(f"You Need The **MANAGE SERVER** Permission Required To Execute This Command!")
 @client.command()
+@blcheck()
 async def security(ctx,query = None,desc = None):
   if not query or query.lower() == "help":
     embed = discord.Embed(title = "Security",color = ctx.author.color,timestamp = datetime.datetime.now())
@@ -3029,6 +3105,7 @@ async def on_bulk_message_delete(messages):
   
   await log.send(embed=embed) 
 @client.command()
+@blcheck()
 async def messagelogs(ctx,query = None):
   if ctx.author.guild_permissions.manage_guild:
     if query.lower() == "on":
@@ -3050,6 +3127,7 @@ async def messagelogs(ctx,query = None):
       await client.config.upsert(kek)
       await ctx.send("Set The Message Logs To <#{}>".format(id))
 @client.command(aliases = ['af','filter'])
+@blcheck()
 async def attachmentfilter(ctx,query = None,desc = None):
   if query == None or query.lower()== "help":
     embed = discord.Embed(title = "📌 Attachment Filter",color = ctx.author.color,timestamp = datetime.datetime.now(),url = "https://discord.gg/5zbU6wEhkh")
@@ -3098,6 +3176,7 @@ async def attachmentfilter(ctx,query = None,desc = None):
       await client.config.upsert(data)
       return await ctx.send("Attachment Filter Action Was Successfully Configured To **`Warn`**. Suspicious Attachments Will Be Deleted Automatically And The Sender Will Be Warned!")
 @client.command()
+@blcheck()
 async def website(ctx):
   list = [0xFF80ED,0x3498DB,0x2ECC71,0x00FFFF]
   embed = discord.Embed(title = "Thank You For Choosing Furious",url = "https://discord.gg/5zbU6wEhkh",timestamp = datetime.datetime.now(),colour = random.choice(list))
