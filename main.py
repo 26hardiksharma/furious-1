@@ -65,6 +65,16 @@ async def on_ready():
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
 intents.guilds = True
+def blcheck():
+  async def lol(ctx:commands.Context):
+    data = await client.bls.find(ctx.author.id)
+    if not data:
+      return True
+    if not "blacklisted" in data:
+      return True
+    if data["blacklisted"] == "yes":
+      return False
+  return commands.check(lol)
 @client.command()
 async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
   await ctx.message.delete()
@@ -3130,5 +3140,8 @@ async def softban(ctx,user: discord.Member = None,*,reason = "No Reason Specifie
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Action")
   else:
     await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
-
+@client.command()
+@blcheck()
+async def kek(ctx):
+  await ctx.send("Ok")
 client.run(TOKEN)
