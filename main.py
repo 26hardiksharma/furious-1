@@ -1419,6 +1419,8 @@ async def on_command_error(ctx, error):
     await ctx.send("Couldn't Find That Role In This Server :(")
   elif isinstance(error,commands.ChannelNotFound):
     await ctx.send("Cannot Find That Channel In This Guild :(")
+  elif isinstance(error,commands.CheckFailure):
+    await ctx.send("Your Account Has Been Blacklisted From Using The Bot. You Can Apply For Unblacklisting In The Official Server.")
   else:
     print(ctx.guild.name)
     print(ctx.author.name)
