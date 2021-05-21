@@ -912,7 +912,8 @@ async def on_guild_join(guild):
 async def on_guild_remove(guild):
   channel = client.get_channel(810205896662712371)
   embed = discord.Embed(title = "😔 I Was Kicked From A Server 😔",colour = 0xFF0000)
-  embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
+  bruh = await client.fetch_user(guild.owner_id)
+  embed.add_field(name = "Server Info",value = f"Server Name :- {guild.name}\nServer Owner :- {bruh}\n Member Count :- {guild.member_count}\n Guild Region :- {guild.region}\n Total Guilds I Am In :- {str(len(client.guilds))}")
   embed.set_thumbnail(url = f"{guild.icon_url}")
   await channel.send(embed=embed)
 @client.command()
