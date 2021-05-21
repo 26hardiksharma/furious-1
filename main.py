@@ -2320,12 +2320,10 @@ async def on_message_delete(message):
           attach += f"{i.filename}"
       else:
         attach = "None"
-      embed.add_field(name = "Additional Info",value = f"The Message Was Replied To Another [Message]{(msg.jump_url)}\nMessage Content : **{content}**\nAttachments : **{attach}**")
+      embed.add_field(name = "Additional Info",value = f"The Message Was Replied To Another [Message]({msg.jump_url})\nMessage Content : **{content}**\nAttachments : **{attach}**")
       await logs.send(embed=embed)
   else:
     await logs.send(embed=embed)
-
-  await logs.send(embed = embed)
 @client.event
 async def on_guild_update(before,after):
   data = await client.config.find(after.id)
