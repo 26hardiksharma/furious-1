@@ -1689,6 +1689,8 @@ async def status(ctx,*,status = None):
       await client.change_presence(activity=discord.Game(name=status))
     elif answers[0].lower() == "streaming":
       await client.change_presence(activity=discord.Streaming(name="Support Server", url="https://discord.gg/MXa2EReETq"))
+    elif answers[0].lower() == "competing":
+      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.competing, name=status))
     await ctx.send(f"Status Setup Done")
 @client.command()
 @commands.cooldown(1,5,commands.BucketType.user)
