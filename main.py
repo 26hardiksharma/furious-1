@@ -2303,6 +2303,28 @@ async def on_message_delete(message):
   if not logs:
     return
   embed = discord.Embed(title = 'Message Deleted',description = f'Message: **{message.content}**\nChannel: <#{message.channel.id}>\nAuthor: {message.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
+  if message.reference:
+    try:
+      msg = await message.channel.fetch_message(message.reference.message_id)
+    except:
+      await logs.send(embed = embed)
+      return
+    else:
+      if len(msg.content) > 0:
+        content = msg.content
+      else:
+        content = "None"
+      if len(msg.attachments) > 0:
+        attach = ""
+        for i in msg.attachments:
+          attach += f"{i.filename}"
+      else:
+        attach = "None"
+      embed.add_field(name = "Additional Info",value = f"The Message Was Replied To Another [Message]{(msg.jump_url)}\nMessage Content : **{content}**\nAttachments : **{attach}**")
+      await logs.send(embed=embed)
+  else:
+    await logs.send(embed=embed)
+
   await logs.send(embed = embed)
 @client.event
 async def on_guild_update(before,after):
