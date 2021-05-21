@@ -1449,7 +1449,6 @@ async def totalbans(ctx):
     await ctx.send(f"{ctx.guild.name} Has {ct} Bans In Total")
 @client.event
 async def on_command_error(ctx, error):
-  ctx.command.reset_cooldown(ctx)
   if isinstance(error, commands.CommandOnCooldown):
     await ctx.message.delete()
     embed = discord.Embed(title = f"<:error:795629492693368833> {ctx.author.name}#{ctx.author.discriminator}",colour = 0xFF0000)
