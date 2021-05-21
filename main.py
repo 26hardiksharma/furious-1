@@ -64,8 +64,8 @@ async def on_ready():
   client.nextMeme = await getMeme()
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
-  client.malik = await client.fetch_user(757589836441059379)
-  print(client.malik)
+  client.मालिक = await client.fetch_user(757589836441059379)
+  print(client.मालिक)
 intents.guilds = True
 def blcheck():
   async def lol(ctx:commands.Context):
@@ -288,7 +288,7 @@ async def botstats(ctx):
     num = num + guild.member_count
   embed = discord.Embed(title = "Bot Stats", description = "<@!790478502909837333>", colour = 0x7FFFD4)
   embed.set_thumbnail(url = 'https://cdn.discordapp.com/avatars/790478502909837333/ffbe1e96004d240eda5385186e145986.webp?size=1024')
-  embed.add_field(name = "Creator", value = f"<:dev:835140540482846790> {client.malik}",inline = False)
+  embed.add_field(name = "Creator", value = f"<:dev:835140540482846790> {client.मालिक}",inline = False)
   embed.add_field(name = "Total Commands",value = len(client.commands),inline = False)
   embed.add_field(name = "Total Servers Joined", value = str(len
   (client.guilds)),inline = False)
@@ -1474,7 +1474,7 @@ async def on_command_error(ctx, error):
     print(ctx.guild.name)
     print(ctx.author.name)
     
-    await client.malik.send(f"An Error Occured!\n{ctx.command.name}\n{ctx.guild.name}\n{ctx.author.name}:- {ctx.author.id} \n{error}")
+    await client.मालिक.send(f"An Error Occured!\n{ctx.command.name}\n{ctx.guild.name}\n{ctx.author.name}:- {ctx.author.id} \n{error}")
     raise error
 async def getMeme():
   all_subs = []
