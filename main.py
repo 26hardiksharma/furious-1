@@ -1850,7 +1850,7 @@ async def on_message(message):
         action ="delete"
       else:
         action = data['aaction']
-      types = ['.png','jepg','jpeg','webp','.mp3','.mp4','.jpg','.txt','.pdf',]
+      types = ['.png','jepg','jpeg','webp','.mp3','.mp4','.jpg','.txt','.pdf','.gif']
       for j in message.attachments:
         kek = j.filename[-4:]
         if not kek.lower() in types:
