@@ -81,7 +81,7 @@ def blcheck():
 @commands.cooldown(1,5,commands.BucketType.user)
 @blcheck()
 async def kick(ctx,user:discord.Member= None,*,reason = "No Reason Specified"):
-  abc = ctx.guild.get_member(client.user.id) 
+  abc = ctx.guild.get_member(client.user.id)
   if ctx.author.guild_permissions.kick_members:
     if abc.guild_permissions.kick_members:
       if not user:
