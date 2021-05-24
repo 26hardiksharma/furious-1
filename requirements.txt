@@ -15,3 +15,4 @@ dnspython
 utils
 asyncpraw
 discord.py[voice]
+ffmpeg
