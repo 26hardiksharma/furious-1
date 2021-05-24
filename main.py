@@ -3250,6 +3250,7 @@ async def join(ctx):
   voice = await ctx.author.voice.channel.connect()
   await ctx.send("Joined Your Voice Channel!")
   source = discord.FFmpegPCMAudio(executable = "ffmpeg.exe",source = 'shanti_dank_rishu.mp3')
+  
   await voice.play(source)
 @client.command()
 @blcheck()
