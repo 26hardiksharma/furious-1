@@ -3249,7 +3249,7 @@ async def join(ctx):
     return await ctx.send("You Are Not Connected To A Voice Channel!")
   voice = await ctx.author.voice.channel.connect()
   await ctx.send("Joined Your Voice Channel!")
-  source = discord.FFmpegPCMAudio(source = 'shanti_dank_rishu.mp3')
+  source = discord.FFmpegPCMAudio(executable = "ffmpeg.exe",source = 'shanti_dank_rishu.mp3')
   await voice.play(source)
 @client.command()
 @blcheck()
