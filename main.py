@@ -3240,6 +3240,7 @@ async def softban(ctx,user: discord.Member = None,*,reason = "No Reason Specifie
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Action")
   else:
     await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
+from discord import FFmpegPCMAudio
 @client.command()
 @blcheck()
 async def join(ctx):
