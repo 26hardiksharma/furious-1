@@ -14,3 +14,4 @@ pymongo[srv]
 dnspython
 utils
 asyncpraw
+discord.py[voice]

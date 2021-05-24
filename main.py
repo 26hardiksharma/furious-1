@@ -3242,6 +3242,9 @@ async def softban(ctx,user: discord.Member = None,*,reason = "No Reason Specifie
     await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
 @client.command()
 @blcheck()
-async def kek(ctx):
-  await ctx.send("Ok")
+async def join(ctx):
+  if not ctx.author.voice:
+    return await ctx.send("You Are Not Connected To A Voice Channel!")
+  await ctx.author.voice.channel.connect()
+  await ctx.send("Joined Your Voice Channel")
 client.run(TOKEN)
