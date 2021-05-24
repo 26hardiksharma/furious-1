@@ -3246,5 +3246,12 @@ async def join(ctx):
   if not ctx.author.voice:
     return await ctx.send("You Are Not Connected To A Voice Channel!")
   await ctx.author.voice.channel.connect()
-  await ctx.send("Joined Your Voice Channel")
+  await ctx.send("Joined Your Voice Channel!")
+@client.command()
+@blcheck()
+async def leave(ctx):
+  if ctx.voice_client:
+    await ctx.guild.voice_client.disconnect()
+    return await ctx.send("Left The Voice Channel!")
+  await ctx.send("I Am Not Connected To A Voice Channel!")
 client.run(TOKEN)
