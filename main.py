@@ -833,7 +833,7 @@ async def  help(ctx):
       embed5.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``^serverunlock``",inline = False)
       
       embed5.add_field(name= "Maintenance",value= "Puts The Server On Maintenance\n• ``^maintenance on/off``",inline = False)
-      pag = DiscordUtils.Pagination.AutoEmbedPaginator(ctx,auto_footer = True,timeout = 30)
+      pag = DiscordUtils.Pagination.CustomEmbedPaginator(ctx,auto_footer = True,timeout = 30)
       dict = {
         "<:emoji_2:810202313142566992>":"first",
         "<:emoji_0:810202224947888249>" : "second",
