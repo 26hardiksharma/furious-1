@@ -12,7 +12,6 @@ import asyncpraw
 from PIL import Image
 from io import BytesIO
 import datetime
-import time
 import dbl
 import requests
 import pyjokes
@@ -65,7 +64,6 @@ async def on_ready():
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
   client.मालिक = await client.fetch_user(757589836441059379)
-  print(client.मालिक)
 intents.guilds = True
 def blcheck():
   async def lol(ctx:commands.Context):
@@ -780,71 +778,72 @@ async def hitler(ctx, member: discord.Member = None):
   await ctx.send(file = discord.File("profile.jpg"))
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def  help(ctx,query = None):
+import DiscordUtils
+async def  help(ctx):
   me = await ctx.guild.fetch_member(client.user.id)
   if me.guild_permissions.send_messages and me.guild_permissions.attach_files and me.guild_permissions.attach_files:
-    if query == None:
-      query = 0
-    if query == 0:    
-      embed = discord.Embed(title = "Help ",colour = 0x00FFD7)
+    if ctx.author:
+      embed1 = discord.Embed(title = "Help ",colour = 0x00FFD7)
       data = await client.config.find(ctx.guild.id)
       if not data or "prefix" not in data:
         prefixes ="F!\nf!\n^"
       else:
         prefixes = data["prefix"]
-      embed.add_field(name = "Bot Prefixes",value = f"{prefixes}\n{client.user.mention}",inline = False)
-      embed.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
-      embed.add_field(name = "<:emoji_2:810202313142566992> Moderation",value  = "`kick`,`ban`,`mute`,`unmute`,`hackban`,`tempmute`,`slowmode`,`lock`,`unlock`,`private`,\n`unprivate`,`setnick`,`muterole`",inline =False)
-      embed.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
-      embed.add_field(name = f"<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`,\n`starboard`",inline = False)
-      embed.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
-      embed.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation\nUtility\nManagement\nFun\nYou Can Type F!help <module> To Get The Commands Of That Module")
-      embed.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://dsc.gg/furiousofficial)",inline = False)
-      await ctx.send(embed=embed)
-    elif query.lower() == 'fun':
-      embed = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
-      embed.add_field(name = "Wink",value = "**^wink**",inline = False)
-      embed.add_field(name = "Pog",value = "**^pog**",inline = False)
-      embed.add_field(name = "Wanted!",value = "**^wanted @user**",inline = False)
-      embed.add_field(name = "Hitler!",value = "**^hitler @user**",inline = False)
-      embed.add_field(name = "Meme",value = "**^meme**")
-      embed.add_field(name = "Trash",value = "**F!Trash <@user>**",inline = False)
-      embed.add_field(name = "Delete",value="**F!delete <@user>**")
-      embed.set_footer(text = "[] = Required, <> = Not Neccesary")
-      await ctx.send(embed=embed)
-    elif query.lower() == 'moderation':
-      embed = discord.Embed(title = "Moderation",description = "Furious' Moderation Commands", colour = 0x00FFD7)
-      embed.add_field(name = "Mute",value = "**^mute [@user] <reason>**",inline = False)
-      embed.add_field(name = "Kick",value = "**^kick [@user] <reason>**",inline = False)
-      embed.add_field(name = "Ban",value = "**^ban [@user] <reason>**",inline = False)
-      embed.add_field(name = "Hackban",value = "**^hackban [user_id] <reason>**",inline = False)
-      embed.add_field(name = "Unmute",value = "**^unmute [@user]**",inline = False)
-      embed.add_field(name = "Tempmute",value = "**^tempmute [@user] [duration] <reason>**",inline = False)   
-      embed.add_field(name= "Slowmode",value = "**^slowmode [seconds]**",inline = False)
-      embed.add_field(name = "Lock",value = "**^lock <#channel>**",inline = False)
-      embed.add_field(name = "Unlock",value = "**^unlock <#channel>**",inline = False)
-      embed.add_field(name = "Private",value = "**^private <#channel>**",inline = False)
-      embed.add_field(name = "Unprivate",value = "**^unprivate <#channel>**",inline = False)
-      
-      embed.set_footer(text = "[] = Required, <> = Optional")
-      await ctx.send(embed=embed)
-    elif query.lower() == 'utility':
-      embed = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = 0x00FFD7)
-      embed.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious",inline = True)
+      embed1.add_field(name = "Bot Prefixes",value = f"{prefixes}\n{client.user.mention}",inline = False)
+      embed1.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
+      embed1.add_field(name = "<:emoji_2:810202313142566992> Moderation",value  = "`kick`,`ban`,`mute`,`unmute`,`hackban`,`tempmute`,`slowmode`,`lock`,`unlock`,`private`,\n`unprivate`,`setnick`,`muterole`",inline =False)
+      embed1.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
+      embed1.add_field(name = f"<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`,\n`starboard`",inline = False)
+      embed1.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
+      embed1.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation\nUtility\nManagement\nFun\nYou Can Type F!help <module> To Get The Commands Of That Module")
+      embed1.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://dsc.gg/furiousofficial)",inline = False)
+      embed2 = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
+      embed2.add_field(name = "Wink",value = "**^wink**",inline = False)
+      embed2.add_field(name = "Pog",value = "**^pog**",inline = False)
+      embed2.add_field(name = "Wanted!",value = "**^wanted @user**",inline = False)
+      embed2.add_field(name = "Hitler!",value = "**^hitler @user**",inline = False)
+      embed2.add_field(name = "Meme",value = "**^meme**")
+      embed2.add_field(name = "Trash",value = "**F!Trash <@user>**",inline = False)
+      embed2.add_field(name = "Delete",value="**F!delete <@user>**")
+      embed2.set_footer(text = "[] = Required, <> = Not Neccesary")
+      embed3 = discord.Embed(title = "Moderation",description = "Furious' Moderation Commands", colour = 0x00FFD7)
+      embed3.add_field(name = "Mute",value = "**^mute [@user] <reason>**",inline = False)
+      embed3.add_field(name = "Kick",value = "**^kick [@user] <reason>**",inline = False)
+      embed3.add_field(name = "Ban",value = "**^ban [@user] <reason>**",inline = False)
+      embed3.add_field(name = "Hackban",value = "**^hackban [user_id] <reason>**",inline = False)
+      embed3.add_field(name = "Unmute",value = "**^unmute [@user]**",inline = False)
+      embed3.add_field(name = "Tempmute",value = "**^tempmute [@user] [duration] <reason>**",inline = False)   
+      embed3.add_field(name= "Slowmode",value = "**^slowmode [seconds]**",inline = False)
+      embed3.add_field(name = "Lock",value = "**^lock <#channel>**",inline = False)
+      embed3.add_field(name = "Unlock",value = "**^unlock <#channel>**",inline = False)
+      embed3.add_field(name = "Private",value = "**^private <#channel>**",inline = False)
+      embed3.add_field(name = "Unprivate",value = "**^unprivate <#channel>**",inline = False)
+      embed3.set_footer(text = "[] = Required, <> = Optional")
+      embed4 = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = 0x00FFD7)
+      embed4.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious",inline = True)
       """
       embed.add_field(name = "Giveaway",value = "<:emoji_2:810202313142566992> Starts A Giveaway Setup In The Server\nUsage :- ^giveaway",inline = True)
       """
-      embed.add_field(name = "Roll",value = "<:emoji_0:810202224947888249> Pick A Random Number From The Choice Provided\nUsage :- ^roll [quantity]\nExample :- ^roll 100",inline = True)
-      embed.add_field(name = "Wiki",value = "<:emoji_4:810202418750029884> Search Wikipedia For A Topic\nUsage :- ^wiki [topic]\nExample :- ^wiki plants",inline = True)
-      embed.add_field(name = "Whois",value = "<:emoji_3:810202359362748487> Get The Info Of A User\nUsage :- ^whois <@user>\nExample :- ^whois <@!790478502909837333>",inline =True)
-      embed.add_field(name= "Roleinfo",value = "<:emoji_7:811830061325090826> Get The Info Of A Role\nUsage :- ^roleinfo [@role/role_id]\nExample :- ^roleinfo @moderators",inline = True)
-      await ctx.send(embed=embed)
-    elif query.lower() == "management":
-      embed= discord.Embed(title= "Management",value= "Commands Which Can Help You Manage Your Server",colour= 0x00FFD7)
-      embed.add_field(name= "Serverlock",value= "Locks All Channels Of The Server\n• ``^serverlock``",inline = False)
-      embed.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``^serverunlock``",inline = False)
-      embed.add_field(name= "Maintenance",value= "Puts The Server On Maintenance\n• ``^maintenance on/off``",inline = False)
-      await ctx.send(embed=embed)
+      embed4.add_field(name = "Roll",value = "<:emoji_0:810202224947888249> Pick A Random Number From The Choice Provided\nUsage :- ^roll [quantity]\nExample :- ^roll 100",inline = True)
+      embed4.add_field(name = "Wiki",value = "<:emoji_4:810202418750029884> Search Wikipedia For A Topic\nUsage :- ^wiki [topic]\nExample :- ^wiki plants",inline = True)
+      embed4.add_field(name = "Whois",value = "<:emoji_3:810202359362748487> Get The Info Of A User\nUsage :- ^whois <@user>\nExample :- ^whois <@!790478502909837333>",inline =True)
+      embed4.add_field(name= "Roleinfo",value = "<:emoji_7:811830061325090826> Get The Info Of A Role\nUsage :- ^roleinfo [@role/role_id]\nExample :- ^roleinfo @moderators",inline = True)
+      embed5= discord.Embed(title= "Management",value= "Commands Which Can Help You Manage Your Server",colour= 0x00FFD7)
+      embed5.add_field(name= "Serverlock",value= "Locks All Channels Of The Server\n• ``^serverlock``",inline = False)
+      embed5.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``^serverunlock``",inline = False)
+      
+      embed5.add_field(name= "Maintenance",value= "Puts The Server On Maintenance\n• ``^maintenance on/off``",inline = False)
+      pag = DiscordUtils.Pagination.AutoEmbedPaginator(ctx,auto_footer = True,timeout = 30)
+      dict = {
+        "<:emoji_2:810202313142566992>":"first",
+        "<:emoji_0:810202224947888249>" : "second",
+        "<:emoji_3:810202359362748487>" :"third",
+        "<:emoji_1:810202277624938527>" :"fourth",
+        "⏹️":"clear"}
+      for i in dict:
+        pag.add_reaction(i,dict[i])
+      embeds = [embed2,embed3,embed4,embed5]
+      await pag.run(embeds)
   else:
     await ctx.send("I Need The Following Permissions To Display My Help Command Correctly :-\n`SEND MESSAGES`\n`ATTACH FILES`\n`EMBED LINKS`")    
 
