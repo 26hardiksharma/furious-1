@@ -833,13 +833,13 @@ async def  help(ctx):
       embed5.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``^serverunlock``",inline = False)
       
       embed5.add_field(name= "Maintenance",value= "Puts The Server On Maintenance\n• ``^maintenance on/off``",inline = False)
-      pag = DiscordUtils.Pagination.CustomEmbedPaginator(ctx,auto_footer = True,timeout = 30)
+      pag = DiscordUtils.Pagination.CustomEmbedPaginator(ctx,auto_footer = False,timeout = 30)
       dict = {
-        "<:emoji_2:810202313142566992>":"second",
-        "<:emoji_0:810202224947888249>" : "third",
-        "<:emoji_3:810202359362748487>" :"fourth",
-        "<:emoji_1:810202277624938527>" :"fifth",
-        "⏹️":"clear"}
+        "⏮️":"first",
+        "⬅️" : "back",
+        "⏹️" :"clear",
+        "⏩" :"last",
+        "⏭️":"clear"}
       for i in dict:
         pag.add_reaction(i,dict[i])
       embeds = [embed1,embed2,embed3,embed4,embed5]
