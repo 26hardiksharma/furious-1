@@ -838,7 +838,7 @@ async def  help(ctx):
         "⏮️":"first",
         "⬅️" : "back",
         "⏹️" :"clear",
-        "⏩" :"next",
+        "➡️" :"next",
         "⏭️":"last"}
       for i in dict:
         pag.add_reaction(i,dict[i])
