@@ -776,9 +776,9 @@ async def hitler(ctx, member: discord.Member = None):
   hitler.paste(pfp,(47,32))
   hitler.save("profile.jpg")
   await ctx.send(file = discord.File("profile.jpg"))
+import DiscordUtils
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-import DiscordUtils
 async def  help(ctx):
   me = await ctx.guild.fetch_member(client.user.id)
   if me.guild_permissions.send_messages and me.guild_permissions.attach_files and me.guild_permissions.attach_files:
