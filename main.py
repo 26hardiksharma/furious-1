@@ -838,8 +838,8 @@ async def  help(ctx):
         "⏮️":"first",
         "⬅️" : "back",
         "⏹️" :"clear",
-        "⏩" :"last",
-        "⏭️":"clear"}
+        "⏩" :"next",
+        "⏭️":"last"}
       for i in dict:
         pag.add_reaction(i,dict[i])
       embeds = [embed1,embed2,embed3,embed4,embed5]
