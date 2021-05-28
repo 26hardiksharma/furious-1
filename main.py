@@ -835,14 +835,14 @@ async def  help(ctx):
       embed5.add_field(name= "Maintenance",value= "Puts The Server On Maintenance\n• ``^maintenance on/off``",inline = False)
       pag = DiscordUtils.Pagination.CustomEmbedPaginator(ctx,auto_footer = True,timeout = 30)
       dict = {
-        "<:emoji_2:810202313142566992>":"first",
-        "<:emoji_0:810202224947888249>" : "second",
-        "<:emoji_3:810202359362748487>" :"third",
-        "<:emoji_1:810202277624938527>" :"fourth",
+        "<:emoji_2:810202313142566992>":"second",
+        "<:emoji_0:810202224947888249>" : "third",
+        "<:emoji_3:810202359362748487>" :"fourth",
+        "<:emoji_1:810202277624938527>" :"fifth",
         "⏹️":"clear"}
       for i in dict:
         pag.add_reaction(i,dict[i])
-      embeds = [embed2,embed3,embed4,embed5]
+      embeds = [embed1,embed2,embed3,embed4,embed5]
       await pag.run(embeds)
   else:
     await ctx.send("I Need The Following Permissions To Display My Help Command Correctly :-\n`SEND MESSAGES`\n`ATTACH FILES`\n`EMBED LINKS`")    
