@@ -824,15 +824,15 @@ async def  help(ctx):
       """
       embed.add_field(name = "Giveaway",value = "<:emoji_2:810202313142566992> Starts A Giveaway Setup In The Server\nUsage :- ^giveaway",inline = True)
       """
-      embed4.add_field(name = "Roll",value = "<:emoji_0:810202224947888249> Pick A Random Number From The Choice Provided\nUsage :- ^roll [quantity]\nExample :- ^roll 100",inline = True)
-      embed4.add_field(name = "Wiki",value = "<:emoji_4:810202418750029884> Search Wikipedia For A Topic\nUsage :- ^wiki [topic]\nExample :- ^wiki plants",inline = True)
-      embed4.add_field(name = "Whois",value = "<:emoji_3:810202359362748487> Get The Info Of A User\nUsage :- ^whois <@user>\nExample :- ^whois <@!790478502909837333>",inline =True)
-      embed4.add_field(name= "Roleinfo",value = "<:emoji_7:811830061325090826> Get The Info Of A Role\nUsage :- ^roleinfo [@role/role_id]\nExample :- ^roleinfo @moderators",inline = True)
+      embed4.add_field(name = "Roll",value = "<:emoji_0:810202224947888249> Pick A Random Number From The Choice Provided\nUsage :- F!roll [quantity]\nExample :- ^roll 100",inline = True)
+      embed4.add_field(name = "Wiki",value = "<:emoji_4:810202418750029884> Search Wikipedia For A Topic\nUsage :- F!wiki [topic]\nExample :- ^wiki plants",inline = True)
+      embed4.add_field(name = "Whois",value = "<:emoji_3:810202359362748487> Get The Info Of A User\nUsage :- F!whois <@user>\nExample :- ^whois <@!790478502909837333>",inline =True)
+      embed4.add_field(name= "Roleinfo",value = "<:emoji_7:811830061325090826> Get The Info Of A Role\nUsage :- F!roleinfo [@role/role_id]\nExample :- ^roleinfo @moderators",inline = True)
       embed5= discord.Embed(title= "Management",value= "Commands Which Can Help You Manage Your Server",colour= 0x00FFD7)
-      embed5.add_field(name= "Serverlock",value= "Locks All Channels Of The Server\n• ``^serverlock``",inline = False)
-      embed5.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``^serverunlock``",inline = False)
+      embed5.add_field(name= "Serverlock",value= "Locks All Channels Of The Server\n• ``F!serverlock``",inline = False)
+      embed5.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``F!serverunlock``",inline = False)
       
-      embed5.add_field(name= "Maintenance",value= "Puts The Server On Maintenance\n• ``^maintenance on/off``",inline = False)
+      embed5.add_field(name= "Maintenance",value= "Puts The Server On Maintenance\n• ``F!maintenance on/off``",inline = False)
       pag = DiscordUtils.Pagination.CustomEmbedPaginator(ctx,auto_footer = False,timeout = 30)
       dict = {
         "⏮️":"first",
