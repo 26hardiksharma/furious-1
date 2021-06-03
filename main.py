@@ -2357,18 +2357,19 @@ async def on_guild_update(before,after):
 async def on_message_edit(before,after):
   if after.author.bot: 
     return
-  await client.process_commands(after)
+  if before.content == after.content:
+    return
   data = await client.config.find(after.guild.id)
   if not data or "logchannel" not in data:
+    await client.process_commands(after)
     return
   logs = after.guild.get_channel(data["logchannel"])
   if not logs:
+    await client.process_commands(after)
     return
-  if before.content == after.content:
-    return
-
   embed = discord.Embed(title = 'Message Edited',description = f'**Before: {before.content}\n+ After: {after.content}**\nChannel: <#{after.channel.id}>\nAuthor: {after.author.mention}',colour = 0xF2922D,timestamp = datetime.datetime.now())
   await logs.send(embed=embed)
+  await client.process_commands(after)
 @client.command()
 @blcheck()
 async def warnings(ctx,member : discord.Member = None):
