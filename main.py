@@ -2357,6 +2357,7 @@ async def on_guild_update(before,after):
 async def on_message_edit(before,after):
   if after.author.bot: 
     return
+  await client.process_commands(after)
   data = await client.config.find(after.guild.id)
   if not data or "logchannel" not in data:
     return
