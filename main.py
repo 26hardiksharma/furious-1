@@ -34,7 +34,7 @@ async def getprefix(client,message):
     data = await client.config.find(message.guild.id)
     if not data or "prefix" not in data:
       return commands.when_mentioned_or('F!','f!','^')(client,message)
-    return commands.when_mentioned_or(data["prefix"])(client,message)
+    return commands.when_mentioned_or(str(data["prefix"]).upper(),str(data['prefix']).lower())(client,message)
   except:
     return commands.when_mentioned_or('f!','F!','^')(client,message)
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True,strip_after_prefix = True)
