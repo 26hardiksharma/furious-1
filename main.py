@@ -3123,9 +3123,9 @@ async def on_bulk_message_delete(messages):
   embed = discord.Embed(title = "⚠️ Bulk Delete",timestamp = datetime.datetime.now(),color = messages[0].author.color,url = "https://discord.gg/5zbU6wEhkh")
   async for i in messages[0].guild.audit_logs(action = discord.AuditLogAction.message_bulk_delete,limit = 1):
     user = i.user
-    reason = i.reason
+    count = i.count
     break
-  embed.add_field(name = f"Information",value = f"{user} Deleted {len(messages)} Messages In {messages[0].channel.mention}",inline = False)
+  embed.add_field(name = f"Information",value = f"{user} Deleted {count} Messages In {messages[0].channel.mention}",inline = False)
   embed.add_field(name = f"Quick Links",value = f"[View]({uploadurl}) • [Download]({msg.attachments[0].url})")
   
   await log.send(embed=embed) 
