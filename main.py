@@ -779,14 +779,14 @@ async def hitler(ctx, member: discord.Member = None):
 import DiscordUtils
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-async def  help(ctx):
-  me = await ctx.guild.fetch_member(client.user.id)
+async def help(ctx,query = None):
+  me = ctx.guild.me
   if me.guild_permissions.send_messages and me.guild_permissions.attach_files and me.guild_permissions.attach_files:
     if ctx.author:
       embed1 = discord.Embed(title = "Help ",colour = 0x00FFD7)
       data = await client.config.find(ctx.guild.id)
       if not data or "prefix" not in data:
-        prefixes ="F!\nf!\n^"
+        prefixes ="**F! || ^**"
       else:
         prefixes = data["prefix"]
       embed1.add_field(name = "Bot Prefixes",value = f"{prefixes}\n{client.user.mention}",inline = False)
@@ -833,7 +833,7 @@ async def  help(ctx):
       embed5.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``F!serverunlock``",inline = False)
       
       embed5.add_field(name= "Maintenance",value= "Puts The Server On Maintenance\n• ``F!maintenance on/off``",inline = False)
-      pag = DiscordUtils.Pagination.CustomEmbedPaginator(ctx,auto_footer = False,timeout = 30)
+      """pag = DiscordUtils.Pagination.CustomEmbedPaginator(ctx,auto_footer = False,timeout = 30)
       dict = {
         "⏮️":"first",
         "⬅️" : "back",
@@ -843,7 +843,19 @@ async def  help(ctx):
       for i in dict:
         pag.add_reaction(i,dict[i])
       embeds = [embed1,embed2,embed3,embed4,embed5]
-      await pag.run(embeds)
+      await pag.run(embeds)"""
+      if not query:
+        await ctx.send(embed=embed1)
+      elif query.lower() == "fun":
+        await ctx.send(embed = embed2)
+      elif query.lower() == "moderation":
+        await ctx.send(embed = embed3)
+      elif query.lower() == "utility":
+        await ctx.send(embed = embed4)
+      elif query.lower() == "management":
+        await ctx.send(embed = embed5)
+      else: 
+        await ctx.send(embed = embed1)
   else:
     await ctx.send("I Need The Following Permissions To Display My Help Command Correctly :-\n`SEND MESSAGES`\n`ATTACH FILES`\n`EMBED LINKS`")    
 
@@ -3116,7 +3128,7 @@ async def on_bulk_message_delete(messages):
   channel = client.get_channel(833262747801878608)
   with open("delmsgs.txt","w") as f:
     for i in range(len(messages)):
-      f.write(f"{messages[i].author}: {messages[i].content}\n\n")
+      f.write(f"{messages[i].author}: {messages[i].content}\n\n") 
   msg = await channel.send(file = discord.File("delmsgs.txt"))
   url = msg.attachments[0].url[39:-4]
   uploadurl = f"https://txt.discord.website/?txt={url}"
