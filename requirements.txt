@@ -12,7 +12,6 @@ motor
 pymongo
 pymongo[srv]
 dnspython
-utils
 asyncpraw
 discord.py[voice]
 ffmpeg
