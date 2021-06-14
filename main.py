@@ -21,8 +21,7 @@ import pymongo
 from pymongo import MongoClient
 import motor.motor_asyncio
 import dns
-
-
+from discord_components import DiscordComponents, Button
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
@@ -65,6 +64,7 @@ async def on_ready():
   client.nowtime = datetime.datetime.now()
   client.मालिक = await client.fetch_user(757589836441059379)
 intents.guilds = True
+mf = DiscordComponents(client)
 def blcheck():
   async def lol(ctx:commands.Context):
     data = await client.bls.find(ctx.author.id)
@@ -3256,19 +3256,9 @@ async def softban(ctx,user: discord.Member = None,*,reason = "No Reason Specifie
 from discord import FFmpegPCMAudio
 import ffmpeg
 @client.command()
-@blcheck()
-async def join(ctx):
-  if not ctx.author.voice:
-    return await ctx.send("You Are Not Connected To A Voice Channel!")
-  voice = await ctx.author.voice.channel.connect()
-  await ctx.send("Joined Your Voice Channel!")
-  source = discord.FFmpegPCMAudio(executable = "fffolder/bin/ffmpeg.exe",source = 'shanti_dank_rishu.mp3')
-  await voice.play(source)
-@client.command()
-@blcheck()
-async def leave(ctx):
-  if ctx.voice_client:
-    await ctx.guild.voice_client.disconnect()
-    return await ctx.send("Left The Voice Channel!")
-  await ctx.send("I Am Not Connected To A Voice Channel!")
+async def inv(ctx):
+  if ctx.author.id == 757589836441059379:
+    c = [Button(label = 'Invite Me',style = 5,url = 'https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot'),Button(label = 'Official Server',url = 'https://discord.gg/5zbU6wEhkh',style = 5)]
+    await ctx.send("Test",components = c)
+
 client.run(TOKEN)

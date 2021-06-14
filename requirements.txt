@@ -17,3 +17,4 @@ asyncpraw
 discord.py[voice]
 ffmpeg
 DiscordUtils
+discord-components
