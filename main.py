@@ -421,7 +421,11 @@ async def invite(ctx):
   embed.add_field(name = "Invite Link",value = "[Click Here](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot)",inline= False)
   embed.add_field(name = "Official Server",value = "[Click Here](https://discord.gg/5zbU6wEhkh)",inline = False)
   embed.set_thumbnail(url= ctx.author.avatar_url)
-  await ctx.send(embed=embed)
+  embed.set_footer(text = 'You Can Also Use The Buttons Below For The Links.')
+  c = [[Button(label = 'Invite Me',style = 5,url = 'https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot'),Button(label = 'Official Server',url = 'https://discord.gg/5zbU6wEhkh',style = 5)]]
+  
+  await ctx.send(embed=embed,components = c)
+
 @client.command()
 @blcheck()
 async def lock(ctx,*,channel : discord.TextChannel=None):
@@ -3253,11 +3257,4 @@ async def softban(ctx,user: discord.Member = None,*,reason = "No Reason Specifie
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Action")
   else:
     await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
-
-@client.command()
-async def inv(ctx):
-  if ctx.author.id == 757589836441059379:
-    c = [[Button(label = 'Invite Me',style = 5,url = 'https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot'),Button(label = 'Official Server',url = 'https://discord.gg/5zbU6wEhkh',style = 5)]]
-    await ctx.send("Test",components = c)
-
 client.run(TOKEN)
