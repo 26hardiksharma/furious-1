@@ -3257,7 +3257,7 @@ async def softban(ctx,user: discord.Member = None,*,reason = "No Reason Specifie
 @client.command()
 async def inv(ctx):
   if ctx.author.id == 757589836441059379:
-    c = [Button(label = 'Invite Me',style = 5,url = 'https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot'),Button(label = 'Official Server',url = 'https://discord.gg/5zbU6wEhkh',style = 5)]
+    c = [[Button(label = 'Invite Me',style = 5,url = 'https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot'),Button(label = 'Official Server',url = 'https://discord.gg/5zbU6wEhkh',style = 5)]]
     await ctx.send("Test",components = c)
 
 client.run(TOKEN)
