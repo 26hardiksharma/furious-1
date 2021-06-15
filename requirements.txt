@@ -13,7 +13,5 @@ pymongo
 pymongo[srv]
 dnspython
 asyncpraw
-discord.py[voice]
-ffmpeg
 DiscordUtils
 discord-components
