@@ -3267,7 +3267,7 @@ async def rps(ctx):
   c = [[Button(style = 1,label = 'Rock',emoji = '🪨'),Button(style = 1,label = 'Paper',emoji = '📰'),Button(style =1,label = 'Scissors',emoji = '✂️')]]
   embed = discord.Embed(title = 'Rock Paper Scissors',description = 'Please Pick Your Choices With The Buttons Below')
   msg = await ctx.send(embed = embed,components = c)
-  i = await client.wait_for('button_click',check = lambda o :o.user == ctx.author and o.message = msg)
+  i = await client.wait_for('button_click',check = lambda o :o.user == ctx.author and o.message == msg)
   dict = {
     'rock-rock' : 'Draw',
     'paper-paper':'Draw',
