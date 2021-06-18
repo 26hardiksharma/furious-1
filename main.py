@@ -1,3 +1,4 @@
+from art.art_param import DESCRIPTION
 import discord
 import os
 from discord.ext import commands
@@ -2805,7 +2806,9 @@ async def evaluate(ctx, *, arg = None):
     "channel": ctx.channel,
     "author": ctx.author,
     "guild": ctx.guild,
-    "message": ctx.message}
+    "message": ctx.message,
+    'Button':Button,
+    }
 
   stdout = io.StringIO()
   try:
@@ -3257,4 +3260,18 @@ async def softban(ctx,user: discord.Member = None,*,reason = "No Reason Specifie
       await ctx.send(f"I Am Missing The **BAN MEMBERS** Permission Required To Execute This Action")
   else:
     await ctx.send(f"You Are Missing The **BAN MEMBERS** Permission Required To Execute This Action")
+@client.command()
+@blcheck()
+@commands.cooldown(1,5,commands.BucketType.user)
+async def rps(ctx):
+  c = [[Button(style = 1,label = 'Rock',emoji = '🪨'),Button(style = 1,label = 'Paper',emoji = '📰'),Button(style =1,label = 'Scissors',emoji = '✂️')]]
+  embed = discord.Embed(title = 'Rock Paper Scissors',description = 'Please Pick Your Choices With The Buttons Below')
+  msg = await ctx.send(embed = embed,components = c)
+  i = await client.wait_for('button_click',check = lambda o :o.user == ctx.author and o.message = msg)
+  dict = {
+    'rock-rock' : 'Draw',
+    'paper-paper':'Draw',
+    'scissors-scissor': 'Draw',
+    'rock-paper':'Lose'
+  }
 client.run(TOKEN)
