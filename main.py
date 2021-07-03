@@ -2715,7 +2715,7 @@ async def blacklist(ctx,query = None,user:discord.User = None):
 @client.event
 async def on_command(ctx):
   channel = client.get_channel(839897540027351090)
-  await channel.send(f"{ctx.author} Used {ctx.command.name} In {ctx.guild.name}")
+  await channel.send(f"{ctx.author}[{ctx.author.id}] Used {ctx.command.name} In {ctx.guild.name}")
 @client.command()
 async def ticket(ctx,query = None,*,desc = None):
   if query == None:
