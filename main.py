@@ -3277,5 +3277,5 @@ async def rps(ctx):
 @client.command()
 async def test1(ctx):
   if ctx.author.id == 757589836441059379:
-    await ctx.send("Test",components = Select(placeholder = "Test Message",options = [SelectOption(label = "1",value = '2'),SelectOption(label = '3',value = '4')]))
+    await ctx.send("Test",components = [Select(placeholder = "Test Message",options = [SelectOption(label = "1",value = '2'),SelectOption(label = '3',value = '4')])])
 client.run(TOKEN)
