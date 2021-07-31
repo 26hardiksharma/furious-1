@@ -22,7 +22,7 @@ import pymongo
 from pymongo import MongoClient
 import motor.motor_asyncio
 import dns
-from discord_components import DiscordComponents, Button
+from discord_components import DiscordComponents, Button, Select, SelectOption
 TOKEN = 'NzkwNDc4NTAyOTA5ODM3MzMz.X-BMeQ.QMkidb3B5HSVnSZMvIQLDtlxsfU'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
@@ -2715,7 +2715,7 @@ async def blacklist(ctx,query = None,user:discord.User = None):
 @client.event
 async def on_command(ctx):
   channel = client.get_channel(839897540027351090)
-  await channel.send(f"{ctx.author}[{ctx.author.id}] Used {ctx.command.name} In {ctx.guild.name}")
+  await channel.send(f"{ctx.author} [{ctx.author.id}] Used {ctx.command.name} In {ctx.guild.name}")
 @client.command()
 async def ticket(ctx,query = None,*,desc = None):
   if query == None:
@@ -3274,4 +3274,8 @@ async def rps(ctx):
     'scissors-scissor': 'Draw',
     'rock-paper':'Lose'
   }
+@client.command()
+async def test(ctx):
+  if ctx.author.id == 757589836441059379:
+    await ctx.send("Test",components = Select(placeholder = "Test Message",options = [SelectOption(label = "1",value = '2'),SelectOption(label = '3',value = '4')]))
 client.run(TOKEN)
