@@ -850,7 +850,7 @@ async def help(ctx,query = None):
       embeds = [embed1,embed2,embed3,embed4,embed5]
       await pag.run(embeds)"""
       msg =await ctx.send(embed=embed1,components = [Select(placeholder = "Select A Help Option To Paginate To",options = [SelectOption(label = "Moderation",value = 'a'),SelectOption(label = 'Fun',value = 'b'),SelectOption(label = 'Utility',value = 'c'),SelectOption(label = 'Management',value = 'd')])])
-      o = await client.wait_for('select_option',check = lambda m: i.message.id ==msg.id and i.user == ctx.author)
+      o = await client.wait_for('select_option',check = lambda i: i.message.id ==msg.id and i.user == ctx.author)
       if o.component[0].label.lower() == "Fun":
         await msg.edit(embed = embed2)
       elif o.component[0].label.lower() == "moderation":
