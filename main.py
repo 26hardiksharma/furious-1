@@ -858,7 +858,7 @@ async def help(ctx,query = None):
       elif o.component[0].label.lower() == "utility":
         await msg.edit(embed = embed4)
       elif o.component[0].label.lower()== "management":
-        await ctx.send(embed = embed5)
+        await msg.edit(embed = embed5)
       else: 
         await msg.edit(embed = embed1)
   else:
