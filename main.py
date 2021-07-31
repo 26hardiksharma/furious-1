@@ -849,18 +849,18 @@ async def help(ctx,query = None):
         pag.add_reaction(i,dict[i])
       embeds = [embed1,embed2,embed3,embed4,embed5]
       await pag.run(embeds)"""
-      if not query:
-        await ctx.send(embed=embed1)
-      elif query.lower() == "fun":
-        await ctx.send(embed = embed2)
-      elif query.lower() == "moderation":
-        await ctx.send(embed = embed3)
-      elif query.lower() == "utility":
-        await ctx.send(embed = embed4)
-      elif query.lower() == "management":
+      msg =await ctx.send(embed=embed1,components = [Select(placeholder = "Select A Help Option To Paginate To",options = [SelectOption(label = "Moderation",value = '2'),SelectOption(label = 'Fun',value = '4'),SelectOption(label = 'Utility',value = '4'),SelectOption(label = 'Management',value = '4')])]))
+      o = await client.wait_for('select_option',check = lambda m: i.message.id ==msg.id and i.user == ctx.author)
+      if o.component[0].label.lower() == "Fun":
+        await msg.edit(embed = embed2)
+      elif o.component[0].label.lower() == "moderation":
+        await msg.edit(embed = embed3)
+      elif o.component[0].label.lower() == "utility":
+        await msg.edit(embed = embed4)
+      elif o.component[0].label.lower()== "management":
         await ctx.send(embed = embed5)
       else: 
-        await ctx.send(embed = embed1)
+        await msg.edit(embed = embed1)
   else:
     await ctx.send("I Need The Following Permissions To Display My Help Command Correctly :-\n`SEND MESSAGES`\n`ATTACH FILES`\n`EMBED LINKS`")    
 
