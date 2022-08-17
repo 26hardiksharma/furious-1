@@ -63,7 +63,7 @@ async def on_ready():
   client.nextMeme = await getMeme()
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
-  client.मालिक = await client.fetch_user(757589836441059379)
+  client.मालिक = await client.fetch_user(920564227570270208)
 intents.guilds = True
 mf = DiscordComponents(client)
 def blcheck():
