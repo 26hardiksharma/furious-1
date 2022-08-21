@@ -862,6 +862,7 @@ async def help(ctx,query = None):
         await msg.edit(embed = embed5)
       else: 
         await msg.edit(embed = embed1)
+      await o.respond(type=6)
   else:
     await ctx.send("I Need The Following Permissions To Display My Help Command Correctly :-\n`SEND MESSAGES`\n`ATTACH FILES`\n`EMBED LINKS`")    
 
