@@ -419,11 +419,11 @@ async def ping(ctx):
 @client.command()
 async def invite(ctx):
   embed=discord.Embed(title = "Thank You For Choosing Furious",description = "Some Useful Links!",url = "https://dsc.gg/furiousop",colour = 0x00FFD3)
-  embed.add_field(name = "Invite Link",value = "[Click Here](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot)",inline= False)
-  embed.add_field(name = "Official Server",value = "[Click Here](https://discord.gg/5zbU6wEhkh)",inline = False)
-  embed.set_thumbnail(url= ctx.author.avatar_url)
+  embed.add_field(name = "Invite Link",value = "[Click Here](https://discord.com/oauth2/authorize?client_id=1009492732730953840&permissions=8&scope=bot)",inline= False)
+  embed.add_field(name = "Official Server",value = "[Click Here](https://discord.gg/XWEmkF42)",inline = False)
+  embed.set_thumbnail(url= client.user.avatar_url)
   embed.set_footer(text = 'You Can Also Use The Buttons Below For The Links.')
-  c = [[Button(label = 'Invite Me',style = 5,url = 'https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot'),Button(label = 'Official Server',url = 'https://discord.gg/5zbU6wEhkh',style = 5)]]
+  c = [[Button(label = 'Invite Me',style = 5,url = 'https://discord.com/oauth2/authorize?client_id=1009492732730953840&permissions=8&scope=bot'),Button(label = 'Official Server',url = 'https://discord.gg/XWEmkF42',style = 5)]]
   
   await ctx.send(embed=embed,components = c)
 
@@ -2714,7 +2714,7 @@ async def blacklist(ctx,query = None,user:discord.User = None):
       return
 @client.event
 async def on_command(ctx):
-  channel = client.get_channel(839897540027351090)
+  channel = client.get_channel(1010920229305602190)
   await channel.send(f"{ctx.author} [{ctx.author.id}] Used {ctx.command.name} In {ctx.guild.name}")
 @client.command()
 async def ticket(ctx,query = None,*,desc = None):
