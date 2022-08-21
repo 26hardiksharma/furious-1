@@ -802,7 +802,7 @@ async def help(ctx,query = None):
       embed1.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
       embed1.add_field(name = f"<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`,\n`starboard`",inline = False)
       embed1.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
-      embed1.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation\nUtility\nManagement\nFun\nYou Can Type F!help <module> To Get The Commands Of That Module")
+      embed1.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation | Utility | Management |Fun\nYou Can Type F!help <module> To See The Commands Of That Module")
       embed1.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://dsc.gg/furiousofficial)",inline = False)
       embed2 = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
       embed2.add_field(name = "Wink",value = "**^wink**",inline = False)
