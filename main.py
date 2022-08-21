@@ -1512,11 +1512,17 @@ async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = await getMeme()
   name, url, random_sub = client.nextMeme
-  if hasattr(random_sub, 'preview')=True:
+  if not hasattr(random_sub, 'preview'):
+    embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
+    embed.set_footer(text=f"r/IndianDankMemes,u/{author}",icon_url = client.user.avatar_url)
+    await ctx.send(embed=embed)
+    client.nextMeme = await getMeme()
+
+  else:
     if 'images'in submission.preview:
       prev=submission.preview['images'][0]['source']['url']
       embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
-      embed.set_image(url=url)
+      embed.set_image(url=prev)
       embed.set_footer(text=f"r/IndianDankMemes,u/{author}",icon_url = client.user.avatar_url)
       await ctx.send(embed=embed)
       client.nextMeme = await getMeme()
@@ -1526,13 +1532,6 @@ async def meme(ctx):
       embed.set_footer(text=f"r/IndianDankMemes,u/{author}",icon_url = client.user.avatar_url)
       await ctx.send(embed=embed)
       client.nextMeme = await getMeme()
-
-  else:
-    embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
-    embed.set_image(url=url)
-    embed.set_footer(text=f"r/IndianDankMemes,u/{author}",icon_url = client.user.avatar_url)
-    await ctx.send(embed=embed)
-    client.nextMeme = await getMeme()
 
 @client.event
 async def on_dbl_vote(data):
