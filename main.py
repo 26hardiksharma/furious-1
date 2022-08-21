@@ -1503,7 +1503,7 @@ async def getMeme():
   random_sub = random.choice(all_subs) 
   name = random_sub.title
   url = random_sub.url
-  author = random_sub.author
+  author = random_sub.author.name
   return name, url, author, random_sub
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
