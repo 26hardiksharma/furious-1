@@ -1511,7 +1511,7 @@ async def getMeme():
 async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = await getMeme()
-  name, url, random_sub = client.nextMeme
+  name, url, random_sub,author = client.nextMeme
   if not hasattr(random_sub, 'preview'):
     embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
     embed.set_footer(text=f"r/IndianDankMemes,u/{author}",icon_url = client.user.avatar_url)
