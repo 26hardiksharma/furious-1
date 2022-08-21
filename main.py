@@ -1498,7 +1498,7 @@ async def getMeme():
   all_subs = []
   subreddit = await reddit.subreddit("indiandankmemes",fetch= True)   
   async for submission in subreddit.top(limit = 200):
-    if submission.is_image == False and submission.url.startswith("https://youtube.com/") == False:
+    if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
   random_sub = random.choice(all_subs) 
   name = random_sub.title
