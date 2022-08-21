@@ -850,18 +850,18 @@ async def help(ctx,query = None):
         pag.add_reaction(i,dict[i])
       embeds = [embed1,embed2,embed3,embed4,embed5]
       await pag.run(embeds)"""
-      msg =await ctx.send(content='Kindly use the buttons to paginate through the embed.',embed=embed1,components = [[Button(label='Moderation'),Button(label="Management"),Button(label='utulity'),Button(label='Fun')]])
+      msg =await ctx.send(content='Kindly use the buttons to paginate through the embed.',embed=embed1,components = [[Button(label='Moderation'),Button(label="Management"),Button(label='Utility'),Button(label='Fun')]])
       o = await client.wait_for('button_click',check = lambda i: i.message.id ==msg.id and i.user == ctx.author)
       if o.component.label.lower() == "fun":
-        await msg.edit(embed = embed2)
+        await msg.edit(embed = embed2,colour = discord.Colour.random())
       elif o.component.label.lower() == "moderation":
-        await msg.edit(embed = embed3)
+        await msg.edit(embed = embed3,colour=discord.Colour.random())
       elif o.component.label.lower() == "utility":
-        await msg.edit(embed = embed4)
+        await msg.edit(embed = embed4,colour=discord.Colour.random())
       elif o.component.label.lower()== "management":
-        await msg.edit(embed = embed5)
+        await msg.edit(embed = embed5,colour=discord.Colour.random())
       else: 
-        await msg.edit(embed = embed1)
+        await msg.edit(embed = embed1,colour=discord.Colour.random())
   else:
     await ctx.send("I Need The Following Permissions To Display My Help Command Correctly :-\n`SEND MESSAGES`\n`ATTACH FILES`\n`EMBED LINKS`")    
 
