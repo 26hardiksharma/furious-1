@@ -796,8 +796,7 @@ async def help(ctx,query = None):
         prefixes ="**F! || ^**"
       else:
         prefixes = data["prefix"]
-      embed1.add_field(name = "Bot Prefixes",value = f"{prefixes}\n{client.user.mention}",inline = False)
-      embed1.add_field(name = "Get Started",value = "Please Refer To The Commands Listed Below",inline=False )
+      embed1.add_field(name = "Bot Prefixes",value = f"{prefixes} \|| {client.user.mention}",inline = False)
       embed1.add_field(name = "<:emoji_2:810202313142566992> Moderation",value  = "`kick`,`ban`,`mute`,`unmute`,`hackban`,`tempmute`,`slowmode`,`lock`,`unlock`,`private`,\n`unprivate`,`setnick`,`muterole`",inline =False)
       embed1.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
       embed1.add_field(name = f"<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`,\n`starboard`",inline = False)
