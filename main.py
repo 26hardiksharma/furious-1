@@ -793,7 +793,7 @@ async def help(ctx,query = None):
       embed1 = discord.Embed(title = "Help ",colour = discord.Colour.random())
       data = await client.config.find(ctx.guild.id)
       if not data or "prefix" not in data:
-        prefixes ="**F!**"
+        prefixes ="F!"
       else:
         prefixes = data["prefix"]
       embed1.add_field(name = "Bot Prefixes",value = f"{prefixes} \|| {client.user.mention}",inline = False)
@@ -809,7 +809,7 @@ async def help(ctx,query = None):
       embed2.add_field(name = "Wanted!",value = f"**{prefixes}wanted @user**",inline = False)
       embed2.add_field(name = "Hitler!",value = f"**{prefixes}hitler @user**",inline = False)
       embed2.add_field(name = "Meme",value = f"**{prefixes}meme**")
-      embed2.add_field(name = "Trash",value = "f**{prefixes}Trash <@user>**",inline = False)
+      embed2.add_field(name = "Trash",value = f"**{prefixes}Trash <@user>**",inline = False)
       embed2.add_field(name = "Delete",value=f"**{prefixes}delete <@user>**")
       embed2.set_footer(text = "[] = Required, <> = Not Neccesary")
       embed3 = discord.Embed(title = "Moderation",description = "Furious' Moderation Commands", colour = discord.Colour.random())
