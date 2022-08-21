@@ -22,7 +22,7 @@ import pymongo
 from pymongo import MongoClient
 import motor.motor_asyncio
 import dns
-from discord_components import DiscordComponents, Button, Select
+from discord_components import DiscordComponents, Button, Select, SelectOption, ComponentsBot
 TOKEN = 'MTAwOTQ5MjczMjczMDk1Mzg0MA.GGA4YZ.B0s2QjggFMh8SG5M3V7oXJjUjHpXsTa7eIwjsk'
 dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
 dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"

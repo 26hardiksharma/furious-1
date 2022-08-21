@@ -14,4 +14,3 @@ pymongo[srv]
 dnspython
 asyncpraw
 DiscordUtils
-discord-components
