@@ -46,6 +46,7 @@ client.dblpy = dbl.DBLClient(client,dbl_token,webhook_path = '/dblwebhook/https:
 intents = discord.Intents.default()
 @client.event
 async def on_ready():
+  client.मालिक = await client.fetch_user(920564227570270208)
   await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=f"Customizable Karuta Cardping || F!karuta help"))
   print('Connected to bot: {}'.format(client.user.name))
   print('Bot ID: {}'.format(client.user.id))
@@ -63,7 +64,6 @@ async def on_ready():
   client.nextMeme = await getMeme()
   print('Fetched A Meme!')
   client.nowtime = datetime.datetime.now()
-  client.मालिक = await client.fetch_user(920564227570270208)
 intents.guilds = True
 mf = DiscordComponents(client)
 def blcheck():
@@ -3132,7 +3132,7 @@ async def on_bulk_message_delete(messages):
   log = discord.utils.get(messages[0].guild.text_channels,id = data["logchannel"])
   if not log:
     return
-  channel = client.get_channel(833262747801878608)
+  channel = client.get_channel(1010924085796143265)
   with open("delmsgs.txt","w") as f:
     for i in range(len(messages)):
       f.write(f"{messages[i].author}: {messages[i].content}\n\n") 
