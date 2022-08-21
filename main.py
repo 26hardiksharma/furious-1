@@ -803,7 +803,7 @@ async def help(ctx,query = None):
       embed1.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
       embed1.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation \|| Utility \|| Management \|| Fun\nYou Can Type F!help <module> To See The Commands Of That Module")
       embed1.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://dsc.gg/furiousofficial)",inline = False)
-      embed2 = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
+      embed2 = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = discord.Colour.random())
       embed2.add_field(name = "Wink",value = "**^wink**",inline = False)
       embed2.add_field(name = "Pog",value = "**^pog**",inline = False)
       embed2.add_field(name = "Wanted!",value = "**^wanted @user**",inline = False)
@@ -812,7 +812,7 @@ async def help(ctx,query = None):
       embed2.add_field(name = "Trash",value = "**F!Trash <@user>**",inline = False)
       embed2.add_field(name = "Delete",value="**F!delete <@user>**")
       embed2.set_footer(text = "[] = Required, <> = Not Neccesary")
-      embed3 = discord.Embed(title = "Moderation",description = "Furious' Moderation Commands", colour = 0x00FFD7)
+      embed3 = discord.Embed(title = "Moderation",description = "Furious' Moderation Commands", colour = discord.Colour.random())
       embed3.add_field(name = "Mute",value = "**^mute [@user] <reason>**",inline = False)
       embed3.add_field(name = "Kick",value = "**^kick [@user] <reason>**",inline = False)
       embed3.add_field(name = "Ban",value = "**^ban [@user] <reason>**",inline = False)
@@ -825,7 +825,7 @@ async def help(ctx,query = None):
       embed3.add_field(name = "Private",value = "**^private <#channel>**",inline = False)
       embed3.add_field(name = "Unprivate",value = "**^unprivate <#channel>**",inline = False)
       embed3.set_footer(text = "[] = Required, <> = Optional")
-      embed4 = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = 0x00FFD7)
+      embed4 = discord.Embed(title = "Utility",description = "Furious' Utility Commands", colour = discord.Colour.random())
       embed4.add_field(name = "Remindme",value = "<:emoji_1:810202277624938527> Sets A Reminder For You\nUsage :- ^remindme [Duration] [Message ]\nExample :- ^remindme 1h Vote Furious",inline = True)
       """
       embed.add_field(name = "Giveaway",value = "<:emoji_2:810202313142566992> Starts A Giveaway Setup In The Server\nUsage :- ^giveaway",inline = True)
@@ -834,7 +834,7 @@ async def help(ctx,query = None):
       embed4.add_field(name = "Wiki",value = "<:emoji_4:810202418750029884> Search Wikipedia For A Topic\nUsage :- F!wiki [topic]\nExample :- ^wiki plants",inline = True)
       embed4.add_field(name = "Whois",value = "<:emoji_3:810202359362748487> Get The Info Of A User\nUsage :- F!whois <@user>\nExample :- ^whois <@!790478502909837333>",inline =True)
       embed4.add_field(name= "Roleinfo",value = "<:emoji_7:811830061325090826> Get The Info Of A Role\nUsage :- F!roleinfo [@role/role_id]\nExample :- ^roleinfo @moderators",inline = True)
-      embed5= discord.Embed(title= "Management",value= "Commands Which Can Help You Manage Your Server",colour= 0x00FFD7)
+      embed5= discord.Embed(title= "Management",value= "Commands Which Can Help You Manage Your Server",colour= discord.Colour.random())
       embed5.add_field(name= "Serverlock",value= "Locks All Channels Of The Server\n• ``F!serverlock``",inline = False)
       embed5.add_field(name= "Serverunlock",value= "Unocks All Channels Of The Server\n• ``F!serverunlock``",inline = False)
       
@@ -853,15 +853,15 @@ async def help(ctx,query = None):
       msg =await ctx.send(content='Kindly use the buttons to paginate through the embed.',embed=embed1,components = [[Button(label='Moderation'),Button(label="Management"),Button(label='Utility'),Button(label='Fun')]])
       o = await client.wait_for('button_click',check = lambda i: i.message.id ==msg.id and i.user == ctx.author)
       if o.component.label.lower() == "fun":
-        await msg.edit(embed = embed2,colour = discord.Colour.random())
+        await msg.edit(embed = embed2)
       elif o.component.label.lower() == "moderation":
-        await msg.edit(embed = embed3,colour=discord.Colour.random())
+        await msg.edit(embed = embed3)
       elif o.component.label.lower() == "utility":
-        await msg.edit(embed = embed4,colour=discord.Colour.random())
+        await msg.edit(embed = embed4)
       elif o.component.label.lower()== "management":
-        await msg.edit(embed = embed5,colour=discord.Colour.random())
+        await msg.edit(embed = embed5)
       else: 
-        await msg.edit(embed = embed1,colour=discord.Colour.random())
+        await msg.edit(embed = embed1)
   else:
     await ctx.send("I Need The Following Permissions To Display My Help Command Correctly :-\n`SEND MESSAGES`\n`ATTACH FILES`\n`EMBED LINKS`")    
 
