@@ -790,7 +790,7 @@ async def help(ctx,query = None):
   me = ctx.guild.me
   if me.guild_permissions.send_messages and me.guild_permissions.attach_files and me.guild_permissions.attach_files:
     if ctx.author:
-      embed1 = discord.Embed(title = "Help ",colour = 0x00FFD7)
+      embed1 = discord.Embed(title = "Help ",colour = discord.Colour.random())
       data = await client.config.find(ctx.guild.id)
       if not data or "prefix" not in data:
         prefixes ="**F! || ^**"
@@ -801,7 +801,7 @@ async def help(ctx,query = None):
       embed1.add_field(name = "<:emoji_0:810202224947888249> Fun",value= "`wink`,`pog`,`wanted`,`hitler`,`meme`,`dog`,`quote`,`joke`,`delete`,`trash`",inline = False)
       embed1.add_field(name = f"<:emoji_3:810202359362748487> Utility",value = "`whois`,`remindme`,`roleinfo`,`serverinfo`,`avatar`,`roll`,`cardping`,\n`starboard`",inline = False)
       embed1.add_field(name = "<:emoji_1:810202277624938527> Management",value = "`maintenance`,`serverlock`,`serverunlock`",inline = False)
-      embed1.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation | Utility | Management |Fun\nYou Can Type F!help <module> To See The Commands Of That Module")
+      embed1.add_field(name = "<:emoji_5:810202499914268703> Modules",value = f"Moderation \|| Utility \|| Management \|| Fun\nYou Can Type F!help <module> To See The Commands Of That Module")
       embed1.add_field(name = "Quick Links",value = f"[Invite Me](https://discord.com/oauth2/authorize?client_id=790478502909837333&permissions=4996415918&scope=bot) • [Vote](https://top.gg/bot/790478502909837333/vote) • [Support Server](https://dsc.gg/furiousofficial)",inline = False)
       embed2 = discord.Embed(title = "Fun",description = "Furious' Fun Commands", colour = 0x00FFD7)
       embed2.add_field(name = "Wink",value = "**^wink**",inline = False)
@@ -852,13 +852,13 @@ async def help(ctx,query = None):
       await pag.run(embeds)"""
       msg =await ctx.send(content='Kindly use the buttons to paginate through the embed.',embed=embed1,components = [[Button(label='Moderation'),Button(label="Management"),Button(label='utulity'),Button(label='Fun')]])
       o = await client.wait_for('button_click',check = lambda i: i.message.id ==msg.id and i.user == ctx.author)
-      if o.component[0].label.lower() == "fun":
+      if o.component.label.lower() == "fun":
         await msg.edit(embed = embed2)
-      elif o.component[0].label.lower() == "moderation":
+      elif o.component.label.lower() == "moderation":
         await msg.edit(embed = embed3)
-      elif o.component[0].label.lower() == "utility":
+      elif o.component.label.lower() == "utility":
         await msg.edit(embed = embed4)
-      elif o.component[0].label.lower()== "management":
+      elif o.component.label.lower()== "management":
         await msg.edit(embed = embed5)
       else: 
         await msg.edit(embed = embed1)
