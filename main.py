@@ -2690,11 +2690,11 @@ async def getav(ctx,user: discord.User):
 bl = []
 @client.command()
 async def blacklist(ctx,query = None,user:discord.User = None):
-  if ctx.author.id == 757589836441059379:
+  if ctx.author.id == 920564227570270208:
     if not user:
       return
     if query.lower() == "add":
-      if user.id ==757589836441059379:
+      if user.id ==920564227570270208:
         return 
       data = {"_id":user.id,"blacklisted" : "yes"}
       await client.bls.upsert(data)
