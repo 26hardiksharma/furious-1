@@ -1,3 +1,4 @@
+from re import A
 from art.art_param import DESCRIPTION
 import discord
 import os
@@ -1495,31 +1496,43 @@ async def on_command_error(ctx, error):
     raise error
 async def getMeme():
   all_subs = []
-  subreddit = await reddit.subreddit("meme",fetch= True)   
-  async for submission in subreddit.top(limit = 250):
-    if submission.is_video == False and submission.url.startswith("https://youtube.com/") == False:
+  subreddit = await reddit.subreddit("indiandankmemes",fetch= True)   
+  async for submission in subreddit.top(limit = 200):
+    if submission.is_image == False and submission.url.startswith("https://youtube.com/") == False:
       all_subs.append(submission)
   random_sub = random.choice(all_subs) 
-  if random_sub.over_18:
-    warn = "NSFW Content Is Not Supported"
-    return warn
-  else:
-    name = random_sub.title
-    url = random_sub.url
-    return name, url
+  name = random_sub.title
+  url = random_sub.url
+  author = random_sub.author
+  return name, url, author, random_sub
 @client.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 @blcheck()
 async def meme(ctx):
   if not hasattr(client, 'nextMeme'):
     client.nextMeme = await getMeme()
-    
-  name, url = client.nextMeme
-  embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
-  embed.set_image(url=url)
-  embed.set_footer(text=f"©️ By Subreddit",icon_url = client.user.avatar_url)
-  await ctx.send(embed=embed)
-  client.nextMeme = await getMeme()
+  name, url, random_sub = client.nextMeme
+  if hasattr(random_sub, 'preview')=True:
+    if 'images'in submission.preview:
+      prev=submission.preview['images'][0]['source']['url']
+      embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
+      embed.set_image(url=url)
+      embed.set_footer(text=f"r/IndianDankMemes,u/{author}",icon_url = client.user.avatar_url)
+      await ctx.send(embed=embed)
+      client.nextMeme = await getMeme()
+    else:
+      embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
+      embed.set_image(url=url)
+      embed.set_footer(text=f"r/IndianDankMemes,u/{author}",icon_url = client.user.avatar_url)
+      await ctx.send(embed=embed)
+      client.nextMeme = await getMeme()
+
+  else:
+    embed = discord.Embed(title = f"{name}",url=url,colour = 0xE5FF00)
+    embed.set_image(url=url)
+    embed.set_footer(text=f"r/IndianDankMemes,u/{author}",icon_url = client.user.avatar_url)
+    await ctx.send(embed=embed)
+    client.nextMeme = await getMeme()
 
 @client.event
 async def on_dbl_vote(data):
