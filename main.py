@@ -2804,7 +2804,7 @@ import textwrap
 
 @client.command(aliases = ['eval'])
 async def evaluate(ctx, *, arg = None):
-  if not ctx.author.id == 757589836441059379:
+  if not ctx.author.id == 920564227570270208:
     return
   if arg == None:
     await ctx.send('I Got Nothing To Evaluate, Bro!')
