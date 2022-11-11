@@ -2,6 +2,7 @@ from re import A
 from art.art_param import DESCRIPTION
 import discord
 import os
+from discord_slash import SlashCommand, SlashContext
 from discord.ext import commands
 from discord import Webhook, AsyncWebhookAdapter
 import json
@@ -3291,10 +3292,7 @@ async def rps(ctx):
 @client.command()
 async def test1(ctx):
   if ctx.author.id == 757589836441059379:
-    
-    
-    
-    
-    
     await ctx.send("Test",components = [Select(placeholder = "Test Message",options = [SelectOption(label = "1",value = '2'),SelectOption(label = '3',value = '4')])])
-client.run(TOKEN)
+@slash.slash(name = 'testt',guild_ids = ids)
+async def test2(ctx:SlashContext):
+    await ctx.send("Works")
