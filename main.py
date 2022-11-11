@@ -3296,3 +3296,4 @@ async def test1(ctx):
 @slash.slash(name = 'testt',guild_ids = ids)
 async def test2(ctx:SlashContext):
     await ctx.send("Works")
+client.run(TOKEN)
