@@ -41,7 +41,7 @@ async def getprefix(client,message):
   except:
     return commands.when_mentioned_or('f!','F!')(client,message)
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True,strip_after_prefix = True)
-
+slash = SlashCommand(client,sync_commands = True)
 
 client.dblpy = dbl.DBLClient(client,dbl_token,webhook_path = '/dblwebhook/https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt',webhook_auth = 'pogchamp',webhook_port = 5000)
 
