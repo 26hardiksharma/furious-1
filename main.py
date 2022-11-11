@@ -3293,7 +3293,7 @@ async def rps(ctx):
 async def test1(ctx):
   if ctx.author.id == 757589836441059379:
     await ctx.send("Test",components = [Select(placeholder = "Test Message",options = [SelectOption(label = "1",value = '2'),SelectOption(label = '3',value = '4')])])
-ids= [1010920650224975952,1010920650224975952]
+ids= [1010920650224975952,1006603392791089233]
 @slash.slash(name = 'testt',guild_ids = ids)
 async def test2(ctx:SlashContext):
     await ctx.send("Works")
