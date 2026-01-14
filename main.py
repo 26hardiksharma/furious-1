@@ -2419,7 +2419,7 @@ async def warnings(ctx,member : discord.Member = None):
 class Topgg():
   def __init__(self,bot):
     self.bot = bot
-    self.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
+    
     self.dblpy = dbl.DBLClient(self.bot,self.token)
 @client.command(aliases = ['config','serverconfig'])
 @blcheck()  
