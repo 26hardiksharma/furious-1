@@ -26,9 +26,7 @@ import motor.motor_asyncio
 import dns
 from discord_components import DiscordComponents, Button, Select
 
-TOKEN = 'MTAwOTQ5MjczMjczMDk1Mzg0MA.GGA4YZ.B0s2QjggFMh8SG5M3V7oXJjUjHpXsTa7eIwjsk'
-dbl_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc5MDQ3ODUwMjkwOTgzNzMzMyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjEyNTI3NTExfQ.lbl6oMuLvlqSGGnhV5y2Z3ZOXU0ldwUTHgXKVYytAD4"
-dbl_webhook = "https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt"
+
 async def getprefix(client,message):
   if not message.guild:
     return commands.when_mentioned_or('F!','f!')(client,message)
@@ -43,7 +41,6 @@ async def getprefix(client,message):
 client = commands.Bot(command_prefix =getprefix,help_command=None,case_insensitive = True,strip_after_prefix = True)
 slash = SlashCommand(client,sync_commands = True)
 
-client.dblpy = dbl.DBLClient(client,dbl_token,webhook_path = '/dblwebhook/https://discord.com/api/webhooks/814525601175437342/FlvD7x4oaoNQvT9PhsvIRIpwv2Q_-J5muSQ1nP1A3U1RVI4GmTLrMELHZN17MFBr2nkt',webhook_auth = 'pogchamp',webhook_port = 5000)
 
 
 intents = discord.Intents.default()
@@ -2163,7 +2160,7 @@ class Document:
   
   async def find_by_custom(self, filter):
     return await self.db.find_one(filter)
-mongo_url = "mongodb+srv://EternalSlayer:26112005op@cluster0.ogee5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
 @client.event
 async def on_member_join(member):
   channel = discord.utils.find(lambda r: 'welcome' in r.topic.lower(),member.guild.text_channels)
